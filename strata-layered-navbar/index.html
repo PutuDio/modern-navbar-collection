@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Strata — Layered Depth Navbar</title>
+  <meta name="description" content="Strata: navbar bertema lapisan sedimen geologis dengan kedalaman, parallax, dan kompaksi scroll." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ============================================
+       NAVBAR STRATA
+       Setiap item nav diperlakukan sebagai "lapisan"
+       tersendiri (data-band) dengan kedalaman-z masing-masing.
+       ============================================ -->
+  <header class="strata-nav" id="strataNav">
+    <div class="strata-nav__inner">
+
+      <!-- Logo dengan efek bayangan berlapis saat hover -->
+      <a href="#beranda" class="strata-logo" aria-label="Strata — kembali ke beranda">
+        <span class="strata-logo__layer strata-logo__layer--back" aria-hidden="true">STRATA</span>
+        <span class="strata-logo__layer strata-logo__layer--mid" aria-hidden="true">STRATA</span>
+        <span class="strata-logo__layer strata-logo__layer--front">STRATA</span>
+      </a>
+
+      <!-- Navigasi desktop -->
+      <nav class="strata-menu" aria-label="Navigasi utama">
+        <ul class="strata-menu__list" role="list">
+          <li class="strata-menu__item" data-band="1">
+            <a href="#beranda" class="strata-menu__link" aria-current="page">
+              <span class="strata-menu__label">Beranda</span>
+              <span class="strata-menu__band" aria-hidden="true"></span>
+            </a>
+          </li>
+          <li class="strata-menu__item" data-band="2">
+            <a href="#karya" class="strata-menu__link">
+              <span class="strata-menu__label">Karya</span>
+              <span class="strata-menu__band" aria-hidden="true"></span>
+            </a>
+          </li>
+          <li class="strata-menu__item" data-band="3">
+            <a href="#layanan" class="strata-menu__link">
+              <span class="strata-menu__label">Layanan</span>
+              <span class="strata-menu__band" aria-hidden="true"></span>
+            </a>
+          </li>
+          <li class="strata-menu__item" data-band="4">
+            <a href="#studio" class="strata-menu__link">
+              <span class="strata-menu__label">Studio</span>
+              <span class="strata-menu__band" aria-hidden="true"></span>
+            </a>
+          </li>
+          <li class="strata-menu__item" data-band="5">
+            <a href="#kontak" class="strata-menu__link">
+              <span class="strata-menu__label">Kontak</span>
+              <span class="strata-menu__band" aria-hidden="true"></span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Tombol aksi utama -->
+      <a href="#mulai" class="strata-cta">
+        <span>Mulai Proyek</span>
+      </a>
+
+      <!-- Tombol hamburger untuk mobile -->
+      <button
+        type="button"
+        class="strata-toggle"
+        id="strataToggle"
+        aria-label="Buka menu navigasi"
+        aria-expanded="false"
+        aria-controls="strataMobileMenu"
+      >
+        <span class="strata-toggle__bar" aria-hidden="true"></span>
+        <span class="strata-toggle__bar" aria-hidden="true"></span>
+        <span class="strata-toggle__bar" aria-hidden="true"></span>
+      </button>
+
+    </div>
+  </header>
+
+  <!-- ============================================
+       MENU MOBILE FULL-SCREEN
+       Setiap item meluncur masuk sebagai pita
+       horizontal terpisah (staggered).
+       ============================================ -->
+  <div class="strata-mobile" id="strataMobileMenu" aria-hidden="true">
+    <nav aria-label="Navigasi mobile">
+      <ul class="strata-mobile__list" role="list">
+        <li class="strata-mobile__item"><a href="#beranda" class="strata-mobile__link" aria-current="page">Beranda</a></li>
+        <li class="strata-mobile__item"><a href="#karya" class="strata-mobile__link">Karya</a></li>
+        <li class="strata-mobile__item"><a href="#layanan" class="strata-mobile__link">Layanan</a></li>
+        <li class="strata-mobile__item"><a href="#studio" class="strata-mobile__link">Studio</a></li>
+        <li class="strata-mobile__item"><a href="#kontak" class="strata-mobile__link">Kontak</a></li>
+      </ul>
+    </nav>
+    <a href="#mulai" class="strata-mobile__cta">Mulai Proyek</a>
+  </div>
+
+  <!-- ============================================
+       KONTEN DEMO (hanya untuk memperlihatkan
+       perilaku scroll compaction pada navbar)
+       ============================================ -->
+  <main id="beranda">
+    <section class="demo-hero">
+      <p class="demo-hero__eyebrow">Creative Navbar Collection</p>
+      <h1 class="demo-hero__title">Strata</h1>
+      <p class="demo-hero__desc">
+        Navbar yang memperlakukan navigasi sebagai lapisan sedimen fisik —
+        setiap item punya kedalaman, bobot, dan bidangnya sendiri.
+        Scroll ke bawah untuk melihat efek kompaksi pada navbar.
+      </p>
+    </section>
+    <section class="demo-spacer" aria-hidden="true"></section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
