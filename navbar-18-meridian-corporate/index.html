@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meridian — Corporate & Enterprise Navigation | Modern Navbar Collection</title>
+  <meta name="description" content="A human-crafted, premium corporate navigation system designed for modern enterprises, advisory firms, and global institutions. Features desktop mega-menus, dual light/dark themes, and accessible mobile drawer.">
+  <meta name="keywords" content="corporate navbar, enterprise navigation, mega menu, company profile, accessible UI, vanilla CSS, light dark theme">
+  <meta name="author" content="Modern Navbar Collection">
+
+  <!-- Typography: Plus Jakarta Sans & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ================================================================
+       MERIDIAN CORPORATE HEADER & NAVIGATION
+       ================================================================ -->
+  <header class="meridian-header" id="meridian-header">
+
+    <!-- Top Utility Bar (Formal Corporate Indicator) -->
+    <div class="header-utility">
+      <div class="utility-inner container">
+        <div class="utility-left">
+          <span class="utility-pill">GLOBAL OFFICES</span>
+          <span class="utility-locations">London &bull; New York &bull; Zurich &bull; Singapore &bull; Tokyo</span>
+        </div>
+        <div class="utility-right">
+          <a href="#investors" class="utility-link">Investor Relations</a>
+          <span class="utility-sep" aria-hidden="true">&bull;</span>
+          <a href="#careers" class="utility-link">
+            Careers
+            <span class="utility-badge">We're hiring</span>
+          </a>
+          <span class="utility-sep" aria-hidden="true">&bull;</span>
+          <a href="#news" class="utility-link">Press &amp; Media</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Navigation Bar -->
+    <div class="header-main">
+      <div class="header-inner container">
+
+        <!-- Corporate Brand Logo -->
+        <a href="#home" class="brand-logo" aria-label="Meridian Group — Home">
+          <span class="logo-mark" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14 2L2 8V20L14 26L26 20V8L14 2Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+              <path d="M14 2V26" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+              <path d="M2 8L14 14L26 8" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+              <circle cx="14" cy="14" r="2.5" fill="currentColor"/>
+            </svg>
+          </span>
+          <span class="logo-text">
+            <span class="logo-name">MERIDIAN</span>
+            <span class="logo-sub">ENTERPRISE ADVISORY</span>
+          </span>
+        </a>
+
+        <!-- Desktop Navigation Menu -->
+        <nav class="nav-desktop" aria-label="Primary Navigation">
+          <ul class="nav-list" role="menubar">
+
+            <!-- Item 1: Mega-Menu (Solutions) -->
+            <li class="nav-item has-dropdown has-megamenu" role="none">
+              <button type="button" 
+                      class="nav-link dropdown-trigger" 
+                      role="menuitem" 
+                      aria-haspopup="true" 
+                      aria-expanded="false" 
+                      aria-controls="megamenu-solutions">
+                <span>Solutions</span>
+                <svg class="chevron-icon" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+
+              <!-- Mega-Menu Container -->
+              <div class="megamenu" id="megamenu-solutions" role="menu" aria-label="Solutions Menu">
+                <div class="megamenu-inner">
+                  
+                  <!-- Column 1: Strategy & Advisory -->
+                  <div class="megamenu-col">
+                    <span class="megamenu-header">STRATEGY &amp; ADVISORY</span>
+                    <ul class="megamenu-links">
+                      <li>
+                        <a href="#solutions" class="megamenu-item" role="menuitem">
+                          <span class="menu-item-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                          </span>
+                          <div class="menu-item-body">
+                            <span class="menu-item-title">Enterprise Architecture</span>
+                            <span class="menu-item-desc">Comprehensive digital and operating model redesign.</span>
+                          </div>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#solutions" class="megamenu-item" role="menuitem">
+                          <span class="menu-item-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                          </span>
+                          <div class="menu-item-body">
+                            <span class="menu-item-title">Capital Advisory &amp; M&amp;A</span>
+                            <span class="menu-item-desc">Due diligence, transaction structuring, and liquidity.</span>
+                          </div>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#solutions" class="megamenu-item" role="menuitem">
+                          <span class="menu-item-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                          </span>
+                          <div class="menu-item-body">
+                            <span class="menu-item-title">Regulatory &amp; Compliance</span>
+                            <span class="menu-item-desc">Global governance frameworks and risk resilience.</span>
+                          </div>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <!-- Column 2: Technology & Transformation -->
+                  <div class="megamenu-col">
+                    <span class="megamenu-header">TECHNOLOGY PLATFORMS</span>
+                    <ul class="megamenu-links">
+                      <li>
+                        <a href="#solutions" class="megamenu-item" role="menuitem">
+                          <span class="menu-item-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+                          </span>
+                          <div class="menu-item-body">
+                            <span class="menu-item-title">Cloud Infrastructure</span>
+                            <span class="menu-item-desc">High-reliability hybrid and multi-cloud ecosystems.</span>
+                          </div>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#solutions" class="megamenu-item" role="menuitem">
+                          <span class="menu-item-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                          </span>
+                          <div class="menu-item-body">
+                            <span class="menu-item-title">Data Intelligence &amp; AI</span>
+                            <span class="menu-item-desc">Executive decision telemetry and data mesh systems.</span>
+                          </div>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#solutions" class="megamenu-item" role="menuitem">
+                          <span class="menu-item-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                          </span>
+                          <div class="menu-item-body">
+                            <span class="menu-item-title">Cyber Defense &amp; Zero Trust</span>
+                            <span class="menu-item-desc">Enterprise security postures for mission-critical assets.</span>
+                          </div>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <!-- Column 3: Featured Case Study / Research Card -->
+                  <div class="megamenu-featured">
+                    <div class="featured-card">
+                      <div class="featured-tag">2026 GLOBAL BENCHMARK</div>
+                      <h4 class="featured-title">Enterprise Operating Model Trends</h4>
+                      <p class="featured-summary">How Fortune 500 leadership navigates capital allocation and AI governance.</p>
+                      <a href="#insights" class="featured-cta">
+                        <span>Download Executive Summary</span>
+                        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </li>
+
+            <!-- Item 2: Standard Dropdown (Company) -->
+            <li class="nav-item has-dropdown" role="none">
+              <button type="button" 
+                      class="nav-link dropdown-trigger" 
+                      role="menuitem" 
+                      aria-haspopup="true" 
+                      aria-expanded="false" 
+                      aria-controls="dropdown-company">
+                <span>Company</span>
+                <svg class="chevron-icon" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+
+              <ul class="dropdown-menu" id="dropdown-company" role="menu" aria-label="Company Menu">
+                <li role="none">
+                  <a href="#about" class="dropdown-link" role="menuitem">
+                    <span class="dropdown-title">About Meridian</span>
+                    <span class="dropdown-desc">Our heritage, global board, and fiduciary philosophy.</span>
+                  </a>
+                </li>
+                <li role="none">
+                  <a href="#leadership" class="dropdown-link" role="menuitem">
+                    <span class="dropdown-title">Executive Leadership</span>
+                    <span class="dropdown-desc">Meet our managing partners and regional directors.</span>
+                  </a>
+                </li>
+                <li role="none">
+                  <a href="#careers" class="dropdown-link" role="menuitem">
+                    <span class="dropdown-title">
+                      Careers &amp; Culture
+                      <span class="badge-hiring">Hiring</span>
+                    </span>
+                    <span class="dropdown-desc">Build your career among industry-leading advisors.</span>
+                  </a>
+                </li>
+                <li role="none">
+                  <a href="#esg" class="dropdown-link" role="menuitem">
+                    <span class="dropdown-title">ESG &amp; Global Impact</span>
+                    <span class="dropdown-desc">Sustainability commitments and governance principles.</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Item 3: Direct Link (Case Studies) -->
+            <li class="nav-item" role="none">
+              <a href="#cases" class="nav-link" role="menuitem">Case Studies</a>
+            </li>
+
+            <!-- Item 4: Direct Link (Insights) -->
+            <li class="nav-item" role="none">
+              <a href="#insights" class="nav-link" role="menuitem">Insights &amp; Reports</a>
+            </li>
+
+            <!-- Item 5: Direct Link (Contact) -->
+            <li class="nav-item" role="none">
+              <a href="#contact" class="nav-link" role="menuitem">Contact</a>
+            </li>
+
+          </ul>
+        </nav>
+
+        <!-- Right Utility & Action Area -->
+        <div class="header-actions">
+
+          <!-- Search Trigger -->
+          <button type="button" class="btn-icon" id="search-trigger" aria-label="Search site content">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </button>
+
+          <!-- Theme Switcher (Light / Dark) -->
+          <button type="button" class="btn-icon theme-toggle" id="theme-toggle" aria-label="Switch to dark theme">
+            <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5"/>
+              <line x1="12" y1="1" x2="12" y2="3"/>
+              <line x1="12" y1="21" x2="12" y2="23"/>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+              <line x1="1" y1="12" x2="3" y2="12"/>
+              <line x1="21" y1="12" x2="23" y2="12"/>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+            <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          </button>
+
+          <!-- Secondary Action: Client Portal -->
+          <a href="#portal" class="btn-portal">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+              <polyline points="10 17 15 12 10 7"/>
+              <line x1="15" y1="12" x2="3" y2="12"/>
+            </svg>
+            <span>Client Portal</span>
+          </a>
+
+          <!-- Primary CTA Button -->
+          <a href="#contact" class="btn-primary">
+            <span>Schedule Consultation</span>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+
+          <!-- Mobile Hamburger Toggle -->
+          <button type="button" 
+                  class="btn-hamburger" 
+                  id="mobile-hamburger" 
+                  aria-label="Open mobile navigation menu" 
+                  aria-expanded="false" 
+                  aria-controls="mobile-drawer">
+            <span class="hamburger-bar" aria-hidden="true"></span>
+            <span class="hamburger-bar" aria-hidden="true"></span>
+          </button>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Collapsible Search Bar Overlay -->
+    <div class="search-overlay" id="search-overlay" aria-hidden="true">
+      <div class="search-container container">
+        <form class="search-form" role="search" onsubmit="event.preventDefault();">
+          <svg class="search-input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <input type="search" class="search-input" id="search-input" placeholder="Search advisory services, insights, leadership..." autocomplete="off">
+          <button type="button" class="search-close" id="search-close" aria-label="Close search">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </form>
+        <div class="search-suggestions">
+          <span class="suggestion-label">Suggested searches:</span>
+          <button type="button" class="suggestion-tag">Capital Allocation</button>
+          <button type="button" class="suggestion-tag">Zero-Trust Framework</button>
+          <button type="button" class="suggestion-tag">Global Tax Architecture</button>
+          <button type="button" class="suggestion-tag">Q3 2026 Telemetry</button>
+        </div>
+      </div>
+    </div>
+
+  </header>
+
+  <!-- ================================================================
+       MOBILE NAVIGATION DRAWER (OFF-CANVAS)
+       ================================================================ -->
+  <div class="mobile-drawer" id="mobile-drawer" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Mobile Navigation">
+    <div class="drawer-backdrop" id="drawer-backdrop"></div>
+    <div class="drawer-panel">
+
+      <!-- Drawer Top Bar -->
+      <div class="drawer-header">
+        <div class="brand-logo">
+          <span class="logo-mark" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14 2L2 8V20L14 26L26 20V8L14 2Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+              <path d="M14 2V26" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+              <path d="M2 8L14 14L26 8" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+              <circle cx="14" cy="14" r="2.5" fill="currentColor"/>
+            </svg>
+          </span>
+          <span class="logo-text">
+            <span class="logo-name">MERIDIAN</span>
+          </span>
+        </div>
+        <button type="button" class="drawer-close" id="drawer-close" aria-label="Close navigation menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+
+      <!-- Drawer Content (Scrollable) -->
+      <div class="drawer-body">
+
+        <!-- Mobile Navigation Accordion -->
+        <nav class="mobile-nav" aria-label="Mobile Navigation Menu">
+          <ul class="mobile-nav-list">
+
+            <!-- Solutions Accordion -->
+            <li class="mobile-nav-item mobile-accordion">
+              <button type="button" class="accordion-trigger" aria-expanded="false">
+                <span>Solutions</span>
+                <svg class="chevron-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <div class="accordion-panel">
+                <ul class="accordion-links">
+                  <li><a href="#solutions" class="accordion-link">Enterprise Architecture</a></li>
+                  <li><a href="#solutions" class="accordion-link">Capital Advisory &amp; M&amp;A</a></li>
+                  <li><a href="#solutions" class="accordion-link">Regulatory &amp; Compliance</a></li>
+                  <li><a href="#solutions" class="accordion-link">Cloud Infrastructure</a></li>
+                  <li><a href="#solutions" class="accordion-link">Data Intelligence &amp; AI</a></li>
+                  <li><a href="#solutions" class="accordion-link">Cyber Defense &amp; Zero Trust</a></li>
+                </ul>
+              </div>
+            </li>
+
+            <!-- Company Accordion -->
+            <li class="mobile-nav-item mobile-accordion">
+              <button type="button" class="accordion-trigger" aria-expanded="false">
+                <span>Company</span>
+                <svg class="chevron-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <div class="accordion-panel">
+                <ul class="accordion-links">
+                  <li><a href="#about" class="accordion-link">About Meridian Group</a></li>
+                  <li><a href="#leadership" class="accordion-link">Executive Leadership</a></li>
+                  <li>
+                    <a href="#careers" class="accordion-link">
+                      <span>Careers &amp; Culture</span>
+                      <span class="badge-hiring">Hiring</span>
+                    </a>
+                  </li>
+                  <li><a href="#esg" class="accordion-link">ESG &amp; Global Impact</a></li>
+                </ul>
+              </div>
+            </li>
+
+            <!-- Direct Links -->
+            <li class="mobile-nav-item">
+              <a href="#cases" class="mobile-direct-link">Case Studies</a>
+            </li>
+            <li class="mobile-nav-item">
+              <a href="#insights" class="mobile-direct-link">Insights &amp; Reports</a>
+            </li>
+            <li class="mobile-nav-item">
+              <a href="#contact" class="mobile-direct-link">Contact</a>
+            </li>
+            <li class="mobile-nav-item">
+              <a href="#portal" class="mobile-direct-link">Client Portal</a>
+            </li>
+
+          </ul>
+        </nav>
+
+        <!-- Mobile Drawer CTAs -->
+        <div class="drawer-actions">
+          <a href="#contact" class="btn-primary btn-block">
+            <span>Schedule Consultation</span>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Corporate Contact Details inside Drawer -->
+        <div class="drawer-corporate-info">
+          <span class="info-label">Direct Inquiries</span>
+          <a href="mailto:advisory@meridian-group.com" class="info-link">advisory@meridian-group.com</a>
+          <span class="info-phone">+1 (212) 555-0190 (New York HQ)</span>
+          <span class="info-phone">+44 (20) 7946-0922 (London City)</span>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================================================================
+       DEMO CONTENT — REPRESENTATIVE CORPORATE PROFILE SECTIONS
+       ================================================================ -->
+  <main id="main-content">
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+      <div class="container hero-inner">
+        <div class="hero-badge-wrap">
+          <span class="hero-badge">
+            <span class="badge-dot"></span>
+            FINANCIAL TIMES &bull; TOP 25 GLOBAL ADVISORY 2026
+          </span>
+        </div>
+        <h1 class="hero-title">
+          Strategic Capital &amp; Technology Advisory for the Modern Enterprise.
+        </h1>
+        <p class="hero-lead">
+          We partner with boardrooms and executive committees of leading multinational organizations to build resilient architectures, navigate cross-border transactions, and scale digital operations.
+        </p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn-primary btn-large">
+            <span>Consult with Senior Partners</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a href="#cases" class="btn-outline btn-large">Explore Client Engagements</a>
+        </div>
+
+        <!-- Client Trust Strip (Clean Corporate Logos) -->
+        <div class="hero-clients">
+          <span class="clients-label">TRUSTED BY BOARDS &amp; INSTITUTIONAL LEADERS WORLDWIDE</span>
+          <div class="clients-grid">
+            <span class="client-name">VANGUARD DYNAMICS</span>
+            <span class="client-name">AETHER CAPITAL</span>
+            <span class="client-name">NORDIC BIOHEALTH</span>
+            <span class="client-name">HELVETIA LOGISTICS</span>
+            <span class="client-name">PACIFIC SEMICONDUCTOR</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Metrics / Key Statistics -->
+    <section class="stats-section">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-number">$42B+</span>
+            <span class="stat-label">Transaction Value Advised</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">14</span>
+            <span class="stat-label">Global Financial Centers</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">98.4%</span>
+            <span class="stat-label">Client Retention &amp; Advisory Recurrence</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">28 Yrs</span>
+            <span class="stat-label">Fiduciary &amp; Architectural Heritage</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Solutions Section -->
+    <section id="solutions" class="content-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">CAPABILITIES &amp; PRACTICES</span>
+          <h2 class="section-title">Built for institutional complexity.</h2>
+          <p class="section-desc">Our integrated practices combine strategic boardroom advisory with engineering-grade technology deployment.</p>
+        </div>
+
+        <div class="practices-grid">
+          <div class="practice-card">
+            <div class="practice-icon">01</div>
+            <h3 class="practice-title">Enterprise Architecture</h3>
+            <p class="practice-desc">Eliminating technological debt and restructuring core transactional backbones for resilient multi-decade operations.</p>
+          </div>
+          <div class="practice-card">
+            <div class="practice-icon">02</div>
+            <h3 class="practice-title">Capital Advisory &amp; M&amp;A</h3>
+            <p class="practice-desc">Deep due-diligence, post-merger integration telemetry, and liquidity management across global markets.</p>
+          </div>
+          <div class="practice-card">
+            <div class="practice-icon">03</div>
+            <h3 class="practice-title">AI &amp; Data Telemetry</h3>
+            <p class="practice-desc">Productionizing predictive analytics and decision infrastructure with strict auditability and governance.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="content-section section-alt">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-content">
+            <span class="section-tag">GOVERNANCE &amp; PHILOSOPHY</span>
+            <h2 class="section-title">Uncompromising fiduciary rigor.</h2>
+            <p class="section-lead">Headquartered across New York, London, and Zurich, Meridian operates with an absolute alignment of client incentives.</p>
+            <p class="section-text">Unlike traditional volume-based consulting agencies, our teams are structured with boutique partner-to-engagement ratios. Every engagement is personally spearheaded by former Fortune 100 CTOs, CFOs, or regulatory authorities.</p>
+            <div class="about-highlights">
+              <div class="highlight-item">
+                <strong>Zero Vendor Commission Bias</strong> — 100% independent architectural recommendations.
+              </div>
+              <div class="highlight-item">
+                <strong>Strict Global Data Fencing</strong> — Swiss and UK tier-4 encrypted operational standards.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact & Footer CTA -->
+    <section id="contact" class="contact-cta-section">
+      <div class="container">
+        <div class="cta-box">
+          <h2 class="cta-title">Initiate an Executive Dialogue</h2>
+          <p class="cta-text">Connect with a senior managing director in your jurisdiction for a confidential strategic review.</p>
+          <div class="cta-buttons">
+            <a href="mailto:advisory@meridian-group.com" class="btn-primary btn-large">
+              <span>Contact Managing Directors</span>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="#portal" class="btn-outline btn-large">Access Institutional Portal</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Corporate Footer -->
+  <footer class="meridian-footer">
+    <div class="container footer-inner">
+      <div class="footer-left">
+        <span class="footer-copyright">&copy; 2026 Meridian Advisory Group International LLC. All rights reserved.</span>
+        <span class="footer-notes">Regulated under FINRA, FCA, and FINMA advisory statutory standards.</span>
+      </div>
+      <div class="footer-links">
+        <a href="#privacy">Privacy Statement</a>
+        <a href="#terms">Terms of Engagement</a>
+        <a href="#cookies">Cookie Policy</a>
+        <a href="#disclosures">Regulatory Disclosures</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Main JavaScript File -->
+  <script src="script.js"></script>
+</body>
+</html>

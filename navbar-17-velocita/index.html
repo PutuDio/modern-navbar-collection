@@ -232,60 +232,60 @@
 
     </div>
 
-    <!-- ==================== MOBILE ==================== -->
-
-    <!-- Mobile Toggle Button -->
-    <button class="mobile-toggle" id="mobile-toggle"
-      aria-label="Toggle navigation menu"
-      aria-expanded="false"
-      aria-controls="mobile-menu">
-      <span class="toggle-line" aria-hidden="true"></span>
-      <span class="toggle-line" aria-hidden="true"></span>
-      <span class="toggle-line" aria-hidden="true"></span>
-      <span class="toggle-glow" aria-hidden="true"></span>
-    </button>
-
-    <!-- Mobile Fullscreen Menu -->
-    <div class="mobile-menu" id="mobile-menu" role="dialog" aria-hidden="true" aria-label="Navigation menu">
-      <div class="mobile-menu-inner">
-
-        <!-- Mobile Brand -->
-        <div class="mobile-brand">
-          <span class="brand-letter">V</span>
-          <span class="brand-name">VELOCITA</span>
-        </div>
-
-        <!-- Mobile Links -->
-        <ul class="mobile-links" role="menu">
-          <li role="none"><a href="#home" class="mobile-link active" role="menuitem" data-target="home">
-            <span class="ml-number">01</span><span class="ml-text">HOME</span>
-          </a></li>
-          <li role="none"><a href="#team" class="mobile-link" role="menuitem" data-target="team">
-            <span class="ml-number">02</span><span class="ml-text">TEAM</span>
-          </a></li>
-          <li role="none"><a href="#garage" class="mobile-link" role="menuitem" data-target="garage">
-            <span class="ml-number">03</span><span class="ml-text">GARAGE</span>
-          </a></li>
-          <li role="none"><a href="#circuits" class="mobile-link" role="menuitem" data-target="circuits">
-            <span class="ml-number">04</span><span class="ml-text">CIRCUITS</span>
-          </a></li>
-          <li role="none"><a href="#news" class="mobile-link" role="menuitem" data-target="news">
-            <span class="ml-number">05</span><span class="ml-text">NEWS</span>
-          </a></li>
-          <li role="none"><a href="#store" class="mobile-link" role="menuitem" data-target="store">
-            <span class="ml-number">06</span><span class="ml-text">STORE</span>
-          </a></li>
-        </ul>
-
-        <!-- Mobile Footer Accent -->
-        <div class="mobile-footer" aria-hidden="true">
-          <div class="mobile-led"></div>
-        </div>
-
-      </div>
-    </div>
-
   </nav>
+
+  <!-- ==================== MOBILE (siblings to nav, not children) ==================== -->
+
+  <!-- Mobile Toggle Button -->
+  <button class="mobile-toggle" id="mobile-toggle"
+    aria-label="Toggle navigation menu"
+    aria-expanded="false"
+    aria-controls="mobile-menu">
+    <span class="toggle-line" aria-hidden="true"></span>
+    <span class="toggle-line" aria-hidden="true"></span>
+    <span class="toggle-line" aria-hidden="true"></span>
+    <span class="toggle-glow" aria-hidden="true"></span>
+  </button>
+
+  <!-- Mobile Fullscreen Menu -->
+  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-hidden="true" aria-label="Navigation menu">
+    <div class="mobile-menu-inner">
+
+      <!-- Mobile Brand -->
+      <div class="mobile-brand">
+        <span class="brand-letter">V</span>
+        <span class="brand-name">VELOCITA</span>
+      </div>
+
+      <!-- Mobile Links -->
+      <ul class="mobile-links" role="menu">
+        <li role="none"><a href="#home" class="mobile-link active" role="menuitem" data-target="home">
+          <span class="ml-number">01</span><span class="ml-text">HOME</span>
+        </a></li>
+        <li role="none"><a href="#team" class="mobile-link" role="menuitem" data-target="team">
+          <span class="ml-number">02</span><span class="ml-text">TEAM</span>
+        </a></li>
+        <li role="none"><a href="#garage" class="mobile-link" role="menuitem" data-target="garage">
+          <span class="ml-number">03</span><span class="ml-text">GARAGE</span>
+        </a></li>
+        <li role="none"><a href="#circuits" class="mobile-link" role="menuitem" data-target="circuits">
+          <span class="ml-number">04</span><span class="ml-text">CIRCUITS</span>
+        </a></li>
+        <li role="none"><a href="#news" class="mobile-link" role="menuitem" data-target="news">
+          <span class="ml-number">05</span><span class="ml-text">NEWS</span>
+        </a></li>
+        <li role="none"><a href="#store" class="mobile-link" role="menuitem" data-target="store">
+          <span class="ml-number">06</span><span class="ml-text">STORE</span>
+        </a></li>
+      </ul>
+
+      <!-- Mobile Footer Accent -->
+      <div class="mobile-footer" aria-hidden="true">
+        <div class="mobile-led"></div>
+      </div>
+
+    </div>
+  </div>
 
   <!-- Scripts -->
   <script src="script.js"></script>

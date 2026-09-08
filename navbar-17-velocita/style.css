@@ -634,11 +634,12 @@ button {
   position: fixed;
   inset: 0;
   z-index: 1005;
-  background: rgba(5, 5, 8, 0.96);
+  background: rgba(5, 5, 8, 0.97);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   opacity: 0;
   visibility: hidden;
+  overflow-y: auto;
   transition:
     opacity var(--t-medium),
     visibility var(--t-medium);
@@ -654,9 +655,9 @@ button {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%;
-  padding: 60px 24px 100px;
-  gap: 40px;
+  min-height: 100%;
+  padding: 40px 24px 80px;
+  gap: 24px;
 }
 
 /* Mobile Brand */
@@ -682,7 +683,7 @@ button {
 .mobile-links {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
   width: 100%;
   max-width: 320px;
 }
@@ -692,7 +693,7 @@ button {
   align-items: center;
   gap: 16px;
   width: 100%;
-  padding: 16px 24px;
+  padding: 13px 22px;
   border: 1px solid var(--border-subtle);
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.015);
