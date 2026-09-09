@@ -10,6 +10,34 @@ A human-crafted, executive-tier navigation system built for company profiles, ad
 
 ---
 
+## 🖼️ Spotlight Preview
+
+Lihat sekilas seperti apa Meridian sebelum membuka versi live-nya:
+
+**Corporate Light theme — hero + top utility bar**
+
+![Meridian light theme preview](preview-desktop.png)
+
+**Executive Dark theme — header close-up**
+
+![Meridian dark theme navbar](navbar-dark.png)
+
+**Mega-menu terbuka — Solutions**
+
+![Meridian mega-menu open](megamenu-open.png)
+
+> Screenshot diambil langsung dari `index.html` di folder ini. Untuk melihat theme switcher, search overlay, dan mobile drawer secara langsung, buka versi live di bawah.
+
+---
+
+## 🔴 Live Demo
+
+▶️ **[Lihat Meridian secara live](https://meridian-corporate-navbar.netlify.app)**
+
+> Ganti URL di atas dengan link GitHub Pages proyekmu setelah repo di-deploy (Settings → Pages → pilih branch). Sebelum itu, kamu tetap bisa mencobanya secara lokal lewat `open index.html`.
+
+---
+
 ## ✨ Features
 
 | Feature | Details |
@@ -34,6 +62,7 @@ navbar-18-meridian-corporate/
 ├── script.js         # Theme toggle, mega-menu, mobile accordion, search bar, A11y
 ├── extract.js        # Build script to generate isolated NAVBAR_CODE.md
 ├── NAVBAR_CODE.md    # Isolated, copy-paste-ready navigation code
+├── assets/           # Screenshot spotlight untuk README
 └── README.md         # Comprehensive documentation
 ```
 
