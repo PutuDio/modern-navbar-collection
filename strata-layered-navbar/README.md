@@ -16,11 +16,11 @@ Lihat sekilas seperti apa Strata sebelum membuka versi live-nya:
 
 **Desktop — navbar + hero**
 
-![Strata desktop preview](strata-layered-navbar/preview-desktop.png)
+![Strata desktop preview](preview-desktop.png)
 
 **Close-up navbar**
 
-![Strata navbar closeup](strata-layered-navbar/navbar-closeup.png)
+![Strata navbar closeup](navbar-closeup.png)
 
 > Screenshot di atas diambil langsung dari `index.html` di folder ini (tema dark, status `Beranda` aktif). Untuk melihat interaksi hover, kompaksi scroll, dan menu mobile secara langsung, buka versi live di bawah.
 
