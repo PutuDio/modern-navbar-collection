@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Untitled UI — User Management | Team & Access Control</title>
+  <meta name="description" content="Manage your team members, roles, and permissions with the Untitled UI SaaS administration dashboard.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Mobile overlay (click to close sidebar) -->
+<div class="mobile-overlay" id="mobile-overlay" aria-hidden="true"></div>
+
+<!-- ══════════════════════════════════════════════════════════
+     ACCOUNT SWITCHER POPOVER
+     ══════════════════════════════════════════════════════════ -->
+<div class="popover-overlay" id="popover-overlay"></div>
+<div class="popover" id="account-popover" role="dialog" aria-label="Account switcher">
+  <div class="popover-section">
+    <div class="popover-item" tabindex="0">
+      <span class="popover-item-icon">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="5" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M2 13c0-3 2.5-5 6-5s6 2 6 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </span>
+      <span class="popover-item-label" data-cmd-label="View profile">View profile</span>
+      <span class="popover-item-shortcut">⌘K→P</span>
+    </div>
+    <div class="popover-item" tabindex="0">
+      <span class="popover-item-icon">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M8 5v3l2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </span>
+      <span class="popover-item-label">Account settings</span>
+      <span class="popover-item-shortcut">⌘S</span>
+    </div>
+    <div class="popover-item" tabindex="0">
+      <span class="popover-item-icon">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M5 7h6M5 9.5h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </span>
+      <span class="popover-item-label">Documentation</span>
+    </div>
+  </div>
+
+  <div class="popover-section">
+    <div class="popover-heading">Switch account</div>
+    <div class="account-item" data-account="florence" tabindex="0">
+      <div class="account-avatar" style="background:linear-gradient(135deg,#667eea,#764ba2);">
+        FS
+        <div class="account-online"></div>
+      </div>
+      <div class="account-info">
+        <div class="account-name-sm">Florence Shaw</div>
+        <div class="account-email-sm">florence@untitledui.com</div>
+      </div>
+      <div class="account-radio active"></div>
+    </div>
+    <div class="account-item" data-account="ammar" tabindex="0">
+      <div class="account-avatar" style="background:linear-gradient(135deg,#f093fb,#f5576c);">
+        AF
+      </div>
+      <div class="account-info">
+        <div class="account-name-sm">Ammar Foley</div>
+        <div class="account-email-sm">ammar@untitledui.com</div>
+      </div>
+      <div class="account-radio"></div>
+    </div>
+  </div>
+
+  <div class="popover-section">
+    <button class="add-account-btn" id="add-account-btn" aria-label="Add another account">
+      <span style="font-size:16px;color:var(--gray-400);">+</span>
+      Add account
+    </button>
+  </div>
+
+  <div class="popover-section">
+    <div class="popover-item" id="sign-out-btn" tabindex="0" style="color:var(--gray-600);">
+      <span class="popover-item-icon">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 14H3a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M10 11l3-3-3-3M13 8H6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span>Sign out</span>
+      <span class="popover-item-shortcut">⌥⌘Q</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     ⌘K COMMAND DIALOG
+     ══════════════════════════════════════════════════════════ -->
+<div class="cmd-dialog-overlay" id="cmd-dialog-overlay" role="dialog" aria-modal="true" aria-label="Command palette">
+  <div class="cmd-dialog">
+    <div class="cmd-input-row">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <circle cx="7" cy="7" r="5" stroke="var(--gray-400)" stroke-width="1.5"/>
+        <path d="M11 11L14 14" stroke="var(--gray-400)" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <input class="cmd-input" id="cmd-input" type="text" placeholder="Search…" autocomplete="off" spellcheck="false">
+      <kbd class="cmd-esc">ESC</kbd>
+    </div>
+    <div class="cmd-results">
+      <div class="cmd-result-section-label">Navigation</div>
+      <div class="cmd-result-item" tabindex="0">
+        <span class="cmd-result-icon">🏠</span>
+        <span data-cmd-label="Dashboard">Dashboard</span>
+      </div>
+      <div class="cmd-result-item highlighted" tabindex="0">
+        <span class="cmd-result-icon">👥</span>
+        <span data-cmd-label="User management">User management</span>
+      </div>
+      <div class="cmd-result-item" tabindex="0">
+        <span class="cmd-result-icon">🔐</span>
+        <span data-cmd-label="Security & access">Security &amp; access</span>
+      </div>
+      <div class="cmd-result-item" tabindex="0">
+        <span class="cmd-result-icon">💳</span>
+        <span data-cmd-label="Payments">Payments</span>
+      </div>
+
+      <div class="cmd-result-section-label">Actions</div>
+      <div class="cmd-result-item" tabindex="0">
+        <span class="cmd-result-icon">➕</span>
+        <span data-cmd-label="Add new user">Add new user</span>
+      </div>
+      <div class="cmd-result-item" tabindex="0">
+        <span class="cmd-result-icon">📤</span>
+        <span data-cmd-label="Export user data">Export user data</span>
+      </div>
+      <div class="cmd-result-item" tabindex="0">
+        <span class="cmd-result-icon">⚙️</span>
+        <span data-cmd-label="Account settings">Account settings</span>
+      </div>
+
+      <div class="cmd-result-section-label">Preferences</div>
+      <div class="cmd-result-item" tabindex="0">
+        <span class="cmd-result-icon">🎨</span>
+        <span data-cmd-label="Change appearance">Change appearance</span>
+      </div>
+      <div class="cmd-result-item" tabindex="0">
+        <span class="cmd-result-icon">🔔</span>
+        <span data-cmd-label="Notification settings">Notification settings</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     APP SHELL
+     ══════════════════════════════════════════════════════════ -->
+<div class="app-shell">
+
+  <!-- ── LEFT SIDEBAR ───────────────────────────────────────── -->
+  <aside class="sidebar" id="sidebar" role="navigation" aria-label="Main sidebar">
+
+    <!-- Brand -->
+    <div class="sidebar-brand">
+      <a href="#" class="brand-logo-group" aria-label="Untitled UI — Home">
+        <div class="brand-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <rect x="2" y="2" width="6" height="6" rx="1.5" fill="white" opacity="0.9"/>
+            <rect x="10" y="2" width="6" height="6" rx="1.5" fill="white" opacity="0.6"/>
+            <rect x="2" y="10" width="6" height="6" rx="1.5" fill="white" opacity="0.6"/>
+            <rect x="10" y="10" width="6" height="6" rx="1.5" fill="white" opacity="0.9"/>
+          </svg>
+        </div>
+        <div>
+          <div class="brand-name">Untitled UI</div>
+          <div class="brand-version">v4.0</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Search Trigger -->
+    <div class="sidebar-search">
+      <button class="search-trigger" id="search-trigger" aria-label="Open command palette" aria-haspopup="dialog">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.3"/>
+          <path d="M10 10L12.5 12.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+        </svg>
+        <span class="search-trigger-label">Search</span>
+        <div class="search-shortcut" aria-label="Shortcut Command K">
+          <kbd>⌘</kbd><kbd>K</kbd>
+        </div>
+      </button>
+    </div>
+
+    <!-- Nav -->
+    <nav class="sidebar-nav" aria-label="Sidebar navigation">
+      <!-- GENERAL Section -->
+      <div class="nav-section">
+        <div class="nav-section-label">General</div>
+        <a href="#" class="nav-item" data-nav="dashboard" aria-label="Dashboard">
+          <span class="nav-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1.5" y="1.5" width="5" height="5" rx="1.5" stroke="currentColor" stroke-width="1.5"/><rect x="9.5" y="1.5" width="5" height="5" rx="1.5" stroke="currentColor" stroke-width="1.5"/><rect x="1.5" y="9.5" width="5" height="5" rx="1.5" stroke="currentColor" stroke-width="1.5"/><rect x="9.5" y="9.5" width="5" height="5" rx="1.5" stroke="currentColor" stroke-width="1.5"/></svg>
+          </span>
+          <span class="nav-label">Dashboard</span>
+        </a>
+        <a href="#" class="nav-item" data-nav="appearance" aria-label="Appearance">
+          <span class="nav-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M8 5v3l2 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </span>
+          <span class="nav-label">Appearance</span>
+        </a>
+        <a href="#" class="nav-item" data-nav="database" aria-label="Database">
+          <span class="nav-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><ellipse cx="8" cy="4" rx="5" ry="2" stroke="currentColor" stroke-width="1.5"/><path d="M3 4v4c0 1.1 2.2 2 5 2s5-.9 5-2V4" stroke="currentColor" stroke-width="1.5"/><path d="M3 8v4c0 1.1 2.2 2 5 2s5-.9 5-2V8" stroke="currentColor" stroke-width="1.5"/></svg>
+          </span>
+          <span class="nav-label">Database</span>
+        </a>
+        <a href="#" class="nav-item" data-nav="connections" aria-label="Connections">
+          <span class="nav-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="4" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="4" r="2" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="2" stroke="currentColor" stroke-width="1.5"/><path d="M6 8h2M10 4.8l-2 2.4M10 11.2l-2-2.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </span>
+          <span class="nav-label">Connections</span>
+        </a>
+        <a href="#" class="nav-item" data-nav="timezones" aria-label="Timezones">
+          <span class="nav-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M8 4v4l2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </span>
+          <span class="nav-label">Timezones</span>
+        </a>
+        <a href="#" class="nav-item" data-nav="notifications" aria-label="Notifications, 4 new">
+          <span class="nav-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2a5 5 0 0 0-5 5v3l-1 2h12l-1-2V7a5 5 0 0 0-5-5Z" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 13a1.5 1.5 0 0 0 3 0" stroke="currentColor" stroke-width="1.5"/></svg>
+          </span>
+          <span class="nav-label">Notifications</span>
+          <span class="nav-badge">4</span>
+        </a>
+      </div>
+
+      <!-- WORKSPACE Section -->
+      <div class="nav-section">
+        <div class="nav-section-label">
+          <span>Sisyphus Ventures</span>
+          <button class="nav-section-action" aria-label="Workspace options">···</button>
+        </div>
+        <a href="#" class="nav-item active" data-nav="user-management" aria-label="User management (current page)" aria-current="page">
+          <span class="nav-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6" cy="5" r="2.5" stroke="currentColor" stroke-width="1.5"/><circle cx="11" cy="5" r="2" stroke="currentColor" stroke-width="1.5"/><path d="M1 13c0-2.5 2-4 5-4s5 1.5 5 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M11 10c1.5.2 3 1 3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </span>
+          <span class="nav-label">User management</span>
+        </a>
+        <a href="#" class="nav-item" data-nav="security" aria-label="Security and access">
+          <span class="nav-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2L3 4v4c0 3 2 5 5 6 3-1 5-3 5-6V4L8 2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="nav-label">Security &amp; access</span>
+        </a>
+        <a href="#" class="nav-item" data-nav="authentication" aria-label="Authentication">
+          <span class="nav-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="3" y="7" width="10" height="7" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M5 7V5a3 3 0 1 1 6 0v2" stroke="currentColor" stroke-width="1.5"/><circle cx="8" cy="10.5" r="1.5" fill="currentColor"/></svg>
+          </span>
+          <span class="nav-label">Authentication</span>
+        </a>
+        <a href="#" class="nav-item" data-nav="payments" aria-label="Payments">
+          <span class="nav-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="4" width="12" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M2 7h12" stroke="currentColor" stroke-width="1.5"/></svg>
+          </span>
+          <span class="nav-label">Payments</span>
+        </a>
+        <a href="#" class="nav-item" data-nav="import" aria-label="Import data">
+          <span class="nav-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v8M5 7l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 11v1.5A1.5 1.5 0 0 0 4.5 14h7A1.5 1.5 0 0 0 13 12.5V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </span>
+          <span class="nav-label">Import data</span>
+        </a>
+        <a href="#" class="nav-item" data-nav="export" aria-label="Export data">
+          <span class="nav-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 10V2M5 5l3-3 3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 11v1.5A1.5 1.5 0 0 0 4.5 14h7A1.5 1.5 0 0 0 13 12.5V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </span>
+          <span class="nav-label">Export data</span>
+        </a>
+      </div>
+    </nav>
+
+    <!-- Footer Links -->
+    <div class="sidebar-footer">
+      <a href="#" class="nav-item" data-nav="settings" aria-label="Settings" style="margin-bottom:2px;">
+        <span class="nav-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.41 1.41M11.54 11.54l1.41 1.41M3.05 12.95l1.41-1.41M11.54 4.46l1.41-1.41" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </span>
+        <span class="nav-label">Settings</span>
+      </a>
+      <a href="#" class="nav-item" data-nav="docs" aria-label="Documentation" style="margin-bottom:2px;">
+        <span class="nav-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="3" y="2" width="10" height="12" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M5.5 5.5h5M5.5 8h5M5.5 10.5h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </span>
+        <span class="nav-label">Documentation</span>
+      </a>
+      <a href="#" class="nav-item" data-nav="support" aria-label="Support, currently online" style="margin-bottom:8px;">
+        <span class="nav-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M6 6a2 2 0 1 1 2 2v1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="11.5" r="0.75" fill="currentColor"/></svg>
+        </span>
+        <span class="nav-label">Support</span>
+        <span class="nav-badge online"><span class="online-dot"></span> Online</span>
+      </a>
+
+      <!-- Profile Pill -->
+      <div class="profile-pill" id="profile-pill" role="button" tabindex="0" aria-haspopup="true" aria-expanded="false" aria-label="Account menu for Florence Shaw">
+        <div class="profile-avatar">
+          <div class="avatar-img">FS</div>
+          <div class="avatar-online-badge"></div>
+        </div>
+        <div class="profile-info">
+          <div class="profile-name">Florence Shaw</div>
+          <div class="profile-email">florence@untitledui.com</div>
+        </div>
+        <button class="profile-action-btn" aria-hidden="true" tabindex="-1">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M5 7l3-3 3 3M5 10l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── MAIN AREA ──────────────────────────────────────────── -->
+  <div class="main-area">
+
+    <!-- Topbar -->
+    <header class="topbar">
+      <!-- Mobile menu toggle -->
+      <button class="topbar-menu-btn" id="topbar-menu-btn" aria-label="Open sidebar" aria-expanded="false" aria-controls="sidebar">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M3 5h12M3 9h12M3 13h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+      <!-- Breadcrumb -->
+      <div class="topbar-breadcrumb" aria-label="Breadcrumb">
+        <div class="breadcrumb-workspace">
+          <div class="workspace-avatar-sm" aria-hidden="true">S</div>
+          <span>Sisyphus Ventures</span>
+        </div>
+        <span class="breadcrumb-sep" aria-hidden="true">/</span>
+        <span class="breadcrumb-current" id="breadcrumb-current">User management</span>
+      </div>
+
+      <!-- Right: user pill -->
+      <div class="topbar-right">
+        <div class="topbar-avatar" aria-label="Signed in as Florence Shaw">
+          <div class="avatar-img" style="width:28px;height:28px;font-size:11px;background:linear-gradient(135deg,#667eea,#764ba2);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;">FS</div>
+          <span class="topbar-name">Florence Shaw</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <main class="page-content">
+      <div class="page-header">
+        <h1 class="page-title">User management</h1>
+        <p class="page-description">Manage your team members and their account permissions here.</p>
+      </div>
+
+      <!-- Actions Bar -->
+      <div class="content-actions">
+        <div>
+          <span class="content-title-sm">All users</span>
+          <span class="count-badge">44</span>
+        </div>
+        <div class="search-input-group" role="search">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.3"/>
+            <path d="M9.5 9.5L12 12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+          </svg>
+          <input class="search-input" type="text" placeholder="Search" aria-label="Search users">
+        </div>
+        <button class="btn btn-secondary" id="btn-filters" aria-label="Open filters">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 4h10M4 7h6M6 10h2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          Filters
+        </button>
+        <button class="btn btn-primary" id="btn-add-user" aria-label="Add new user">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 3v8M3 7h8" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+          Add user
+        </button>
+      </div>
+
+      <!-- User Table -->
+      <div class="user-table-wrapper">
+        <table class="user-table" aria-label="User management table">
+          <thead>
+            <tr>
+              <th scope="col"><input type="checkbox" class="checkbox" id="check-all" aria-label="Select all users"></th>
+              <th scope="col">User name</th>
+              <th scope="col">Access</th>
+              <th scope="col">Last active <span class="sort-icon" aria-hidden="true">↓</span></th>
+              <th scope="col">Date added</th>
+              <th scope="col" style="width:40px;"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input type="checkbox" class="checkbox row-checkbox" aria-label="Select Florence Shaw"></td>
+              <td>
+                <div class="user-cell">
+                  <div class="user-avatar-sm" style="background:linear-gradient(135deg,#667eea,#764ba2);">FS</div>
+                  <div class="user-info-col">
+                    <div class="user-name-sm">Florence Shaw</div>
+                    <div class="user-email-sm">florence@untitledui.com</div>
+                  </div>
+                </div>
+              </td>
+              <td><div class="badge-group"><span class="badge badge-admin">Admin</span><span class="badge badge-export">Data Export</span><span class="badge badge-import">Data Import</span></div></td>
+              <td>Mar 4, 2024</td>
+              <td>July 4, 2022</td>
+              <td><button class="row-action-btn" aria-label="More actions for Florence Shaw">⋯</button></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" class="checkbox row-checkbox" aria-label="Select Amélie Laurent"></td>
+              <td>
+                <div class="user-cell">
+                  <div class="user-avatar-sm" style="background:linear-gradient(135deg,#f093fb,#f5576c);">AL</div>
+                  <div class="user-info-col">
+                    <div class="user-name-sm">Amélie Laurent</div>
+                    <div class="user-email-sm">amelie@untitledui.com</div>
+                  </div>
+                </div>
+              </td>
+              <td><div class="badge-group"><span class="badge badge-admin">Admin</span><span class="badge badge-export">Data Export</span><span class="badge badge-import">Data Import</span></div></td>
+              <td>Mar 4, 2024</td>
+              <td>July 4, 2022</td>
+              <td><button class="row-action-btn" aria-label="More actions for Amélie Laurent">⋯</button></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" class="checkbox row-checkbox" aria-label="Select Ammar Foley"></td>
+              <td>
+                <div class="user-cell">
+                  <div class="user-avatar-sm" style="background:linear-gradient(135deg,#4facfe,#00f2fe);">AF</div>
+                  <div class="user-info-col">
+                    <div class="user-name-sm">Ammar Foley</div>
+                    <div class="user-email-sm">ammar@untitledui.com</div>
+                  </div>
+                </div>
+              </td>
+              <td><div class="badge-group"><span class="badge badge-export">Data Export</span><span class="badge badge-import">Data Import</span></div></td>
+              <td>Mar 2, 2024</td>
+              <td>July 4, 2022</td>
+              <td><button class="row-action-btn" aria-label="More actions for Ammar Foley">⋯</button></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" class="checkbox row-checkbox" aria-label="Select Caitlyn King"></td>
+              <td>
+                <div class="user-cell">
+                  <div class="user-avatar-sm" style="background:linear-gradient(135deg,#43e97b,#38f9d7);">CK</div>
+                  <div class="user-info-col">
+                    <div class="user-name-sm">Caitlyn King</div>
+                    <div class="user-email-sm">caitlyn@untitledui.com</div>
+                  </div>
+                </div>
+              </td>
+              <td><div class="badge-group"><span class="badge badge-export">Data Export</span><span class="badge badge-import">Data Import</span></div></td>
+              <td>Mar 6, 2024</td>
+              <td>July 4, 2022</td>
+              <td><button class="row-action-btn" aria-label="More actions for Caitlyn King">⋯</button></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" class="checkbox row-checkbox" aria-label="Select Sienna Hewitt"></td>
+              <td>
+                <div class="user-cell">
+                  <div class="user-avatar-sm" style="background:linear-gradient(135deg,#fa709a,#fee140);">SH</div>
+                  <div class="user-info-col">
+                    <div class="user-name-sm">Sienna Hewitt</div>
+                    <div class="user-email-sm">sienna@untitledui.com</div>
+                  </div>
+                </div>
+              </td>
+              <td><div class="badge-group"><span class="badge badge-export">Data Export</span><span class="badge badge-import">Data Import</span></div></td>
+              <td>Mar 8, 2024</td>
+              <td>July 4, 2022</td>
+              <td><button class="row-action-btn" aria-label="More actions for Sienna Hewitt">⋯</button></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" class="checkbox row-checkbox" aria-label="Select Olly Shroeder"></td>
+              <td>
+                <div class="user-cell">
+                  <div class="user-avatar-sm" style="background:linear-gradient(135deg,#a18cd1,#fbc2eb);">OS</div>
+                  <div class="user-info-col">
+                    <div class="user-name-sm">Olly Shroeder</div>
+                    <div class="user-email-sm">olly@untitledui.com</div>
+                  </div>
+                </div>
+              </td>
+              <td><div class="badge-group"><span class="badge badge-export">Data Export</span><span class="badge badge-import">Data Import</span></div></td>
+              <td>Mar 6, 2024</td>
+              <td>July 4, 2022</td>
+              <td><button class="row-action-btn" aria-label="More actions for Olly Shroeder">⋯</button></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" class="checkbox row-checkbox" aria-label="Select Mathilde Lewis"></td>
+              <td>
+                <div class="user-cell">
+                  <div class="user-avatar-sm" style="background:linear-gradient(135deg,#ffecd2,#fcb69f);color:#8B4513;">ML</div>
+                  <div class="user-info-col">
+                    <div class="user-name-sm">Mathilde Lewis</div>
+                    <div class="user-email-sm">mathilde@untitledui.com</div>
+                  </div>
+                </div>
+              </td>
+              <td><div class="badge-group"><span class="badge badge-export">Data Export</span><span class="badge badge-import">Data Import</span></div></td>
+              <td>Mar 4, 2024</td>
+              <td>July 4, 2022</td>
+              <td><button class="row-action-btn" aria-label="More actions for Mathilde Lewis">⋯</button></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" class="checkbox row-checkbox" aria-label="Select Jaya Willis"></td>
+              <td>
+                <div class="user-cell">
+                  <div class="user-avatar-sm" style="background:linear-gradient(135deg,#30cfd0,#330867);">JW</div>
+                  <div class="user-info-col">
+                    <div class="user-name-sm">Jaya Willis</div>
+                    <div class="user-email-sm">jaya@untitledui.com</div>
+                  </div>
+                </div>
+              </td>
+              <td><div class="badge-group"><span class="badge badge-export">Data Export</span><span class="badge badge-import">Data Import</span></div></td>
+              <td>Mar 1, 2024</td>
+              <td>July 4, 2022</td>
+              <td><button class="row-action-btn" aria-label="More actions for Jaya Willis">⋯</button></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="table-pagination" role="navigation" aria-label="Pagination">
+          <button class="pag-btn active" data-page="1" aria-label="Page 1, current" aria-current="page">1</button>
+          <button class="pag-btn" data-page="2" aria-label="Page 2">2</button>
+          <button class="pag-btn" data-page="3" aria-label="Page 3">3</button>
+          <button class="pag-btn" data-page="4" aria-label="Page 4">4</button>
+          <button class="pag-btn" data-page="5" aria-label="Page 5">5</button>
+          <button class="pag-btn" data-page="6" aria-label="Page 6">6</button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+</div><!-- /.app-shell -->
+
+<!-- ── Toast ────────────────────────────────────────────────── -->
+<div class="action-toast" id="action-toast" role="status" aria-live="polite" aria-atomic="true">
+  <span class="toast-icon">✅</span>
+  <div class="toast-body">
+    <div class="toast-msg">"Amélie Laurent" details updated</div>
+  </div>
+  <div class="toast-actions">
+    <a class="toast-link" id="toast-undo" tabindex="0">Undo</a>
+    <a class="toast-link accent" id="toast-action" tabindex="0">View profile</a>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

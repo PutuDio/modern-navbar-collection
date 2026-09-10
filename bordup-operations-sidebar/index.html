@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BordUp™ — HR & Workforce Operations Dashboard</title>
+  <meta name="description" content="Enterprise B2B HR, workforce management, and operational management suite. Manage employees, schedules, payroll, and recruitment in one unified platform.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Mobile overlay -->
+<div class="mobile-overlay" id="mobile-overlay" aria-hidden="true"></div>
+
+<!-- ══════════════════════════════════════════════════════════
+     APP SHELL
+     ══════════════════════════════════════════════════════════ -->
+<div class="app-shell">
+
+  <!-- ── SIDEBAR ────────────────────────────────────────────── -->
+  <aside class="sidebar" id="sidebar" role="navigation" aria-label="Main sidebar">
+
+    <!-- Header: Brand + Toggle -->
+    <div class="sidebar-header">
+      <a href="#" class="brand-group" aria-label="BordUp home">
+        <div class="brand-icon" aria-hidden="true">
+          <!-- BordUp B logo mark -->
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <rect x="3" y="3" width="5" height="5" rx="1.5" fill="white" opacity="0.9"/>
+            <rect x="3" y="10" width="5" height="5" rx="1.5" fill="white" opacity="0.7"/>
+            <rect x="10" y="3" width="5" height="7" rx="1.5" fill="white" opacity="0.5"/>
+            <rect x="10" y="12" width="5" height="3" rx="1.5" fill="white" opacity="0.7"/>
+          </svg>
+        </div>
+        <div class="brand-info">
+          <div class="brand-name">BordUp<span class="brand-tm">™</span></div>
+        </div>
+      </a>
+      <button class="sidebar-toggle-btn" id="sidebar-toggle-btn" aria-label="Collapse sidebar" aria-expanded="true" aria-controls="sidebar">
+        <!-- Collapse left arrows -->
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M9 3L5 7l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Company Workspace Card -->
+    <div class="workspace-card" id="workspace-card" tabindex="0" role="button" aria-label="Switch workspace — Rocks Company">
+      <div class="workspace-avatar" aria-hidden="true">R</div>
+      <div class="workspace-info">
+        <div class="workspace-name">Rocks Company</div>
+        <div class="workspace-sub">Team · 20 Members</div>
+      </div>
+      <div class="workspace-chevron" aria-hidden="true">⌃</div>
+      <div class="nav-item-tooltip">Rocks Company</div>
+    </div>
+
+    <!-- Nav -->
+    <nav class="sidebar-nav" aria-label="Sidebar navigation">
+
+      <!-- MAIN MENU -->
+      <div class="nav-section">
+        <div class="nav-section-title">Main Menu</div>
+
+        <a href="#" class="nav-item active" data-nav="dashboard" aria-label="Dashboard" aria-current="page">
+          <span class="nav-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1.5" y="1.5" width="5.5" height="5.5" rx="1.5" stroke="currentColor" stroke-width="1.5"/><rect x="9" y="1.5" width="5.5" height="5.5" rx="1.5" stroke="currentColor" stroke-width="1.5"/><rect x="1.5" y="9" width="5.5" height="5.5" rx="1.5" stroke="currentColor" stroke-width="1.5"/><rect x="9" y="9" width="5.5" height="5.5" rx="1.5" stroke="currentColor" stroke-width="1.5"/></svg>
+          </span>
+          <span class="nav-label">Dashboard</span>
+          <div class="nav-item-tooltip">Dashboard</div>
+        </a>
+
+        <a href="#" class="nav-item" data-nav="employee" aria-label="Employee">
+          <span class="nav-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="5.5" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M2 13.5c0-3 2.5-5 6-5s6 2 6 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </span>
+          <span class="nav-label">Employee</span>
+          <div class="nav-item-tooltip">Employee</div>
+        </a>
+
+        <a href="#" class="nav-item" data-nav="recruitment" aria-label="Recruitment">
+          <span class="nav-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M4 6l4-4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 14h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </span>
+          <span class="nav-label">Recruitment</span>
+          <div class="nav-item-tooltip">Recruitment</div>
+        </a>
+
+        <a href="#" class="nav-item" data-nav="payroll" aria-label="Payroll">
+          <span class="nav-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M2 6.5h12" stroke="currentColor" stroke-width="1.5"/><circle cx="6" cy="9.5" r="1" fill="currentColor"/></svg>
+          </span>
+          <span class="nav-label">Payroll</span>
+          <div class="nav-item-tooltip">Payroll</div>
+        </a>
+
+        <a href="#" class="nav-item" data-nav="schedule" aria-label="Schedule">
+          <span class="nav-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="11" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M2 7h12M5.5 2v2M10.5 2v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </span>
+          <span class="nav-label">Schedule</span>
+          <div class="nav-item-tooltip">Schedule</div>
+        </a>
+      </div>
+
+      <div class="sidebar-divider"></div>
+
+      <!-- DEPARTMENT -->
+      <div class="nav-section">
+        <div class="nav-section-title">
+          Department
+          <button class="nav-section-add" aria-label="Add department" style="background:none;border:none;cursor:pointer;color:var(--gray-400);font-size:16px;margin-left:4px;">+</button>
+        </div>
+
+        <div class="dept-item" data-dept="marketing" tabindex="0" role="button" aria-label="Business and Marketing department">
+          <div class="dept-dot" style="background: var(--dept-marketing);" aria-hidden="true"></div>
+          <span class="dept-label">Business and Marketing</span>
+          <div class="nav-item-tooltip">Marketing</div>
+        </div>
+
+        <div class="dept-item" data-dept="design" tabindex="0" role="button" aria-label="Design department">
+          <div class="dept-dot" style="background: var(--dept-design);" aria-hidden="true"></div>
+          <span class="dept-label">Design</span>
+          <div class="nav-item-tooltip">Design</div>
+        </div>
+
+        <div class="dept-item" data-dept="pm" tabindex="0" role="button" aria-label="Project Manager department">
+          <div class="dept-dot" style="background: var(--dept-pm);" aria-hidden="true"></div>
+          <span class="dept-label">Project Manager</span>
+          <div class="nav-item-tooltip">Project Manager</div>
+        </div>
+
+        <div class="dept-item" data-dept="hr" tabindex="0" role="button" aria-label="Human Resource department">
+          <div class="dept-dot" style="background: var(--dept-hr);" aria-hidden="true"></div>
+          <span class="dept-label">Human Resource</span>
+          <div class="nav-item-tooltip">Human Resource</div>
+        </div>
+
+        <div class="dept-item" data-dept="dev" tabindex="0" role="button" aria-label="Development department">
+          <div class="dept-dot" style="background: var(--dept-dev);" aria-hidden="true"></div>
+          <span class="dept-label">Development</span>
+          <div class="nav-item-tooltip">Development</div>
+        </div>
+      </div>
+
+      <div class="sidebar-divider"></div>
+
+      <!-- OTHER -->
+      <div class="nav-section">
+        <div class="nav-section-title">Other</div>
+
+        <a href="#" class="nav-item" data-nav="settings" aria-label="Setting">
+          <span class="nav-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/><path d="M8 2v1M8 13v1M2 8h1M13 8h1M3.64 3.64l.71.71M11.65 11.65l.7.7M12.36 3.64l-.71.71M4.35 11.65l-.7.7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </span>
+          <span class="nav-label">Setting</span>
+          <div class="nav-item-tooltip">Setting</div>
+        </a>
+
+        <a href="#" class="nav-item" data-nav="help" aria-label="Help Center">
+          <span class="nav-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M6 6a2 2 0 1 1 2.5 1.9c-.5.1-.5.6-.5 1.1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="11.5" r="0.75" fill="currentColor"/></svg>
+          </span>
+          <span class="nav-label">Help Center</span>
+          <div class="nav-item-tooltip">Help Center</div>
+        </a>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- ── MAIN AREA ──────────────────────────────────────────── -->
+  <div class="main-area">
+
+    <!-- Mobile topbar -->
+    <div class="mobile-topbar" role="banner">
+      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open sidebar" aria-expanded="false" aria-controls="sidebar">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M3 5h12M3 9h12M3 13h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <span class="mobile-topbar-title">BordUp™</span>
+    </div>
+
+    <!-- Dashboard Content -->
+    <main class="content" id="dashboard-content">
+      <h1 class="dash-title">Dashboard</h1>
+      <p class="dash-sub">Good morning! Here's what's happening at Rocks Company today.</p>
+
+      <!-- Payment Banner -->
+      <div class="card payment-card" style="margin-bottom: 20px;" aria-label="Payment method">
+        <div class="card-header">
+          <div class="card-title">Payment Method</div>
+          <a class="card-action" href="#" aria-label="Change payment method">Change Payment Method</a>
+        </div>
+        <div class="payment-info">
+          <div>
+            <div class="payment-field-label">Cardholder Name</div>
+            <div class="payment-field-value">Rocks Company Ltd</div>
+          </div>
+          <div>
+            <div class="payment-field-label">Account Number</div>
+            <div class="payment-field-value">•••• •••• •••• 6213</div>
+          </div>
+          <div>
+            <div class="payment-field-label">Expiration</div>
+            <div class="payment-field-value">12/28</div>
+          </div>
+          <div>
+            <div class="payment-field-label">Payment Method</div>
+            <div class="payment-field-value">
+              <span class="payment-method-logo" aria-label="Visa">VISA</span>
+              Debit Card · Visa
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top Grid: What's On + Schedule + Job Card -->
+      <div class="dash-grid-top" style="margin-bottom:20px;">
+
+        <!-- What's On -->
+        <div class="card" aria-label="What's on in January">
+          <div class="card-header">
+            <div class="card-title">What's on in January?</div>
+          </div>
+          <div class="whats-on-body">
+            <div class="whats-on-tabs" role="tablist" aria-label="What's on categories">
+              <button class="wo-tab active" data-tab="timeoff" role="tab" aria-selected="true">Time Off</button>
+              <button class="wo-tab" data-tab="birthday" role="tab" aria-selected="false">Birthday</button>
+            </div>
+            <div class="wo-entries">
+              <div class="wo-content" data-tab="timeoff">
+                <div class="wo-entry">
+                  <div class="wo-entry-avatar" style="background:linear-gradient(135deg,#a78bfa,#7c3aed);">EM</div>
+                  <div class="wo-entry-info">
+                    <div class="wo-entry-name">Elanore Maggie</div>
+                    <div class="wo-entry-detail">UI UX Designer · Sick Leave</div>
+                  </div>
+                </div>
+                <div class="wo-entry">
+                  <div class="wo-entry-avatar" style="background:linear-gradient(135deg,#60a5fa,#2563eb);">KM</div>
+                  <div class="wo-entry-info">
+                    <div class="wo-entry-name">Kevin Malona</div>
+                    <div class="wo-entry-detail">UI UX Designer · Annual Leave</div>
+                  </div>
+                </div>
+                <div class="wo-entry">
+                  <div class="wo-entry-avatar" style="background:linear-gradient(135deg,#34d399,#059669);">JG</div>
+                  <div class="wo-entry-info">
+                    <div class="wo-entry-name">Jeremy Gemoy</div>
+                    <div class="wo-entry-detail">Graphic Design · Work From Home</div>
+                  </div>
+                </div>
+              </div>
+              <div class="wo-content" data-tab="birthday" style="display:none;">
+                <div class="wo-entry">
+                  <div class="wo-entry-avatar" style="background:linear-gradient(135deg,#f9a8d4,#ec4899);">BS</div>
+                  <div class="wo-entry-info">
+                    <div class="wo-entry-name">Brooklyn Simmons</div>
+                    <div class="wo-entry-detail">UI Designer · Jan 14 🎂</div>
+                  </div>
+                </div>
+                <div class="wo-entry">
+                  <div class="wo-entry-avatar" style="background:linear-gradient(135deg,#fcd34d,#d97706);">CF</div>
+                  <div class="wo-entry-info">
+                    <div class="wo-entry-name">Cody Fisher</div>
+                    <div class="wo-entry-detail">Front-End Developer · Jan 22 🎂</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Today's Schedule -->
+        <div class="card" aria-label="Today's schedule">
+          <div class="card-header">
+            <div class="card-title">Today Schedule</div>
+            <div>
+              <button class="schedule-date-pill" aria-label="Change schedule date">
+                Jan 28, 2024
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2 4l3 3 3-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="schedule-body">
+            <div class="schedule-header-row">
+              <span></span>
+              <button class="add-task-btn" id="add-task-btn" aria-label="Add new task">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 2v8M2 6h8" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+                Add Task
+              </button>
+            </div>
+            <div class="timeline" aria-label="Schedule timeline">
+              <div class="timeline-hours" aria-hidden="true">
+                <span class="timeline-hour">08:00</span>
+                <span class="timeline-hour">09:00</span>
+                <span class="timeline-hour" style="color:var(--brand-600);font-weight:700;">08:35</span>
+                <span class="timeline-hour">10:00</span>
+                <span class="timeline-hour">11:00</span>
+              </div>
+              <div class="timeline-events">
+                <div class="timeline-event" style="flex:1.2;background:#D1FAE5;color:#065F46;">Online Interview with UI Candidate</div>
+                <div class="timeline-event" style="flex:0.9;background:#E0E7FF;color:#3730A3;">Weekly meeting</div>
+                <div class="timeline-event" style="flex:0.6;background:#FEF3C7;color:#92400E;">Psychology test</div>
+                <div class="timeline-event" style="flex:1;background:#F3F4F6;color:#374151;font-size:10px;">Replying email</div>
+              </div>
+              <div class="timeline-now-indicator" aria-label="Current time indicator"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Job Posting Card -->
+        <div class="card" aria-label="Current job posting">
+          <div class="card-header">
+            <div class="card-title">Active Position</div>
+            <span style="font-size:11.5px;color:var(--gray-400);">Until Jan 31, 2024</span>
+          </div>
+          <div style="padding:16px 20px;">
+            <div style="font-size:15px;font-weight:700;color:var(--gray-900);margin-bottom:6px;">Junior Frontend Developer</div>
+            <div style="font-size:12.5px;color:var(--gray-500);line-height:1.6;margin-bottom:14px;">A front-end developer builds and maintains the visual and interactive parts of websites and web apps.</div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;">
+              <span class="dept-badge" style="background:#EFF6FF;color:#1D4ED8;"><span class="dept-badge-dot" style="background:#3B82F6;"></span>Development</span>
+              <span class="dept-badge" style="background:#F0FDF4;color:#15803D;"><span class="dept-badge-dot" style="background:#22C55E;"></span>Full Time</span>
+              <span class="dept-badge" style="background:#FFF7ED;color:#C2410C;"><span class="dept-badge-dot" style="background:#F97316;"></span>Remote</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mid Grid: Employee Table + Work Hours -->
+      <div class="dash-grid-mid" style="margin-bottom:20px;">
+
+        <!-- Employee Table -->
+        <div class="card" aria-label="Employee directory">
+          <div class="card-header">
+            <div class="card-title">Employee</div>
+            <a class="card-action" href="#" aria-label="See all employee details">See Details</a>
+          </div>
+          <table class="emp-table" aria-label="Employee list">
+            <thead>
+              <tr>
+                <th scope="col">Employee Name</th>
+                <th scope="col">Department</th>
+                <th scope="col">Job Title</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="emp-cell">
+                    <div class="emp-avatar" style="background:linear-gradient(135deg,#f9a8d4,#ec4899);" aria-hidden="true">BS</div>
+                    <div>
+                      <div class="emp-name">Brooklyn Simmons</div>
+                      <div class="emp-email">brok-simms@mail.com</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="dept-badge" style="background:#F0FDF4;color:#15803D;"><span class="dept-badge-dot" style="background:var(--dept-design);"></span>Design</span></td>
+                <td style="font-size:13px;">UI Designer</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="emp-cell">
+                    <div class="emp-avatar" style="background:linear-gradient(135deg,#93c5fd,#3b82f6);" aria-hidden="true">CF</div>
+                    <div>
+                      <div class="emp-name">Cody Fisher</div>
+                      <div class="emp-email">cody_fisher99@mail.com</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="dept-badge" style="background:#EFF6FF;color:#1D4ED8;"><span class="dept-badge-dot" style="background:var(--dept-dev);"></span>Development</span></td>
+                <td style="font-size:13px;">Front-End</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="emp-cell">
+                    <div class="emp-avatar" style="background:linear-gradient(135deg,#86efac,#22c55e);" aria-hidden="true">RE</div>
+                    <div>
+                      <div class="emp-name">Ralph Edwards</div>
+                      <div class="emp-email">ralp_uwdtxg@mail.com</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="dept-badge" style="background:#F0FDF4;color:#15803D;"><span class="dept-badge-dot" style="background:var(--dept-design);"></span>Design</span></td>
+                <td style="font-size:13px;">UX Designer</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Work Hours Chart -->
+        <div class="card" aria-label="Member work hours this week">
+          <div class="card-header">
+            <div class="card-title">Member Work Hours</div>
+            <a class="card-action" href="#" aria-label="View work hours by week">View by We...</a>
+          </div>
+          <div class="hours-chart-wrapper">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+              <div class="hours-big">120<span>h</span> 54<span>m</span></div>
+              <div style="display:flex;gap:12px;font-size:11px;color:var(--gray-400);">
+                <span style="display:flex;align-items:center;gap:4px;"><span style="width:8px;height:8px;border-radius:2px;background:var(--brand-500);display:inline-block;"></span>Work Time</span>
+                <span style="display:flex;align-items:center;gap:4px;"><span style="width:8px;height:8px;border-radius:2px;background:var(--warning-100);display:inline-block;"></span>OT</span>
+              </div>
+            </div>
+            <div class="chart-bars" role="img" aria-label="Work hours bar chart for Jan 24-30">
+              <div class="chart-col">
+                <div class="chart-bar-stack">
+                  <div class="chart-bar overtime" style="height:8px;"></div>
+                  <div class="chart-bar work" style="height:48px;"></div>
+                </div>
+                <div class="chart-date">Jan 24</div>
+              </div>
+              <div class="chart-col">
+                <div class="chart-bar-stack">
+                  <div class="chart-bar overtime" style="height:14px;"></div>
+                  <div class="chart-bar work" style="height:52px;"></div>
+                </div>
+                <div class="chart-date">Jan 25</div>
+              </div>
+              <div class="chart-col">
+                <div class="chart-bar-stack">
+                  <div class="chart-bar overtime" style="height:18px;"></div>
+                  <div class="chart-bar work" style="height:50px;background:var(--brand-300);"></div>
+                </div>
+                <div class="chart-date" style="color:var(--brand-600);font-weight:700;">Jan 26</div>
+              </div>
+              <div class="chart-col">
+                <div class="chart-bar-stack">
+                  <div class="chart-bar work" style="height:40px;"></div>
+                </div>
+                <div class="chart-date">Jan 27</div>
+              </div>
+              <div class="chart-col">
+                <div class="chart-bar-stack">
+                  <div class="chart-bar overtime" style="height:6px;"></div>
+                  <div class="chart-bar work" style="height:44px;"></div>
+                </div>
+                <div class="chart-date">Jan 28</div>
+              </div>
+              <div class="chart-col">
+                <div class="chart-bar-stack">
+                  <div class="chart-bar work" style="height:28px;"></div>
+                </div>
+                <div class="chart-date">Jan 29</div>
+              </div>
+              <div class="chart-col">
+                <div class="chart-bar-stack">
+                  <div class="chart-bar work" style="height:18px;"></div>
+                </div>
+                <div class="chart-date">Jan 30</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Leave Action Cards Grid -->
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;" role="region" aria-label="Leave requests requiring action">
+
+        <!-- Sick Leave Card -->
+        <div class="leave-card" aria-label="Sick leave request from Brooklyn Simmons">
+          <div class="leave-emp">
+            <div class="emp-avatar" style="background:linear-gradient(135deg,#f9a8d4,#ec4899);width:36px;height:36px;font-size:11px;" aria-hidden="true">BS</div>
+            <div class="leave-emp-info">
+              <div class="emp-name">Brooklyn Simmons</div>
+              <div class="emp-email">brok-simms@mail.com</div>
+            </div>
+            <span class="leave-badge leave-badge-sick" aria-label="Sick leave">Sick Leave</span>
+          </div>
+          <div style="display:flex;gap:6px;margin-bottom:10px;">
+            <div class="leave-detail">Department: <strong>Design</strong></div>
+            <div class="leave-detail">Title: <strong>Creative Director</strong></div>
+          </div>
+          <div class="leave-detail">Contract Type: <strong>Onsite · Fulltime</strong></div>
+          <div style="margin-top:8px;display:flex;gap:16px;">
+            <div class="leave-detail">Leave From: <strong>Jan 23, 2024</strong></div>
+            <div class="leave-detail">Leave To: <strong>Jan 27, 2024</strong></div>
+          </div>
+          <div class="leave-actions">
+            <button class="btn-approve" aria-label="Approve sick leave for Brooklyn Simmons">Approve</button>
+            <button class="btn-reject" aria-label="Reject sick leave for Brooklyn Simmons">Reject</button>
+          </div>
+        </div>
+
+        <!-- LinkedIn Card -->
+        <div class="leave-card" aria-label="Lisa Harvey contact info">
+          <div class="leave-emp" style="margin-bottom:8px;">
+            <div class="emp-avatar" style="background:linear-gradient(135deg,#93c5fd,#2563eb);width:36px;height:36px;font-size:11px;" aria-hidden="true">LH</div>
+            <div class="leave-emp-info">
+              <div class="emp-name">Lisa Harvey</div>
+              <div class="emp-email">helo-lisaa@hotmail.com</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;margin-bottom:10px;align-items:center;">
+            <span style="background:#EFF6FF;color:#1E40AF;padding:3px 10px;border-radius:99px;font-size:11.5px;font-weight:600;">LinkedIn</span>
+            <span style="font-size:12px;color:var(--gray-400);">4 💬 · 1 ❤️</span>
+          </div>
+          <div class="leave-detail">Department: <strong>Human Resource</strong></div>
+          <div class="leave-detail" style="margin-top:4px;">Job Title: <strong>HR Manager</strong></div>
+        </div>
+
+        <!-- Annual Leave Card -->
+        <div class="leave-card" aria-label="Annual leave for Leslie Alexander">
+          <div class="leave-emp">
+            <div class="emp-avatar" style="background:linear-gradient(135deg,#fcd34d,#d97706);width:36px;height:36px;font-size:11px;" aria-hidden="true">LA</div>
+            <div class="leave-emp-info">
+              <div class="emp-name">Leslie Alexander</div>
+              <div class="emp-email">leslie@company.com</div>
+            </div>
+            <span class="leave-badge leave-badge-annual" aria-label="Annual leave">Annual Leave</span>
+          </div>
+          <div style="margin-top:4px;margin-bottom:8px;">
+            <div class="leave-detail">Leave From: <strong>Jan 12, 2024</strong></div>
+          </div>
+          <div class="leave-detail">Department: <strong>Project Manager</strong></div>
+          <div class="leave-detail" style="margin-top:4px;">Leave Duration: <strong>3 Days</strong></div>
+          <div class="leave-actions">
+            <button class="btn-approve" aria-label="Approve annual leave for Leslie Alexander">Approve</button>
+            <button class="btn-reject" aria-label="Reject annual leave for Leslie Alexander">Reject</button>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+</div><!-- /.app-shell -->
+
+<!-- Toast -->
+<div class="bordup-toast" id="bordup-toast" role="status" aria-live="polite" aria-atomic="true">
+  <span class="bordup-toast-msg">Action completed</span>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Velt — Real-Time Collaboration SDK for Developers</title>
+  <meta name="description" content="Add real-time multiplayer features like comments, cursors, presence, and notifications to any product in minutes. The collaboration infrastructure toolkit.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page-wrapper">
+
+  <!-- ══════════════════════════════════════════════════════════
+       NAVBAR
+       ══════════════════════════════════════════════════════════ -->
+  <header>
+    <nav class="velt-navbar" aria-label="Main navigation">
+      <div class="navbar-inner">
+
+        <!-- Brand -->
+        <a href="#" class="navbar-brand" aria-label="Velt — Home">
+          <div class="brand-mark" aria-hidden="true">
+            <!-- Velt V logo -->
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M2 4L8 12L14 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="8" cy="8" r="2" fill="rgba(255,255,255,0.5)"/>
+            </svg>
+          </div>
+          <span class="brand-name">Velt</span>
+        </a>
+
+        <!-- Nav Links -->
+        <ul class="navbar-nav" role="list">
+          <!-- Product (with mega-menu) -->
+          <li class="nav-item-wrap" id="mega-wrap">
+            <button class="nav-link" id="mega-trigger" aria-haspopup="true" aria-expanded="false" aria-controls="mega-menu">
+              Product
+              <span class="nav-link-chevron" aria-hidden="true">▾</span>
+            </button>
+          </li>
+          <li><a href="#use-cases" class="nav-link">Use Cases</a></li>
+          <li><a href="#enterprise" class="nav-link">Enterprise</a></li>
+          <li><a href="#resources" class="nav-link">Resources</a></li>
+          <li><a href="#pricing" class="nav-link">Pricing</a></li>
+        </ul>
+
+        <!-- Right actions -->
+        <div class="navbar-right">
+          <a href="#signin" class="nav-btn-ghost">Sign In</a>
+          <a href="#docs" class="nav-btn-ghost nav-btn-docs">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <rect x="2" y="2" width="10" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/>
+              <path d="M4.5 5h5M4.5 7h5M4.5 9h3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+            </svg>
+            Read Docs
+          </a>
+          <a href="#book-demo" class="nav-btn-primary" id="btn-book-demo">Book Demo</a>
+        </div>
+
+        <!-- Mobile Burger -->
+        <button class="navbar-burger" id="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-drawer">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+      </div>
+    </nav>
+
+    <!-- ══ MEGA MENU ══════════════════════════════════════════ -->
+    <div class="mega-menu-wrapper" role="region">
+      <div class="mega-menu" id="mega-menu" role="menu" aria-label="Product features">
+        <div class="mega-menu-grid">
+
+          <!-- Col 1: ASYNC -->
+          <div class="mega-col">
+            <div class="mega-col-label">Sync</div>
+            <a class="mega-item" href="#comments" role="menuitem">
+              <div class="mega-item-icon" aria-hidden="true">💬</div>
+              <span class="mega-item-text">Comments</span>
+            </a>
+            <a class="mega-item" href="#notifications" role="menuitem">
+              <div class="mega-item-icon" aria-hidden="true">🔔</div>
+              <span class="mega-item-text">Notifications</span>
+            </a>
+            <a class="mega-item" href="#recording" role="menuitem">
+              <div class="mega-item-icon" aria-hidden="true">📹</div>
+              <span class="mega-item-text">Recording</span>
+            </a>
+            <a class="mega-item" href="#activity-logs" role="menuitem">
+              <div class="mega-item-icon" aria-hidden="true">📋</div>
+              <span class="mega-item-text">Activity Logs</span>
+            </a>
+            <a class="mega-item" href="#video-editor" role="menuitem">
+              <div class="mega-item-icon" aria-hidden="true">🎬</div>
+              <span class="mega-item-text">Video Editor</span>
+            </a>
+            <a class="mega-item" href="#analytics" role="menuitem">
+              <div class="mega-item-icon" aria-hidden="true">📊</div>
+              <span class="mega-item-text">View Analytics</span>
+            </a>
+            <a class="mega-item" href="#reactions" role="menuitem">
+              <div class="mega-item-icon" aria-hidden="true">⚡</div>
+              <span class="mega-item-text">Reactions</span>
+            </a>
+            <a class="mega-view-all" href="#sync-all" role="menuitem">VIEW ALL ↗</a>
+          </div>
+
+          <!-- Col 2: REALTIME -->
+          <div class="mega-col">
+            <div class="mega-col-label">Real Time</div>
+            <a class="mega-item" href="#multiplayer" role="menuitem">
+              <div class="mega-item-icon" aria-hidden="true">🖊️</div>
+              <span class="mega-item-text">Multiplayer Editing</span>
+            </a>
+            <a class="mega-item" href="#single-editor" role="menuitem">
+              <div class="mega-item-icon" aria-hidden="true">✏️</div>
+              <span class="mega-item-text">Single Editor</span>
+            </a>
+            <a class="mega-item" href="#live-state" role="menuitem">
+              <div class="mega-item-icon" aria-hidden="true">🔄</div>
+              <span class="mega-item-text">Live State Sync</span>
+            </a>
+            <a class="mega-item" href="#live-selection" role="menuitem">
+              <div class="mega-item-icon" aria-hidden="true">🎯</div>
+              <span class="mega-item-text">Live Selection</span>
+            </a>
+            <a class="mega-item" href="#huddle" role="menuitem">
+              <div class="mega-item-icon" aria-hidden="true">🔊</div>
+              <span class="mega-item-text">Huddle</span>
+            </a>
+            <a class="mega-item" href="#presence" role="menuitem">
+              <div class="mega-item-icon" aria-hidden="true">🟢</div>
+              <span class="mega-item-text">Presence</span>
+            </a>
+            <a class="mega-item" href="#cursors" role="menuitem">
+              <div class="mega-item-icon" aria-hidden="true">🖱️</div>
+              <span class="mega-item-text">Cursors</span>
+            </a>
+            <a class="mega-item" href="#follow-mode" role="menuitem">
+              <div class="mega-item-icon" aria-hidden="true">👁️</div>
+              <span class="mega-item-text">Follow Mode</span>
+            </a>
+          </div>
+
+          <!-- Col 3: PLATFORM -->
+          <div class="mega-col">
+            <div class="mega-col-label">Platform</div>
+            <a class="mega-item" href="#admin" role="menuitem">
+              <div class="mega-item-icon" aria-hidden="true">🛡️</div>
+              <span class="mega-item-text">Admin Console</span>
+            </a>
+            <a class="mega-item" href="#devtools" role="menuitem">
+              <div class="mega-item-icon" aria-hidden="true">🔧</div>
+              <span class="mega-item-text">Dev Tools</span>
+            </a>
+            <a class="mega-item" href="#mcp" role="menuitem">
+              <div class="mega-item-icon" aria-hidden="true">🤖</div>
+              <span class="mega-item-text">MCP</span>
+            </a>
+            <a class="mega-item" href="#webhooks" role="menuitem">
+              <div class="mega-item-icon" aria-hidden="true">🔗</div>
+              <span class="mega-item-text">Webhooks &amp; API</span>
+            </a>
+            <a class="mega-item" href="#integrations" role="menuitem">
+              <div class="mega-item-icon" aria-hidden="true">🔌</div>
+              <span class="mega-item-text">Integrations</span>
+            </a>
+          </div>
+
+          <!-- Col 4: SHOWCASE CARD -->
+          <div class="mega-col">
+            <div class="showcase-card" role="complementary" aria-label="Feature showcase">
+              <div class="showcase-preview">
+                <div class="showcase-nodes" aria-hidden="true">
+                  <div class="showcase-node node-primary">Primary / 6</div>
+                  <div class="showcase-connector"></div>
+                  <div class="showcase-node node-secondary">16px →</div>
+                </div>
+                <div class="showcase-badge" aria-label="Live feature">
+                  <div class="showcase-dot"></div>
+                  Live
+                </div>
+              </div>
+              <div class="showcase-body">
+                <div class="showcase-title">Advance UI Customization</div>
+                <p class="showcase-desc">Personalize the collaboration experience to match your exact design system and brand.</p>
+                <div class="showcase-btns">
+                  <a href="#learn-more" class="showcase-btn showcase-btn-secondary">Learn More</a>
+                  <a href="#view-docs" class="showcase-btn showcase-btn-primary">View Docs</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer" id="mobile-drawer" role="dialog" aria-label="Mobile navigation" aria-modal="true">
+    <div class="mobile-drawer-overlay" id="mobile-drawer-overlay"></div>
+    <div class="mobile-drawer-panel">
+      <div class="drawer-section-label">Product</div>
+      <a href="#comments" class="drawer-link">💬 Comments</a>
+      <a href="#notifications" class="drawer-link">🔔 Notifications</a>
+      <a href="#multiplayer" class="drawer-link">🖊️ Multiplayer Editing</a>
+      <a href="#cursors" class="drawer-link">🖱️ Cursors</a>
+      <a href="#admin" class="drawer-link">🛡️ Admin Console</a>
+      <div class="drawer-divider"></div>
+      <div class="drawer-section-label">Company</div>
+      <a href="#use-cases" class="drawer-link">Use Cases</a>
+      <a href="#enterprise" class="drawer-link">Enterprise</a>
+      <a href="#resources" class="drawer-link">Resources</a>
+      <a href="#pricing" class="drawer-link">Pricing</a>
+      <div class="drawer-divider"></div>
+      <a href="#signin" class="drawer-link">Sign In</a>
+      <a href="#docs" class="drawer-link">Read Docs</a>
+      <a href="#book-demo" class="drawer-link" style="color:var(--accent-primary);font-weight:600;">Book Demo →</a>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       HERO
+       ══════════════════════════════════════════════════════════ -->
+  <main>
+    <section class="hero" id="home" aria-labelledby="hero-heading">
+
+      <!-- Live multiplayer cursor tags -->
+      <div class="cursor-tag cursor-sean" id="cursor-sean" aria-hidden="true">Sean</div>
+      <div class="cursor-tag cursor-emma" id="cursor-emma" aria-hidden="true">Emma</div>
+
+      <!-- Hero badge -->
+      <div class="hero-badge" aria-label="SDK for developers">
+        <div class="hero-badge-dot" aria-hidden="true"></div>
+        The Collaboration Infra Toolkit
+      </div>
+
+      <!-- Title -->
+      <h1 class="hero-title" id="hero-heading">
+        Build the <span class="hero-title-highlight">collaboration</span> kit
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="hero-subtitle">
+        Add real-time multiplayer features — comments, cursors, presence, notifications, and more — to any product in minutes.
+      </p>
+
+      <!-- CLI Command Card -->
+      <div class="hero-cli" role="region" aria-label="Install command">
+        <span class="cli-prompt" aria-hidden="true">$</span>
+        <code class="cli-cmd" id="cli-cmd-text">npx skills add velt-js/agent-skills</code>
+        <button class="cli-copy-btn" id="cli-copy-btn" aria-label="Copy install command" title="Copy to clipboard">⎘</button>
+      </div>
+
+      <!-- Use Case Tabs -->
+      <section class="use-case-section" id="use-cases" aria-label="Use cases">
+        <div class="use-case-tabs" role="tablist" aria-label="Product use cases">
+          <button class="uc-tab active" data-tab="dashboard" role="tab" aria-selected="true">
+            <span class="uc-tab-dot" aria-hidden="true"></span>
+            Dashboard Product
+          </button>
+          <button class="uc-tab" data-tab="docs" role="tab" aria-selected="false">Documentation</button>
+          <button class="uc-tab" data-tab="video" role="tab" aria-selected="false">Video Editor</button>
+          <button class="uc-tab" data-tab="cms" role="tab" aria-selected="false">CMS Product</button>
+          <button class="uc-tab" data-tab="canvas" role="tab" aria-selected="false">Canvas Editor</button>
+        </div>
+
+        <!-- Previews -->
+        <div class="uc-preview" data-tab="dashboard" role="tabpanel" aria-label="Dashboard product preview">
+          <div class="uc-placeholder" aria-hidden="true">
+            <div class="uc-placeholder-icon">📊</div>
+            <div class="uc-placeholder-label">Dashboard Product Preview</div>
+          </div>
+        </div>
+        <div class="uc-preview" data-tab="docs" role="tabpanel" aria-label="Documentation preview" style="display:none;">
+          <div class="uc-placeholder" aria-hidden="true">
+            <div class="uc-placeholder-icon">📝</div>
+            <div class="uc-placeholder-label">Documentation Preview</div>
+          </div>
+        </div>
+        <div class="uc-preview" data-tab="video" role="tabpanel" aria-label="Video editor preview" style="display:none;">
+          <div class="uc-placeholder" aria-hidden="true">
+            <div class="uc-placeholder-icon">🎬</div>
+            <div class="uc-placeholder-label">Video Editor Preview</div>
+          </div>
+        </div>
+        <div class="uc-preview" data-tab="cms" role="tabpanel" aria-label="CMS product preview" style="display:none;">
+          <div class="uc-placeholder" aria-hidden="true">
+            <div class="uc-placeholder-icon">🗂️</div>
+            <div class="uc-placeholder-label">CMS Product Preview</div>
+          </div>
+        </div>
+        <div class="uc-preview" data-tab="canvas" role="tabpanel" aria-label="Canvas editor preview" style="display:none;">
+          <div class="uc-placeholder" aria-hidden="true">
+            <div class="uc-placeholder-icon">🎨</div>
+            <div class="uc-placeholder-label">Canvas Editor Preview</div>
+          </div>
+        </div>
+      </section>
+
+    </section>
+  </main>
+
+  <!-- Toast -->
+  <div class="velt-toast" id="velt-toast" role="status" aria-live="polite" aria-atomic="true">
+    <span aria-hidden="true">✓</span>
+    <span class="velt-toast-msg"></span>
+  </div>
+
+</div><!-- /.page-wrapper -->
+<script src="script.js"></script>
+</body>
+</html>
