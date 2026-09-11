@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navigation Collection — A Curated Archive of Navbar & Sidebar Systems</title>
+  <meta name="description" content="Sebuah arsip navigasi web: tujuh eksperimen navbar dan sidebar untuk landing page, SaaS, developer platform, dan enterprise, dibangun dengan semantic HTML, CSS, dan vanilla JS.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Color */
+      --background: #F4F3EF;
+      --surface: #FFFFFF;
+      --surface-muted: #E9E8E3;
+
+      --text-primary: #171717;
+      --text-secondary: #66645F;
+      --text-tertiary: #92908A;
+
+      --border: #D8D6CF;
+      --border-strong: #B7B4AB;
+
+      --accent: #D94A3D;
+
+      /* Typography */
+      --font-display: "Inter Tight", sans-serif;
+      --font-body: "Inter", sans-serif;
+      --font-mono: "IBM Plex Mono", monospace;
+
+      /* Spacing */
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-5: 24px;
+      --space-6: 32px;
+      --space-7: 48px;
+      --space-8: 64px;
+      --space-9: 96px;
+      --space-10: 128px;
+
+      /* Radius */
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+
+      /* Motion */
+      --ease-out: cubic-bezier(.22, 1, .36, 1);
+      --duration-fast: 160ms;
+      --duration-normal: 260ms;
+
+      /* Layout */
+      --page-padding: clamp(20px, 4vw, 72px);
+      --content-width: 1440px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--background);
+      background-image: linear-gradient(rgba(0, 0, 0, .035) 1px, transparent 1px);
+      background-size: 100% 32px;
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button, input {
+      font-family: inherit;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--text-primary);
+      outline-offset: 2px;
+    }
+
+    .wrap {
+      max-width: var(--content-width);
+      margin: 0 auto;
+      padding-left: var(--page-padding);
+      padding-right: var(--page-padding);
+    }
+
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: var(--text-secondary);
+    }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      padding-top: var(--space-8);
+      padding-bottom: var(--space-7);
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-4);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--surface);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      color: var(--text-secondary);
+      margin-bottom: var(--space-5);
+    }
+
+    .hero-badge .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(34px, 5.5vw, 60px);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-desc {
+      max-width: 56ch;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: clamp(15px, 1.6vw, 17px);
+      line-height: 1.6;
+      color: var(--text-secondary);
+      margin-top: var(--space-5);
+    }
+
+    /* ---------- Toolbar (boxed / card) ---------- */
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-5);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-4) var(--space-5);
+      margin-top: var(--space-7);
+      margin-bottom: 0;
+    }
+
+    .filters {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+    }
+
+    .filter-btn {
+      background: var(--surface-muted);
+      border: 1px solid transparent;
+      cursor: pointer;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      color: var(--text-secondary);
+      padding: var(--space-2) var(--space-4);
+      border-radius: 999px;
+      transition: color var(--duration-fast) var(--ease-out), background var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
+    }
+
+    .filter-btn:hover {
+      color: var(--text-primary);
+      border-color: var(--border-strong);
+    }
+
+    .filter-btn.active {
+      color: #fff;
+      background: var(--text-primary);
+    }
+
+    .filter-sep {
+      display: none;
+    }
+
+    .search {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      min-width: 240px;
+      background: var(--surface-muted);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: var(--space-2) var(--space-4);
+      transition: border-color var(--duration-fast) var(--ease-out);
+    }
+
+    .search:focus-within {
+      border-color: var(--text-primary);
+    }
+
+    .search svg {
+      flex-shrink: 0;
+      color: var(--text-tertiary);
+    }
+
+    .search label {
+      display: none;
+    }
+
+    .search input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      padding: var(--space-1) 0;
+      font-size: 14px;
+      color: var(--text-primary);
+      outline: none;
+    }
+
+    .search input::placeholder {
+      color: var(--text-tertiary);
+    }
+
+    /* ---------- Card Grid (ringkas, tampil saat filter "Semua") ---------- */
+    .card-grid {
+      padding-top: var(--space-8);
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: var(--space-5);
+    }
+
+    .mini-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--space-5);
+      transition: border-color var(--duration-fast) var(--ease-out), background var(--duration-fast) var(--ease-out);
+    }
+
+    .mini-card:hover {
+      border-color: var(--border-strong);
+      background: var(--surface-muted);
+    }
+
+    .mini-card-top {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: var(--space-4);
+    }
+
+    .mini-card-number {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--text-tertiary);
+      transition: color var(--duration-fast) var(--ease-out);
+    }
+
+    .mini-card:hover .mini-card-number {
+      color: var(--accent);
+    }
+
+    .mini-card-category {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+    }
+
+    .mini-card-title {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 19px;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin-bottom: var(--space-3);
+    }
+
+    .mini-card-desc {
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--text-secondary);
+      flex-grow: 1;
+      margin-bottom: var(--space-4);
+    }
+
+    .mini-card-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-3);
+      padding-top: var(--space-4);
+      border-top: 1px solid var(--border);
+    }
+
+    .mini-card-tech {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      color: var(--text-tertiary);
+    }
+
+    .mini-card-links {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+    }
+
+    .is-hidden {
+      display: none !important;
+    }
+
+    /* ---------- Archive / Specimens (tampil saat filter kategori dipilih) ---------- */
+    .archive {
+      padding-top: var(--space-8);
+    }
+
+    .specimen {
+      padding-bottom: var(--space-9);
+      margin-bottom: var(--space-9);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .specimen:last-child {
+      border-bottom: none;
+    }
+
+    .specimen-head {
+      display: grid;
+      grid-template-columns: 96px 1fr;
+      gap: var(--space-5);
+      align-items: start;
+      margin-bottom: var(--space-5);
+    }
+
+    .specimen-number {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--text-tertiary);
+      padding-top: var(--space-2);
+      transition: color var(--duration-fast) var(--ease-out);
+    }
+
+    .specimen:hover .specimen-number {
+      color: var(--accent);
+    }
+
+    .specimen-title {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: clamp(28px, 4vw, 44px);
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+
+    .specimen-category {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-top: var(--space-2);
+    }
+
+    /* Preview / browser frame */
+    .specimen-preview {
+      margin-left: 0;
+    }
+
+    .specimen[data-featured="true"] .specimen-preview {
+      margin-top: var(--space-6);
+    }
+
+    .browser-frame {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--surface);
+    }
+
+    .browser-bar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: var(--space-3) var(--space-4);
+      border-bottom: 1px solid var(--border);
+      background: var(--surface-muted);
+    }
+
+    .browser-bar span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--border-strong);
+    }
+
+    .browser-frame iframe {
+      display: block;
+      width: 100%;
+      height: 460px;
+      border: none;
+      background: var(--surface);
+    }
+
+    .specimen[data-featured="true"] .browser-frame iframe {
+      height: 620px;
+    }
+
+    /* Specimen footer: description + meta */
+    .specimen-footer {
+      display: grid;
+      grid-template-columns: 96px 1fr auto;
+      gap: var(--space-5);
+      align-items: start;
+      margin-top: var(--space-5);
+    }
+
+    .specimen-desc {
+      grid-column: 2;
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--text-secondary);
+      max-width: 62ch;
+    }
+
+    .specimen-links {
+      grid-column: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: var(--space-3);
+      text-align: right;
+    }
+
+    .specimen-tech {
+      grid-column: 2;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      color: var(--text-tertiary);
+      margin-top: var(--space-4);
+    }
+
+    .link-primary {
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      white-space: nowrap;
+      position: relative;
+    }
+
+    .link-primary::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -2px;
+      height: 1px;
+      background: var(--text-primary);
+      transform: scaleX(1);
+      transform-origin: right;
+      transition: transform var(--duration-normal) var(--ease-out);
+    }
+
+    .link-primary:hover::after {
+      transform: scaleX(0.6);
+    }
+
+    .link-secondary {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      color: var(--text-tertiary);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: color var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
+    }
+
+    .link-secondary:hover {
+      color: var(--text-primary);
+      border-color: var(--border-strong);
+    }
+
+    /* Featured specimen gets a touch more air + larger description */
+    .specimen[data-featured="true"] .eyebrow-featured {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: var(--space-3);
+    }
+
+    .specimen[data-featured="true"] .specimen-desc {
+      font-size: 17px;
+      max-width: 68ch;
+    }
+
+    /* ---------- Footer ---------- */
+    .site-footer {
+      border-top: 1px solid var(--border);
+      padding-top: var(--space-6);
+      padding-bottom: var(--space-8);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: var(--space-6);
+    }
+
+    .site-footer .mark {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 20px;
+      letter-spacing: -0.02em;
+    }
+
+    .site-footer .mark span {
+      display: block;
+      font-family: var(--font-mono);
+      font-weight: 400;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      color: var(--text-tertiary);
+      margin-top: var(--space-1);
+    }
+
+    .site-footer .colophon {
+      max-width: 40ch;
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .site-footer .links {
+      display: flex;
+      align-items: center;
+      gap: var(--space-6);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.06em;
+    }
+
+    .site-footer .links a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      border-bottom: 1px solid transparent;
+      transition: color var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
+    }
+
+    .site-footer .links a:hover {
+      color: var(--text-primary);
+      border-color: var(--border-strong);
+    }
+
+    /* ---------- Empty state ---------- */
+    .empty-state {
+      display: none;
+      padding: var(--space-9) 0;
+      text-align: center;
+      color: var(--text-tertiary);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      letter-spacing: 0.06em;
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 860px) {
+      .specimen-head {
+        grid-template-columns: 48px 1fr;
+      }
+
+      .specimen-footer {
+        grid-template-columns: 1fr;
+        row-gap: var(--space-4);
+      }
+
+      .specimen-desc,
+      .specimen-tech {
+        grid-column: 1;
+      }
+
+      .specimen-links {
+        grid-column: 1;
+        align-items: flex-start;
+        text-align: left;
+        flex-direction: row;
+        gap: var(--space-5);
+      }
+
+      .browser-frame iframe,
+      .specimen[data-featured="true"] .browser-frame iframe {
+        height: 320px;
+      }
+
+      .toolbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .search {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="wrap">
+
+    <!-- Hero -->
+    <header class="hero">
+      <div class="hero-badge">
+        <span class="dot"></span>
+        Production-Ready UI Suite
+      </div>
+      <h1 class="hero-title">Modern Navbar &amp; Sidebar Collection</h1>
+      <p class="hero-desc">
+        Koleksi navigasi modern siap pakai dengan HTML, CSS Vanilla Tokens, &amp; Vanilla JS. Terisolasi per folder dan dilengkapi komponen clean code siap copy-paste.
+      </p>
+
+      <!-- Toolbar -->
+      <div class="toolbar">
+        <nav class="filters" aria-label="Filter kategori navigasi">
+          <button class="filter-btn active" data-filter="all" aria-pressed="true">ALL</button>
+          <button class="filter-btn" data-filter="landing" aria-pressed="false">Landing Page</button>
+          <button class="filter-btn" data-filter="saas" aria-pressed="false">SaaS &amp; Admin</button>
+          <button class="filter-btn" data-filter="developer" aria-pressed="false">Developer &amp; SDK</button>
+          <button class="filter-btn" data-filter="corporate" aria-pressed="false">Corporate</button>
+        </nav>
+
+        <div class="search">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.3"/>
+            <path d="M9.5 9.5L12.5 12.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+          </svg>
+          <label for="searchInput">Search</label>
+          <input type="text" id="searchInput" placeholder="Cari navigasi, mis. mega-menu, island...">
+        </div>
+      </div>
+    </header>
+
+    <!-- Card Grid: tampilan ringkas untuk "Semua" -->
+    <section class="card-grid" id="cardGrid">
+
+      <article class="mini-card" data-category="landing" data-keywords="island pill macos sonoma clipboard floating toast">
+        <div class="mini-card-top">
+          <span class="mini-card-number">01</span>
+          <span class="mini-card-category">Landing Page</span>
+        </div>
+        <h3 class="mini-card-title">Supaste Dynamic Island</h3>
+        <p class="mini-card-desc">Navigasi floating pill khas Apple dengan efek morph saat scroll dan HUD dock interaktif.</p>
+        <div class="mini-card-foot">
+          <span class="mini-card-tech">HTML · CSS · JS</span>
+          <div class="mini-card-links">
+            <a href="supaste-island-navbar/index.html" class="link-primary" target="_blank">Demo →</a>
+            <a href="supaste-island-navbar/NAVBAR_CODE.md" class="link-secondary">Kode</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="mini-card" data-category="saas" data-keywords="saas admin sidebar dual tier command palette popover profile">
+        <div class="mini-card-top">
+          <span class="mini-card-number">02</span>
+          <span class="mini-card-category">SaaS &amp; Admin</span>
+        </div>
+        <h3 class="mini-card-title">Untitled UI SaaS Sidebar</h3>
+        <p class="mini-card-desc">Sidebar dual-tier enterprise dengan ⌘K command palette dan account switcher.</p>
+        <div class="mini-card-foot">
+          <span class="mini-card-tech">HTML · CSS · JS</span>
+          <div class="mini-card-links">
+            <a href="untitled-saas-sidebar/index.html" class="link-primary" target="_blank">Demo →</a>
+            <a href="untitled-saas-sidebar/NAVBAR_CODE.md" class="link-secondary">Kode</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="mini-card" data-category="developer" data-keywords="developer sdk mega-menu realtime cursors dark cli api">
+        <div class="mini-card-top">
+          <span class="mini-card-number">03</span>
+          <span class="mini-card-category">Developer &amp; SDK</span>
+        </div>
+        <h3 class="mini-card-title">Velt Developer Platform</h3>
+        <p class="mini-card-desc">Navbar dark-mode dengan 4-column mega-menu dan multiplayer live cursor tags.</p>
+        <div class="mini-card-foot">
+          <span class="mini-card-tech">HTML · CSS · JS</span>
+          <div class="mini-card-links">
+            <a href="velt-developer-navbar/index.html" class="link-primary" target="_blank">Demo →</a>
+            <a href="velt-developer-navbar/NAVBAR_CODE.md" class="link-secondary">Kode</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="mini-card" data-category="saas" data-keywords="enterprise hr operations rail collapsible sidebar department taxonomy">
+        <div class="mini-card-top">
+          <span class="mini-card-number">04</span>
+          <span class="mini-card-category">SaaS &amp; Admin</span>
+        </div>
+        <h3 class="mini-card-title">BordUp™ Operations Rail</h3>
+        <p class="mini-card-desc">Sidebar collapsible rail (260px ↔ 76px) dengan tooltip &amp; taksonomi departemen.</p>
+        <div class="mini-card-foot">
+          <span class="mini-card-tech">HTML · CSS · JS</span>
+          <div class="mini-card-links">
+            <a href="bordup-operations-sidebar/index.html" class="link-primary" target="_blank">Demo →</a>
+            <a href="bordup-operations-sidebar/NAVBAR_CODE.md" class="link-secondary">Kode</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="mini-card" data-category="landing" data-keywords="cyberpunk creative portfolio gaming neon velocita audio search">
+        <div class="mini-card-top">
+          <span class="mini-card-number">05</span>
+          <span class="mini-card-category">Landing Page</span>
+        </div>
+        <h3 class="mini-card-title">Velocita Cyber Creative</h3>
+        <p class="mini-card-desc">Navigasi floating pill futuristik dengan search overlay &amp; kontrol audio ambiance.</p>
+        <div class="mini-card-foot">
+          <span class="mini-card-tech">HTML · CSS · JS</span>
+          <div class="mini-card-links">
+            <a href="velocita-navbar/index.html" class="link-primary" target="_blank">Demo →</a>
+            <a href="velocita-navbar/NAVBAR_CODE.md" class="link-secondary">Kode</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="mini-card" data-category="corporate" data-keywords="corporate law finance luxury real estate mega menu multi tier">
+        <div class="mini-card-top">
+          <span class="mini-card-number">06</span>
+          <span class="mini-card-category">Corporate</span>
+        </div>
+        <h3 class="mini-card-title">Meridian Luxury Corporate</h3>
+        <p class="mini-card-desc">Header multi-tier dengan top utility bar, mega-menu mewah &amp; portal klien.</p>
+        <div class="mini-card-foot">
+          <span class="mini-card-tech">HTML · CSS · JS</span>
+          <div class="mini-card-links">
+            <a href="meridian-corporate-navbar/index.html" class="link-primary" target="_blank">Demo →</a>
+            <a href="meridian-corporate-navbar/NAVBAR_CODE.md" class="link-secondary">Kode</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="mini-card" data-category="corporate" data-keywords="minimalist architecture design strata stacked layered">
+        <div class="mini-card-top">
+          <span class="mini-card-number">07</span>
+          <span class="mini-card-category">Corporate</span>
+        </div>
+        <h3 class="mini-card-title">Strata Layered Architecture</h3>
+        <p class="mini-card-desc">Navigasi minimalis multi-layer dengan grid arsitektural &amp; kontras tinggi.</p>
+        <div class="mini-card-foot">
+          <span class="mini-card-tech">HTML · CSS · JS</span>
+          <div class="mini-card-links">
+            <a href="strata-layered-navbar/index.html" class="link-primary" target="_blank">Demo →</a>
+            <a href="strata-layered-navbar/NAVBAR_CODE.md" class="link-secondary">Kode</a>
+          </div>
+        </div>
+      </article>
+
+      <p class="empty-state" id="emptyStateGrid">TIDAK ADA HASIL — COBA KATA KUNCI LAIN</p>
+
+    </section>
+
+    <!-- Archive: tampilan detail untuk kategori spesifik -->
+    <section class="archive is-hidden" id="navbarGrid">
+
+      <!-- 01 — Supaste (Featured) -->
+      <article class="specimen" data-featured="true" data-category="landing" data-keywords="island pill macos sonoma clipboard floating toast">
+        <div class="specimen-head">
+          <span class="specimen-number">01</span>
+          <div>
+            <span class="eyebrow-featured">FEATURED</span>
+            <h2 class="specimen-title">Supaste Dynamic Island</h2>
+            <span class="specimen-category">Landing Page — macOS / Productivity</span>
+          </div>
+        </div>
+        <div class="specimen-preview">
+          <div class="browser-frame">
+            <div class="browser-bar"><span></span><span></span><span></span></div>
+            <iframe src="supaste-island-navbar/index.html" loading="lazy" title="Preview Supaste Dynamic Island"></iframe>
+          </div>
+        </div>
+        <div class="specimen-footer">
+          <p class="specimen-desc">
+            Navigasi floating pill khas Apple dengan efek morph saat scroll, latar langit macOS Sonoma, in-app clipboard HUD dock interaktif, dan notifikasi copy toast.
+          </p>
+          <span class="specimen-tech">HTML · CSS · JS</span>
+          <div class="specimen-links">
+            <a href="supaste-island-navbar/index.html" class="link-primary" target="_blank">VIEW DEMO →</a>
+            <a href="supaste-island-navbar/NAVBAR_CODE.md" class="link-secondary">CODE</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 02 — Untitled UI SaaS Sidebar -->
+      <article class="specimen" data-category="saas" data-keywords="saas admin sidebar dual tier command palette popover profile">
+        <div class="specimen-head">
+          <span class="specimen-number">02</span>
+          <div>
+            <h2 class="specimen-title">Untitled UI SaaS Sidebar</h2>
+            <span class="specimen-category">SaaS &amp; Admin — Cloud / Team Management</span>
+          </div>
+        </div>
+        <div class="specimen-preview">
+          <div class="browser-frame">
+            <div class="browser-bar"><span></span><span></span><span></span></div>
+            <iframe src="untitled-saas-sidebar/index.html" loading="lazy" title="Preview Untitled UI SaaS Sidebar"></iframe>
+          </div>
+        </div>
+        <div class="specimen-footer">
+          <p class="specimen-desc">
+            Sidebar bertingkat ganda kelas enterprise terinspirasi oleh Untitled UI v4.0. Dilengkapi ⌘K command palette, popover account switcher, dan status kehadiran live.
+          </p>
+          <span class="specimen-tech">HTML · CSS · JS</span>
+          <div class="specimen-links">
+            <a href="untitled-saas-sidebar/index.html" class="link-primary" target="_blank">VIEW DEMO →</a>
+            <a href="untitled-saas-sidebar/NAVBAR_CODE.md" class="link-secondary">CODE</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 03 — Velt Developer Platform -->
+      <article class="specimen" data-category="developer" data-keywords="developer sdk mega-menu realtime cursors dark cli api">
+        <div class="specimen-head">
+          <span class="specimen-number">03</span>
+          <div>
+            <h2 class="specimen-title">Velt Developer Platform</h2>
+            <span class="specimen-category">Developer &amp; SDK — Real-Time Collaboration</span>
+          </div>
+        </div>
+        <div class="specimen-preview">
+          <div class="browser-frame">
+            <div class="browser-bar"><span></span><span></span><span></span></div>
+            <iframe src="velt-developer-navbar/index.html" loading="lazy" title="Preview Velt Developer Platform"></iframe>
+          </div>
+        </div>
+        <div class="specimen-footer">
+          <p class="specimen-desc">
+            Navbar dark-mode untuk platform developer dengan 4-column mega-menu hover-safe (Sync, Real Time, Workflow, SDK), multiplayer live cursor tags, dan card salin CLI satu klik.
+          </p>
+          <span class="specimen-tech">HTML · CSS · JS</span>
+          <div class="specimen-links">
+            <a href="velt-developer-navbar/index.html" class="link-primary" target="_blank">VIEW DEMO →</a>
+            <a href="velt-developer-navbar/NAVBAR_CODE.md" class="link-secondary">CODE</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 04 — BordUp Operations Rail -->
+      <article class="specimen" data-category="saas" data-keywords="enterprise hr operations rail collapsible sidebar department taxonomy">
+        <div class="specimen-head">
+          <span class="specimen-number">04</span>
+          <div>
+            <h2 class="specimen-title">BordUp™ Operations Rail</h2>
+            <span class="specimen-category">SaaS &amp; Admin — Enterprise HR / Workforce</span>
+          </div>
+        </div>
+        <div class="specimen-preview">
+          <div class="browser-frame">
+            <div class="browser-bar"><span></span><span></span><span></span></div>
+            <iframe src="bordup-operations-sidebar/index.html" loading="lazy" title="Preview BordUp Operations Rail"></iframe>
+          </div>
+        </div>
+        <div class="specimen-footer">
+          <p class="specimen-desc">
+            Sidebar collapsible rail (260px ↔ 76px) dengan transisi mulus, hover tooltip otomatis dalam mode ringkas, switcher workspace perusahaan, dan taksonomi warna departemen.
+          </p>
+          <span class="specimen-tech">HTML · CSS · JS</span>
+          <div class="specimen-links">
+            <a href="bordup-operations-sidebar/index.html" class="link-primary" target="_blank">VIEW DEMO →</a>
+            <a href="bordup-operations-sidebar/NAVBAR_CODE.md" class="link-secondary">CODE</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 05 — Velocita Cyber Creative -->
+      <article class="specimen" data-category="landing" data-keywords="cyberpunk creative portfolio gaming neon velocita audio search">
+        <div class="specimen-head">
+          <span class="specimen-number">05</span>
+          <div>
+            <h2 class="specimen-title">Velocita Cyber Creative</h2>
+            <span class="specimen-category">Landing Page — Automotive / Creative Portfolio</span>
+          </div>
+        </div>
+        <div class="specimen-preview">
+          <div class="browser-frame">
+            <div class="browser-bar"><span></span><span></span><span></span></div>
+            <iframe src="velocita-navbar/index.html" loading="lazy" title="Preview Velocita Cyber Creative"></iframe>
+          </div>
+        </div>
+        <div class="specimen-footer">
+          <p class="specimen-desc">
+            Navigasi floating pill futuristik dengan aksen LED di ujung sayap, indikator link aktif, search overlay terintegrasi, dan kontrol audio ambiance.
+          </p>
+          <span class="specimen-tech">HTML · CSS · JS</span>
+          <div class="specimen-links">
+            <a href="velocita-navbar/index.html" class="link-primary" target="_blank">VIEW DEMO →</a>
+            <a href="velocita-navbar/NAVBAR_CODE.md" class="link-secondary">CODE</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 06 — Meridian Luxury Corporate -->
+      <article class="specimen" data-category="corporate" data-keywords="corporate law finance luxury real estate mega menu multi tier">
+        <div class="specimen-head">
+          <span class="specimen-number">06</span>
+          <div>
+            <h2 class="specimen-title">Meridian Luxury Corporate</h2>
+            <span class="specimen-category">Corporate — Law / Private Equity / Holding</span>
+          </div>
+        </div>
+        <div class="specimen-preview">
+          <div class="browser-frame">
+            <div class="browser-bar"><span></span><span></span><span></span></div>
+            <iframe src="meridian-corporate-navbar/index.html" loading="lazy" title="Preview Meridian Luxury Corporate"></iframe>
+          </div>
+        </div>
+        <div class="specimen-footer">
+          <p class="specimen-desc">
+            Header korporat berjenjang multi-tier dengan top utility bar (investor relations, currency, language), mega-menu mewah, dan portal login klien.
+          </p>
+          <span class="specimen-tech">HTML · CSS · JS</span>
+          <div class="specimen-links">
+            <a href="meridian-corporate-navbar/index.html" class="link-primary" target="_blank">VIEW DEMO →</a>
+            <a href="meridian-corporate-navbar/NAVBAR_CODE.md" class="link-secondary">CODE</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 07 — Strata Layered Architecture -->
+      <article class="specimen" data-category="corporate" data-keywords="minimalist architecture design strata stacked layered">
+        <div class="specimen-head">
+          <span class="specimen-number">07</span>
+          <div>
+            <h2 class="specimen-title">Strata Layered Architecture</h2>
+            <span class="specimen-category">Corporate — Architectural Studio / Agency</span>
+          </div>
+        </div>
+        <div class="specimen-preview">
+          <div class="browser-frame">
+            <div class="browser-bar"><span></span><span></span><span></span></div>
+            <iframe src="strata-layered-navbar/index.html" loading="lazy" title="Preview Strata Layered Architecture"></iframe>
+          </div>
+        </div>
+        <div class="specimen-footer">
+          <p class="specimen-desc">
+            Navigasi minimalis multi-layer dengan tipografi modern, garis grid arsitektural presisi, dan estetika kontras tinggi.
+          </p>
+          <span class="specimen-tech">HTML · CSS · JS</span>
+          <div class="specimen-links">
+            <a href="strata-layered-navbar/index.html" class="link-primary" target="_blank">VIEW DEMO →</a>
+            <a href="strata-layered-navbar/NAVBAR_CODE.md" class="link-secondary">CODE</a>
+          </div>
+        </div>
+      </article>
+
+      <p class="empty-state" id="emptyState">TIDAK ADA HASIL — COBA KATA KUNCI LAIN</p>
+
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="mark">
+        MODERN NAVBAR
+        <span>COLLECTION / 2026</span>
+      </div>
+      <p class="colophon">
+        Tujuh eksperimen navigasi, dibangun dengan semantic HTML, CSS, dan vanilla JavaScript — tanpa framework dependency.
+      </p>
+      <div class="links">
+        <a href="README.md">GITHUB</a>
+        <a href="#top" id="toTop">↑ TOP</a>
+      </div>
+    </footer>
+
+  </main>
+
+  <script>
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const miniCards = document.querySelectorAll('.mini-card');
+    const specimens = document.querySelectorAll('.specimen');
+    const searchInput = document.getElementById('searchInput');
+    const cardGrid = document.getElementById('cardGrid');
+    const archive = document.getElementById('navbarGrid');
+    const emptyStateGrid = document.getElementById('emptyStateGrid');
+    const emptyState = document.getElementById('emptyState');
+
+    let currentFilter = 'all';
+    let searchQuery = '';
+
+    function matches(item, titleSel, descSel) {
+      const cat = item.dataset.category;
+      const keywords = (
+        item.dataset.keywords + ' ' +
+        item.querySelector(titleSel).textContent + ' ' +
+        item.querySelector(descSel).textContent
+      ).toLowerCase();
+
+      const matchesFilter = currentFilter === 'all' || cat === currentFilter;
+      const matchesSearch = searchQuery === '' || keywords.includes(searchQuery);
+      return matchesFilter && matchesSearch;
+    }
+
+    function applyFilterAndSearch() {
+      const showGrid = currentFilter === 'all';
+      cardGrid.classList.toggle('is-hidden', !showGrid);
+      archive.classList.toggle('is-hidden', showGrid);
+
+      if (showGrid) {
+        let visibleCount = 0;
+        miniCards.forEach(item => {
+          const visible = matches(item, '.mini-card-title', '.mini-card-desc');
+          item.style.display = visible ? '' : 'none';
+          if (visible) visibleCount++;
+        });
+        emptyStateGrid.style.display = visibleCount === 0 ? 'block' : 'none';
+        emptyState.style.display = 'none';
+      } else {
+        let visibleCount = 0;
+        specimens.forEach(item => {
+          const visible = matches(item, '.specimen-title', '.specimen-desc');
+          item.style.display = visible ? '' : 'none';
+          if (visible) visibleCount++;
+        });
+        emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+        emptyStateGrid.style.display = 'none';
+      }
+    }
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-pressed', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
+        currentFilter = btn.dataset.filter;
+        applyFilterAndSearch();
+      });
+    });
+
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = e.target.value.toLowerCase().trim();
+      applyFilterAndSearch();
+    });
+
+    document.getElementById('toTop').addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+
+</body>
+</html>
