@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liquid Metal Cursor Attractor Navbar — Magnetic Fluid Dynamics</title>
+  <meta name="description" content="An experimental gaze and cursor-attracted liquid metal navbar with fluid velocity scattering and magnetic particle physics.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Ambient Light Blobs -->
+  <div class="ambient-glow" aria-hidden="true"></div>
+
+  <!-- FIXED TOP STATUS BAR -->
+  <header class="top-nav">
+    <div style="display:flex; align-items:center; gap:20px;">
+      <a href="../index.html" class="back-btn">← Collection</a>
+      <a href="#" class="brand-wrapper">
+        <div class="brand-orb"></div>
+        <span class="brand-title">AURA Liquid</span>
+      </a>
+    </div>
+
+    <div class="top-metrics">
+      <div class="metric-pill">
+        <span class="dot"></span>
+        <span>VELOCITY:</span>
+        <strong id="velocity-val" style="color:#fff;">0 px/s</strong>
+      </div>
+      <div class="metric-pill">
+        <span>STATE:</span>
+        <strong id="state-val" style="color:var(--neon-cyan);">RESTING LIQUID</strong>
+      </div>
+      <button id="toggle-mode-btn" class="back-btn" style="cursor:pointer; background:rgba(56,189,248,0.1); border-color:rgba(56,189,248,0.4);">
+        Mode: Magnetic Dock
+      </button>
+    </div>
+  </header>
+
+  <!-- LIQUID PARTICLES CANVAS -->
+  <canvas id="liquid-canvas"></canvas>
+
+  <!-- MAGNETIC LIQUID DOCK NAVBAR -->
+  <div class="liquid-dock-container" id="liquid-dock-container">
+    <nav class="liquid-dock" id="liquid-dock" aria-label="Liquid Navigation Bar">
+      <a href="#hero" class="liquid-item active">
+        <span class="item-bead"></span>
+        <span>Overview</span>
+      </a>
+      <a href="#dynamics" class="liquid-item">
+        <span class="item-bead"></span>
+        <span>Fluid Dynamics</span>
+      </a>
+      <a href="#generative" class="liquid-item">
+        <span class="item-bead"></span>
+        <span>Generative Mesh</span>
+      </a>
+      <a href="#showcase" class="liquid-item">
+        <span class="item-bead"></span>
+        <span>Showcase</span>
+      </a>
+      <a href="#contact" class="liquid-item">
+        <span class="item-bead"></span>
+        <span>Connect</span>
+      </a>
+    </nav>
+  </div>
+
+  <!-- INTERACTIVE PHYSICS NOTICE -->
+  <aside class="physics-notice" aria-live="polite">
+    <span>💡 <strong>Tip:</strong> Move cursor slowly to attract beads · Flick fast to scatter liquid · Press <kbd>M</kbd> to toggle follow cursor</span>
+  </aside>
+
+  <!-- PAGE CONTENT (SHOWCASE) -->
+  <main class="content-wrapper">
+    
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+      <div class="hero-tag">Next-Gen Interface Physics</div>
+      <h1 class="hero-title">
+        Fluidity meets <br>
+        <span class="gradient-text">magnetic attraction.</span>
+      </h1>
+      <p class="hero-subtitle">
+        Navigation shouldn't be a rigid frozen plank. AURA re-imagines menus as sentient liquid mercury droplets that magnetically cluster around your intent and scatter out of view during high-velocity gestures.
+      </p>
+      <div class="hero-actions">
+        <a href="#dynamics" class="primary-btn">Explore Physics Engine →</a>
+        <a href="#showcase" class="ghost-btn">View Generative Art</a>
+      </div>
+    </section>
+
+    <!-- Dynamics Grid -->
+    <section class="features-section" id="dynamics">
+      <div class="section-header">
+        <h2>Hydrodynamic Principles</h2>
+        <p>Built upon non-Newtonian fluid mechanics and cursor velocity vector fields.</p>
+      </div>
+
+      <div class="cards-grid">
+        <article class="liquid-card">
+          <div class="card-num">01 / CLUMPING</div>
+          <h3 class="card-title">Magnetic Attraction</h3>
+          <p class="card-desc">
+            When cursor movement slows below 15 px/s, surrounding liquid beads experience gravitational pull, forming an ergonomic nav pill cluster within reach.
+          </p>
+        </article>
+
+        <article class="liquid-card">
+          <div class="card-num">02 / DISPERSAL</div>
+          <h3 class="card-title">Velocity Scattering</h3>
+          <p class="card-desc">
+            A rapid flick or swipe instantly disperses the menu particles radially away from the cursor path, granting users a 100% unobstructed view of deep canvas visuals.
+          </p>
+        </article>
+
+        <article class="liquid-card">
+          <div class="card-num">03 / METABALLS</div>
+          <h3 class="card-title">Specular Chrome Bridges</h3>
+          <p class="card-desc">
+            Real-time procedural tendril bridges form between adjacent liquid beads, creating an authentic mercury liquid cohesion rendered at a steady 60 FPS.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Generative Section -->
+    <section class="features-section" id="generative" style="padding-top:40px;">
+      <div class="section-header">
+        <h2>Generative Applications</h2>
+        <p>Tailored for experimental creative studios, high-end Web3 showcases, and visual spatial portfolios.</p>
+      </div>
+
+      <div class="cards-grid">
+        <article class="liquid-card">
+          <div class="card-num">CASE STUDY A</div>
+          <h3 class="card-title">Autonomous 3D Canvas</h3>
+          <p class="card-desc">
+            Eliminates traditional cluttered headers, giving 3D WebGL scenes complete immersion while keeping navigation accessible via subtle cursor intent.
+          </p>
+        </article>
+
+        <article class="liquid-card">
+          <div class="card-num">CASE STUDY B</div>
+          <h3 class="card-title">Tactile Audio Feedback</h3>
+          <p class="card-desc">
+            Optional synthesized haptic audio envelopes respond dynamically to liquid bead collisions and velocity thresholds.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Showcase & Connect Section -->
+    <section class="features-section" id="showcase" style="padding-top:40px; margin-bottom: 60px;">
+      <div class="section-header" id="contact">
+        <h2>Ready to integrate fluid navigation?</h2>
+        <p>Easily drop the lightweight standalone script into your project with zero external dependencies.</p>
+      </div>
+      <div style="padding:40px; border-radius:24px; background:rgba(18,22,34,0.6); border:1px solid var(--border-glass); backdrop-filter:blur(20px); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px;">
+        <div>
+          <h3 style="font-family:var(--font-display); font-size:24px; color:#fff; margin-bottom:8px;">AURA Fluid SDK v1.0</h3>
+          <p style="color:var(--chrome-300); font-size:14px;">Open source MIT license · Pure HTML5 Canvas &amp; Vanilla JavaScript</p>
+        </div>
+        <div style="display:flex; gap:12px;">
+          <a href="../index.html" class="primary-btn">All Navbars in Collection</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

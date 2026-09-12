@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frequency Studio — Audio-Spatial Sonic Navigation</title>
+  <meta name="description" content="An experimental sonic navbar where each menu item plays a unique synthesizer voice. Sweep the nav to generate a harmonic chord progression. Built with Web Audio API.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ── Background ambient canvas ────────────────────────────── -->
+<canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+<!-- ── Audio Unlock Screen ──────────────────────────────────── -->
+<div class="audio-unlock" id="audio-unlock" role="dialog" aria-label="Enable audio to start the sonic experience" aria-modal="true">
+  <div class="unlock-icon" aria-hidden="true">🎵</div>
+  <div class="unlock-title">Enable Sonic Navigation</div>
+  <div class="unlock-desc">
+    This navbar plays unique synthesizer voices for each menu item.
+    Sweep your cursor across the nav to hear harmonic chord progressions.
+    <br><br>Click to unlock your browser's audio engine.
+  </div>
+  <button class="unlock-btn" id="unlock-btn" aria-label="Enable audio and start experience">
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+      <path d="M3 6l6-4v14L3 12V6z" stroke="white" stroke-width="1.5" fill="white" opacity="0.9"/>
+      <path d="M13 5.5a5 5 0 0 1 0 7" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M15 3a8.5 8.5 0 0 1 0 12" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+    </svg>
+    Enable Audio &amp; Start
+  </button>
+  <p style="font-family:var(--font-mono);font-size:11px;color:var(--text-dim);">No external files · Pure Web Audio API synthesis</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SONIC NAVBAR
+     ═══════════════════════════════════════════════════════════ -->
+<div class="sonic-nav-wrapper" role="banner">
+  <nav class="sonic-nav" aria-label="Sonic harmonic navigation">
+
+    <!-- Brand -->
+    <a href="#home" class="sonic-brand" aria-label="Frequency Studio — Home">
+      <div class="brand-waveform" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M1 8 Q3 3 5 8 Q7 13 9 8 Q11 3 13 8 Q15 13 16 8" stroke="white" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+        </svg>
+      </div>
+      <span class="sonic-brand-name">Freq Studio</span>
+    </a>
+
+    <!-- Live Visualizer Bars -->
+    <div class="visualizer-strip" aria-hidden="true" title="Live audio level meter">
+      <div class="viz-bar" style="height:8px;"></div>
+      <div class="viz-bar" style="height:14px;"></div>
+      <div class="viz-bar" style="height:22px;"></div>
+      <div class="viz-bar" style="height:10px;"></div>
+      <div class="viz-bar" style="height:28px;"></div>
+      <div class="viz-bar" style="height:18px;"></div>
+      <div class="viz-bar" style="height:12px;"></div>
+      <div class="viz-bar" style="height:20px;"></div>
+      <div class="viz-bar" style="height:6px;"></div>
+      <div class="viz-bar" style="height:16px;"></div>
+      <div class="viz-bar" style="height:24px;"></div>
+      <div class="viz-bar" style="height:10px;"></div>
+      <div class="viz-bar" style="height:18px;"></div>
+    </div>
+
+    <!-- Sonic Nav Links -->
+    <ul class="sonic-links" role="list">
+
+      <li>
+        <a class="sonic-link active" data-voice="home" href="#home" role="listitem" aria-label="Home — plays Ambient Pad chord in A3 (220 Hz)">
+          <span class="link-ripple" style="border:2px solid #a855f7;" aria-hidden="true"></span>
+          <span class="link-instrument" aria-hidden="true">🎛️</span>
+          <span>Home</span>
+          <span class="link-freq">A3 · 220Hz</span>
+          <span class="link-glow-bar" style="background:#a855f7;" aria-hidden="true"></span>
+        </a>
+      </li>
+
+      <li>
+        <a class="sonic-link" data-voice="project" href="#projects" role="listitem" aria-label="Projects — plays Synth Lead in A4 (440 Hz)">
+          <span class="link-ripple" style="border:2px solid #06b6d4;" aria-hidden="true"></span>
+          <span class="link-instrument" aria-hidden="true">🎸</span>
+          <span>Projects</span>
+          <span class="link-freq">A4 · 440Hz</span>
+          <span class="link-glow-bar" style="background:#06b6d4;" aria-hidden="true"></span>
+        </a>
+      </li>
+
+      <li>
+        <a class="sonic-link" data-voice="lab" href="#lab" role="listitem" aria-label="Lab — plays Arpeggiator in E4 (330 Hz)">
+          <span class="link-ripple" style="border:2px solid #10b981;" aria-hidden="true"></span>
+          <span class="link-instrument" aria-hidden="true">🎹</span>
+          <span>Lab</span>
+          <span class="link-freq">E4 · 330Hz</span>
+          <span class="link-glow-bar" style="background:#10b981;" aria-hidden="true"></span>
+        </a>
+      </li>
+
+      <li>
+        <a class="sonic-link" data-voice="about" href="#about" role="listitem" aria-label="About — plays Electric Piano in C4 (264 Hz)">
+          <span class="link-ripple" style="border:2px solid #f59e0b;" aria-hidden="true"></span>
+          <span class="link-instrument" aria-hidden="true">🎺</span>
+          <span>About</span>
+          <span class="link-freq">C4 · 264Hz</span>
+          <span class="link-glow-bar" style="background:#f59e0b;" aria-hidden="true"></span>
+        </a>
+      </li>
+
+      <li>
+        <a class="sonic-link" data-voice="contact" href="#contact" role="listitem" aria-label="Contact — plays Rhythm Tap in A2 (110 Hz)">
+          <span class="link-ripple" style="border:2px solid #f43f5e;" aria-hidden="true"></span>
+          <span class="link-instrument" aria-hidden="true">🥁</span>
+          <span>Contact</span>
+          <span class="link-freq">A2 · 110Hz</span>
+          <span class="link-glow-bar" style="background:#f43f5e;" aria-hidden="true"></span>
+        </a>
+      </li>
+
+    </ul>
+
+    <!-- CTA -->
+    <a href="#projects" class="sonic-cta" id="sonic-cta">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+        <polygon points="2,1 11,6 2,11" fill="white"/>
+      </svg>
+      Listen Now
+    </a>
+
+  </nav>
+</div>
+
+<!-- ── Soundscape change banner ──────────────────────────────── -->
+<div class="soundscape-banner" id="soundscape-banner" role="status" aria-live="polite">
+  <span class="soundscape-icon" id="banner-icon">🎛️</span>
+  <span class="soundscape-key">Now playing → </span>
+  <span class="soundscape-value" id="banner-value">Ambient Pad · A3 · 220 Hz</span>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     PAGE CONTENT
+     ═══════════════════════════════════════════════════════════ -->
+<div class="page-wrap">
+
+  <!-- ── Hero ─────────────────────────────────────────────────── -->
+  <section class="hero" id="home" aria-labelledby="hero-title">
+    <div>
+      <div class="hero-eyebrow" aria-label="Web Audio API Synthesizer Navigation">
+        <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true">
+          <path d="M1 5.5 Q3 2 5 5.5 Q7 9 9 5.5 Q11 2 11 5.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+        </svg>
+        Audio-Spatial Sonic Navigation
+      </div>
+
+      <h1 class="hero-title" id="hero-title">
+        Every Menu<br>Has a Voice
+      </h1>
+
+      <p class="hero-subtitle">
+        Hover over the navigation to play synthesized tones. Sweep across all items
+        to generate a live harmonic chord progression.
+        Click to change the soundscape of the entire interface.
+      </p>
+
+      <!-- Live Oscilloscope Viewer -->
+      <div class="hero-visualizer" role="img" aria-label="Live audio waveform oscilloscope">
+        <canvas id="hero-canvas"></canvas>
+        <span class="hero-viz-label">OSCILLOSCOPE</span>
+        <span class="hero-viz-freq" id="hero-freq">220 Hz · Ambient Pad</span>
+      </div>
+
+      <!-- Note palette guide -->
+      <div class="notes-palette" role="list" aria-label="Available tones per navigation item">
+        <div class="note-chip" role="listitem">
+          <span class="note-dot" style="background:#a855f7;color:#a855f7;" aria-hidden="true"></span>
+          <span class="note-name">Home</span>
+          <span class="note-freq">Ambient · A3</span>
+        </div>
+        <div class="note-chip" role="listitem">
+          <span class="note-dot" style="background:#06b6d4;color:#06b6d4;" aria-hidden="true"></span>
+          <span class="note-name">Projects</span>
+          <span class="note-freq">Synth · A4</span>
+        </div>
+        <div class="note-chip" role="listitem">
+          <span class="note-dot" style="background:#10b981;color:#10b981;" aria-hidden="true"></span>
+          <span class="note-name">Lab</span>
+          <span class="note-freq">Arpeggio · E4</span>
+        </div>
+        <div class="note-chip" role="listitem">
+          <span class="note-dot" style="background:#f59e0b;color:#f59e0b;" aria-hidden="true"></span>
+          <span class="note-name">About</span>
+          <span class="note-freq">Piano · C4</span>
+        </div>
+        <div class="note-chip" role="listitem">
+          <span class="note-dot" style="background:#f43f5e;color:#f43f5e;" aria-hidden="true"></span>
+          <span class="note-name">Contact</span>
+          <span class="note-freq">Rhythm · A2</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Projects Section ─────────────────────────────────────── -->
+  <section class="section" id="projects" aria-labelledby="projects-title">
+    <div class="section-header">
+      <div class="section-tag">Sound Tracks</div>
+      <h2 class="section-title" id="projects-title">Studio Sessions & Releases</h2>
+    </div>
+    <div class="tracks-grid">
+
+      <article class="track-card">
+        <div class="track-color-bar" style="background:linear-gradient(90deg,#a855f7,#7c3aed);"></div>
+        <div class="track-icon" aria-hidden="true">🌌</div>
+        <div class="track-name">Infinite Drift</div>
+        <div class="track-type">Ambient / Drone</div>
+        <div class="track-desc">A 48-minute evolving ambient texture built entirely from sine oscillators, convolution reverb, and low-frequency modulation patterns.</div>
+        <canvas class="mini-wave-canvas" role="img" aria-label="Sine waveform preview"></canvas>
+      </article>
+
+      <article class="track-card">
+        <div class="track-color-bar" style="background:linear-gradient(90deg,#06b6d4,#0284c7);"></div>
+        <div class="track-icon" aria-hidden="true">⚡</div>
+        <div class="track-name">Digital Rain</div>
+        <div class="track-type">Synthwave / Electronic</div>
+        <div class="track-desc">Retro-futurist sawtooth synthesis arranged in cascading arpeggios with vintage-style chorus, delay, and sidechain compression.</div>
+        <canvas class="mini-wave-canvas" role="img" aria-label="Sawtooth waveform preview"></canvas>
+      </article>
+
+      <article class="track-card">
+        <div class="track-color-bar" style="background:linear-gradient(90deg,#10b981,#059669);"></div>
+        <div class="track-icon" aria-hidden="true">🌿</div>
+        <div class="track-name">Pulse Garden</div>
+        <div class="track-type">IDM / Experimental</div>
+        <div class="track-desc">Polyrhythmic square-wave sequences interlocked with generative melodies derived from L-system fractal patterns at 174 BPM.</div>
+        <canvas class="mini-wave-canvas" role="img" aria-label="Square waveform preview"></canvas>
+      </article>
+
+      <article class="track-card">
+        <div class="track-color-bar" style="background:linear-gradient(90deg,#f59e0b,#d97706);"></div>
+        <div class="track-icon" aria-hidden="true">🍂</div>
+        <div class="track-name">Warm Autumn</div>
+        <div class="track-type">Lo-fi / Jazz</div>
+        <div class="track-desc">Mellow triangle-wave piano chords layered over field recordings and soft analog noise textures. Perfect for late-night focus.</div>
+        <canvas class="mini-wave-canvas" role="img" aria-label="Triangle waveform preview"></canvas>
+      </article>
+
+      <article class="track-card">
+        <div class="track-color-bar" style="background:linear-gradient(90deg,#f43f5e,#e11d48);"></div>
+        <div class="track-icon" aria-hidden="true">🔥</div>
+        <div class="track-name">Broken Clock</div>
+        <div class="track-type">Industrial / Noise</div>
+        <div class="track-desc">Aggressive rhythmic percussion sculpted from filtered noise bursts, pulse-width-modulated basslines, and granular vocal samples.</div>
+        <canvas class="mini-wave-canvas" role="img" aria-label="Noise burst waveform preview"></canvas>
+      </article>
+
+      <article class="track-card">
+        <div class="track-color-bar" style="background:linear-gradient(90deg,#6366f1,#a855f7);"></div>
+        <div class="track-icon" aria-hidden="true">🌀</div>
+        <div class="track-name">Spectral Loop</div>
+        <div class="track-type">Generative / Spectral</div>
+        <div class="track-desc">Real-time spectral analysis driving harmonic oscillator clusters. Each bar in the frequency spectrum controls a unique musical voice.</div>
+        <canvas class="mini-wave-canvas" role="img" aria-label="Mixed waveform preview"></canvas>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ── Lab Section ──────────────────────────────────────────── -->
+  <section class="section" id="lab" aria-labelledby="lab-title">
+    <div class="section-header">
+      <div class="section-tag">Sound Lab</div>
+      <h2 class="section-title" id="lab-title">Synthesis Experiments</h2>
+    </div>
+    <div class="tracks-grid">
+      <article class="track-card">
+        <div class="track-color-bar" style="background:linear-gradient(90deg,#10b981,#06b6d4);"></div>
+        <div class="track-icon" aria-hidden="true">🔬</div>
+        <div class="track-name">FM Synthesis Lab</div>
+        <div class="track-type">Research</div>
+        <div class="track-desc">Explore frequency modulation ratios, operator configurations, and envelope interplay across 32 algorithmic preset banks.</div>
+        <canvas class="mini-wave-canvas" role="img" aria-label="FM synthesis waveform preview"></canvas>
+      </article>
+      <article class="track-card">
+        <div class="track-color-bar" style="background:linear-gradient(90deg,#6366f1,#10b981);"></div>
+        <div class="track-icon" aria-hidden="true">🎚️</div>
+        <div class="track-name">Granular Engine</div>
+        <div class="track-type">Experimental</div>
+        <div class="track-desc">Real-time granular synthesis with adjustable grain size, scatter, pitch, and density. Works on any input audio buffer.</div>
+        <canvas class="mini-wave-canvas" role="img" aria-label="Granular synthesis waveform preview"></canvas>
+      </article>
+    </div>
+  </section>
+
+  <!-- ── About & Contact ──────────────────────────────────────── -->
+  <section class="section" id="about" aria-labelledby="about-title">
+    <div class="section-header">
+      <div class="section-tag">About</div>
+      <h2 class="section-title" id="about-title">About Frequency Studio</h2>
+    </div>
+    <article class="track-card" style="max-width:700px;margin:0 auto;">
+      <div class="track-color-bar" style="background:linear-gradient(90deg,#a855f7,#f59e0b);"></div>
+      <div class="track-desc" style="font-size:14px;line-height:1.8;color:var(--text-muted);">
+        Frequency Studio is an experimental audio-visual research collective exploring the intersection of spatial audio design, browser-native synthesis, and interaction design. Our work lives entirely in the browser — no plugins, no DAW, just the Web Audio API and a vision for what navigation could sound like.
+      </div>
+    </article>
+  </section>
+
+  <section class="section" id="contact" style="padding-bottom:100px;" aria-labelledby="contact-title">
+    <div class="section-header">
+      <div class="section-tag">Contact</div>
+      <h2 class="section-title" id="contact-title">Get In Touch</h2>
+    </div>
+    <article class="track-card" style="max-width:500px;margin:0 auto;text-align:center;">
+      <div class="track-color-bar" style="background:linear-gradient(90deg,#f43f5e,#a855f7);"></div>
+      <div class="track-icon" aria-hidden="true">🎵</div>
+      <div class="track-name">Let's Collaborate</div>
+      <div class="track-desc">Whether it's a sonic branding project, interactive audio installation, or just a passion for browser synthesis — drop us a line.</div>
+      <div style="margin-top:18px;">
+        <a href="mailto:hello@freqstudio.io" style="color:var(--note-contact);font-family:var(--font-mono);font-size:13px;">hello@freqstudio.io</a>
+      </div>
+    </article>
+  </section>
+
+</div><!-- /page-wrap -->
+
+<footer class="page-footer">
+  <p>sonic-audio-navbar · Modern Navbar Collection · Web Audio API Synthesizer Navigation · Vanilla JS</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

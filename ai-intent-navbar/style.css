@@ -1,0 +1,463 @@
+/* =============================================================
+   AI ADAPTIVE INTENT NAVBAR — style.css
+   Predictive Morphing Navigation System
+   ============================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* ── Design Tokens ─────────────────────────────────────────── */
+:root {
+  --bg-dark: #090d16;
+  --bg-surface: #0f172a;
+  --bg-card: rgba(15, 23, 42, 0.7);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-active: rgba(99, 102, 241, 0.4);
+
+  --text-white: #ffffff;
+  --text-slate-200: #e2e8f0;
+  --text-slate-400: #94a3b8;
+  --text-slate-500: #64748b;
+
+  --ai-primary: #6366f1;
+  --ai-cyan: #06b6d4;
+  --ai-emerald: #10b981;
+  --ai-amber: #f59e0b;
+  --ai-glow: rgba(99, 102, 241, 0.35);
+
+  --font-main: 'Plus Jakarta Sans', sans-serif;
+  --font-code: 'JetBrains Mono', monospace;
+
+  --ease-morph: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-morph: 420ms;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-slate-200);
+  font-family: var(--font-main);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Background Gradients */
+.bg-grid-pattern {
+  position: fixed;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ai-light-orb {
+  position: fixed;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  height: 380px;
+  background: radial-gradient(ellipse at center, rgba(99, 102, 241, 0.18) 0%, rgba(6, 182, 212, 0.08) 50%, transparent 80%);
+  filter: blur(70px);
+  pointer-events: none;
+  z-index: 0;
+  transition: all 0.8s ease;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TOP SIMULATOR TOOLBAR
+   ═══════════════════════════════════════════════════════════════ */
+.simulator-strip {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: rgba(11, 15, 25, 0.95);
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  z-index: 200;
+  font-family: var(--font-code);
+  font-size: 11px;
+}
+
+.simulator-strip .sim-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-slate-400);
+}
+
+.simulator-strip .sim-pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ai-emerald);
+  box-shadow: 0 0 8px var(--ai-emerald);
+  animation: simPulse 1.5s infinite;
+}
+
+@keyframes simPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.simulator-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sim-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  color: var(--text-slate-400);
+  font-family: var(--font-code);
+  font-size: 11px;
+  padding: 3px 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sim-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.sim-btn.active {
+  background: rgba(99, 102, 241, 0.2);
+  border-color: var(--ai-primary);
+  color: #fff;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PREDICTIVE AI NAVBAR (MORPHING CONTAINER)
+   ═══════════════════════════════════════════════════════════════ */
+.nav-header {
+  position: fixed;
+  top: 54px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1200px, 94vw);
+  z-index: 180;
+  transition: all var(--duration-morph) var(--ease-morph);
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  background: rgba(15, 23, 42, 0.82);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--border-subtle);
+  border-radius: 9999px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  transition: all var(--duration-morph) var(--ease-morph);
+}
+
+/* Brand Section */
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  padding-left: 8px;
+}
+
+.brand-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--ai-primary), var(--ai-cyan));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 800;
+  font-size: 15px;
+  box-shadow: 0 0 16px var(--ai-glow);
+}
+
+.brand-name {
+  font-weight: 800;
+  font-size: 16px;
+  color: var(--text-white);
+  letter-spacing: -0.02em;
+}
+
+/* Morphing Menu Links */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  list-style: none;
+  transition: all var(--duration-morph) var(--ease-morph);
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 9999px;
+  color: var(--text-slate-400);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.nav-link:hover {
+  color: var(--text-white);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.nav-link.active {
+  color: var(--text-white);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Adaptive Morphing Items (Show/Hide dynamically) */
+.adaptive-item {
+  transition: all var(--duration-morph) var(--ease-morph);
+  overflow: hidden;
+  max-width: 140px;
+  opacity: 1;
+}
+
+.adaptive-item.collapsed {
+  max-width: 0;
+  opacity: 0;
+  padding: 0;
+  margin: 0;
+  pointer-events: none;
+}
+
+/* Live Intent Badge */
+.intent-badge-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: rgba(99, 102, 241, 0.12);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  font-family: var(--font-code);
+  font-size: 11px;
+  transition: all var(--duration-morph) var(--ease-morph);
+}
+
+.intent-badge-pill .sparkle {
+  color: var(--ai-cyan);
+}
+
+.intent-badge-pill .intent-text {
+  color: var(--text-slate-200);
+  font-weight: 600;
+}
+
+.intent-badge-pill .intent-conf {
+  color: var(--ai-cyan);
+  font-weight: 700;
+}
+
+/* Right Action Buttons */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.action-btn-adaptive {
+  padding: 8px 18px;
+  border-radius: 9999px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.btn-primary-ai {
+  background: linear-gradient(135deg, var(--ai-primary), #4f46e5);
+  color: #fff;
+  box-shadow: 0 4px 14px var(--ai-glow);
+}
+
+.btn-primary-ai:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+}
+
+.btn-ghost-ai {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-slate-200);
+}
+
+.btn-ghost-ai:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PAGE CONTENT (SYNAPSE AI ENTERPRISE SECTIONS)
+   ═══════════════════════════════════════════════════════════════ */
+.page-container {
+  position: relative;
+  z-index: 10;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 160px 24px 120px;
+}
+
+/* Hero Section */
+.hero-section {
+  text-align: center;
+  padding: 60px 0 100px;
+}
+
+.ai-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  font-family: var(--font-code);
+  font-size: 12px;
+  color: var(--ai-cyan);
+  margin-bottom: 24px;
+}
+
+.hero-h1 {
+  font-size: clamp(40px, 6vw, 76px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  color: #fff;
+}
+
+.hero-h1 .gradient-ai {
+  background: linear-gradient(135deg, #ffffff 10%, #cbd5e1 40%, var(--ai-cyan) 75%, var(--ai-primary) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-lead {
+  font-size: clamp(16px, 2vw, 19px);
+  color: var(--text-slate-400);
+  max-width: 720px;
+  margin: 0 auto 40px;
+}
+
+/* Content Blocks for Intent Dwell Detection */
+.intent-detector-block {
+  padding: 80px 40px;
+  border-radius: 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  backdrop-filter: blur(16px);
+  margin-bottom: 40px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.4s ease;
+}
+
+.intent-detector-block.focused {
+  border-color: var(--border-active);
+  box-shadow: 0 0 40px rgba(99, 102, 241, 0.15);
+}
+
+.block-tag {
+  font-family: var(--font-code);
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--ai-cyan);
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+}
+
+.block-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 16px;
+}
+
+.block-text {
+  color: var(--text-slate-400);
+  font-size: 15px;
+  max-width: 680px;
+  margin-bottom: 30px;
+}
+
+/* Code Snippet Box for Developer Intent */
+.code-preview {
+  background: #060911;
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 20px;
+  font-family: var(--font-code);
+  font-size: 13px;
+  color: #38bdf8;
+  overflow-x: auto;
+}
+
+/* Enterprise Pricing / Compliance Grid */
+.enterprise-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.spec-card {
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+}
+
+.spec-card h4 {
+  font-size: 18px;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.spec-card p {
+  font-size: 13px;
+  color: var(--text-slate-400);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .simulator-strip { display: none; }
+  .nav-header { top: 16px; }
+  .nav-menu { display: none; }
+  .intent-badge-pill { display: none; }
+}

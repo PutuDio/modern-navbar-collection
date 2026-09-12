@@ -1,0 +1,11 @@
+{
+  "title": "Liquid Metal Cursor Attractor",
+  "category": "experimental",
+  "categoryLabel": "Experimental — Liquid Metal Magnetic Navigation",
+  "descriptionShort": "Navigasi partikel cairan merkuri — menyatu magnetis saat kursor tenang dan buyar menjauh saat gerakan kursor cepat.",
+  "descriptionLong": "Interaksi fluida dinamis: partikel cairan merkuri (liquid chrome) melayang bebas di viewport. Saat kursor santai, partikel berkumpul magnetis membentuk dock navigasi yang ergonomis. Sentakan cepat menyebarkan partikel untuk memberikan pandangan penuh terhadap konten.",
+  "tech": "HTML5 Canvas · Vector Physics · Liquid Chrome CSS",
+  "keywords": ["liquid", "metal", "mercury", "cursor", "attractor", "physics", "particles", "fluid", "magnetic", "experimental"],
+  "featured": true,
+  "order": 11
+}

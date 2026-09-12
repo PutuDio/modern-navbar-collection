@@ -1,0 +1,11 @@
+{
+  "title": "Semantic Mesh Navigator",
+  "category": "experimental",
+  "categoryLabel": "Experimental — Mind-Map Graph Physics Navigation",
+  "descriptionShort": "Navigasi mind-map graph interaktif dengan spring physics — node gravitasi, edge traversal, dan kartu semantik.",
+  "descriptionLong": "Bukan baris menu konvensional, melainkan jaringan graph visual mind-map dengan spring physics 60fps. Node pusat bertindak sebagai gravitasi, sub-menu merekah organik. Drag node, hover untuk kartu semantik, klik untuk navigasi.",
+  "tech": "HTML5 Canvas · Spring Physics · Vanilla JS",
+  "keywords": ["semantic", "mesh", "graph", "mind-map", "physics", "spring", "nodes", "edges", "canvas", "experimental"],
+  "featured": true,
+  "order": 8
+}

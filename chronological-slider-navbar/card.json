@@ -1,0 +1,11 @@
+{
+  "title": "Chronological Slider Navbar",
+  "category": "experimental",
+  "categoryLabel": "Experimental — Timeline Time-Machine Navigation",
+  "descriptionShort": "Navigasi mesin waktu linimasa interaktif — geser slider untuk melintasi era dan sejarah pencapaian secara mulus.",
+  "descriptionLong": "Menggantikan menu bertingkat tradisional dengan sumbu linimasa horizontal yang presisi. Pengguna menavigasi dengan drag, scroll wheel, atau keyboard antar-era (2019-2026+). Halaman bertransisi mulus dengan tema warna dinamis dan counter animasi.",
+  "tech": "Timeline Physics · Intersection Observer · CSS Morphing",
+  "keywords": ["timeline", "slider", "scrubber", "chronological", "history", "milestones", "roadmap", "storytelling", "experimental"],
+  "featured": true,
+  "order": 10
+}

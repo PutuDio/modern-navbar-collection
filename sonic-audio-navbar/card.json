@@ -1,0 +1,11 @@
+{
+  "title": "Sonic Audio Navbar",
+  "category": "experimental",
+  "categoryLabel": "Experimental — Web Audio API Harmonic Navigation",
+  "descriptionShort": "Navigasi berbasis suara — tiap menu memainkan synthesizer unik (Ambient, Synth, Arpeggio, Piano, Drum). Sweep hover membunyikan progresi akord harmonis.",
+  "descriptionLong": "Navbar audio-spatial yang menggunakan Web Audio API untuk mensintesis nada unik pada setiap menu link. Sweep kursor cepat menghasilkan harmoni akord. Visualizer oscilloscope live. Tanpa file audio eksternal — semua disintesis langsung di browser.",
+  "tech": "Web Audio API · HTML5 Canvas · Vanilla JS",
+  "keywords": ["audio", "sonic", "sound", "synthesizer", "web audio", "oscilloscope", "music", "harmonic", "experimental", "creative"],
+  "featured": true,
+  "order": 9
+}
