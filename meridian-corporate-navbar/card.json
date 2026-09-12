@@ -1,0 +1,11 @@
+{
+  "title": "Meridian Luxury Corporate",
+  "category": "corporate",
+  "categoryLabel": "Corporate — Law / Private Equity / Holding",
+  "descriptionShort": "Header multi-tier dengan top utility bar, mega-menu mewah & portal klien.",
+  "descriptionLong": "Header korporat berjenjang multi-tier dengan top utility bar (investor relations, currency, language), mega-menu mewah, dan portal login klien.",
+  "tech": "HTML · CSS · JS",
+  "keywords": ["corporate", "law", "finance", "luxury", "real estate", "mega menu", "multi tier"],
+  "featured": false,
+  "order": 6
+}

@@ -6,31 +6,7 @@ A premium, motorsport-inspired floating navigation bar with carbon fiber texture
 ![Vanilla JS](https://img.shields.io/badge/JS-Vanilla-f7df1e?style=flat-square)
 ![CSS Only Shape](https://img.shields.io/badge/Shape-CSS_Clip_Path-e63946?style=flat-square)
 ![Responsive](https://img.shields.io/badge/Responsive-Yes-4ade80?style=flat-square)
-![Accessible](https://img.shields.io/badge/A11y-WCAG_2.1-3b82f6?style=flat-square)
-
----
-
-## 🖼️ Spotlight Preview
-
-Lihat sekilas seperti apa Velocita sebelum membuka versi live-nya:
-
-**Desktop — hero + floating cockpit navbar**
-
-![Velocita desktop preview](preview-desktop.png)
-
-**Close-up navbar**
-
-![Velocita navbar closeup](navbar-closeup.png)
-
-> Screenshot diambil langsung dari `index.html` di folder ini (tema dark, status `HOME` aktif, animasi entrance dinonaktifkan agar hasil statis konsisten). Untuk melihat LED pulse, hover icon-box, dan menu mobile fullscreen secara langsung, buka versi live di bawah.
-
----
-
-## 🔴 Live Demo
-
-▶️ **[Lihat Velocita secara live](https://velocita-navbar.netlify.app)**
-
-> Ganti URL di atas dengan link GitHub Pages proyekmu setelah repo di-deploy (Settings → Pages → pilih branch). Sebelum itu, kamu tetap bisa mencobanya secara lokal lewat `open index.html`.
+![Accessible](https://img.shields.io/badge/A11y-WCAG_2.1-3b82f6?style=flat-square) 
 
 ---
 

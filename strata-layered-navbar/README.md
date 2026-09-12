@@ -10,30 +10,6 @@ A dark, editorial-style navigation bar that reimagines navigation as physical, l
 
 ---
 
-## 🖼️ Spotlight Preview
-
-Lihat sekilas seperti apa Strata sebelum membuka versi live-nya:
-
-**Desktop — navbar + hero**
-
-![Strata desktop preview](preview-desktop.png)
-
-**Close-up navbar**
-
-![Strata navbar closeup](navbar-closeup.png)
-
-> Screenshot di atas diambil langsung dari `index.html` di folder ini (tema dark, status `Beranda` aktif). Untuk melihat interaksi hover, kompaksi scroll, dan menu mobile secara langsung, buka versi live di bawah.
-
----
-
-## 🔴 Live Demo
-
-▶️ **[Lihat Strata secara live](https://strata-navbar.netlify.app)**
-
-> Ganti URL di atas dengan link GitHub Pages proyekmu setelah repo di-deploy (Settings → Pages → pilih branch). Sebelum itu, kamu tetap bisa mencobanya secara lokal — lihat bagian [Quick Start](#-quick-start) di bawah.
-
----
-
 ## ✨ Features
 
 | Feature | Details |

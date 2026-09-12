@@ -749,21 +749,8 @@
         </div>
       </article>
 
-      <article class="mini-card" data-category="corporate" data-keywords="corporate law finance luxury real estate mega menu multi tier">
-        <div class="mini-card-top">
-          <span class="mini-card-number">06</span>
-          <span class="mini-card-category">Corporate</span>
-        </div>
-        <h3 class="mini-card-title">Meridian Luxury Corporate</h3>
-        <p class="mini-card-desc">Header multi-tier dengan top utility bar, mega-menu mewah &amp; portal klien.</p>
-        <div class="mini-card-foot">
-          <span class="mini-card-tech">HTML · CSS · JS</span>
-          <div class="mini-card-links">
-            <a href="meridian-corporate-navbar/index.html" class="link-primary" target="_blank">Demo →</a>
-            <a href="meridian-corporate-navbar/NAVBAR_CODE.md" class="link-secondary">Kode</a>
-          </div>
-        </div>
-      </article>
+      <!-- Kartu Meridian sekarang dirender otomatis oleh script dari meridian-corporate-navbar/card.json -->
+      <div id="dyn-mini-meridian-corporate-navbar" class="dyn-anchor" style="display:none"></div>
 
       <article class="mini-card" data-category="corporate" data-keywords="minimalist architecture design strata stacked layered">
         <div class="mini-card-top">
@@ -924,32 +911,8 @@
         </div>
       </article>
 
-      <!-- 06 — Meridian Luxury Corporate -->
-      <article class="specimen" data-category="corporate" data-keywords="corporate law finance luxury real estate mega menu multi tier">
-        <div class="specimen-head">
-          <span class="specimen-number">06</span>
-          <div>
-            <h2 class="specimen-title">Meridian Luxury Corporate</h2>
-            <span class="specimen-category">Corporate — Law / Private Equity / Holding</span>
-          </div>
-        </div>
-        <div class="specimen-preview">
-          <div class="browser-frame">
-            <div class="browser-bar"><span></span><span></span><span></span></div>
-            <iframe src="meridian-corporate-navbar/index.html" loading="lazy" title="Preview Meridian Luxury Corporate"></iframe>
-          </div>
-        </div>
-        <div class="specimen-footer">
-          <p class="specimen-desc">
-            Header korporat berjenjang multi-tier dengan top utility bar (investor relations, currency, language), mega-menu mewah, dan portal login klien.
-          </p>
-          <span class="specimen-tech">HTML · CSS · JS</span>
-          <div class="specimen-links">
-            <a href="meridian-corporate-navbar/index.html" class="link-primary" target="_blank">VIEW DEMO →</a>
-            <a href="meridian-corporate-navbar/NAVBAR_CODE.md" class="link-secondary">CODE</a>
-          </div>
-        </div>
-      </article>
+      <!-- Kartu detail Meridian sekarang dirender otomatis oleh script dari meridian-corporate-navbar/card.json -->
+      <div id="dyn-specimen-meridian-corporate-navbar" class="dyn-anchor" style="display:none"></div>
 
       <!-- 07 — Strata Layered Architecture -->
       <article class="specimen" data-category="corporate" data-keywords="minimalist architecture design strata stacked layered">
@@ -997,79 +960,171 @@
   </main>
 
   <script>
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const miniCards = document.querySelectorAll('.mini-card');
-    const specimens = document.querySelectorAll('.specimen');
-    const searchInput = document.getElementById('searchInput');
-    const cardGrid = document.getElementById('cardGrid');
-    const archive = document.getElementById('navbarGrid');
-    const emptyStateGrid = document.getElementById('emptyStateGrid');
-    const emptyState = document.getElementById('emptyState');
+    /* ================================================================
+       BAGIAN 1 — DYNAMIC CARD LOADER
+       Daftar folder di sini akan dibaca card.json-nya lalu dirender
+       otomatis ke dalam #cardGrid dan #navbarGrid.
+       Tambahkan nama folder baru ke array ini kalau folder itu
+       sudah punya card.json (folder lain yang belum dikonversi
+       tetap tampil dari HTML manual seperti biasa).
+       ================================================================ */
+    const dynamicFolders = ['meridian-corporate-navbar'];
 
-    let currentFilter = 'all';
-    let searchQuery = '';
-
-    function matches(item, titleSel, descSel) {
-      const cat = item.dataset.category;
-      const keywords = (
-        item.dataset.keywords + ' ' +
-        item.querySelector(titleSel).textContent + ' ' +
-        item.querySelector(descSel).textContent
-      ).toLowerCase();
-
-      const matchesFilter = currentFilter === 'all' || cat === currentFilter;
-      const matchesSearch = searchQuery === '' || keywords.includes(searchQuery);
-      return matchesFilter && matchesSearch;
+    function buildMiniCardHTML(folder, d) {
+      const number = String(d.order).padStart(2, '0');
+      return `
+        <article class="mini-card" data-category="${d.category}" data-keywords="${d.keywords.join(' ')}">
+          <div class="mini-card-top">
+            <span class="mini-card-number">${number}</span>
+            <span class="mini-card-category">${d.categoryLabel.split('—')[0].trim()}</span>
+          </div>
+          <h3 class="mini-card-title">${d.title}</h3>
+          <p class="mini-card-desc">${d.descriptionShort}</p>
+          <div class="mini-card-foot">
+            <span class="mini-card-tech">${d.tech}</span>
+            <div class="mini-card-links">
+              <a href="${folder}/index.html" class="link-primary" target="_blank">Demo →</a>
+              <a href="${folder}/NAVBAR_CODE.md" class="link-secondary">Kode</a>
+            </div>
+          </div>
+        </article>`;
     }
 
-    function applyFilterAndSearch() {
-      const showGrid = currentFilter === 'all';
-      cardGrid.classList.toggle('is-hidden', !showGrid);
-      archive.classList.toggle('is-hidden', showGrid);
+    function buildSpecimenHTML(folder, d) {
+      const number = String(d.order).padStart(2, '0');
+      return `
+        <article class="specimen" data-category="${d.category}" data-keywords="${d.keywords.join(' ')}"${d.featured ? ' data-featured="true"' : ''}>
+          <div class="specimen-head">
+            <span class="specimen-number">${number}</span>
+            <div>
+              ${d.featured ? '<span class="eyebrow-featured">FEATURED</span>' : ''}
+              <h2 class="specimen-title">${d.title}</h2>
+              <span class="specimen-category">${d.categoryLabel}</span>
+            </div>
+          </div>
+          <div class="specimen-preview">
+            <div class="browser-frame">
+              <div class="browser-bar"><span></span><span></span><span></span></div>
+              <iframe src="${folder}/index.html" loading="lazy" title="Preview ${d.title}"></iframe>
+            </div>
+          </div>
+          <div class="specimen-footer">
+            <p class="specimen-desc">${d.descriptionLong}</p>
+            <span class="specimen-tech">${d.tech}</span>
+            <div class="specimen-links">
+              <a href="${folder}/index.html" class="link-primary" target="_blank">VIEW DEMO →</a>
+              <a href="${folder}/NAVBAR_CODE.md" class="link-secondary">CODE</a>
+            </div>
+          </div>
+        </article>`;
+    }
 
-      if (showGrid) {
-        let visibleCount = 0;
-        miniCards.forEach(item => {
-          const visible = matches(item, '.mini-card-title', '.mini-card-desc');
-          item.style.display = visible ? '' : 'none';
-          if (visible) visibleCount++;
-        });
-        emptyStateGrid.style.display = visibleCount === 0 ? 'block' : 'none';
-        emptyState.style.display = 'none';
-      } else {
-        let visibleCount = 0;
-        specimens.forEach(item => {
-          const visible = matches(item, '.specimen-title', '.specimen-desc');
-          item.style.display = visible ? '' : 'none';
-          if (visible) visibleCount++;
-        });
-        emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
-        emptyStateGrid.style.display = 'none';
+    async function loadDynamicCards() {
+      for (const folder of dynamicFolders) {
+        try {
+          const res = await fetch(`${folder}/card.json`);
+          if (!res.ok) throw new Error(`card.json tidak ditemukan untuk ${folder}`);
+          const data = await res.json();
+
+          const miniAnchor = document.getElementById(`dyn-mini-${folder}`);
+          if (miniAnchor) miniAnchor.outerHTML = buildMiniCardHTML(folder, data);
+
+          const specimenAnchor = document.getElementById(`dyn-specimen-${folder}`);
+          if (specimenAnchor) specimenAnchor.outerHTML = buildSpecimenHTML(folder, data);
+        } catch (err) {
+          console.error(`[dynamic-cards] Gagal memuat ${folder}:`, err);
+        }
       }
     }
 
-    filterBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        filterBtns.forEach(b => {
-          b.classList.remove('active');
-          b.setAttribute('aria-pressed', 'false');
+    /* ================================================================
+       BAGIAN 2 — FILTER & SEARCH (logika lama, tidak diubah)
+       Dibungkus jadi fungsi supaya bisa dijalankan SETELAH kartu
+       dinamis selesai disisipkan ke halaman.
+       ================================================================ */
+    function initFilterAndSearch() {
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const miniCards = document.querySelectorAll('.mini-card');
+      const specimens = document.querySelectorAll('.specimen');
+      const searchInput = document.getElementById('searchInput');
+      const cardGrid = document.getElementById('cardGrid');
+      const archive = document.getElementById('navbarGrid');
+      const emptyStateGrid = document.getElementById('emptyStateGrid');
+      const emptyState = document.getElementById('emptyState');
+
+      let currentFilter = 'all';
+      let searchQuery = '';
+
+      function matches(item, titleSel, descSel) {
+        const cat = item.dataset.category;
+        const keywords = (
+          item.dataset.keywords + ' ' +
+          item.querySelector(titleSel).textContent + ' ' +
+          item.querySelector(descSel).textContent
+        ).toLowerCase();
+
+        const matchesFilter = currentFilter === 'all' || cat === currentFilter;
+        const matchesSearch = searchQuery === '' || keywords.includes(searchQuery);
+        return matchesFilter && matchesSearch;
+      }
+
+      function applyFilterAndSearch() {
+        const showGrid = currentFilter === 'all';
+        cardGrid.classList.toggle('is-hidden', !showGrid);
+        archive.classList.toggle('is-hidden', showGrid);
+
+        if (showGrid) {
+          let visibleCount = 0;
+          miniCards.forEach(item => {
+            const visible = matches(item, '.mini-card-title', '.mini-card-desc');
+            item.style.display = visible ? '' : 'none';
+            if (visible) visibleCount++;
+          });
+          emptyStateGrid.style.display = visibleCount === 0 ? 'block' : 'none';
+          emptyState.style.display = 'none';
+        } else {
+          let visibleCount = 0;
+          specimens.forEach(item => {
+            const visible = matches(item, '.specimen-title', '.specimen-desc');
+            item.style.display = visible ? '' : 'none';
+            if (visible) visibleCount++;
+          });
+          emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+          emptyStateGrid.style.display = 'none';
+        }
+      }
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => {
+            b.classList.remove('active');
+            b.setAttribute('aria-pressed', 'false');
+          });
+          btn.classList.add('active');
+          btn.setAttribute('aria-pressed', 'true');
+          currentFilter = btn.dataset.filter;
+          applyFilterAndSearch();
         });
-        btn.classList.add('active');
-        btn.setAttribute('aria-pressed', 'true');
-        currentFilter = btn.dataset.filter;
+      });
+
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value.toLowerCase().trim();
         applyFilterAndSearch();
       });
-    });
 
-    searchInput.addEventListener('input', (e) => {
-      searchQuery = e.target.value.toLowerCase().trim();
-      applyFilterAndSearch();
-    });
+      document.getElementById('toTop').addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
 
-    document.getElementById('toTop').addEventListener('click', (e) => {
-      e.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    /* ================================================================
+       BAGIAN 3 — JALANKAN BERURUTAN
+       Kartu dinamis harus selesai disisipkan DULU, baru filter &
+       search di-inisialisasi — supaya querySelectorAll ikut
+       menangkap kartu Meridian yang baru ditambahkan.
+       ================================================================ */
+    loadDynamicCards().then(initFilterAndSearch);
   </script>
 
 </body>
