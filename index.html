@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Navigation Collection — A Curated Archive of Navbar & Sidebar Systems</title>
-  <meta name="description" content="Sebuah arsip navigasi web: tujuh eksperimen navbar dan sidebar untuk landing page, SaaS, developer platform, dan enterprise, dibangun dengan semantic HTML, CSS, dan vanilla JS.">
+  <meta name="description" content="Sebuah arsip navigasi web berisi berbagai eksperimen navbar dan sidebar untuk landing page, SaaS, developer platform, dan enterprise, dibangun dengan semantic HTML, CSS, dan vanilla JS.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -647,12 +647,9 @@
 
       <!-- Toolbar -->
       <div class="toolbar">
-        <nav class="filters" aria-label="Filter kategori navigasi">
+        <nav class="filters" aria-label="Filter kategori navigasi" id="filtersNav">
           <button class="filter-btn active" data-filter="all" aria-pressed="true">ALL</button>
-          <button class="filter-btn" data-filter="landing" aria-pressed="false">Landing Page</button>
-          <button class="filter-btn" data-filter="saas" aria-pressed="false">SaaS &amp; Admin</button>
-          <button class="filter-btn" data-filter="developer" aria-pressed="false">Developer &amp; SDK</button>
-          <button class="filter-btn" data-filter="corporate" aria-pressed="false">Corporate</button>
+          <!-- Tombol kategori lain dibuat otomatis oleh script berdasarkan kategori yang benar-benar dipakai -->
         </nav>
 
         <div class="search">
@@ -667,282 +664,15 @@
     </header>
 
     <!-- Card Grid: tampilan ringkas untuk "Semua" -->
+    <!-- Semua kartu di sini dirender otomatis oleh script dari card.json tiap folder -->
     <section class="card-grid" id="cardGrid">
-
-      <article class="mini-card" data-category="landing" data-keywords="island pill macos sonoma clipboard floating toast">
-        <div class="mini-card-top">
-          <span class="mini-card-number">01</span>
-          <span class="mini-card-category">Landing Page</span>
-        </div>
-        <h3 class="mini-card-title">Supaste Dynamic Island</h3>
-        <p class="mini-card-desc">Navigasi floating pill khas Apple dengan efek morph saat scroll dan HUD dock interaktif.</p>
-        <div class="mini-card-foot">
-          <span class="mini-card-tech">HTML · CSS · JS</span>
-          <div class="mini-card-links">
-            <a href="supaste-island-navbar/index.html" class="link-primary" target="_blank">Demo →</a>
-            <a href="supaste-island-navbar/NAVBAR_CODE.md" class="link-secondary">Kode</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="mini-card" data-category="saas" data-keywords="saas admin sidebar dual tier command palette popover profile">
-        <div class="mini-card-top">
-          <span class="mini-card-number">02</span>
-          <span class="mini-card-category">SaaS &amp; Admin</span>
-        </div>
-        <h3 class="mini-card-title">Untitled UI SaaS Sidebar</h3>
-        <p class="mini-card-desc">Sidebar dual-tier enterprise dengan ⌘K command palette dan account switcher.</p>
-        <div class="mini-card-foot">
-          <span class="mini-card-tech">HTML · CSS · JS</span>
-          <div class="mini-card-links">
-            <a href="untitled-saas-sidebar/index.html" class="link-primary" target="_blank">Demo →</a>
-            <a href="untitled-saas-sidebar/NAVBAR_CODE.md" class="link-secondary">Kode</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="mini-card" data-category="developer" data-keywords="developer sdk mega-menu realtime cursors dark cli api">
-        <div class="mini-card-top">
-          <span class="mini-card-number">03</span>
-          <span class="mini-card-category">Developer &amp; SDK</span>
-        </div>
-        <h3 class="mini-card-title">Velt Developer Platform</h3>
-        <p class="mini-card-desc">Navbar dark-mode dengan 4-column mega-menu dan multiplayer live cursor tags.</p>
-        <div class="mini-card-foot">
-          <span class="mini-card-tech">HTML · CSS · JS</span>
-          <div class="mini-card-links">
-            <a href="velt-developer-navbar/index.html" class="link-primary" target="_blank">Demo →</a>
-            <a href="velt-developer-navbar/NAVBAR_CODE.md" class="link-secondary">Kode</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="mini-card" data-category="saas" data-keywords="enterprise hr operations rail collapsible sidebar department taxonomy">
-        <div class="mini-card-top">
-          <span class="mini-card-number">04</span>
-          <span class="mini-card-category">SaaS &amp; Admin</span>
-        </div>
-        <h3 class="mini-card-title">BordUp™ Operations Rail</h3>
-        <p class="mini-card-desc">Sidebar collapsible rail (260px ↔ 76px) dengan tooltip &amp; taksonomi departemen.</p>
-        <div class="mini-card-foot">
-          <span class="mini-card-tech">HTML · CSS · JS</span>
-          <div class="mini-card-links">
-            <a href="bordup-operations-sidebar/index.html" class="link-primary" target="_blank">Demo →</a>
-            <a href="bordup-operations-sidebar/NAVBAR_CODE.md" class="link-secondary">Kode</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="mini-card" data-category="landing" data-keywords="cyberpunk creative portfolio gaming neon velocita audio search">
-        <div class="mini-card-top">
-          <span class="mini-card-number">05</span>
-          <span class="mini-card-category">Landing Page</span>
-        </div>
-        <h3 class="mini-card-title">Velocita Cyber Creative</h3>
-        <p class="mini-card-desc">Navigasi floating pill futuristik dengan search overlay &amp; kontrol audio ambiance.</p>
-        <div class="mini-card-foot">
-          <span class="mini-card-tech">HTML · CSS · JS</span>
-          <div class="mini-card-links">
-            <a href="velocita-navbar/index.html" class="link-primary" target="_blank">Demo →</a>
-            <a href="velocita-navbar/NAVBAR_CODE.md" class="link-secondary">Kode</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Kartu Meridian sekarang dirender otomatis oleh script dari meridian-corporate-navbar/card.json -->
-      <div id="dyn-mini-meridian-corporate-navbar" class="dyn-anchor" style="display:none"></div>
-
-      <article class="mini-card" data-category="corporate" data-keywords="minimalist architecture design strata stacked layered">
-        <div class="mini-card-top">
-          <span class="mini-card-number">07</span>
-          <span class="mini-card-category">Corporate</span>
-        </div>
-        <h3 class="mini-card-title">Strata Layered Architecture</h3>
-        <p class="mini-card-desc">Navigasi minimalis multi-layer dengan grid arsitektural &amp; kontras tinggi.</p>
-        <div class="mini-card-foot">
-          <span class="mini-card-tech">HTML · CSS · JS</span>
-          <div class="mini-card-links">
-            <a href="strata-layered-navbar/index.html" class="link-primary" target="_blank">Demo →</a>
-            <a href="strata-layered-navbar/NAVBAR_CODE.md" class="link-secondary">Kode</a>
-          </div>
-        </div>
-      </article>
-
       <p class="empty-state" id="emptyStateGrid">TIDAK ADA HASIL — COBA KATA KUNCI LAIN</p>
-
     </section>
 
     <!-- Archive: tampilan detail untuk kategori spesifik -->
+    <!-- Semua kartu di sini dirender otomatis oleh script dari card.json tiap folder -->
     <section class="archive is-hidden" id="navbarGrid">
-
-      <!-- 01 — Supaste (Featured) -->
-      <article class="specimen" data-featured="true" data-category="landing" data-keywords="island pill macos sonoma clipboard floating toast">
-        <div class="specimen-head">
-          <span class="specimen-number">01</span>
-          <div>
-            <span class="eyebrow-featured">FEATURED</span>
-            <h2 class="specimen-title">Supaste Dynamic Island</h2>
-            <span class="specimen-category">Landing Page — macOS / Productivity</span>
-          </div>
-        </div>
-        <div class="specimen-preview">
-          <div class="browser-frame">
-            <div class="browser-bar"><span></span><span></span><span></span></div>
-            <iframe src="supaste-island-navbar/index.html" loading="lazy" title="Preview Supaste Dynamic Island"></iframe>
-          </div>
-        </div>
-        <div class="specimen-footer">
-          <p class="specimen-desc">
-            Navigasi floating pill khas Apple dengan efek morph saat scroll, latar langit macOS Sonoma, in-app clipboard HUD dock interaktif, dan notifikasi copy toast.
-          </p>
-          <span class="specimen-tech">HTML · CSS · JS</span>
-          <div class="specimen-links">
-            <a href="supaste-island-navbar/index.html" class="link-primary" target="_blank">VIEW DEMO →</a>
-            <a href="supaste-island-navbar/NAVBAR_CODE.md" class="link-secondary">CODE</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- 02 — Untitled UI SaaS Sidebar -->
-      <article class="specimen" data-category="saas" data-keywords="saas admin sidebar dual tier command palette popover profile">
-        <div class="specimen-head">
-          <span class="specimen-number">02</span>
-          <div>
-            <h2 class="specimen-title">Untitled UI SaaS Sidebar</h2>
-            <span class="specimen-category">SaaS &amp; Admin — Cloud / Team Management</span>
-          </div>
-        </div>
-        <div class="specimen-preview">
-          <div class="browser-frame">
-            <div class="browser-bar"><span></span><span></span><span></span></div>
-            <iframe src="untitled-saas-sidebar/index.html" loading="lazy" title="Preview Untitled UI SaaS Sidebar"></iframe>
-          </div>
-        </div>
-        <div class="specimen-footer">
-          <p class="specimen-desc">
-            Sidebar bertingkat ganda kelas enterprise terinspirasi oleh Untitled UI v4.0. Dilengkapi ⌘K command palette, popover account switcher, dan status kehadiran live.
-          </p>
-          <span class="specimen-tech">HTML · CSS · JS</span>
-          <div class="specimen-links">
-            <a href="untitled-saas-sidebar/index.html" class="link-primary" target="_blank">VIEW DEMO →</a>
-            <a href="untitled-saas-sidebar/NAVBAR_CODE.md" class="link-secondary">CODE</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- 03 — Velt Developer Platform -->
-      <article class="specimen" data-category="developer" data-keywords="developer sdk mega-menu realtime cursors dark cli api">
-        <div class="specimen-head">
-          <span class="specimen-number">03</span>
-          <div>
-            <h2 class="specimen-title">Velt Developer Platform</h2>
-            <span class="specimen-category">Developer &amp; SDK — Real-Time Collaboration</span>
-          </div>
-        </div>
-        <div class="specimen-preview">
-          <div class="browser-frame">
-            <div class="browser-bar"><span></span><span></span><span></span></div>
-            <iframe src="velt-developer-navbar/index.html" loading="lazy" title="Preview Velt Developer Platform"></iframe>
-          </div>
-        </div>
-        <div class="specimen-footer">
-          <p class="specimen-desc">
-            Navbar dark-mode untuk platform developer dengan 4-column mega-menu hover-safe (Sync, Real Time, Workflow, SDK), multiplayer live cursor tags, dan card salin CLI satu klik.
-          </p>
-          <span class="specimen-tech">HTML · CSS · JS</span>
-          <div class="specimen-links">
-            <a href="velt-developer-navbar/index.html" class="link-primary" target="_blank">VIEW DEMO →</a>
-            <a href="velt-developer-navbar/NAVBAR_CODE.md" class="link-secondary">CODE</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- 04 — BordUp Operations Rail -->
-      <article class="specimen" data-category="saas" data-keywords="enterprise hr operations rail collapsible sidebar department taxonomy">
-        <div class="specimen-head">
-          <span class="specimen-number">04</span>
-          <div>
-            <h2 class="specimen-title">BordUp™ Operations Rail</h2>
-            <span class="specimen-category">SaaS &amp; Admin — Enterprise HR / Workforce</span>
-          </div>
-        </div>
-        <div class="specimen-preview">
-          <div class="browser-frame">
-            <div class="browser-bar"><span></span><span></span><span></span></div>
-            <iframe src="bordup-operations-sidebar/index.html" loading="lazy" title="Preview BordUp Operations Rail"></iframe>
-          </div>
-        </div>
-        <div class="specimen-footer">
-          <p class="specimen-desc">
-            Sidebar collapsible rail (260px ↔ 76px) dengan transisi mulus, hover tooltip otomatis dalam mode ringkas, switcher workspace perusahaan, dan taksonomi warna departemen.
-          </p>
-          <span class="specimen-tech">HTML · CSS · JS</span>
-          <div class="specimen-links">
-            <a href="bordup-operations-sidebar/index.html" class="link-primary" target="_blank">VIEW DEMO →</a>
-            <a href="bordup-operations-sidebar/NAVBAR_CODE.md" class="link-secondary">CODE</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- 05 — Velocita Cyber Creative -->
-      <article class="specimen" data-category="landing" data-keywords="cyberpunk creative portfolio gaming neon velocita audio search">
-        <div class="specimen-head">
-          <span class="specimen-number">05</span>
-          <div>
-            <h2 class="specimen-title">Velocita Cyber Creative</h2>
-            <span class="specimen-category">Landing Page — Automotive / Creative Portfolio</span>
-          </div>
-        </div>
-        <div class="specimen-preview">
-          <div class="browser-frame">
-            <div class="browser-bar"><span></span><span></span><span></span></div>
-            <iframe src="velocita-navbar/index.html" loading="lazy" title="Preview Velocita Cyber Creative"></iframe>
-          </div>
-        </div>
-        <div class="specimen-footer">
-          <p class="specimen-desc">
-            Navigasi floating pill futuristik dengan aksen LED di ujung sayap, indikator link aktif, search overlay terintegrasi, dan kontrol audio ambiance.
-          </p>
-          <span class="specimen-tech">HTML · CSS · JS</span>
-          <div class="specimen-links">
-            <a href="velocita-navbar/index.html" class="link-primary" target="_blank">VIEW DEMO →</a>
-            <a href="velocita-navbar/NAVBAR_CODE.md" class="link-secondary">CODE</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Kartu detail Meridian sekarang dirender otomatis oleh script dari meridian-corporate-navbar/card.json -->
-      <div id="dyn-specimen-meridian-corporate-navbar" class="dyn-anchor" style="display:none"></div>
-
-      <!-- 07 — Strata Layered Architecture -->
-      <article class="specimen" data-category="corporate" data-keywords="minimalist architecture design strata stacked layered">
-        <div class="specimen-head">
-          <span class="specimen-number">07</span>
-          <div>
-            <h2 class="specimen-title">Strata Layered Architecture</h2>
-            <span class="specimen-category">Corporate — Architectural Studio / Agency</span>
-          </div>
-        </div>
-        <div class="specimen-preview">
-          <div class="browser-frame">
-            <div class="browser-bar"><span></span><span></span><span></span></div>
-            <iframe src="strata-layered-navbar/index.html" loading="lazy" title="Preview Strata Layered Architecture"></iframe>
-          </div>
-        </div>
-        <div class="specimen-footer">
-          <p class="specimen-desc">
-            Navigasi minimalis multi-layer dengan tipografi modern, garis grid arsitektural presisi, dan estetika kontras tinggi.
-          </p>
-          <span class="specimen-tech">HTML · CSS · JS</span>
-          <div class="specimen-links">
-            <a href="strata-layered-navbar/index.html" class="link-primary" target="_blank">VIEW DEMO →</a>
-            <a href="strata-layered-navbar/NAVBAR_CODE.md" class="link-secondary">CODE</a>
-          </div>
-        </div>
-      </article>
-
       <p class="empty-state" id="emptyState">NO RESULT — TRY ANOTHER KEYWORD</p>
-
     </section>
 
     <!-- Footer -->
@@ -961,14 +691,18 @@
 
   <script>
     /* ================================================================
-       BAGIAN 1 — DYNAMIC CARD LOADER
-       Daftar folder di sini akan dibaca card.json-nya lalu dirender
-       otomatis ke dalam #cardGrid dan #navbarGrid.
-       Tambahkan nama folder baru ke array ini kalau folder itu
-       sudah punya card.json (folder lain yang belum dikonversi
-       tetap tampil dari HTML manual seperti biasa).
+       BAGIAN 1 — MEMUAT DAFTAR FOLDER & CARD.JSON
+       navbars.json (di root repo) berisi daftar nama folder navbar.
+       Kalau nambah navbar baru:
+         1. Buat foldernya seperti biasa (index.html, style.css,
+            script.js, README.md, NAVBAR_CODE.md, card.json)
+         2. Tambahkan nama foldernya ke navbars.json
+       File index.html ini TIDAK PERLU disentuh sama sekali lagi.
        ================================================================ */
-    const dynamicFolders = ['meridian-corporate-navbar'];
+
+    function shortLabel(categoryLabel) {
+      return categoryLabel.split('—')[0].trim();
+    }
 
     function buildMiniCardHTML(folder, d) {
       const number = String(d.order).padStart(2, '0');
@@ -976,7 +710,7 @@
         <article class="mini-card" data-category="${d.category}" data-keywords="${d.keywords.join(' ')}">
           <div class="mini-card-top">
             <span class="mini-card-number">${number}</span>
-            <span class="mini-card-category">${d.categoryLabel.split('—')[0].trim()}</span>
+            <span class="mini-card-category">${shortLabel(d.categoryLabel)}</span>
           </div>
           <h3 class="mini-card-title">${d.title}</h3>
           <p class="mini-card-desc">${d.descriptionShort}</p>
@@ -1019,28 +753,64 @@
         </article>`;
     }
 
-    async function loadDynamicCards() {
-      for (const folder of dynamicFolders) {
+    async function loadAllCards() {
+      const emptyStateGrid = document.getElementById('emptyStateGrid');
+      const emptyState = document.getElementById('emptyState');
+      const filtersNav = document.getElementById('filtersNav');
+
+      // 1. Ambil daftar folder dari navbars.json
+      let folders = [];
+      try {
+        const res = await fetch('navbars.json');
+        folders = await res.json();
+      } catch (err) {
+        console.error('[dynamic-cards] Gagal memuat navbars.json:', err);
+        return;
+      }
+
+      // 2. Ambil card.json tiap folder
+      const cards = [];
+      for (const folder of folders) {
         try {
           const res = await fetch(`${folder}/card.json`);
           if (!res.ok) throw new Error(`card.json tidak ditemukan untuk ${folder}`);
           const data = await res.json();
-
-          const miniAnchor = document.getElementById(`dyn-mini-${folder}`);
-          if (miniAnchor) miniAnchor.outerHTML = buildMiniCardHTML(folder, data);
-
-          const specimenAnchor = document.getElementById(`dyn-specimen-${folder}`);
-          if (specimenAnchor) specimenAnchor.outerHTML = buildSpecimenHTML(folder, data);
+          cards.push({ folder, data });
         } catch (err) {
           console.error(`[dynamic-cards] Gagal memuat ${folder}:`, err);
         }
       }
+
+      // 3. Urutkan sesuai field "order" di card.json
+      cards.sort((a, b) => a.data.order - b.data.order);
+
+      // 4. Sisipkan tiap kartu tepat sebelum pesan "empty state"
+      cards.forEach(({ folder, data }) => {
+        emptyStateGrid.insertAdjacentHTML('beforebegin', buildMiniCardHTML(folder, data));
+        emptyState.insertAdjacentHTML('beforebegin', buildSpecimenHTML(folder, data));
+      });
+
+      // 5. Buat tombol filter kategori otomatis dari kategori yang benar-benar dipakai
+      const seenCategories = new Map();
+      cards.forEach(({ data }) => {
+        if (!seenCategories.has(data.category)) {
+          seenCategories.set(data.category, shortLabel(data.categoryLabel));
+        }
+      });
+      seenCategories.forEach((label, key) => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn';
+        btn.dataset.filter = key;
+        btn.setAttribute('aria-pressed', 'false');
+        btn.textContent = label;
+        filtersNav.appendChild(btn);
+      });
     }
 
     /* ================================================================
        BAGIAN 2 — FILTER & SEARCH (logika lama, tidak diubah)
-       Dibungkus jadi fungsi supaya bisa dijalankan SETELAH kartu
-       dinamis selesai disisipkan ke halaman.
+       Dibungkus jadi fungsi supaya bisa dijalankan SETELAH semua
+       kartu & tombol filter selesai dibuat oleh loadAllCards().
        ================================================================ */
     function initFilterAndSearch() {
       const filterBtns = document.querySelectorAll('.filter-btn');
@@ -1120,11 +890,11 @@
 
     /* ================================================================
        BAGIAN 3 — JALANKAN BERURUTAN
-       Kartu dinamis harus selesai disisipkan DULU, baru filter &
-       search di-inisialisasi — supaya querySelectorAll ikut
-       menangkap kartu Meridian yang baru ditambahkan.
+       Kartu & tombol filter harus selesai dibuat DULU, baru filter
+       & search di-inisialisasi — supaya querySelectorAll ikut
+       menangkap semua elemen yang baru disisipkan.
        ================================================================ */
-    loadDynamicCards().then(initFilterAndSearch);
+    loadAllCards().then(initFilterAndSearch);
   </script>
 
 </body>

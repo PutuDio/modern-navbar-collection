@@ -1,0 +1,11 @@
+{
+  "title": "Velt Developer Platform",
+  "category": "developer",
+  "categoryLabel": "Developer & SDK — Real-Time Collaboration",
+  "descriptionShort": "Navbar dark-mode dengan 4-column mega-menu dan multiplayer live cursor tags.",
+  "descriptionLong": "Navbar dark-mode untuk platform developer dengan 4-column mega-menu hover-safe (Sync, Real Time, Workflow, SDK), multiplayer live cursor tags, dan card salin CLI satu klik.",
+  "tech": "HTML · CSS · JS",
+  "keywords": ["developer", "sdk", "mega-menu", "realtime", "cursors", "dark", "cli", "api"],
+  "featured": false,
+  "order": 3
+}

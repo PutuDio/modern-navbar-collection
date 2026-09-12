@@ -1,0 +1,11 @@
+{
+  "title": "Velocita Cyber Creative",
+  "category": "landing",
+  "categoryLabel": "Landing Page — Automotive / Creative Portfolio",
+  "descriptionShort": "Navigasi floating pill futuristik dengan search overlay & kontrol audio ambiance.",
+  "descriptionLong": "Navigasi floating pill futuristik dengan aksen LED di ujung sayap, indikator link aktif, search overlay terintegrasi, dan kontrol audio ambiance.",
+  "tech": "HTML · CSS · JS",
+  "keywords": ["cyberpunk", "creative", "portfolio", "gaming", "neon", "velocita", "audio", "search"],
+  "featured": false,
+  "order": 5
+}

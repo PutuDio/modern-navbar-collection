@@ -1,0 +1,11 @@
+{
+  "title": "Supaste Dynamic Island",
+  "category": "landing",
+  "categoryLabel": "Landing Page — macOS / Productivity",
+  "descriptionShort": "Navigasi floating pill khas Apple dengan efek morph saat scroll dan HUD dock interaktif.",
+  "descriptionLong": "Navigasi floating pill khas Apple dengan efek morph saat scroll, latar langit macOS Sonoma, in-app clipboard HUD dock interaktif, dan notifikasi copy toast.",
+  "tech": "HTML · CSS · JS",
+  "keywords": ["island", "pill", "macos", "sonoma", "clipboard", "floating", "toast"],
+  "featured": true,
+  "order": 1
+}

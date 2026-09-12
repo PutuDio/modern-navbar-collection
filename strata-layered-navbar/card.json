@@ -1,0 +1,11 @@
+{
+  "title": "Strata Layered Architecture",
+  "category": "landing",
+  "categoryLabel": "Landing Page — Architectural Studio / Agency",
+  "descriptionShort": "Navigasi minimalis multi-layer dengan grid arsitektural & kontras tinggi.",
+  "descriptionLong": "Navigasi minimalis multi-layer dengan tipografi modern, garis grid arsitektural presisi, dan estetika kontras tinggi.",
+  "tech": "HTML · CSS · JS",
+  "keywords": ["minimalist", "architecture", "design", "strata", "stacked", "layered"],
+  "featured": false,
+  "order": 7
+}
