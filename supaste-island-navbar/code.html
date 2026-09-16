@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Supaste Dynamic Island &mdash; Implementation Guide</title>
+<meta name="description" content="Isolated, copy-paste-ready code for Supaste Dynamic Island &mdash; font import, markup, styles, and behavior.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/tomorrow-night.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+<style>
+  :root{
+    --paper:#fbfcfd;
+    --panel:#ffffff;
+    --line:#e2e8f0;
+    --ink:#0f172a;
+    --ink-soft:#475569;
+    --ink-faint:#94a3b8;
+    --accent:#0284c7;
+    --accent-soft:rgba(29, 78, 216, 0.08);
+    --ok:#059669;
+    --code-bg:#0b1220;
+    --code-chrome:#111a2c;
+    --code-line:#1e293b;
+    --font-display:'Plus Jakarta Sans', system-ui, sans-serif;
+    --font-mono:'IBM Plex Mono', 'SFMono-Regular', monospace;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--font-display);
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{ color:inherit; text-decoration:none; }
+
+  /* ---------- Masthead ---------- */
+  .masthead{
+    max-width:1180px;
+    margin:0 auto;
+    padding:4.5rem 2.5rem 3rem;
+    border-bottom:1px solid var(--line);
+  }
+  .masthead-kicker{
+    font-size:0.8125rem;
+    color:var(--accent);
+    font-weight:600;
+    margin-bottom:0.9rem;
+  }
+  .masthead h1{
+    font-size:clamp(2rem, 4vw, 2.75rem);
+    font-weight:700;
+    letter-spacing:-0.02em;
+    margin:0 0 1rem;
+    max-width:24ch;
+  }
+  .masthead p{
+    color:var(--ink-soft);
+    font-size:1.05rem;
+    line-height:1.65;
+    max-width:62ch;
+    margin:0;
+  }
+  .masthead-meta{
+    display:flex;
+    gap:1.5rem;
+    margin-top:1.75rem;
+    font-size:0.85rem;
+    color:var(--ink-faint);
+    font-family:var(--font-mono);
+  }
+
+  /* ---------- Layout ---------- */
+  .layout{
+    max-width:1180px;
+    margin:0 auto;
+    padding:3rem 2.5rem 6rem;
+    display:grid;
+    grid-template-columns:220px minmax(0,1fr);
+    gap:3.5rem;
+  }
+
+  .side-nav{ align-self:start; position:sticky; top:2.5rem; }
+  .side-nav-label{
+    font-size:0.75rem;
+    color:var(--ink-faint);
+    font-weight:600;
+    margin-bottom:0.9rem;
+  }
+  .side-nav ul{ list-style:none; margin:0; padding:0; }
+  .side-nav li + li{ margin-top:0.35rem; }
+  .side-nav a{
+    display:flex;
+    align-items:baseline;
+    gap:0.6rem;
+    padding:0.45rem 0.6rem;
+    border-radius:8px;
+    font-size:0.9rem;
+    color:var(--ink-soft);
+    transition:background 0.15s ease, color 0.15s ease;
+  }
+  .side-nav a:hover{ background:var(--accent-soft); color:var(--ink); }
+  .side-nav a.is-active{ background:var(--accent-soft); color:var(--accent); font-weight:600; }
+  .side-nav .idx{
+    font-family:var(--font-mono);
+    font-size:0.78rem;
+    color:var(--ink-faint);
+    width:1.1rem;
+  }
+  .side-nav a.is-active .idx{ color:var(--accent); }
+
+  /* ---------- Doc sections ---------- */
+  .doc-section{ margin-bottom:3.5rem; scroll-margin-top:2rem; }
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:0.9rem;
+    margin-bottom:0.5rem;
+  }
+  .section-index{
+    font-family:var(--font-mono);
+    font-size:0.95rem;
+    color:var(--accent);
+    font-weight:600;
+  }
+  .section-head h2{
+    font-size:1.35rem;
+    font-weight:700;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+  .section-note{
+    color:var(--ink-soft);
+    font-size:0.98rem;
+    line-height:1.6;
+    margin:0 0 1.1rem;
+    max-width:60ch;
+  }
+
+  /* ---------- Code window ---------- */
+  .code-window{
+    background:var(--code-bg);
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 1px 2px rgba(15,23,42,0.06), 0 12px 32px -16px rgba(15,23,42,0.35);
+  }
+  .code-chrome{
+    display:flex;
+    align-items:center;
+    gap:0.9rem;
+    padding:0.7rem 1rem;
+    background:var(--code-chrome);
+    border-bottom:1px solid var(--code-line);
+  }
+  .dots{ display:flex; gap:6px; flex-shrink:0; }
+  .dot{ width:10px; height:10px; border-radius:50%; display:block; }
+  .dot-a{ background:#f4756b; }
+  .dot-b{ background:#f5b95b; }
+  .dot-c{ background:#4fbf6b; }
+  .filename{
+    font-family:var(--font-mono);
+    font-size:0.78rem;
+    color:#8592ad;
+    flex:1;
+  }
+  .copy-btn{
+    display:flex;
+    align-items:center;
+    gap:0.4rem;
+    background:transparent;
+    border:1px solid var(--code-line);
+    color:#c3cbe0;
+    font-family:var(--font-display);
+    font-size:0.78rem;
+    font-weight:500;
+    padding:0.32rem 0.65rem;
+    border-radius:6px;
+    cursor:pointer;
+    transition:background 0.15s ease, border-color 0.15s ease;
+  }
+  .copy-btn:hover{ background:rgba(255,255,255,0.06); border-color:#334155; }
+  .copy-btn .icon-check{ display:none; }
+  .copy-btn.is-copied .icon-copy{ display:none; }
+  .copy-btn.is-copied .icon-check{ display:block; color:var(--ok); }
+  .copy-btn.is-copied{ border-color:var(--ok); color:var(--ok); }
+
+  .code-window pre{
+    margin:0;
+    padding:1.25rem 1.4rem;
+    overflow-x:auto;
+    max-height:520px;
+    overflow-y:auto;
+  }
+  .code-window code{
+    font-family:var(--font-mono);
+    font-size:0.84rem;
+    line-height:1.65;
+    background:transparent !important;
+  }
+
+  .code-window pre::-webkit-scrollbar{ height:8px; width:8px; }
+  .code-window pre::-webkit-scrollbar-thumb{ background:#293449; border-radius:8px; }
+  .code-window pre::-webkit-scrollbar-track{ background:transparent; }
+
+  /* ---------- Footer ---------- */
+  .doc-footer{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 2.5rem 4rem;
+    border-top:1px solid var(--line);
+    padding-top:2rem;
+    color:var(--ink-faint);
+    font-size:0.85rem;
+    display:flex;
+    justify-content:space-between;
+  }
+  .doc-footer a{ color:var(--accent); font-weight:500; }
+
+  @media (max-width: 860px){
+    .layout{ grid-template-columns:1fr; }
+    .side-nav{ position:static; margin-bottom:1rem; }
+    .side-nav ul{ display:flex; flex-wrap:wrap; gap:0.4rem; }
+    .side-nav li + li{ margin-top:0; }
+    .masthead{ padding:3rem 1.5rem 2.25rem; }
+    .layout{ padding:2rem 1.5rem 4rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .copy-btn, .side-nav a{ transition:none; }
+  }
+</style>
+</head>
+<body>
+
+  <header class="masthead">
+    <p class="masthead-kicker">Implementation guide</p>
+    <h1>Supaste Dynamic Island</h1>
+    <p>Isolated, dependency-free code for the navigation only &mdash; no hero sections or demo page content. Copy each block in order into your own project: font, markup, styles, then behavior.</p>
+    <div class="masthead-meta">
+      <span>4 steps</span>
+      <span>Vanilla HTML / CSS / JS</span>
+      <span>Zero dependencies</span>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="side-nav" aria-label="Implementation steps">
+      <p class="side-nav-label">On this page</p>
+      <ul>
+        <li><a href="#section-1"><span class="idx">1</span>Google Font Import</a></li>
+        <li><a href="#section-2"><span class="idx">2</span>HTML Markup</a></li>
+        <li><a href="#section-3"><span class="idx">3</span>CSS Stylesheet</a></li>
+        <li><a href="#section-4"><span class="idx">4</span>JavaScript Code</a></li>
+      </ul>
+    </nav>
+
+    <main>
+
+    <section class="doc-section" id="section-1">
+      <div class="section-head">
+        <span class="section-index">1</span>
+        <h2>Google Font Import</h2>
+      </div>
+      <p class="section-note">Add this to your HTML &lt;head&gt;:</p>
+      <div class="code-window">
+        <div class="code-chrome">
+          <div class="dots"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <span class="filename">index.html &mdash; &lt;head&gt;</span>
+          <button class="copy-btn" type="button" data-copy-target="code-1">
+            <svg class="icon-copy" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M3 10.5V3.5A1.5 1.5 0 0 1 4.5 2H10"/></svg>
+            <svg class="icon-check" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8.5l3 3 7-7"/></svg>
+            <span class="copy-label">Copy</span>
+          </button>
+        </div>
+        <pre><code id="code-1" class="language-html">&lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.googleapis.com&quot;&gt;
+&lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.gstatic.com&quot; crossorigin&gt;
+&lt;link href=&quot;https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;</code></pre>
+      </div>
+    </section>
+
+    <section class="doc-section" id="section-2">
+      <div class="section-head">
+        <span class="section-index">2</span>
+        <h2>HTML Markup</h2>
+      </div>
+      <p class="section-note">Place this navigation component markup into your &lt;body&gt;:</p>
+      <div class="code-window">
+        <div class="code-chrome">
+          <div class="dots"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <span class="filename">index.html &mdash; &lt;body&gt;</span>
+          <button class="copy-btn" type="button" data-copy-target="code-2">
+            <svg class="icon-copy" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M3 10.5V3.5A1.5 1.5 0 0 1 4.5 2H10"/></svg>
+            <svg class="icon-check" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8.5l3 3 7-7"/></svg>
+            <span class="copy-label">Copy</span>
+          </button>
+        </div>
+        <pre><code id="code-2" class="language-html">&lt;!-- ================================================================
+     SUPASTE DYNAMIC ISLAND NAVBAR
+     ================================================================ --&gt;
+&lt;div class=&quot;island-nav-wrapper&quot; role=&quot;banner&quot;&gt;
+  &lt;nav class=&quot;island-nav&quot; id=&quot;island-nav&quot; aria-label=&quot;Main navigation&quot;&gt;
+
+    &lt;!-- Brand --&gt;
+    &lt;a href=&quot;#home&quot; class=&quot;island-brand&quot; aria-label=&quot;Supaste — Home&quot;&gt;
+      &lt;div class=&quot;island-brand-icon&quot; aria-hidden=&quot;true&quot;&gt;
+        &lt;!-- Minimalist App Icon --&gt;
+        &lt;svg width=&quot;14&quot; height=&quot;14&quot; viewBox=&quot;0 0 14 14&quot; fill=&quot;none&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;
+          &lt;rect x=&quot;1&quot; y=&quot;3&quot; width=&quot;12&quot; height=&quot;10&quot; rx=&quot;2&quot; stroke=&quot;white&quot; stroke-width=&quot;1.3&quot;/&gt;
+          &lt;path d=&quot;M5 3V2.5A1.5 1.5 0 0 1 9 2.5V3&quot; stroke=&quot;white&quot; stroke-width=&quot;1.3&quot; stroke-linecap=&quot;round&quot;/&gt;
+          &lt;path d=&quot;M4 7H10M4 9.5H8&quot; stroke=&quot;white&quot; stroke-width=&quot;1.3&quot; stroke-linecap=&quot;round&quot;/&gt;
+        &lt;/svg&gt;
+      &lt;/div&gt;
+      &lt;span class=&quot;island-brand-name&quot;&gt;Supaste&lt;/span&gt;
+    &lt;/a&gt;
+
+    &lt;!-- Separator --&gt;
+    &lt;div class=&quot;island-sep&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;
+
+    &lt;!-- Nav Links --&gt;
+    &lt;ul class=&quot;island-links&quot; role=&quot;list&quot;&gt;
+      &lt;li&gt;&lt;a href=&quot;#features&quot;&gt;Features&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#faq&quot;&gt;FAQ&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#pricing&quot;&gt;Pricing&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#changelog&quot;&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;!-- CTA Button --&gt;
+    &lt;a href=&quot;#download&quot; class=&quot;island-cta&quot; id=&quot;island-cta-download&quot;&gt;
+      &lt;span class=&quot;island-cta-icon&quot; aria-hidden=&quot;true&quot;&gt;
+        &lt;!-- Apple Icon SVG --&gt;
+        &lt;svg width=&quot;14&quot; height=&quot;14&quot; viewBox=&quot;0 0 14 14&quot; fill=&quot;none&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;
+          &lt;path d=&quot;M9.5 1.5C9.5 1.5 9.9 3.1 8.5 4.2C7.2 5.2 6 4.5 6 4.5&quot; stroke=&quot;black&quot; stroke-width=&quot;1.3&quot; stroke-linecap=&quot;round&quot;/&gt;
+          &lt;path d=&quot;M2.5 9.5C2.5 11.5 3.8 12.8 5.2 12.8C5.8 12.8 6.3 12.5 6.8 12.5C7.3 12.5 7.8 12.8 8.5 12.8C10 12.8 11.5 11.2 11.5 9.2C11.5 7.5 10.3 6.2 8.5 5.8C7.8 5.6 7.1 5.7 6.5 5.7C5.9 5.7 5.2 5.5 4.5 5.8C3.3 6.3 2.5 7.8 2.5 9.5Z&quot; fill=&quot;black&quot;/&gt;
+        &lt;/svg&gt;
+      &lt;/span&gt;
+      Download for macOS
+    &lt;/a&gt;
+
+    &lt;!-- Mobile Burger Toggle --&gt;
+    &lt;button class=&quot;island-burger&quot; id=&quot;island-burger&quot; aria-label=&quot;Toggle mobile menu&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;island-drawer&quot;&gt;
+      &lt;span&gt;&lt;/span&gt;
+      &lt;span&gt;&lt;/span&gt;
+      &lt;span&gt;&lt;/span&gt;
+    &lt;/button&gt;
+
+  &lt;/nav&gt;
+&lt;/div&gt;
+
+&lt;!-- Mobile Drawer Sheet --&gt;
+&lt;div class=&quot;island-drawer&quot; id=&quot;island-drawer&quot; role=&quot;dialog&quot; aria-label=&quot;Mobile navigation&quot; aria-modal=&quot;true&quot;&gt;
+  &lt;div class=&quot;island-drawer-overlay&quot; id=&quot;drawer-overlay&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;island-drawer-sheet&quot;&gt;
+    &lt;ul class=&quot;drawer-nav-links&quot; role=&quot;list&quot;&gt;
+      &lt;li&gt;&lt;a href=&quot;#features&quot;&gt;Features&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#faq&quot;&gt;FAQ&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#pricing&quot;&gt;Pricing&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#changelog&quot;&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;a href=&quot;#download&quot; class=&quot;drawer-cta&quot;&gt;
+      &lt;svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 14 14&quot; fill=&quot;none&quot;&gt;
+        &lt;path d=&quot;M9.5 1.5C9.5 1.5 9.9 3.1 8.5 4.2C7.2 5.2 6 4.5 6 4.5&quot; stroke=&quot;black&quot; stroke-width=&quot;1.3&quot; stroke-linecap=&quot;round&quot;/&gt;
+        &lt;path d=&quot;M2.5 9.5C2.5 11.5 3.8 12.8 5.2 12.8C5.8 12.8 6.3 12.5 6.8 12.5C7.3 12.5 7.8 12.8 8.5 12.8C10 12.8 11.5 11.2 11.5 9.2C11.5 7.5 10.3 6.2 8.5 5.8C7.8 5.6 7.1 5.7 6.5 5.7C5.9 5.7 5.2 5.5 4.5 5.8C3.3 6.3 2.5 7.8 2.5 9.5Z&quot; fill=&quot;black&quot;/&gt;
+      &lt;/svg&gt;
+      Download for macOS
+    &lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+    </section>
+
+    <section class="doc-section" id="section-3">
+      <div class="section-head">
+        <span class="section-index">3</span>
+        <h2>CSS Stylesheet</h2>
+      </div>
+      <p class="section-note">Add this CSS to your stylesheet (e.g. style.css):</p>
+      <div class="code-window">
+        <div class="code-chrome">
+          <div class="dots"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <span class="filename">style.css</span>
+          <button class="copy-btn" type="button" data-copy-target="code-3">
+            <svg class="icon-copy" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M3 10.5V3.5A1.5 1.5 0 0 1 4.5 2H10"/></svg>
+            <svg class="icon-check" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8.5l3 3 7-7"/></svg>
+            <span class="copy-label">Copy</span>
+          </button>
+        </div>
+        <pre><code id="code-3" class="language-css">/* ================================================================
+   SUPASTE DYNAMIC ISLAND NAVBAR STYLES
+   ================================================================ */
+:root {
+  --island-bg: rgba(10, 10, 12, 0.88);
+  --island-border: rgba(255, 255, 255, 0.10);
+  --island-shadow: 0 24px 60px rgba(0,0,0,0.55), 0 4px 12px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.08);
+  --island-blur: blur(28px) saturate(180%);
+  --radius-pill: 9999px;
+  --glass-text: rgba(255, 255, 255, 0.92);
+  --glass-text-muted: rgba(255, 255, 255, 0.60);
+  --duration-fast: 180ms;
+  --duration-med: 320ms;
+  --duration-slow: 500ms;
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Island Wrapper */
+.island-nav-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  padding-top: 16px;
+  pointer-events: none;
+}
+
+/* Island Body */
+.island-nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 14px;
+  background: var(--island-bg);
+  border: 1px solid var(--island-border);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--island-shadow);
+  backdrop-filter: var(--island-blur);
+  -webkit-backdrop-filter: var(--island-blur);
+  pointer-events: all;
+  transition: padding var(--duration-med) var(--ease-out),
+              gap var(--duration-med) var(--ease-out),
+              background var(--duration-med) var(--ease-out);
+  max-width: 680px;
+  width: max-content;
+}
+
+/* Morph on Scroll */
+.island-nav.scrolled {
+  padding: 7px 12px;
+  gap: 8px;
+  background: rgba(5, 5, 7, 0.95);
+}
+
+/* Brand */
+.island-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.island-brand-icon {
+  width: 26px;
+  height: 26px;
+  background: linear-gradient(135deg, #5E9BEF, #2B6DEA);
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(43, 109, 234, 0.4);
+}
+
+.island-brand-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--glass-text);
+  letter-spacing: -0.01em;
+}
+
+/* Separator */
+.island-sep {
+  width: 1px;
+  height: 18px;
+  background: rgba(255, 255, 255, 0.14);
+  flex-shrink: 0;
+}
+
+/* Nav Links */
+.island-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.island-links li a {
+  display: block;
+  padding: 5px 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--glass-text-muted);
+  text-decoration: none;
+  border-radius: var(--radius-pill);
+  transition: color var(--duration-fast) ease, background var(--duration-fast) ease;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+}
+
+.island-links li a:hover {
+  color: var(--glass-text);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* CTA */
+.island-cta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  background: #ffffff;
+  color: #000000;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: var(--radius-pill);
+  border: none;
+  cursor: pointer;
+  transition: background var(--duration-fast) ease, transform var(--duration-fast) var(--ease-spring);
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+  flex-shrink: 0;
+}
+
+.island-cta:hover {
+  background: #e8e8e8;
+  transform: scale(1.02);
+}
+
+.island-cta:active {
+  transform: scale(0.98);
+}
+
+/* Mobile Hamburger */
+.island-burger {
+  display: none;
+  flex-direction: column;
+  gap: 4.5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.island-burger span {
+  display: block;
+  width: 18px;
+  height: 1.5px;
+  background: var(--glass-text-muted);
+  border-radius: 99px;
+  transition: all var(--duration-med) var(--ease-out);
+}
+
+.island-burger.open span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+  background: var(--glass-text);
+}
+.island-burger.open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.island-burger.open span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+  background: var(--glass-text);
+}
+
+/* Mobile Drawer */
+.island-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  pointer-events: none;
+}
+
+.island-drawer-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  transition: opacity var(--duration-med) ease;
+}
+
+.island-drawer-sheet {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(18, 18, 22, 0.97);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0 0 24px 24px;
+  padding: 80px 20px 32px;
+  transform: translateY(-100%);
+  transition: transform var(--duration-slow) var(--ease-out);
+}
+
+.island-drawer.open {
+  pointer-events: all;
+}
+
+.island-drawer.open .island-drawer-overlay {
+  opacity: 1;
+}
+
+.island-drawer.open .island-drawer-sheet {
+  transform: translateY(0);
+}
+
+.drawer-nav-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0 0 24px 0;
+  padding: 0;
+}
+
+.drawer-nav-links a {
+  display: block;
+  padding: 12px 16px;
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--glass-text-muted);
+  text-decoration: none;
+  border-radius: 12px;
+  transition: color var(--duration-fast) ease, background var(--duration-fast) ease;
+}
+
+.drawer-nav-links a:hover {
+  color: var(--glass-text);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.drawer-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 20px;
+  background: #ffffff;
+  color: #000000;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: var(--radius-pill);
+}
+
+/* Responsive queries */
+@media (max-width: 768px) {
+  .island-links,
+  .island-cta,
+  .island-sep {
+    display: none;
+  }
+
+  .island-burger {
+    display: flex;
+  }
+
+  .island-nav {
+    justify-content: space-between;
+    width: calc(100vw - 32px);
+    max-width: 100%;
+  }
+}</code></pre>
+      </div>
+    </section>
+
+    <section class="doc-section" id="section-4">
+      <div class="section-head">
+        <span class="section-index">4</span>
+        <h2>JavaScript Code</h2>
+      </div>
+      <p class="section-note">Add this script before the closing &lt;/body&gt; tag (e.g. script.js):</p>
+      <div class="code-window">
+        <div class="code-chrome">
+          <div class="dots"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <span class="filename">script.js</span>
+          <button class="copy-btn" type="button" data-copy-target="code-4">
+            <svg class="icon-copy" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M3 10.5V3.5A1.5 1.5 0 0 1 4.5 2H10"/></svg>
+            <svg class="icon-check" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8.5l3 3 7-7"/></svg>
+            <span class="copy-label">Copy</span>
+          </button>
+        </div>
+        <pre><code id="code-4" class="language-javascript">(function () {
+  &#39;use strict&#39;;
+
+  const islandNav     = document.getElementById(&#39;island-nav&#39;);
+  const islandBurger  = document.getElementById(&#39;island-burger&#39;);
+  const islandDrawer  = document.getElementById(&#39;island-drawer&#39;);
+  const drawerOverlay = document.getElementById(&#39;drawer-overlay&#39;);
+
+  if (!islandNav) return;
+
+  // 1. Morph on Scroll
+  let ticking = false;
+  window.addEventListener(&#39;scroll&#39;, function () {
+    if (!ticking) {
+      requestAnimationFrame(function () {
+        if (window.scrollY &gt; 40) {
+          islandNav.classList.add(&#39;scrolled&#39;);
+        } else {
+          islandNav.classList.remove(&#39;scrolled&#39;);
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  // 2. Mobile Drawer Controls
+  function openDrawer () {
+    if (!islandDrawer || !islandBurger) return;
+    islandDrawer.classList.add(&#39;open&#39;);
+    islandBurger.classList.add(&#39;open&#39;);
+    islandBurger.setAttribute(&#39;aria-expanded&#39;, &#39;true&#39;);
+    document.body.style.overflow = &#39;hidden&#39;;
+  }
+
+  function closeDrawer () {
+    if (!islandDrawer || !islandBurger) return;
+    islandDrawer.classList.remove(&#39;open&#39;);
+    islandBurger.classList.remove(&#39;open&#39;);
+    islandBurger.setAttribute(&#39;aria-expanded&#39;, &#39;false&#39;);
+    document.body.style.overflow = &#39;&#39;;
+  }
+
+  if (islandBurger) {
+    islandBurger.addEventListener(&#39;click&#39;, function () {
+      if (islandDrawer.classList.contains(&#39;open&#39;)) {
+        closeDrawer();
+      } else {
+        openDrawer();
+      }
+    });
+  }
+
+  if (drawerOverlay) {
+    drawerOverlay.addEventListener(&#39;click&#39;, closeDrawer);
+  }
+
+  // Close drawer when clicking any link
+  document.querySelectorAll(&#39;.drawer-nav-links a, .drawer-cta&#39;).forEach(link =&gt; {
+    link.addEventListener(&#39;click&#39;, closeDrawer);
+  });
+})();</code></pre>
+      </div>
+    </section>
+
+    </main>
+  </div>
+
+  <footer class="doc-footer">
+    <span>Part of the Modern Navbar Collection</span>
+    <a href="../index.html">&larr; Back to Collection</a>
+  </footer>
+
+<script>
+  hljs.highlightAll();
+
+  document.querySelectorAll('.copy-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var targetId = btn.getAttribute('data-copy-target');
+      var codeEl = document.getElementById(targetId);
+      var text = codeEl.textContent;
+      navigator.clipboard.writeText(text).then(function(){
+        btn.classList.add('is-copied');
+        var label = btn.querySelector('.copy-label');
+        var prev = label.textContent;
+        label.textContent = 'Copied';
+        setTimeout(function(){
+          btn.classList.remove('is-copied');
+          label.textContent = prev;
+        }, 1800);
+      });
+    });
+  });
+
+  var links = document.querySelectorAll('.side-nav a');
+  var sections = document.querySelectorAll('.doc-section');
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting) {
+        links.forEach(function(l){ l.classList.remove('is-active'); });
+        var active = document.querySelector('.side-nav a[href="#' + entry.target.id + '"]');
+        if (active) active.classList.add('is-active');
+      }
+    });
+  }, { rootMargin: '-15% 0px -70% 0px' });
+  sections.forEach(function(s){ observer.observe(s); });
+</script>
+
+</body>
+</html>

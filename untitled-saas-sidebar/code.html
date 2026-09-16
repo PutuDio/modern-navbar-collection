@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Untitled UI SaaS Sidebar &mdash; Implementation Guide</title>
+<meta name="description" content="Isolated, copy-paste-ready code for Untitled UI SaaS Sidebar &mdash; font import, markup, styles, and behavior.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/tomorrow-night.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+<style>
+  :root{
+    --paper:#fbfcfd;
+    --panel:#ffffff;
+    --line:#e2e8f0;
+    --ink:#0f172a;
+    --ink-soft:#475569;
+    --ink-faint:#94a3b8;
+    --accent:#4f46e5;
+    --accent-soft:rgba(29, 78, 216, 0.08);
+    --ok:#059669;
+    --code-bg:#0b1220;
+    --code-chrome:#111a2c;
+    --code-line:#1e293b;
+    --font-display:'Plus Jakarta Sans', system-ui, sans-serif;
+    --font-mono:'IBM Plex Mono', 'SFMono-Regular', monospace;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--font-display);
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{ color:inherit; text-decoration:none; }
+
+  /* ---------- Masthead ---------- */
+  .masthead{
+    max-width:1180px;
+    margin:0 auto;
+    padding:4.5rem 2.5rem 3rem;
+    border-bottom:1px solid var(--line);
+  }
+  .masthead-kicker{
+    font-size:0.8125rem;
+    color:var(--accent);
+    font-weight:600;
+    margin-bottom:0.9rem;
+  }
+  .masthead h1{
+    font-size:clamp(2rem, 4vw, 2.75rem);
+    font-weight:700;
+    letter-spacing:-0.02em;
+    margin:0 0 1rem;
+    max-width:24ch;
+  }
+  .masthead p{
+    color:var(--ink-soft);
+    font-size:1.05rem;
+    line-height:1.65;
+    max-width:62ch;
+    margin:0;
+  }
+  .masthead-meta{
+    display:flex;
+    gap:1.5rem;
+    margin-top:1.75rem;
+    font-size:0.85rem;
+    color:var(--ink-faint);
+    font-family:var(--font-mono);
+  }
+
+  /* ---------- Layout ---------- */
+  .layout{
+    max-width:1180px;
+    margin:0 auto;
+    padding:3rem 2.5rem 6rem;
+    display:grid;
+    grid-template-columns:220px minmax(0,1fr);
+    gap:3.5rem;
+  }
+
+  .side-nav{ align-self:start; position:sticky; top:2.5rem; }
+  .side-nav-label{
+    font-size:0.75rem;
+    color:var(--ink-faint);
+    font-weight:600;
+    margin-bottom:0.9rem;
+  }
+  .side-nav ul{ list-style:none; margin:0; padding:0; }
+  .side-nav li + li{ margin-top:0.35rem; }
+  .side-nav a{
+    display:flex;
+    align-items:baseline;
+    gap:0.6rem;
+    padding:0.45rem 0.6rem;
+    border-radius:8px;
+    font-size:0.9rem;
+    color:var(--ink-soft);
+    transition:background 0.15s ease, color 0.15s ease;
+  }
+  .side-nav a:hover{ background:var(--accent-soft); color:var(--ink); }
+  .side-nav a.is-active{ background:var(--accent-soft); color:var(--accent); font-weight:600; }
+  .side-nav .idx{
+    font-family:var(--font-mono);
+    font-size:0.78rem;
+    color:var(--ink-faint);
+    width:1.1rem;
+  }
+  .side-nav a.is-active .idx{ color:var(--accent); }
+
+  /* ---------- Doc sections ---------- */
+  .doc-section{ margin-bottom:3.5rem; scroll-margin-top:2rem; }
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:0.9rem;
+    margin-bottom:0.5rem;
+  }
+  .section-index{
+    font-family:var(--font-mono);
+    font-size:0.95rem;
+    color:var(--accent);
+    font-weight:600;
+  }
+  .section-head h2{
+    font-size:1.35rem;
+    font-weight:700;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+  .section-note{
+    color:var(--ink-soft);
+    font-size:0.98rem;
+    line-height:1.6;
+    margin:0 0 1.1rem;
+    max-width:60ch;
+  }
+
+  /* ---------- Code window ---------- */
+  .code-window{
+    background:var(--code-bg);
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 1px 2px rgba(15,23,42,0.06), 0 12px 32px -16px rgba(15,23,42,0.35);
+  }
+  .code-chrome{
+    display:flex;
+    align-items:center;
+    gap:0.9rem;
+    padding:0.7rem 1rem;
+    background:var(--code-chrome);
+    border-bottom:1px solid var(--code-line);
+  }
+  .dots{ display:flex; gap:6px; flex-shrink:0; }
+  .dot{ width:10px; height:10px; border-radius:50%; display:block; }
+  .dot-a{ background:#f4756b; }
+  .dot-b{ background:#f5b95b; }
+  .dot-c{ background:#4fbf6b; }
+  .filename{
+    font-family:var(--font-mono);
+    font-size:0.78rem;
+    color:#8592ad;
+    flex:1;
+  }
+  .copy-btn{
+    display:flex;
+    align-items:center;
+    gap:0.4rem;
+    background:transparent;
+    border:1px solid var(--code-line);
+    color:#c3cbe0;
+    font-family:var(--font-display);
+    font-size:0.78rem;
+    font-weight:500;
+    padding:0.32rem 0.65rem;
+    border-radius:6px;
+    cursor:pointer;
+    transition:background 0.15s ease, border-color 0.15s ease;
+  }
+  .copy-btn:hover{ background:rgba(255,255,255,0.06); border-color:#334155; }
+  .copy-btn .icon-check{ display:none; }
+  .copy-btn.is-copied .icon-copy{ display:none; }
+  .copy-btn.is-copied .icon-check{ display:block; color:var(--ok); }
+  .copy-btn.is-copied{ border-color:var(--ok); color:var(--ok); }
+
+  .code-window pre{
+    margin:0;
+    padding:1.25rem 1.4rem;
+    overflow-x:auto;
+    max-height:520px;
+    overflow-y:auto;
+  }
+  .code-window code{
+    font-family:var(--font-mono);
+    font-size:0.84rem;
+    line-height:1.65;
+    background:transparent !important;
+  }
+
+  .code-window pre::-webkit-scrollbar{ height:8px; width:8px; }
+  .code-window pre::-webkit-scrollbar-thumb{ background:#293449; border-radius:8px; }
+  .code-window pre::-webkit-scrollbar-track{ background:transparent; }
+
+  /* ---------- Footer ---------- */
+  .doc-footer{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 2.5rem 4rem;
+    border-top:1px solid var(--line);
+    padding-top:2rem;
+    color:var(--ink-faint);
+    font-size:0.85rem;
+    display:flex;
+    justify-content:space-between;
+  }
+  .doc-footer a{ color:var(--accent); font-weight:500; }
+
+  @media (max-width: 860px){
+    .layout{ grid-template-columns:1fr; }
+    .side-nav{ position:static; margin-bottom:1rem; }
+    .side-nav ul{ display:flex; flex-wrap:wrap; gap:0.4rem; }
+    .side-nav li + li{ margin-top:0; }
+    .masthead{ padding:3rem 1.5rem 2.25rem; }
+    .layout{ padding:2rem 1.5rem 4rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .copy-btn, .side-nav a{ transition:none; }
+  }
+</style>
+</head>
+<body>
+
+  <header class="masthead">
+    <p class="masthead-kicker">Implementation guide</p>
+    <h1>Untitled UI SaaS Sidebar</h1>
+    <p>Isolated, dependency-free code for the navigation only &mdash; no hero sections or demo page content. Copy each block in order into your own project: font, markup, styles, then behavior.</p>
+    <div class="masthead-meta">
+      <span>4 steps</span>
+      <span>Vanilla HTML / CSS / JS</span>
+      <span>Zero dependencies</span>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="side-nav" aria-label="Implementation steps">
+      <p class="side-nav-label">On this page</p>
+      <ul>
+        <li><a href="#section-1"><span class="idx">1</span>Google Font Import</a></li>
+        <li><a href="#section-2"><span class="idx">2</span>HTML Markup</a></li>
+        <li><a href="#section-3"><span class="idx">3</span>CSS Stylesheet</a></li>
+        <li><a href="#section-4"><span class="idx">4</span>JavaScript Code</a></li>
+      </ul>
+    </nav>
+
+    <main>
+
+    <section class="doc-section" id="section-1">
+      <div class="section-head">
+        <span class="section-index">1</span>
+        <h2>Google Font Import</h2>
+      </div>
+      <p class="section-note">Add this to your HTML &lt;head&gt;:</p>
+      <div class="code-window">
+        <div class="code-chrome">
+          <div class="dots"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <span class="filename">index.html &mdash; &lt;head&gt;</span>
+          <button class="copy-btn" type="button" data-copy-target="code-1">
+            <svg class="icon-copy" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M3 10.5V3.5A1.5 1.5 0 0 1 4.5 2H10"/></svg>
+            <svg class="icon-check" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8.5l3 3 7-7"/></svg>
+            <span class="copy-label">Copy</span>
+          </button>
+        </div>
+        <pre><code id="code-1" class="language-html">&lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.googleapis.com&quot;&gt;
+&lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.gstatic.com&quot; crossorigin&gt;
+&lt;link href=&quot;https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;</code></pre>
+      </div>
+    </section>
+
+    <section class="doc-section" id="section-2">
+      <div class="section-head">
+        <span class="section-index">2</span>
+        <h2>HTML Markup</h2>
+      </div>
+      <p class="section-note">Place this navigation component markup into your &lt;body&gt;:</p>
+      <div class="code-window">
+        <div class="code-chrome">
+          <div class="dots"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <span class="filename">index.html &mdash; &lt;body&gt;</span>
+          <button class="copy-btn" type="button" data-copy-target="code-2">
+            <svg class="icon-copy" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M3 10.5V3.5A1.5 1.5 0 0 1 4.5 2H10"/></svg>
+            <svg class="icon-check" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8.5l3 3 7-7"/></svg>
+            <span class="copy-label">Copy</span>
+          </button>
+        </div>
+        <pre><code id="code-2" class="language-html">&lt;!-- ================================================================
+     UNTITLED UI SAAS SIDEBAR &amp; SHELL
+     ================================================================ --&gt;
+
+&lt;!-- Mobile overlay --&gt;
+&lt;div class=&quot;mobile-overlay&quot; id=&quot;mobile-overlay&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;
+
+&lt;!-- Account Switcher Popover --&gt;
+&lt;div class=&quot;popover-overlay&quot; id=&quot;popover-overlay&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;popover&quot; id=&quot;account-popover&quot; role=&quot;dialog&quot; aria-label=&quot;Account switcher&quot;&gt;
+  &lt;div class=&quot;popover-section&quot;&gt;
+    &lt;div class=&quot;popover-item&quot; tabindex=&quot;0&quot;&gt;
+      &lt;span class=&quot;popover-item-icon&quot;&gt;
+        &lt;svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 16 16&quot; fill=&quot;none&quot;&gt;&lt;circle cx=&quot;8&quot; cy=&quot;5&quot; r=&quot;3&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.5&quot;/&gt;&lt;path d=&quot;M2 13c0-3 2.5-5 6-5s6 2 6 5&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.5&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;/svg&gt;
+      &lt;/span&gt;
+      &lt;span class=&quot;popover-item-label&quot;&gt;View profile&lt;/span&gt;
+      &lt;span class=&quot;popover-item-shortcut&quot;&gt;⌘K→P&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;popover-item&quot; tabindex=&quot;0&quot;&gt;
+      &lt;span class=&quot;popover-item-icon&quot;&gt;
+        &lt;svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 16 16&quot; fill=&quot;none&quot;&gt;&lt;circle cx=&quot;8&quot; cy=&quot;8&quot; r=&quot;6&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.5&quot;/&gt;&lt;path d=&quot;M8 5v3l2 2&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.5&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;/svg&gt;
+      &lt;/span&gt;
+      &lt;span class=&quot;popover-item-label&quot;&gt;Account settings&lt;/span&gt;
+      &lt;span class=&quot;popover-item-shortcut&quot;&gt;⌘S&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;popover-section&quot;&gt;
+    &lt;div class=&quot;popover-heading&quot;&gt;Switch account&lt;/div&gt;
+    &lt;div class=&quot;account-item active&quot; data-account=&quot;florence&quot; tabindex=&quot;0&quot;&gt;
+      &lt;div class=&quot;account-avatar&quot; style=&quot;background:linear-gradient(135deg,#667eea,#764ba2);&quot;&gt;
+        FS
+        &lt;div class=&quot;account-online&quot;&gt;&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;account-info&quot;&gt;
+        &lt;div class=&quot;account-name-sm&quot;&gt;Florence Shaw&lt;/div&gt;
+        &lt;div class=&quot;account-email-sm&quot;&gt;florence@untitledui.com&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;account-radio active&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;account-item&quot; data-account=&quot;ammar&quot; tabindex=&quot;0&quot;&gt;
+      &lt;div class=&quot;account-avatar&quot; style=&quot;background:linear-gradient(135deg,#f093fb,#f5576c);&quot;&gt;AF&lt;/div&gt;
+      &lt;div class=&quot;account-info&quot;&gt;
+        &lt;div class=&quot;account-name-sm&quot;&gt;Ammar Foley&lt;/div&gt;
+        &lt;div class=&quot;account-email-sm&quot;&gt;ammar@untitledui.com&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;account-radio&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;popover-section&quot;&gt;
+    &lt;div class=&quot;popover-item&quot; id=&quot;sign-out-btn&quot; tabindex=&quot;0&quot; style=&quot;color:var(--gray-600);&quot;&gt;
+      &lt;span class=&quot;popover-item-icon&quot;&gt;
+        &lt;svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 16 16&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M6 14H3a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h3&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.5&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;path d=&quot;M10 11l3-3-3-3M13 8H6&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.5&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;
+      &lt;/span&gt;
+      &lt;span&gt;Sign out&lt;/span&gt;
+      &lt;span class=&quot;popover-item-shortcut&quot;&gt;⌥⌘Q&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- ⌘K Command Dialog --&gt;
+&lt;div class=&quot;cmd-dialog-overlay&quot; id=&quot;cmd-dialog-overlay&quot; role=&quot;dialog&quot; aria-modal=&quot;true&quot; aria-label=&quot;Command palette&quot;&gt;
+  &lt;div class=&quot;cmd-dialog&quot;&gt;
+    &lt;div class=&quot;cmd-input-row&quot;&gt;
+      &lt;svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 16 16&quot; fill=&quot;none&quot; aria-hidden=&quot;true&quot;&gt;
+        &lt;circle cx=&quot;7&quot; cy=&quot;7&quot; r=&quot;5&quot; stroke=&quot;#98a2b3&quot; stroke-width=&quot;1.5&quot;/&gt;
+        &lt;path d=&quot;M11 11L14 14&quot; stroke=&quot;#98a2b3&quot; stroke-width=&quot;1.5&quot; stroke-linecap=&quot;round&quot;/&gt;
+      &lt;/svg&gt;
+      &lt;input class=&quot;cmd-input&quot; id=&quot;cmd-input&quot; type=&quot;text&quot; placeholder=&quot;Type a command or search…&quot; autocomplete=&quot;off&quot; spellcheck=&quot;false&quot;&gt;
+      &lt;kbd class=&quot;cmd-esc&quot;&gt;ESC&lt;/kbd&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;cmd-results&quot;&gt;
+      &lt;div class=&quot;cmd-result-section-label&quot;&gt;Navigation&lt;/div&gt;
+      &lt;div class=&quot;cmd-result-item&quot; tabindex=&quot;0&quot;&gt;
+        &lt;span class=&quot;cmd-result-icon&quot;&gt;🏠&lt;/span&gt;
+        &lt;span&gt;Dashboard&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;cmd-result-item highlighted&quot; tabindex=&quot;0&quot;&gt;
+        &lt;span class=&quot;cmd-result-icon&quot;&gt;👥&lt;/span&gt;
+        &lt;span&gt;User management&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;cmd-result-item&quot; tabindex=&quot;0&quot;&gt;
+        &lt;span class=&quot;cmd-result-icon&quot;&gt;🔐&lt;/span&gt;
+        &lt;span&gt;Security &amp; access&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- App Shell --&gt;
+&lt;div class=&quot;app-shell&quot;&gt;
+  &lt;!-- Left Sidebar --&gt;
+  &lt;aside class=&quot;sidebar&quot; id=&quot;sidebar&quot; role=&quot;navigation&quot; aria-label=&quot;Main sidebar&quot;&gt;
+    &lt;!-- Brand --&gt;
+    &lt;div class=&quot;sidebar-brand&quot;&gt;
+      &lt;a href=&quot;#&quot; class=&quot;brand-logo-group&quot; aria-label=&quot;Untitled UI — Home&quot;&gt;
+        &lt;div class=&quot;brand-icon&quot; aria-hidden=&quot;true&quot;&gt;
+          &lt;svg width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 18 18&quot; fill=&quot;none&quot;&gt;
+            &lt;rect x=&quot;2&quot; y=&quot;2&quot; width=&quot;6&quot; height=&quot;6&quot; rx=&quot;1.5&quot; fill=&quot;white&quot; opacity=&quot;0.9&quot;/&gt;
+            &lt;rect x=&quot;10&quot; y=&quot;2&quot; width=&quot;6&quot; height=&quot;6&quot; rx=&quot;1.5&quot; fill=&quot;white&quot; opacity=&quot;0.6&quot;/&gt;
+            &lt;rect x=&quot;2&quot; y=&quot;10&quot; width=&quot;6&quot; height=&quot;6&quot; rx=&quot;1.5&quot; fill=&quot;white&quot; opacity=&quot;0.6&quot;/&gt;
+            &lt;rect x=&quot;10&quot; y=&quot;10&quot; width=&quot;6&quot; height=&quot;6&quot; rx=&quot;1.5&quot; fill=&quot;white&quot; opacity=&quot;0.9&quot;/&gt;
+          &lt;/svg&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+          &lt;div class=&quot;brand-name&quot;&gt;Untitled UI&lt;/div&gt;
+          &lt;div class=&quot;brand-version&quot;&gt;v4.0&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/a&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Quick Search Trigger --&gt;
+    &lt;div class=&quot;sidebar-search&quot;&gt;
+      &lt;button class=&quot;search-trigger&quot; id=&quot;search-trigger&quot; aria-label=&quot;Open command palette&quot; aria-haspopup=&quot;dialog&quot;&gt;
+        &lt;svg width=&quot;14&quot; height=&quot;14&quot; viewBox=&quot;0 0 14 14&quot; fill=&quot;none&quot; aria-hidden=&quot;true&quot;&gt;
+          &lt;circle cx=&quot;6.5&quot; cy=&quot;6.5&quot; r=&quot;4.5&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.3&quot;/&gt;
+          &lt;path d=&quot;M10 10L12.5 12.5&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.3&quot; stroke-linecap=&quot;round&quot;/&gt;
+        &lt;/svg&gt;
+        &lt;span class=&quot;search-trigger-label&quot;&gt;Search&lt;/span&gt;
+        &lt;div class=&quot;search-shortcut&quot; aria-label=&quot;Shortcut Command K&quot;&gt;
+          &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;K&lt;/kbd&gt;
+        &lt;/div&gt;
+      &lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Navigation List --&gt;
+    &lt;nav class=&quot;sidebar-nav&quot; aria-label=&quot;Sidebar navigation&quot;&gt;
+      &lt;div class=&quot;nav-section&quot;&gt;
+        &lt;div class=&quot;nav-section-label&quot;&gt;General&lt;/div&gt;
+        &lt;a href=&quot;#&quot; class=&quot;nav-item&quot; data-nav=&quot;dashboard&quot;&gt;
+          &lt;span class=&quot;nav-icon&quot;&gt;
+            &lt;svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 16 16&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;1.5&quot; y=&quot;1.5&quot; width=&quot;5&quot; height=&quot;5&quot; rx=&quot;1.5&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.5&quot;/&gt;&lt;rect x=&quot;9.5&quot; y=&quot;1.5&quot; width=&quot;5&quot; height=&quot;5&quot; rx=&quot;1.5&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.5&quot;/&gt;&lt;rect x=&quot;1.5&quot; y=&quot;9.5&quot; width=&quot;5&quot; height=&quot;5&quot; rx=&quot;1.5&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.5&quot;/&gt;&lt;rect x=&quot;9.5&quot; y=&quot;9.5&quot; width=&quot;5&quot; height=&quot;5&quot; rx=&quot;1.5&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.5&quot;/&gt;&lt;/svg&gt;
+          &lt;/span&gt;
+          &lt;span class=&quot;nav-label&quot;&gt;Dashboard&lt;/span&gt;
+        &lt;/a&gt;
+        &lt;a href=&quot;#&quot; class=&quot;nav-item&quot; data-nav=&quot;notifications&quot;&gt;
+          &lt;span class=&quot;nav-icon&quot;&gt;
+            &lt;svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 16 16&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M8 2a5 5 0 0 0-5 5v3l-1 2h12l-1-2V7a5 5 0 0 0-5-5Z&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.5&quot;/&gt;&lt;path d=&quot;M6.5 13a1.5 1.5 0 0 0 3 0&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.5&quot;/&gt;&lt;/svg&gt;
+          &lt;/span&gt;
+          &lt;span class=&quot;nav-label&quot;&gt;Notifications&lt;/span&gt;
+          &lt;span class=&quot;nav-badge&quot;&gt;4&lt;/span&gt;
+        &lt;/a&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;nav-section&quot;&gt;
+        &lt;div class=&quot;nav-section-label&quot;&gt;Workspace&lt;/div&gt;
+        &lt;a href=&quot;#&quot; class=&quot;nav-item active&quot; data-nav=&quot;user-management&quot;&gt;
+          &lt;span class=&quot;nav-icon&quot;&gt;
+            &lt;svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 16 16&quot; fill=&quot;none&quot;&gt;&lt;circle cx=&quot;6&quot; cy=&quot;5&quot; r=&quot;2.5&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.5&quot;/&gt;&lt;circle cx=&quot;11&quot; cy=&quot;5&quot; r=&quot;2&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.5&quot;/&gt;&lt;path d=&quot;M1 13c0-2.5 2-4 5-4s5 1.5 5 4&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.5&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;path d=&quot;M11 10c1.5.2 3 1 3 3&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.5&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;/svg&gt;
+          &lt;/span&gt;
+          &lt;span class=&quot;nav-label&quot;&gt;User management&lt;/span&gt;
+        &lt;/a&gt;
+        &lt;a href=&quot;#&quot; class=&quot;nav-item&quot; data-nav=&quot;security&quot;&gt;
+          &lt;span class=&quot;nav-icon&quot;&gt;
+            &lt;svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 16 16&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M8 2L3 4v4c0 3 2 5 5 6 3-1 5-3 5-6V4L8 2Z&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.5&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;
+          &lt;/span&gt;
+          &lt;span class=&quot;nav-label&quot;&gt;Security &amp;amp; access&lt;/span&gt;
+        &lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/nav&gt;
+
+    &lt;!-- Sidebar Footer --&gt;
+    &lt;div class=&quot;sidebar-footer&quot;&gt;
+      &lt;div class=&quot;profile-pill&quot; id=&quot;profile-pill&quot; role=&quot;button&quot; tabindex=&quot;0&quot; aria-haspopup=&quot;true&quot;&gt;
+        &lt;div class=&quot;profile-avatar&quot;&gt;
+          &lt;div class=&quot;avatar-img&quot;&gt;FS&lt;/div&gt;
+          &lt;div class=&quot;avatar-online-badge&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;profile-info&quot;&gt;
+          &lt;div class=&quot;profile-name&quot;&gt;Florence Shaw&lt;/div&gt;
+          &lt;div class=&quot;profile-email&quot;&gt;florence@untitledui.com&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/aside&gt;
+
+  &lt;!-- Content / Topbar --&gt;
+  &lt;div class=&quot;main-area&quot;&gt;
+    &lt;header class=&quot;topbar&quot;&gt;
+      &lt;button class=&quot;topbar-menu-btn&quot; id=&quot;topbar-menu-btn&quot; aria-label=&quot;Open sidebar&quot;&gt;
+        &lt;svg width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 18 18&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M3 5h12M3 9h12M3 13h12&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.5&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;/svg&gt;
+      &lt;/button&gt;
+      &lt;div class=&quot;topbar-breadcrumb&quot;&gt;
+        &lt;span&gt;Sisyphus Ventures&lt;/span&gt; / &lt;strong&gt;User management&lt;/strong&gt;
+      &lt;/div&gt;
+    &lt;/header&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+    </section>
+
+    <section class="doc-section" id="section-3">
+      <div class="section-head">
+        <span class="section-index">3</span>
+        <h2>CSS Stylesheet</h2>
+      </div>
+      <p class="section-note">Add this CSS to your stylesheet (e.g. style.css):</p>
+      <div class="code-window">
+        <div class="code-chrome">
+          <div class="dots"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <span class="filename">style.css</span>
+          <button class="copy-btn" type="button" data-copy-target="code-3">
+            <svg class="icon-copy" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M3 10.5V3.5A1.5 1.5 0 0 1 4.5 2H10"/></svg>
+            <svg class="icon-check" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8.5l3 3 7-7"/></svg>
+            <span class="copy-label">Copy</span>
+          </button>
+        </div>
+        <pre><code id="code-3" class="language-css">:root {
+  --sidebar-width: 280px;
+  --topbar-height: 60px;
+  --brand-primary: #7f56d9;
+  --brand-primary-light: #f9f5ff;
+  --gray-25: #fcfcfd;
+  --gray-50: #f8f9fc;
+  --gray-100: #f2f4f7;
+  --gray-200: #eaecf0;
+  --gray-300: #d0d5dd;
+  --gray-400: #98a2b3;
+  --gray-600: #475467;
+  --gray-700: #344054;
+  --gray-900: #101828;
+}
+
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: var(--sidebar-width);
+  background: #ffffff;
+  border-right: 1px solid var(--gray-200);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+}
+
+.sidebar-brand {
+  padding: 24px 20px 16px;
+}
+
+.brand-logo-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.brand-icon {
+  width: 32px;
+  height: 32px;
+  background: var(--brand-primary);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--gray-900);
+}
+
+.brand-version {
+  font-size: 11px;
+  color: var(--brand-primary);
+  font-weight: 600;
+}
+
+/* Search Trigger */
+.sidebar-search {
+  padding: 0 16px 12px;
+}
+
+.search-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--gray-50);
+  border: 1px solid var(--gray-300);
+  border-radius: 8px;
+  color: var(--gray-400);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.search-shortcut {
+  margin-left: auto;
+  display: flex;
+  gap: 2px;
+}
+
+.search-shortcut kbd {
+  background: #fff;
+  border: 1px solid var(--gray-300);
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-size: 11px;
+  color: var(--gray-600);
+}
+
+/* Nav */
+.sidebar-nav {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 16px;
+}
+
+.nav-section {
+  margin-bottom: 20px;
+}
+
+.nav-section-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--gray-400);
+  letter-spacing: 0.04em;
+  padding: 0 8px 6px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  color: var(--gray-700);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.nav-item:hover {
+  background: var(--gray-50);
+  color: var(--gray-900);
+}
+
+.nav-item.active {
+  background: var(--brand-primary-light);
+  color: var(--brand-primary);
+  font-weight: 600;
+}
+
+.nav-badge {
+  margin-left: auto;
+  background: var(--gray-100);
+  color: var(--gray-700);
+  padding: 2px 7px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* Sidebar Footer &amp; Profile */
+.sidebar-footer {
+  padding: 16px;
+  border-top: 1px solid var(--gray-200);
+}
+
+.profile-pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.profile-pill:hover {
+  background: var(--gray-50);
+}
+
+.avatar-img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #7f56d9;
+  color: #fff;
+  font-weight: 600;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gray-900);
+}
+
+.profile-email {
+  font-size: 12px;
+  color: var(--gray-600);
+}
+
+/* Main Area */
+.main-area {
+  margin-left: var(--sidebar-width);
+  flex: 1;
+}
+
+.topbar {
+  height: var(--topbar-height);
+  background: #fff;
+  border-bottom: 1px solid var(--gray-200);
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  gap: 16px;
+}
+
+.topbar-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+@media (max-width: 992px) {
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+  }
+  .sidebar.open {
+    transform: translateX(0);
+  }
+  .main-area {
+    margin-left: 0;
+  }
+  .topbar-menu-btn {
+    display: block;
+  }
+}</code></pre>
+      </div>
+    </section>
+
+    <section class="doc-section" id="section-4">
+      <div class="section-head">
+        <span class="section-index">4</span>
+        <h2>JavaScript Code</h2>
+      </div>
+      <p class="section-note">Add this script before the closing &lt;/body&gt; tag (e.g. script.js):</p>
+      <div class="code-window">
+        <div class="code-chrome">
+          <div class="dots"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <span class="filename">script.js</span>
+          <button class="copy-btn" type="button" data-copy-target="code-4">
+            <svg class="icon-copy" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M3 10.5V3.5A1.5 1.5 0 0 1 4.5 2H10"/></svg>
+            <svg class="icon-check" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8.5l3 3 7-7"/></svg>
+            <span class="copy-label">Copy</span>
+          </button>
+        </div>
+        <pre><code id="code-4" class="language-javascript">(function () {
+  &#39;use strict&#39;;
+
+  const sidebar = document.getElementById(&#39;sidebar&#39;);
+  const menuBtn = document.getElementById(&#39;topbar-menu-btn&#39;);
+  const overlay = document.getElementById(&#39;mobile-overlay&#39;);
+  const searchTrigger = document.getElementById(&#39;search-trigger&#39;);
+  const cmdOverlay = document.getElementById(&#39;cmd-dialog-overlay&#39;);
+  const cmdInput = document.getElementById(&#39;cmd-input&#39;);
+  const profilePill = document.getElementById(&#39;profile-pill&#39;);
+  const popover = document.getElementById(&#39;account-popover&#39;);
+  const popoverOverlay = document.getElementById(&#39;popover-overlay&#39;);
+
+  // Mobile toggle
+  function openSidebar() {
+    sidebar.classList.add(&#39;open&#39;);
+    if (overlay) overlay.classList.add(&#39;show&#39;);
+  }
+  function closeSidebar() {
+    sidebar.classList.remove(&#39;open&#39;);
+    if (overlay) overlay.classList.remove(&#39;show&#39;);
+  }
+  if (menuBtn) menuBtn.addEventListener(&#39;click&#39;, openSidebar);
+  if (overlay) overlay.addEventListener(&#39;click&#39;, closeSidebar);
+
+  // Command palette (⌘K)
+  function openCmd() {
+    if (cmdOverlay) {
+      cmdOverlay.classList.add(&#39;show&#39;);
+      if (cmdInput) cmdInput.focus();
+    }
+  }
+  function closeCmd() {
+    if (cmdOverlay) cmdOverlay.classList.remove(&#39;show&#39;);
+  }
+  if (searchTrigger) searchTrigger.addEventListener(&#39;click&#39;, openCmd);
+
+  window.addEventListener(&#39;keydown&#39;, (e) =&gt; {
+    if ((e.metaKey || e.ctrlKey) &amp;&amp; e.key === &#39;k&#39;) {
+      e.preventDefault();
+      cmdOverlay &amp;&amp; cmdOverlay.classList.contains(&#39;show&#39;) ? closeCmd() : openCmd();
+    }
+    if (e.key === &#39;Escape&#39;) {
+      closeCmd();
+      if (popover) popover.classList.remove(&#39;open&#39;);
+    }
+  });
+
+  // Popover toggle
+  if (profilePill &amp;&amp; popover) {
+    profilePill.addEventListener(&#39;click&#39;, () =&gt; {
+      popover.classList.toggle(&#39;open&#39;);
+      if (popoverOverlay) popoverOverlay.classList.toggle(&#39;show&#39;);
+    });
+  }
+  if (popoverOverlay) {
+    popoverOverlay.addEventListener(&#39;click&#39;, () =&gt; {
+      if (popover) popover.classList.remove(&#39;open&#39;);
+      popoverOverlay.classList.remove(&#39;show&#39;);
+    });
+  }
+})();</code></pre>
+      </div>
+    </section>
+
+    </main>
+  </div>
+
+  <footer class="doc-footer">
+    <span>Part of the Modern Navbar Collection</span>
+    <a href="../index.html">&larr; Back to Collection</a>
+  </footer>
+
+<script>
+  hljs.highlightAll();
+
+  document.querySelectorAll('.copy-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var targetId = btn.getAttribute('data-copy-target');
+      var codeEl = document.getElementById(targetId);
+      var text = codeEl.textContent;
+      navigator.clipboard.writeText(text).then(function(){
+        btn.classList.add('is-copied');
+        var label = btn.querySelector('.copy-label');
+        var prev = label.textContent;
+        label.textContent = 'Copied';
+        setTimeout(function(){
+          btn.classList.remove('is-copied');
+          label.textContent = prev;
+        }, 1800);
+      });
+    });
+  });
+
+  var links = document.querySelectorAll('.side-nav a');
+  var sections = document.querySelectorAll('.doc-section');
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting) {
+        links.forEach(function(l){ l.classList.remove('is-active'); });
+        var active = document.querySelector('.side-nav a[href="#' + entry.target.id + '"]');
+        if (active) active.classList.add('is-active');
+      }
+    });
+  }, { rootMargin: '-15% 0px -70% 0px' });
+  sections.forEach(function(s){ observer.observe(s); });
+</script>
+
+</body>
+</html>

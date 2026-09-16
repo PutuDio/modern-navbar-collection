@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Velt Developer Platform &mdash; Implementation Guide</title>
+<meta name="description" content="Isolated, copy-paste-ready code for Velt Developer Platform &mdash; font import, markup, styles, and behavior.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/tomorrow-night.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+<style>
+  :root{
+    --paper:#fbfcfd;
+    --panel:#ffffff;
+    --line:#e2e8f0;
+    --ink:#0f172a;
+    --ink-soft:#475569;
+    --ink-faint:#94a3b8;
+    --accent:#06b6d4;
+    --accent-soft:rgba(29, 78, 216, 0.08);
+    --ok:#059669;
+    --code-bg:#0b1220;
+    --code-chrome:#111a2c;
+    --code-line:#1e293b;
+    --font-display:'Plus Jakarta Sans', system-ui, sans-serif;
+    --font-mono:'IBM Plex Mono', 'SFMono-Regular', monospace;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--font-display);
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{ color:inherit; text-decoration:none; }
+
+  /* ---------- Masthead ---------- */
+  .masthead{
+    max-width:1180px;
+    margin:0 auto;
+    padding:4.5rem 2.5rem 3rem;
+    border-bottom:1px solid var(--line);
+  }
+  .masthead-kicker{
+    font-size:0.8125rem;
+    color:var(--accent);
+    font-weight:600;
+    margin-bottom:0.9rem;
+  }
+  .masthead h1{
+    font-size:clamp(2rem, 4vw, 2.75rem);
+    font-weight:700;
+    letter-spacing:-0.02em;
+    margin:0 0 1rem;
+    max-width:24ch;
+  }
+  .masthead p{
+    color:var(--ink-soft);
+    font-size:1.05rem;
+    line-height:1.65;
+    max-width:62ch;
+    margin:0;
+  }
+  .masthead-meta{
+    display:flex;
+    gap:1.5rem;
+    margin-top:1.75rem;
+    font-size:0.85rem;
+    color:var(--ink-faint);
+    font-family:var(--font-mono);
+  }
+
+  /* ---------- Layout ---------- */
+  .layout{
+    max-width:1180px;
+    margin:0 auto;
+    padding:3rem 2.5rem 6rem;
+    display:grid;
+    grid-template-columns:220px minmax(0,1fr);
+    gap:3.5rem;
+  }
+
+  .side-nav{ align-self:start; position:sticky; top:2.5rem; }
+  .side-nav-label{
+    font-size:0.75rem;
+    color:var(--ink-faint);
+    font-weight:600;
+    margin-bottom:0.9rem;
+  }
+  .side-nav ul{ list-style:none; margin:0; padding:0; }
+  .side-nav li + li{ margin-top:0.35rem; }
+  .side-nav a{
+    display:flex;
+    align-items:baseline;
+    gap:0.6rem;
+    padding:0.45rem 0.6rem;
+    border-radius:8px;
+    font-size:0.9rem;
+    color:var(--ink-soft);
+    transition:background 0.15s ease, color 0.15s ease;
+  }
+  .side-nav a:hover{ background:var(--accent-soft); color:var(--ink); }
+  .side-nav a.is-active{ background:var(--accent-soft); color:var(--accent); font-weight:600; }
+  .side-nav .idx{
+    font-family:var(--font-mono);
+    font-size:0.78rem;
+    color:var(--ink-faint);
+    width:1.1rem;
+  }
+  .side-nav a.is-active .idx{ color:var(--accent); }
+
+  /* ---------- Doc sections ---------- */
+  .doc-section{ margin-bottom:3.5rem; scroll-margin-top:2rem; }
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:0.9rem;
+    margin-bottom:0.5rem;
+  }
+  .section-index{
+    font-family:var(--font-mono);
+    font-size:0.95rem;
+    color:var(--accent);
+    font-weight:600;
+  }
+  .section-head h2{
+    font-size:1.35rem;
+    font-weight:700;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+  .section-note{
+    color:var(--ink-soft);
+    font-size:0.98rem;
+    line-height:1.6;
+    margin:0 0 1.1rem;
+    max-width:60ch;
+  }
+
+  /* ---------- Code window ---------- */
+  .code-window{
+    background:var(--code-bg);
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 1px 2px rgba(15,23,42,0.06), 0 12px 32px -16px rgba(15,23,42,0.35);
+  }
+  .code-chrome{
+    display:flex;
+    align-items:center;
+    gap:0.9rem;
+    padding:0.7rem 1rem;
+    background:var(--code-chrome);
+    border-bottom:1px solid var(--code-line);
+  }
+  .dots{ display:flex; gap:6px; flex-shrink:0; }
+  .dot{ width:10px; height:10px; border-radius:50%; display:block; }
+  .dot-a{ background:#f4756b; }
+  .dot-b{ background:#f5b95b; }
+  .dot-c{ background:#4fbf6b; }
+  .filename{
+    font-family:var(--font-mono);
+    font-size:0.78rem;
+    color:#8592ad;
+    flex:1;
+  }
+  .copy-btn{
+    display:flex;
+    align-items:center;
+    gap:0.4rem;
+    background:transparent;
+    border:1px solid var(--code-line);
+    color:#c3cbe0;
+    font-family:var(--font-display);
+    font-size:0.78rem;
+    font-weight:500;
+    padding:0.32rem 0.65rem;
+    border-radius:6px;
+    cursor:pointer;
+    transition:background 0.15s ease, border-color 0.15s ease;
+  }
+  .copy-btn:hover{ background:rgba(255,255,255,0.06); border-color:#334155; }
+  .copy-btn .icon-check{ display:none; }
+  .copy-btn.is-copied .icon-copy{ display:none; }
+  .copy-btn.is-copied .icon-check{ display:block; color:var(--ok); }
+  .copy-btn.is-copied{ border-color:var(--ok); color:var(--ok); }
+
+  .code-window pre{
+    margin:0;
+    padding:1.25rem 1.4rem;
+    overflow-x:auto;
+    max-height:520px;
+    overflow-y:auto;
+  }
+  .code-window code{
+    font-family:var(--font-mono);
+    font-size:0.84rem;
+    line-height:1.65;
+    background:transparent !important;
+  }
+
+  .code-window pre::-webkit-scrollbar{ height:8px; width:8px; }
+  .code-window pre::-webkit-scrollbar-thumb{ background:#293449; border-radius:8px; }
+  .code-window pre::-webkit-scrollbar-track{ background:transparent; }
+
+  /* ---------- Footer ---------- */
+  .doc-footer{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 2.5rem 4rem;
+    border-top:1px solid var(--line);
+    padding-top:2rem;
+    color:var(--ink-faint);
+    font-size:0.85rem;
+    display:flex;
+    justify-content:space-between;
+  }
+  .doc-footer a{ color:var(--accent); font-weight:500; }
+
+  @media (max-width: 860px){
+    .layout{ grid-template-columns:1fr; }
+    .side-nav{ position:static; margin-bottom:1rem; }
+    .side-nav ul{ display:flex; flex-wrap:wrap; gap:0.4rem; }
+    .side-nav li + li{ margin-top:0; }
+    .masthead{ padding:3rem 1.5rem 2.25rem; }
+    .layout{ padding:2rem 1.5rem 4rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .copy-btn, .side-nav a{ transition:none; }
+  }
+</style>
+</head>
+<body>
+
+  <header class="masthead">
+    <p class="masthead-kicker">Implementation guide</p>
+    <h1>Velt Developer Platform</h1>
+    <p>Isolated, dependency-free code for the navigation only &mdash; no hero sections or demo page content. Copy each block in order into your own project: font, markup, styles, then behavior.</p>
+    <div class="masthead-meta">
+      <span>4 steps</span>
+      <span>Vanilla HTML / CSS / JS</span>
+      <span>Zero dependencies</span>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="side-nav" aria-label="Implementation steps">
+      <p class="side-nav-label">On this page</p>
+      <ul>
+        <li><a href="#section-1"><span class="idx">1</span>Google Font Import</a></li>
+        <li><a href="#section-2"><span class="idx">2</span>HTML Markup</a></li>
+        <li><a href="#section-3"><span class="idx">3</span>CSS Stylesheet</a></li>
+        <li><a href="#section-4"><span class="idx">4</span>JavaScript Code</a></li>
+      </ul>
+    </nav>
+
+    <main>
+
+    <section class="doc-section" id="section-1">
+      <div class="section-head">
+        <span class="section-index">1</span>
+        <h2>Google Font Import</h2>
+      </div>
+      <p class="section-note">Add this to your HTML &lt;head&gt;:</p>
+      <div class="code-window">
+        <div class="code-chrome">
+          <div class="dots"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <span class="filename">index.html &mdash; &lt;head&gt;</span>
+          <button class="copy-btn" type="button" data-copy-target="code-1">
+            <svg class="icon-copy" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M3 10.5V3.5A1.5 1.5 0 0 1 4.5 2H10"/></svg>
+            <svg class="icon-check" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8.5l3 3 7-7"/></svg>
+            <span class="copy-label">Copy</span>
+          </button>
+        </div>
+        <pre><code id="code-1" class="language-html">&lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.googleapis.com&quot;&gt;
+&lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.gstatic.com&quot; crossorigin&gt;
+&lt;link href=&quot;https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Fira+Code:wght@400;500;600&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;</code></pre>
+      </div>
+    </section>
+
+    <section class="doc-section" id="section-2">
+      <div class="section-head">
+        <span class="section-index">2</span>
+        <h2>HTML Markup</h2>
+      </div>
+      <p class="section-note">Place this navigation component markup into your &lt;body&gt;:</p>
+      <div class="code-window">
+        <div class="code-chrome">
+          <div class="dots"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <span class="filename">index.html &mdash; &lt;body&gt;</span>
+          <button class="copy-btn" type="button" data-copy-target="code-2">
+            <svg class="icon-copy" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M3 10.5V3.5A1.5 1.5 0 0 1 4.5 2H10"/></svg>
+            <svg class="icon-check" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8.5l3 3 7-7"/></svg>
+            <span class="copy-label">Copy</span>
+          </button>
+        </div>
+        <pre><code id="code-2" class="language-html">&lt;!-- ================================================================
+     VELT DEVELOPER NAVBAR &amp; MEGA MENU
+     ================================================================ --&gt;
+&lt;div class=&quot;velt-nav-root&quot; id=&quot;velt-nav-root&quot;&gt;
+
+  &lt;nav class=&quot;velt-navbar&quot; aria-label=&quot;Main navigation&quot;&gt;
+    &lt;div class=&quot;navbar-inner&quot;&gt;
+
+      &lt;!-- Brand --&gt;
+      &lt;a href=&quot;#&quot; class=&quot;navbar-brand&quot; aria-label=&quot;Velt — Home&quot;&gt;
+        &lt;div class=&quot;brand-mark&quot; aria-hidden=&quot;true&quot;&gt;
+          &lt;svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 16 16&quot; fill=&quot;none&quot;&gt;
+            &lt;path d=&quot;M2 4L8 12L14 4&quot; stroke=&quot;white&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;
+            &lt;circle cx=&quot;8&quot; cy=&quot;8&quot; r=&quot;2&quot; fill=&quot;rgba(255,255,255,0.5)&quot;/&gt;
+          &lt;/svg&gt;
+        &lt;/div&gt;
+        &lt;span class=&quot;brand-name&quot;&gt;Velt&lt;/span&gt;
+      &lt;/a&gt;
+
+      &lt;!-- Nav Links --&gt;
+      &lt;ul class=&quot;navbar-nav&quot; role=&quot;list&quot;&gt;
+        &lt;!-- Product with 4-Column Mega-Menu --&gt;
+        &lt;li class=&quot;nav-item-wrap&quot; id=&quot;mega-wrap&quot;&gt;
+          &lt;button class=&quot;nav-link&quot; id=&quot;mega-trigger&quot; aria-haspopup=&quot;true&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;mega-menu&quot;&gt;
+            Product
+            &lt;span class=&quot;nav-link-chevron&quot; aria-hidden=&quot;true&quot;&gt;▾&lt;/span&gt;
+          &lt;/button&gt;
+        &lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;#use-cases&quot; class=&quot;nav-link&quot;&gt;Use Cases&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;#enterprise&quot; class=&quot;nav-link&quot;&gt;Enterprise&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;#resources&quot; class=&quot;nav-link&quot;&gt;Resources&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;#pricing&quot; class=&quot;nav-link&quot;&gt;Pricing&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+
+      &lt;!-- Right actions --&gt;
+      &lt;div class=&quot;navbar-right&quot;&gt;
+        &lt;a href=&quot;#signin&quot; class=&quot;nav-btn-ghost&quot;&gt;Sign In&lt;/a&gt;
+        &lt;a href=&quot;#docs&quot; class=&quot;nav-btn-ghost nav-btn-docs&quot;&gt;
+          &lt;svg width=&quot;14&quot; height=&quot;14&quot; viewBox=&quot;0 0 14 14&quot; fill=&quot;none&quot; aria-hidden=&quot;true&quot;&gt;
+            &lt;rect x=&quot;2&quot; y=&quot;2&quot; width=&quot;10&quot; height=&quot;10&quot; rx=&quot;1.5&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.3&quot;/&gt;
+            &lt;path d=&quot;M4.5 5h5M4.5 7h5M4.5 9h3&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.3&quot; stroke-linecap=&quot;round&quot;/&gt;
+          &lt;/svg&gt;
+          Read Docs
+        &lt;/a&gt;
+        &lt;a href=&quot;#book-demo&quot; class=&quot;nav-btn-primary&quot; id=&quot;btn-book-demo&quot;&gt;Book Demo&lt;/a&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Mobile Burger --&gt;
+      &lt;button class=&quot;navbar-burger&quot; id=&quot;nav-burger&quot; aria-label=&quot;Open menu&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;mobile-drawer&quot;&gt;
+        &lt;span&gt;&lt;/span&gt;
+        &lt;span&gt;&lt;/span&gt;
+        &lt;span&gt;&lt;/span&gt;
+      &lt;/button&gt;
+
+    &lt;/div&gt;
+  &lt;/nav&gt;
+
+  &lt;!-- 4-COLUMN MEGA MENU --&gt;
+  &lt;div class=&quot;mega-menu-wrapper&quot; role=&quot;region&quot;&gt;
+    &lt;div class=&quot;mega-menu&quot; id=&quot;mega-menu&quot; role=&quot;menu&quot; aria-label=&quot;Product features&quot;&gt;
+      &lt;div class=&quot;mega-menu-grid&quot;&gt;
+
+        &lt;!-- Col 1: SYNC --&gt;
+        &lt;div class=&quot;mega-col&quot;&gt;
+          &lt;div class=&quot;mega-col-label&quot;&gt;Sync&lt;/div&gt;
+          &lt;a class=&quot;mega-item&quot; href=&quot;#comments&quot; role=&quot;menuitem&quot;&gt;
+            &lt;div class=&quot;mega-item-icon&quot; aria-hidden=&quot;true&quot;&gt;💬&lt;/div&gt;
+            &lt;span class=&quot;mega-item-text&quot;&gt;Comments&lt;/span&gt;
+          &lt;/a&gt;
+          &lt;a class=&quot;mega-item&quot; href=&quot;#notifications&quot; role=&quot;menuitem&quot;&gt;
+            &lt;div class=&quot;mega-item-icon&quot; aria-hidden=&quot;true&quot;&gt;🔔&lt;/div&gt;
+            &lt;span class=&quot;mega-item-text&quot;&gt;Notifications&lt;/span&gt;
+          &lt;/a&gt;
+          &lt;a class=&quot;mega-item&quot; href=&quot;#recording&quot; role=&quot;menuitem&quot;&gt;
+            &lt;div class=&quot;mega-item-icon&quot; aria-hidden=&quot;true&quot;&gt;📹&lt;/div&gt;
+            &lt;span class=&quot;mega-item-text&quot;&gt;Recording&lt;/span&gt;
+          &lt;/a&gt;
+          &lt;a class=&quot;mega-item&quot; href=&quot;#analytics&quot; role=&quot;menuitem&quot;&gt;
+            &lt;div class=&quot;mega-item-icon&quot; aria-hidden=&quot;true&quot;&gt;📊&lt;/div&gt;
+            &lt;span class=&quot;mega-item-text&quot;&gt;View Analytics&lt;/span&gt;
+          &lt;/a&gt;
+          &lt;a class=&quot;mega-view-all&quot; href=&quot;#sync-all&quot;&gt;VIEW ALL ↗&lt;/a&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Col 2: REAL TIME --&gt;
+        &lt;div class=&quot;mega-col&quot;&gt;
+          &lt;div class=&quot;mega-col-label&quot;&gt;Real Time&lt;/div&gt;
+          &lt;a class=&quot;mega-item&quot; href=&quot;#multiplayer&quot; role=&quot;menuitem&quot;&gt;
+            &lt;div class=&quot;mega-item-icon&quot; aria-hidden=&quot;true&quot;&gt;🖊️&lt;/div&gt;
+            &lt;span class=&quot;mega-item-text&quot;&gt;Multiplayer Editing&lt;/span&gt;
+          &lt;/a&gt;
+          &lt;a class=&quot;mega-item&quot; href=&quot;#live-state&quot; role=&quot;menuitem&quot;&gt;
+            &lt;div class=&quot;mega-item-icon&quot; aria-hidden=&quot;true&quot;&gt;🔄&lt;/div&gt;
+            &lt;span class=&quot;mega-item-text&quot;&gt;Live State Sync&lt;/span&gt;
+          &lt;/a&gt;
+          &lt;a class=&quot;mega-item&quot; href=&quot;#presence&quot; role=&quot;menuitem&quot;&gt;
+            &lt;div class=&quot;mega-item-icon&quot; aria-hidden=&quot;true&quot;&gt;🟢&lt;/div&gt;
+            &lt;span class=&quot;mega-item-text&quot;&gt;Presence&lt;/span&gt;
+          &lt;/a&gt;
+          &lt;a class=&quot;mega-item&quot; href=&quot;#cursors&quot; role=&quot;menuitem&quot;&gt;
+            &lt;div class=&quot;mega-item-icon&quot; aria-hidden=&quot;true&quot;&gt;🖱️&lt;/div&gt;
+            &lt;span class=&quot;mega-item-text&quot;&gt;Live Cursors&lt;/span&gt;
+          &lt;/a&gt;
+          &lt;a class=&quot;mega-view-all&quot; href=&quot;#realtime-all&quot;&gt;VIEW ALL ↗&lt;/a&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Col 3: WORKFLOW --&gt;
+        &lt;div class=&quot;mega-col&quot;&gt;
+          &lt;div class=&quot;mega-col-label&quot;&gt;Workflow&lt;/div&gt;
+          &lt;a class=&quot;mega-item&quot; href=&quot;#version-history&quot; role=&quot;menuitem&quot;&gt;
+            &lt;div class=&quot;mega-item-icon&quot; aria-hidden=&quot;true&quot;&gt;⏳&lt;/div&gt;
+            &lt;span class=&quot;mega-item-text&quot;&gt;Version History&lt;/span&gt;
+          &lt;/a&gt;
+          &lt;a class=&quot;mega-item&quot; href=&quot;#approval&quot; role=&quot;menuitem&quot;&gt;
+            &lt;div class=&quot;mega-item-icon&quot; aria-hidden=&quot;true&quot;&gt;✅&lt;/div&gt;
+            &lt;span class=&quot;mega-item-text&quot;&gt;Approval Flow&lt;/span&gt;
+          &lt;/a&gt;
+          &lt;a class=&quot;mega-item&quot; href=&quot;#branching&quot; role=&quot;menuitem&quot;&gt;
+            &lt;div class=&quot;mega-item-icon&quot; aria-hidden=&quot;true&quot;&gt;🌿&lt;/div&gt;
+            &lt;span class=&quot;mega-item-text&quot;&gt;Branching&lt;/span&gt;
+          &lt;/a&gt;
+          &lt;a class=&quot;mega-view-all&quot; href=&quot;#workflow-all&quot;&gt;VIEW ALL ↗&lt;/a&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Col 4: FEATURED SDK CARD --&gt;
+        &lt;div class=&quot;mega-col mega-col--highlight&quot;&gt;
+          &lt;div class=&quot;mega-highlight-card&quot;&gt;
+            &lt;div class=&quot;mega-highlight-tag&quot;&gt;SDK 2.0 AVAILABLE&lt;/div&gt;
+            &lt;div class=&quot;mega-highlight-title&quot;&gt;Drop-in Multiplayer in 5 min&lt;/div&gt;
+            &lt;div class=&quot;mega-highlight-desc&quot;&gt;Add real-time cursors, comments, and presence to any React, Vue, or Webflow app.&lt;/div&gt;
+            &lt;a href=&quot;#quickstart&quot; class=&quot;mega-highlight-cta&quot;&gt;Explore Quickstart →&lt;/a&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Mobile Drawer --&gt;
+  &lt;div class=&quot;mobile-drawer&quot; id=&quot;mobile-drawer&quot;&gt;
+    &lt;div class=&quot;mobile-drawer-overlay&quot; id=&quot;mobile-drawer-overlay&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;mobile-drawer-body&quot;&gt;
+      &lt;ul class=&quot;mobile-nav-list&quot;&gt;
+        &lt;li&gt;&lt;a href=&quot;#products&quot;&gt;Product Features&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;#use-cases&quot;&gt;Use Cases&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;#enterprise&quot;&gt;Enterprise&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;#resources&quot;&gt;Resources&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;#pricing&quot;&gt;Pricing&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;div class=&quot;mobile-actions&quot;&gt;
+        &lt;a href=&quot;#signin&quot; class=&quot;nav-btn-ghost&quot; style=&quot;text-align:center;&quot;&gt;Sign In&lt;/a&gt;
+        &lt;a href=&quot;#book-demo&quot; class=&quot;nav-btn-primary&quot; style=&quot;text-align:center;&quot;&gt;Book Demo&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</code></pre>
+      </div>
+    </section>
+
+    <section class="doc-section" id="section-3">
+      <div class="section-head">
+        <span class="section-index">3</span>
+        <h2>CSS Stylesheet</h2>
+      </div>
+      <p class="section-note">Add this CSS to your stylesheet (e.g. style.css):</p>
+      <div class="code-window">
+        <div class="code-chrome">
+          <div class="dots"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <span class="filename">style.css</span>
+          <button class="copy-btn" type="button" data-copy-target="code-3">
+            <svg class="icon-copy" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M3 10.5V3.5A1.5 1.5 0 0 1 4.5 2H10"/></svg>
+            <svg class="icon-check" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8.5l3 3 7-7"/></svg>
+            <span class="copy-label">Copy</span>
+          </button>
+        </div>
+        <pre><code id="code-3" class="language-css">:root {
+  --bg-nav: rgba(12, 13, 20, 0.85);
+  --border-nav: rgba(255, 255, 255, 0.08);
+  --accent-cyan: #00f2fe;
+  --accent-blue: #4facfe;
+  --text-white: #f8fafc;
+  --text-muted: #94a3b8;
+}
+
+.velt-nav-root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.velt-navbar {
+  background: var(--bg-nav);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-nav);
+  height: 64px;
+}
+
+.navbar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+}
+
+/* Brand */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.brand-mark {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #3b82f6, #06b6d4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-name {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-white);
+  letter-spacing: -0.02em;
+}
+
+/* Nav Links */
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--text-white);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-link-chevron {
+  font-size: 10px;
+  transition: transform 0.2s ease;
+}
+
+.nav-item-wrap.open .nav-link-chevron {
+  transform: rotate(180deg);
+}
+
+/* Right Actions */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-decoration: none;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+}
+
+.nav-btn-ghost:hover {
+  color: var(--text-white);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-btn-primary {
+  display: inline-block;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #0b0c10;
+  background: linear-gradient(135deg, #00f2fe, #4facfe);
+  border-radius: 6px;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(0, 242, 254, 0.3);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.nav-btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0, 242, 254, 0.45);
+}
+
+/* Mega Menu */
+.mega-menu-wrapper {
+  position: absolute;
+  top: 64px;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+}
+
+.mega-menu {
+  max-width: 1000px;
+  margin: 12px auto 0;
+  background: rgba(14, 16, 24, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(20px);
+  padding: 24px;
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.mega-menu.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+}
+
+.mega-menu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1.3fr;
+  gap: 24px;
+}
+
+.mega-col-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 12px;
+}
+
+.mega-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 8px;
+  border-radius: 6px;
+  color: var(--text-white);
+  text-decoration: none;
+  font-size: 13px;
+  transition: background 0.15s ease;
+}
+
+.mega-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.mega-view-all {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent-cyan);
+  text-decoration: none;
+  margin-top: 10px;
+  padding-left: 8px;
+}
+
+/* Highlight Card */
+.mega-highlight-card {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(6, 182, 212, 0.15));
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.mega-highlight-tag {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  margin-bottom: 6px;
+}
+
+.mega-highlight-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.mega-highlight-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+
+.mega-highlight-cta {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-cyan);
+  text-decoration: none;
+}
+
+/* Mobile burger */
+.navbar-burger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 4px;
+}
+.navbar-burger span {
+  width: 20px;
+  height: 2px;
+  background: #fff;
+  border-radius: 2px;
+}
+
+@media (max-width: 868px) {
+  .navbar-nav, .navbar-right {
+    display: none;
+  }
+  .navbar-burger {
+    display: flex;
+  }
+}</code></pre>
+      </div>
+    </section>
+
+    <section class="doc-section" id="section-4">
+      <div class="section-head">
+        <span class="section-index">4</span>
+        <h2>JavaScript Code</h2>
+      </div>
+      <p class="section-note">Add this script before the closing &lt;/body&gt; tag (e.g. script.js):</p>
+      <div class="code-window">
+        <div class="code-chrome">
+          <div class="dots"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <span class="filename">script.js</span>
+          <button class="copy-btn" type="button" data-copy-target="code-4">
+            <svg class="icon-copy" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M3 10.5V3.5A1.5 1.5 0 0 1 4.5 2H10"/></svg>
+            <svg class="icon-check" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8.5l3 3 7-7"/></svg>
+            <span class="copy-label">Copy</span>
+          </button>
+        </div>
+        <pre><code id="code-4" class="language-javascript">(function () {
+  &#39;use strict&#39;;
+
+  const megaWrap = document.getElementById(&#39;mega-wrap&#39;);
+  const megaTrigger = document.getElementById(&#39;mega-trigger&#39;);
+  const megaMenu = document.getElementById(&#39;mega-menu&#39;);
+
+  if (!megaWrap || !megaTrigger || !megaMenu) return;
+
+  let closeTimer = null;
+
+  function openMega() {
+    clearTimeout(closeTimer);
+    megaMenu.classList.add(&#39;show&#39;);
+    megaWrap.classList.add(&#39;open&#39;);
+    megaTrigger.setAttribute(&#39;aria-expanded&#39;, &#39;true&#39;);
+  }
+
+  function closeMega() {
+    closeTimer = setTimeout(() =&gt; {
+      megaMenu.classList.remove(&#39;show&#39;);
+      megaWrap.classList.remove(&#39;open&#39;);
+      megaTrigger.setAttribute(&#39;aria-expanded&#39;, &#39;false&#39;);
+    }, 120);
+  }
+
+  // Hover with safe area timeout
+  megaWrap.addEventListener(&#39;mouseenter&#39;, openMega);
+  megaWrap.addEventListener(&#39;mouseleave&#39;, closeMega);
+  megaMenu.addEventListener(&#39;mouseenter&#39;, openMega);
+  megaMenu.addEventListener(&#39;mouseleave&#39;, closeMega);
+
+  // Click toggle for touchscreen/keyboard
+  megaTrigger.addEventListener(&#39;click&#39;, (e) =&gt; {
+    e.preventDefault();
+    if (megaMenu.classList.contains(&#39;show&#39;)) {
+      closeMega();
+    } else {
+      openMega();
+    }
+  });
+
+  // ESC close
+  window.addEventListener(&#39;keydown&#39;, (e) =&gt; {
+    if (e.key === &#39;Escape&#39;) closeMega();
+  });
+})();</code></pre>
+      </div>
+    </section>
+
+    </main>
+  </div>
+
+  <footer class="doc-footer">
+    <span>Part of the Modern Navbar Collection</span>
+    <a href="../index.html">&larr; Back to Collection</a>
+  </footer>
+
+<script>
+  hljs.highlightAll();
+
+  document.querySelectorAll('.copy-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var targetId = btn.getAttribute('data-copy-target');
+      var codeEl = document.getElementById(targetId);
+      var text = codeEl.textContent;
+      navigator.clipboard.writeText(text).then(function(){
+        btn.classList.add('is-copied');
+        var label = btn.querySelector('.copy-label');
+        var prev = label.textContent;
+        label.textContent = 'Copied';
+        setTimeout(function(){
+          btn.classList.remove('is-copied');
+          label.textContent = prev;
+        }, 1800);
+      });
+    });
+  });
+
+  var links = document.querySelectorAll('.side-nav a');
+  var sections = document.querySelectorAll('.doc-section');
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting) {
+        links.forEach(function(l){ l.classList.remove('is-active'); });
+        var active = document.querySelector('.side-nav a[href="#' + entry.target.id + '"]');
+        if (active) active.classList.add('is-active');
+      }
+    });
+  }, { rootMargin: '-15% 0px -70% 0px' });
+  sections.forEach(function(s){ observer.observe(s); });
+</script>
+
+</body>
+</html>

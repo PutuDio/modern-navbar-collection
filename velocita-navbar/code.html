@@ -1,0 +1,1687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Velocita Cyber Creative &mdash; Implementation Guide</title>
+<meta name="description" content="Isolated, copy-paste-ready code for Velocita Cyber Creative &mdash; font import, markup, styles, and behavior.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/tomorrow-night.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+<style>
+  :root{
+    --paper:#fbfcfd;
+    --panel:#ffffff;
+    --line:#e2e8f0;
+    --ink:#0f172a;
+    --ink-soft:#475569;
+    --ink-faint:#94a3b8;
+    --accent:#f97316;
+    --accent-soft:rgba(29, 78, 216, 0.08);
+    --ok:#059669;
+    --code-bg:#0b1220;
+    --code-chrome:#111a2c;
+    --code-line:#1e293b;
+    --font-display:'Plus Jakarta Sans', system-ui, sans-serif;
+    --font-mono:'IBM Plex Mono', 'SFMono-Regular', monospace;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--font-display);
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{ color:inherit; text-decoration:none; }
+
+  /* ---------- Masthead ---------- */
+  .masthead{
+    max-width:1180px;
+    margin:0 auto;
+    padding:4.5rem 2.5rem 3rem;
+    border-bottom:1px solid var(--line);
+  }
+  .masthead-kicker{
+    font-size:0.8125rem;
+    color:var(--accent);
+    font-weight:600;
+    margin-bottom:0.9rem;
+  }
+  .masthead h1{
+    font-size:clamp(2rem, 4vw, 2.75rem);
+    font-weight:700;
+    letter-spacing:-0.02em;
+    margin:0 0 1rem;
+    max-width:24ch;
+  }
+  .masthead p{
+    color:var(--ink-soft);
+    font-size:1.05rem;
+    line-height:1.65;
+    max-width:62ch;
+    margin:0;
+  }
+  .masthead-meta{
+    display:flex;
+    gap:1.5rem;
+    margin-top:1.75rem;
+    font-size:0.85rem;
+    color:var(--ink-faint);
+    font-family:var(--font-mono);
+  }
+
+  /* ---------- Layout ---------- */
+  .layout{
+    max-width:1180px;
+    margin:0 auto;
+    padding:3rem 2.5rem 6rem;
+    display:grid;
+    grid-template-columns:220px minmax(0,1fr);
+    gap:3.5rem;
+  }
+
+  .side-nav{ align-self:start; position:sticky; top:2.5rem; }
+  .side-nav-label{
+    font-size:0.75rem;
+    color:var(--ink-faint);
+    font-weight:600;
+    margin-bottom:0.9rem;
+  }
+  .side-nav ul{ list-style:none; margin:0; padding:0; }
+  .side-nav li + li{ margin-top:0.35rem; }
+  .side-nav a{
+    display:flex;
+    align-items:baseline;
+    gap:0.6rem;
+    padding:0.45rem 0.6rem;
+    border-radius:8px;
+    font-size:0.9rem;
+    color:var(--ink-soft);
+    transition:background 0.15s ease, color 0.15s ease;
+  }
+  .side-nav a:hover{ background:var(--accent-soft); color:var(--ink); }
+  .side-nav a.is-active{ background:var(--accent-soft); color:var(--accent); font-weight:600; }
+  .side-nav .idx{
+    font-family:var(--font-mono);
+    font-size:0.78rem;
+    color:var(--ink-faint);
+    width:1.1rem;
+  }
+  .side-nav a.is-active .idx{ color:var(--accent); }
+
+  /* ---------- Doc sections ---------- */
+  .doc-section{ margin-bottom:3.5rem; scroll-margin-top:2rem; }
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:0.9rem;
+    margin-bottom:0.5rem;
+  }
+  .section-index{
+    font-family:var(--font-mono);
+    font-size:0.95rem;
+    color:var(--accent);
+    font-weight:600;
+  }
+  .section-head h2{
+    font-size:1.35rem;
+    font-weight:700;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+  .section-note{
+    color:var(--ink-soft);
+    font-size:0.98rem;
+    line-height:1.6;
+    margin:0 0 1.1rem;
+    max-width:60ch;
+  }
+
+  /* ---------- Code window ---------- */
+  .code-window{
+    background:var(--code-bg);
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 1px 2px rgba(15,23,42,0.06), 0 12px 32px -16px rgba(15,23,42,0.35);
+  }
+  .code-chrome{
+    display:flex;
+    align-items:center;
+    gap:0.9rem;
+    padding:0.7rem 1rem;
+    background:var(--code-chrome);
+    border-bottom:1px solid var(--code-line);
+  }
+  .dots{ display:flex; gap:6px; flex-shrink:0; }
+  .dot{ width:10px; height:10px; border-radius:50%; display:block; }
+  .dot-a{ background:#f4756b; }
+  .dot-b{ background:#f5b95b; }
+  .dot-c{ background:#4fbf6b; }
+  .filename{
+    font-family:var(--font-mono);
+    font-size:0.78rem;
+    color:#8592ad;
+    flex:1;
+  }
+  .copy-btn{
+    display:flex;
+    align-items:center;
+    gap:0.4rem;
+    background:transparent;
+    border:1px solid var(--code-line);
+    color:#c3cbe0;
+    font-family:var(--font-display);
+    font-size:0.78rem;
+    font-weight:500;
+    padding:0.32rem 0.65rem;
+    border-radius:6px;
+    cursor:pointer;
+    transition:background 0.15s ease, border-color 0.15s ease;
+  }
+  .copy-btn:hover{ background:rgba(255,255,255,0.06); border-color:#334155; }
+  .copy-btn .icon-check{ display:none; }
+  .copy-btn.is-copied .icon-copy{ display:none; }
+  .copy-btn.is-copied .icon-check{ display:block; color:var(--ok); }
+  .copy-btn.is-copied{ border-color:var(--ok); color:var(--ok); }
+
+  .code-window pre{
+    margin:0;
+    padding:1.25rem 1.4rem;
+    overflow-x:auto;
+    max-height:520px;
+    overflow-y:auto;
+  }
+  .code-window code{
+    font-family:var(--font-mono);
+    font-size:0.84rem;
+    line-height:1.65;
+    background:transparent !important;
+  }
+
+  .code-window pre::-webkit-scrollbar{ height:8px; width:8px; }
+  .code-window pre::-webkit-scrollbar-thumb{ background:#293449; border-radius:8px; }
+  .code-window pre::-webkit-scrollbar-track{ background:transparent; }
+
+  /* ---------- Footer ---------- */
+  .doc-footer{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 2.5rem 4rem;
+    border-top:1px solid var(--line);
+    padding-top:2rem;
+    color:var(--ink-faint);
+    font-size:0.85rem;
+    display:flex;
+    justify-content:space-between;
+  }
+  .doc-footer a{ color:var(--accent); font-weight:500; }
+
+  @media (max-width: 860px){
+    .layout{ grid-template-columns:1fr; }
+    .side-nav{ position:static; margin-bottom:1rem; }
+    .side-nav ul{ display:flex; flex-wrap:wrap; gap:0.4rem; }
+    .side-nav li + li{ margin-top:0; }
+    .masthead{ padding:3rem 1.5rem 2.25rem; }
+    .layout{ padding:2rem 1.5rem 4rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .copy-btn, .side-nav a{ transition:none; }
+  }
+</style>
+</head>
+<body>
+
+  <header class="masthead">
+    <p class="masthead-kicker">Implementation guide</p>
+    <h1>Velocita Cyber Creative</h1>
+    <p>Isolated, dependency-free code for the navigation only &mdash; no hero sections or demo page content. Copy each block in order into your own project: font, markup, styles, then behavior.</p>
+    <div class="masthead-meta">
+      <span>4 steps</span>
+      <span>Vanilla HTML / CSS / JS</span>
+      <span>Zero dependencies</span>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="side-nav" aria-label="Implementation steps">
+      <p class="side-nav-label">On this page</p>
+      <ul>
+        <li><a href="#section-1"><span class="idx">1</span>Google Font Import</a></li>
+        <li><a href="#section-2"><span class="idx">2</span>HTML Markup</a></li>
+        <li><a href="#section-3"><span class="idx">3</span>CSS Stylesheet</a></li>
+        <li><a href="#section-4"><span class="idx">4</span>JavaScript Code</a></li>
+      </ul>
+    </nav>
+
+    <main>
+
+    <section class="doc-section" id="section-1">
+      <div class="section-head">
+        <span class="section-index">1</span>
+        <h2>Google Font Import</h2>
+      </div>
+      <p class="section-note">Add this to your HTML &lt;head&gt;:</p>
+      <div class="code-window">
+        <div class="code-chrome">
+          <div class="dots"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <span class="filename">index.html &mdash; &lt;head&gt;</span>
+          <button class="copy-btn" type="button" data-copy-target="code-1">
+            <svg class="icon-copy" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M3 10.5V3.5A1.5 1.5 0 0 1 4.5 2H10"/></svg>
+            <svg class="icon-check" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8.5l3 3 7-7"/></svg>
+            <span class="copy-label">Copy</span>
+          </button>
+        </div>
+        <pre><code id="code-1" class="language-html">&lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.googleapis.com&quot;&gt;
+&lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.gstatic.com&quot; crossorigin&gt;
+&lt;link href=&quot;https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&amp;family=Rajdhani:wght@500;600;700&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;</code></pre>
+      </div>
+    </section>
+
+    <section class="doc-section" id="section-2">
+      <div class="section-head">
+        <span class="section-index">2</span>
+        <h2>HTML Markup</h2>
+      </div>
+      <p class="section-note">Place this navigation component markup into your &lt;body&gt;:</p>
+      <div class="code-window">
+        <div class="code-chrome">
+          <div class="dots"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <span class="filename">index.html &mdash; &lt;body&gt;</span>
+          <button class="copy-btn" type="button" data-copy-target="code-2">
+            <svg class="icon-copy" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M3 10.5V3.5A1.5 1.5 0 0 1 4.5 2H10"/></svg>
+            <svg class="icon-check" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8.5l3 3 7-7"/></svg>
+            <span class="copy-label">Copy</span>
+          </button>
+        </div>
+        <pre><code id="code-2" class="language-html">&lt;!-- ================================================================
+       VELOCITA NAVBAR
+       ================================================================ --&gt;
+  &lt;nav class=&quot;velocita-nav&quot; id=&quot;velocita-nav&quot; role=&quot;navigation&quot; aria-label=&quot;Main navigation&quot;&gt;
+    &lt;div class=&quot;nav-shell&quot;&gt;
+
+      &lt;!-- Left LED Wing Tip --&gt;
+      &lt;div class=&quot;nav-wing nav-wing--left&quot; aria-hidden=&quot;true&quot;&gt;
+        &lt;div class=&quot;wing-led&quot;&gt;&lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Brand Mark --&gt;
+      &lt;a href=&quot;#home&quot; class=&quot;nav-brand&quot; aria-label=&quot;Velocita — Home&quot;&gt;
+        &lt;span class=&quot;brand-letter&quot; aria-hidden=&quot;true&quot;&gt;V&lt;/span&gt;
+        &lt;span class=&quot;brand-dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+      &lt;/a&gt;
+
+      &lt;!-- Separator --&gt;
+      &lt;span class=&quot;nav-sep&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+
+      &lt;!-- Navigation Links --&gt;
+      &lt;ul class=&quot;nav-links&quot; role=&quot;menubar&quot; aria-label=&quot;Page sections&quot;&gt;
+
+        &lt;!-- HOME --&gt;
+        &lt;li role=&quot;none&quot;&gt;
+          &lt;a href=&quot;#home&quot; class=&quot;nav-link active&quot; role=&quot;menuitem&quot; aria-current=&quot;page&quot; data-target=&quot;home&quot; id=&quot;nav-home&quot;&gt;
+            &lt;span class=&quot;link-icon-box&quot;&gt;
+              &lt;svg class=&quot;link-icon&quot; width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; aria-hidden=&quot;true&quot;&gt;
+                &lt;path d=&quot;M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z&quot;/&gt;
+                &lt;polyline points=&quot;9 22 9 12 15 12 15 22&quot;/&gt;
+              &lt;/svg&gt;
+            &lt;/span&gt;
+            &lt;span class=&quot;link-label&quot;&gt;HOME&lt;/span&gt;
+            &lt;span class=&quot;link-indicator&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+          &lt;/a&gt;
+        &lt;/li&gt;
+
+        &lt;!-- TEAM --&gt;
+        &lt;li role=&quot;none&quot;&gt;
+          &lt;a href=&quot;#team&quot; class=&quot;nav-link&quot; role=&quot;menuitem&quot; data-target=&quot;team&quot; id=&quot;nav-team&quot;&gt;
+            &lt;span class=&quot;link-icon-box&quot;&gt;
+              &lt;svg class=&quot;link-icon&quot; width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; aria-hidden=&quot;true&quot;&gt;
+                &lt;path d=&quot;M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2&quot;/&gt;
+                &lt;circle cx=&quot;9&quot; cy=&quot;7&quot; r=&quot;4&quot;/&gt;
+                &lt;path d=&quot;M23 21v-2a4 4 0 0 0-3-3.87&quot;/&gt;
+                &lt;path d=&quot;M16 3.13a4 4 0 0 1 0 7.75&quot;/&gt;
+              &lt;/svg&gt;
+            &lt;/span&gt;
+            &lt;span class=&quot;link-label&quot;&gt;TEAM&lt;/span&gt;
+            &lt;span class=&quot;link-indicator&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+          &lt;/a&gt;
+        &lt;/li&gt;
+
+        &lt;!-- GARAGE --&gt;
+        &lt;li role=&quot;none&quot;&gt;
+          &lt;a href=&quot;#garage&quot; class=&quot;nav-link&quot; role=&quot;menuitem&quot; data-target=&quot;garage&quot; id=&quot;nav-garage&quot;&gt;
+            &lt;span class=&quot;link-icon-box&quot;&gt;
+              &lt;svg class=&quot;link-icon&quot; width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; aria-hidden=&quot;true&quot;&gt;
+                &lt;path d=&quot;M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9L18 10l-2.7-4.1A2 2 0 0 0 13.6 5h-3.2a2 2 0 0 0-1.7 1L6 10l-2.5 1.1C2.7 11.3 2 12.1 2 13v3c0 .6.4 1 1 1h2&quot;/&gt;
+                &lt;circle cx=&quot;7&quot; cy=&quot;17&quot; r=&quot;2&quot;/&gt;
+                &lt;circle cx=&quot;17&quot; cy=&quot;17&quot; r=&quot;2&quot;/&gt;
+              &lt;/svg&gt;
+            &lt;/span&gt;
+            &lt;span class=&quot;link-label&quot;&gt;GARAGE&lt;/span&gt;
+            &lt;span class=&quot;link-indicator&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+          &lt;/a&gt;
+        &lt;/li&gt;
+
+        &lt;!-- CIRCUITS --&gt;
+        &lt;li role=&quot;none&quot;&gt;
+          &lt;a href=&quot;#circuits&quot; class=&quot;nav-link&quot; role=&quot;menuitem&quot; data-target=&quot;circuits&quot; id=&quot;nav-circuits&quot;&gt;
+            &lt;span class=&quot;link-icon-box&quot;&gt;
+              &lt;svg class=&quot;link-icon&quot; width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; aria-hidden=&quot;true&quot;&gt;
+                &lt;path d=&quot;M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z&quot;/&gt;
+                &lt;line x1=&quot;4&quot; y1=&quot;22&quot; x2=&quot;4&quot; y2=&quot;15&quot;/&gt;
+              &lt;/svg&gt;
+            &lt;/span&gt;
+            &lt;span class=&quot;link-label&quot;&gt;CIRCUITS&lt;/span&gt;
+            &lt;span class=&quot;link-indicator&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+          &lt;/a&gt;
+        &lt;/li&gt;
+
+        &lt;!-- NEWS --&gt;
+        &lt;li role=&quot;none&quot;&gt;
+          &lt;a href=&quot;#news&quot; class=&quot;nav-link&quot; role=&quot;menuitem&quot; data-target=&quot;news&quot; id=&quot;nav-news&quot;&gt;
+            &lt;span class=&quot;link-icon-box&quot;&gt;
+              &lt;svg class=&quot;link-icon&quot; width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; aria-hidden=&quot;true&quot;&gt;
+                &lt;path d=&quot;M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2&quot;/&gt;
+                &lt;path d=&quot;M18 14h-8&quot;/&gt;
+                &lt;path d=&quot;M15 18h-5&quot;/&gt;
+                &lt;path d=&quot;M10 6h8v4h-8z&quot;/&gt;
+              &lt;/svg&gt;
+            &lt;/span&gt;
+            &lt;span class=&quot;link-label&quot;&gt;NEWS&lt;/span&gt;
+            &lt;span class=&quot;link-indicator&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+          &lt;/a&gt;
+        &lt;/li&gt;
+
+        &lt;!-- STORE --&gt;
+        &lt;li role=&quot;none&quot;&gt;
+          &lt;a href=&quot;#store&quot; class=&quot;nav-link&quot; role=&quot;menuitem&quot; data-target=&quot;store&quot; id=&quot;nav-store&quot;&gt;
+            &lt;span class=&quot;link-icon-box&quot;&gt;
+              &lt;svg class=&quot;link-icon&quot; width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; aria-hidden=&quot;true&quot;&gt;
+                &lt;path d=&quot;M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z&quot;/&gt;
+                &lt;line x1=&quot;3&quot; y1=&quot;6&quot; x2=&quot;21&quot; y2=&quot;6&quot;/&gt;
+                &lt;path d=&quot;M16 10a4 4 0 0 1-8 0&quot;/&gt;
+              &lt;/svg&gt;
+            &lt;/span&gt;
+            &lt;span class=&quot;link-label&quot;&gt;STORE&lt;/span&gt;
+            &lt;span class=&quot;link-indicator&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+          &lt;/a&gt;
+        &lt;/li&gt;
+
+      &lt;/ul&gt;
+
+      &lt;!-- Separator --&gt;
+      &lt;span class=&quot;nav-sep&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+
+      &lt;!-- Racing Flag Accent --&gt;
+      &lt;div class=&quot;nav-flag&quot; aria-hidden=&quot;true&quot;&gt;
+        &lt;svg class=&quot;flag-icon&quot; width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 20 20&quot; fill=&quot;none&quot;&gt;
+          &lt;rect x=&quot;0&quot; y=&quot;0&quot; width=&quot;5&quot; height=&quot;5&quot; rx=&quot;0.5&quot; fill=&quot;currentColor&quot; opacity=&quot;0.9&quot;/&gt;
+          &lt;rect x=&quot;10&quot; y=&quot;0&quot; width=&quot;5&quot; height=&quot;5&quot; rx=&quot;0.5&quot; fill=&quot;currentColor&quot; opacity=&quot;0.9&quot;/&gt;
+          &lt;rect x=&quot;5&quot; y=&quot;5&quot; width=&quot;5&quot; height=&quot;5&quot; rx=&quot;0.5&quot; fill=&quot;currentColor&quot; opacity=&quot;0.9&quot;/&gt;
+          &lt;rect x=&quot;15&quot; y=&quot;5&quot; width=&quot;5&quot; height=&quot;5&quot; rx=&quot;0.5&quot; fill=&quot;currentColor&quot; opacity=&quot;0.9&quot;/&gt;
+          &lt;rect x=&quot;0&quot; y=&quot;10&quot; width=&quot;5&quot; height=&quot;5&quot; rx=&quot;0.5&quot; fill=&quot;currentColor&quot; opacity=&quot;0.45&quot;/&gt;
+          &lt;rect x=&quot;10&quot; y=&quot;10&quot; width=&quot;5&quot; height=&quot;5&quot; rx=&quot;0.5&quot; fill=&quot;currentColor&quot; opacity=&quot;0.45&quot;/&gt;
+          &lt;rect x=&quot;5&quot; y=&quot;15&quot; width=&quot;5&quot; height=&quot;5&quot; rx=&quot;0.5&quot; fill=&quot;currentColor&quot; opacity=&quot;0.2&quot;/&gt;
+          &lt;rect x=&quot;15&quot; y=&quot;15&quot; width=&quot;5&quot; height=&quot;5&quot; rx=&quot;0.5&quot; fill=&quot;currentColor&quot; opacity=&quot;0.2&quot;/&gt;
+        &lt;/svg&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Right LED Wing Tip --&gt;
+      &lt;div class=&quot;nav-wing nav-wing--right&quot; aria-hidden=&quot;true&quot;&gt;
+        &lt;div class=&quot;wing-led&quot;&gt;&lt;/div&gt;
+      &lt;/div&gt;
+
+    &lt;/div&gt;
+
+  &lt;/nav&gt;
+
+  &lt;!-- ==================== MOBILE (siblings to nav, not children) ==================== --&gt;
+
+  &lt;!-- Mobile Toggle Button --&gt;
+  &lt;button class=&quot;mobile-toggle&quot; id=&quot;mobile-toggle&quot;
+    aria-label=&quot;Toggle navigation menu&quot;
+    aria-expanded=&quot;false&quot;
+    aria-controls=&quot;mobile-menu&quot;&gt;
+    &lt;span class=&quot;toggle-line&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+    &lt;span class=&quot;toggle-line&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+    &lt;span class=&quot;toggle-line&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+    &lt;span class=&quot;toggle-glow&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+  &lt;/button&gt;
+
+  &lt;!-- Mobile Fullscreen Menu --&gt;
+  &lt;div class=&quot;mobile-menu&quot; id=&quot;mobile-menu&quot; role=&quot;dialog&quot; aria-hidden=&quot;true&quot; aria-label=&quot;Navigation menu&quot;&gt;
+    &lt;div class=&quot;mobile-menu-inner&quot;&gt;
+
+      &lt;!-- Mobile Brand --&gt;
+      &lt;div class=&quot;mobile-brand&quot;&gt;
+        &lt;span class=&quot;brand-letter&quot;&gt;V&lt;/span&gt;
+        &lt;span class=&quot;brand-name&quot;&gt;VELOCITA&lt;/span&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Mobile Links --&gt;
+      &lt;ul class=&quot;mobile-links&quot; role=&quot;menu&quot;&gt;
+        &lt;li role=&quot;none&quot;&gt;&lt;a href=&quot;#home&quot; class=&quot;mobile-link active&quot; role=&quot;menuitem&quot; data-target=&quot;home&quot;&gt;
+          &lt;span class=&quot;ml-number&quot;&gt;01&lt;/span&gt;&lt;span class=&quot;ml-text&quot;&gt;HOME&lt;/span&gt;
+        &lt;/a&gt;&lt;/li&gt;
+        &lt;li role=&quot;none&quot;&gt;&lt;a href=&quot;#team&quot; class=&quot;mobile-link&quot; role=&quot;menuitem&quot; data-target=&quot;team&quot;&gt;
+          &lt;span class=&quot;ml-number&quot;&gt;02&lt;/span&gt;&lt;span class=&quot;ml-text&quot;&gt;TEAM&lt;/span&gt;
+        &lt;/a&gt;&lt;/li&gt;
+        &lt;li role=&quot;none&quot;&gt;&lt;a href=&quot;#garage&quot; class=&quot;mobile-link&quot; role=&quot;menuitem&quot; data-target=&quot;garage&quot;&gt;
+          &lt;span class=&quot;ml-number&quot;&gt;03&lt;/span&gt;&lt;span class=&quot;ml-text&quot;&gt;GARAGE&lt;/span&gt;
+        &lt;/a&gt;&lt;/li&gt;
+        &lt;li role=&quot;none&quot;&gt;&lt;a href=&quot;#circuits&quot; class=&quot;mobile-link&quot; role=&quot;menuitem&quot; data-target=&quot;circuits&quot;&gt;
+          &lt;span class=&quot;ml-number&quot;&gt;04&lt;/span&gt;&lt;span class=&quot;ml-text&quot;&gt;CIRCUITS&lt;/span&gt;
+        &lt;/a&gt;&lt;/li&gt;
+        &lt;li role=&quot;none&quot;&gt;&lt;a href=&quot;#news&quot; class=&quot;mobile-link&quot; role=&quot;menuitem&quot; data-target=&quot;news&quot;&gt;
+          &lt;span class=&quot;ml-number&quot;&gt;05&lt;/span&gt;&lt;span class=&quot;ml-text&quot;&gt;NEWS&lt;/span&gt;
+        &lt;/a&gt;&lt;/li&gt;
+        &lt;li role=&quot;none&quot;&gt;&lt;a href=&quot;#store&quot; class=&quot;mobile-link&quot; role=&quot;menuitem&quot; data-target=&quot;store&quot;&gt;
+          &lt;span class=&quot;ml-number&quot;&gt;06&lt;/span&gt;&lt;span class=&quot;ml-text&quot;&gt;STORE&lt;/span&gt;
+        &lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+
+      &lt;!-- Mobile Footer Accent --&gt;
+      &lt;div class=&quot;mobile-footer&quot; aria-hidden=&quot;true&quot;&gt;
+        &lt;div class=&quot;mobile-led&quot;&gt;&lt;/div&gt;
+      &lt;/div&gt;
+
+    &lt;/div&gt;
+  &lt;/div&gt;</code></pre>
+      </div>
+    </section>
+
+    <section class="doc-section" id="section-3">
+      <div class="section-head">
+        <span class="section-index">3</span>
+        <h2>CSS Stylesheet</h2>
+      </div>
+      <p class="section-note">Add this CSS to your stylesheet (e.g. style.css):</p>
+      <div class="code-window">
+        <div class="code-chrome">
+          <div class="dots"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <span class="filename">style.css</span>
+          <button class="copy-btn" type="button" data-copy-target="code-3">
+            <svg class="icon-copy" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M3 10.5V3.5A1.5 1.5 0 0 1 4.5 2H10"/></svg>
+            <svg class="icon-check" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8.5l3 3 7-7"/></svg>
+            <span class="copy-label">Copy</span>
+          </button>
+        </div>
+        <pre><code id="code-3" class="language-css">/* ============================================================
+   VELOCITA — Racing Cockpit Navbar
+   A motorsport-inspired floating navigation bar with
+   carbon fiber textures, LED accent animations,
+   and cockpit instrument aesthetics.
+   ============================================================ */
+
+/* ─────────────────────────────────────────────
+   CSS Custom Properties
+   ───────────────────────────────────────────── */
+:root {
+  /* Surface Colors */
+  --color-bg: #050508;
+  --color-surface: #0d0d12;
+  --color-surface-raised: #141419;
+  --color-surface-light: #1c1c24;
+
+  /* Accent Colors */
+  --accent-red: #e63946;
+  --accent-red-bright: #ff4757;
+  --accent-orange: #ff6b35;
+  --accent-glow: rgba(230, 57, 70, 0.55);
+  --accent-glow-soft: rgba(230, 57, 70, 0.12);
+  --accent-glow-muted: rgba(230, 57, 70, 0.06);
+
+  /* Text Colors */
+  --text-primary: #eeeef2;
+  --text-secondary: #787890;
+  --text-muted: #484858;
+  --text-accent: #ff5c6a;
+
+  /* Borders */
+  --border-subtle: rgba(255, 255, 255, 0.05);
+  --border-light: rgba(255, 255, 255, 0.08);
+  --border-accent: rgba(230, 57, 70, 0.25);
+
+  /* Typography */
+  --font-display: &#39;Orbitron&#39;, monospace, sans-serif;
+  --font-body: &#39;Rajdhani&#39;, &#39;Segoe UI&#39;, sans-serif;
+
+  /* Dimensions */
+  --nav-height: 72px;
+  --nav-max-width: 1100px;
+  --nav-bottom: 30px;
+  --icon-box: 38px;
+
+  /* Transitions */
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --t-fast: 0.2s var(--ease-expo);
+  --t-medium: 0.4s var(--ease-quint);
+  --t-slow: 0.6s var(--ease-quint);
+}
+
+
+/* ─────────────────────────────────────────────
+   Reset &amp; Base
+   ───────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul, li {
+  list-style: none;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+
+
+/* ─────────────────────────────────────────────
+   Reduced Motion
+   ───────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+
+/* =============================================================
+   VELOCITA NAVBAR — Main Container
+   ============================================================= */
+.velocita-nav {
+  position: fixed;
+  bottom: var(--nav-bottom);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  width: min(var(--nav-max-width), 92vw);
+  /* Entrance animation */
+  animation: navEntrance 1s var(--ease-expo) 0.3s both;
+}
+
+@keyframes navEntrance {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(40px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+}
+
+/* Ambient glow beneath navbar */
+.velocita-nav::before {
+  content: &#39;&#39;;
+  position: absolute;
+  bottom: -8px;
+  left: 10%;
+  right: 10%;
+  height: 60%;
+  background: radial-gradient(
+    ellipse at 50% 80%,
+    var(--accent-glow-soft) 0%,
+    transparent 70%
+  );
+  filter: blur(25px);
+  pointer-events: none;
+  z-index: -1;
+  animation: ambientPulse 3s ease-in-out infinite;
+}
+
+@keyframes ambientPulse {
+  0%, 100% { opacity: 0.5; }
+  50%      { opacity: 0.9; }
+}
+
+
+/* =============================================================
+   Nav Shell — The Aerodynamic Body
+   ============================================================= */
+.nav-shell {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: var(--nav-height);
+  /* Aerodynamic hexagonal shape */
+  clip-path: polygon(
+    0%   50%,
+    1.2% 28%,
+    3%   10%,
+    5.5% 2%,
+    8%   0%,
+    92%  0%,
+    94.5% 2%,
+    97%  10%,
+    98.8% 28%,
+    100% 50%,
+    98.8% 72%,
+    97%  90%,
+    94.5% 98%,
+    92%  100%,
+    8%   100%,
+    5.5% 98%,
+    3%   90%,
+    1.2% 72%
+  );
+  /* Surface gradient */
+  background: linear-gradient(
+    180deg,
+    #1a1a24 0%,
+    #13131b 35%,
+    #0f0f16 65%,
+    #0c0c12 100%
+  );
+}
+
+/* Carbon Fiber Texture */
+.nav-shell::before {
+  content: &#39;&#39;;
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 1px,
+      rgba(255, 255, 255, 0.012) 1px,
+      rgba(255, 255, 255, 0.012) 2px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 1px,
+      rgba(255, 255, 255, 0.012) 1px,
+      rgba(255, 255, 255, 0.012) 2px
+    );
+  background-size: 3px 3px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Top Edge Highlight */
+.nav-shell::after {
+  content: &#39;&#39;;
+  position: absolute;
+  top: 1px;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.06) 15%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.06) 85%,
+    transparent
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+
+
+/* =============================================================
+   LED Wing Tips
+   ============================================================= */
+.nav-wing {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  width: 5px;
+  height: 22px;
+}
+
+.nav-wing--left {
+  left: 8px;
+}
+
+.nav-wing--right {
+  right: 8px;
+}
+
+.wing-led {
+  width: 100%;
+  height: 100%;
+  border-radius: 2.5px;
+  background: linear-gradient(180deg, var(--accent-red), var(--accent-orange));
+  box-shadow:
+    0 0 6px  var(--accent-glow),
+    0 0 16px var(--accent-glow),
+    0 0 35px rgba(230, 57, 70, 0.2);
+  animation: ledPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes ledPulse {
+  0%, 100% {
+    opacity: 0.65;
+    box-shadow:
+      0 0 6px  var(--accent-glow),
+      0 0 16px var(--accent-glow),
+      0 0 35px rgba(230, 57, 70, 0.2);
+  }
+  50% {
+    opacity: 1;
+    box-shadow:
+      0 0 10px var(--accent-glow),
+      0 0 28px var(--accent-glow),
+      0 0 55px rgba(230, 57, 70, 0.3);
+  }
+}
+
+
+/* =============================================================
+   Brand Mark
+   ============================================================= */
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 14px 0 32px;
+  z-index: 3;
+  flex-shrink: 0;
+  text-decoration: none;
+  outline: none;
+  position: relative;
+}
+
+.nav-brand:focus-visible {
+  outline: 2px solid var(--accent-red);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.brand-letter {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--accent-red);
+  text-shadow:
+    0 0 8px  var(--accent-glow),
+    0 0 20px rgba(230, 57, 70, 0.25);
+  letter-spacing: 3px;
+  line-height: 1;
+  user-select: none;
+}
+
+.brand-dot {
+  display: block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent-red);
+  box-shadow: 0 0 6px var(--accent-glow);
+  animation: dotPulse 2s ease-in-out infinite;
+  margin-top: -8px;
+}
+
+@keyframes dotPulse {
+  0%, 100% { opacity: 0.4; transform: scale(0.8); }
+  50%      { opacity: 1;   transform: scale(1.2); }
+}
+
+
+/* =============================================================
+   Separator
+   ============================================================= */
+.nav-sep {
+  display: block;
+  width: 1px;
+  height: 26px;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    var(--border-subtle) 20%,
+    var(--border-light) 50%,
+    var(--border-subtle) 80%,
+    transparent 100%
+  );
+  flex-shrink: 0;
+  z-index: 3;
+}
+
+
+/* =============================================================
+   Navigation Links
+   ============================================================= */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 0 10px;
+  flex: 1;
+  justify-content: center;
+  z-index: 3;
+}
+
+/* Individual Link */
+.nav-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 7px 13px;
+  border-radius: 10px;
+  position: relative;
+  transition:
+    background var(--t-fast),
+    transform var(--t-fast);
+  cursor: pointer;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.nav-link:focus-visible {
+  outline: 2px solid var(--accent-red);
+  outline-offset: 2px;
+}
+
+/* Icon Container */
+.link-icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--icon-box);
+  height: var(--icon-box);
+  border-radius: 9px;
+  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.018);
+  transition:
+    border-color var(--t-fast),
+    background var(--t-fast),
+    box-shadow var(--t-fast),
+    transform var(--t-fast);
+}
+
+.link-icon {
+  color: var(--text-secondary);
+  transition: color var(--t-fast);
+  flex-shrink: 0;
+}
+
+/* Label */
+.link-label {
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  transition: color var(--t-fast);
+  white-space: nowrap;
+}
+
+/* Bottom Indicator */
+.link-indicator {
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 18px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--accent-red);
+  box-shadow: 0 0 8px var(--accent-glow);
+  transition: transform var(--t-medium);
+  transform-origin: center;
+}
+
+/* ---- Hover State ---- */
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.nav-link:hover .link-icon-box {
+  border-color: var(--border-accent);
+  background: var(--accent-glow-muted);
+  transform: translateY(-1px);
+}
+
+.nav-link:hover .link-icon {
+  color: var(--text-primary);
+}
+
+.nav-link:hover .link-label {
+  color: var(--text-secondary);
+}
+
+/* ---- Active State ---- */
+.nav-link.active {
+  background: var(--accent-glow-muted);
+}
+
+.nav-link.active .link-icon-box {
+  border-color: var(--accent-red);
+  background: rgba(230, 57, 70, 0.12);
+  box-shadow:
+    0 0 12px rgba(230, 57, 70, 0.12),
+    inset 0 0 8px rgba(230, 57, 70, 0.06);
+}
+
+.nav-link.active .link-icon {
+  color: var(--accent-red-bright);
+}
+
+.nav-link.active .link-label {
+  color: var(--text-accent);
+}
+
+.nav-link.active .link-indicator {
+  transform: translateX(-50%) scaleX(1);
+}
+
+/* Heat glow under active item */
+.nav-link.active::after {
+  content: &#39;&#39;;
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 36px;
+  height: 10px;
+  background: var(--accent-glow);
+  filter: blur(10px);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: heatGlow 2.4s ease-in-out infinite;
+}
+
+@keyframes heatGlow {
+  0%, 100% { opacity: 0.3; }
+  50%      { opacity: 0.65; }
+}
+
+
+/* =============================================================
+   Racing Flag Accent
+   ============================================================= */
+.nav-flag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px 0 8px;
+  z-index: 3;
+  flex-shrink: 0;
+}
+
+.flag-icon {
+  color: var(--accent-red);
+  opacity: 0.45;
+  transition: opacity var(--t-fast);
+}
+
+.nav-flag:hover .flag-icon {
+  opacity: 0.75;
+}
+
+
+/* =============================================================
+   Mobile Toggle
+   ============================================================= */
+.mobile-toggle {
+  display: none;
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1010;
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+  background: linear-gradient(145deg, #18181f 0%, #0e0e14 100%);
+  border: 1px solid var(--border-subtle);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+  transition:
+    border-color var(--t-fast),
+    box-shadow var(--t-fast);
+  overflow: hidden;
+}
+
+.mobile-toggle:hover {
+  border-color: var(--border-accent);
+}
+
+.mobile-toggle:focus-visible {
+  outline: 2px solid var(--accent-red);
+  outline-offset: 3px;
+}
+
+.toggle-line {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text-secondary);
+  border-radius: 1px;
+  transition: var(--t-medium);
+  transform-origin: center;
+}
+
+/* Subtle glow backdrop */
+.toggle-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at center, var(--accent-glow-soft), transparent 70%);
+  opacity: 0;
+  transition: opacity var(--t-medium);
+  pointer-events: none;
+}
+
+/* Toggle Active (X shape) */
+.mobile-toggle.active {
+  border-color: var(--border-accent);
+}
+
+.mobile-toggle.active .toggle-glow {
+  opacity: 1;
+}
+
+.mobile-toggle.active .toggle-line:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+  background: var(--accent-red);
+}
+
+.mobile-toggle.active .toggle-line:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.mobile-toggle.active .toggle-line:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+  background: var(--accent-red);
+}
+
+
+/* =============================================================
+   Mobile Fullscreen Menu
+   ============================================================= */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1005;
+  background: rgba(5, 5, 8, 0.97);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  opacity: 0;
+  visibility: hidden;
+  overflow-y: auto;
+  transition:
+    opacity var(--t-medium),
+    visibility var(--t-medium);
+}
+
+.mobile-menu.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-menu-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+  padding: 40px 24px 80px;
+  gap: 24px;
+}
+
+/* Mobile Brand */
+.mobile-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.mobile-brand .brand-letter {
+  font-size: 2.2rem;
+}
+
+.brand-name {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: 5px;
+}
+
+/* Mobile Links */
+.mobile-links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  max-width: 320px;
+}
+
+.mobile-link {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 13px 22px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.015);
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  color: var(--text-secondary);
+  transition:
+    background var(--t-fast),
+    border-color var(--t-fast),
+    color var(--t-fast),
+    transform var(--t-medium),
+    opacity var(--t-medium),
+    box-shadow var(--t-fast);
+  transform: translateY(24px);
+  opacity: 0;
+}
+
+/* Staggered entrance */
+.mobile-menu.open .mobile-link {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.mobile-menu.open li:nth-child(1) .mobile-link { transition-delay: 0.04s; }
+.mobile-menu.open li:nth-child(2) .mobile-link { transition-delay: 0.08s; }
+.mobile-menu.open li:nth-child(3) .mobile-link { transition-delay: 0.12s; }
+.mobile-menu.open li:nth-child(4) .mobile-link { transition-delay: 0.16s; }
+.mobile-menu.open li:nth-child(5) .mobile-link { transition-delay: 0.20s; }
+.mobile-menu.open li:nth-child(6) .mobile-link { transition-delay: 0.24s; }
+
+.ml-number {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  min-width: 20px;
+}
+
+.ml-text {
+  flex: 1;
+}
+
+/* Mobile Link States */
+.mobile-link:hover,
+.mobile-link:focus-visible {
+  background: var(--accent-glow-muted);
+  border-color: var(--border-accent);
+  color: var(--text-primary);
+}
+
+.mobile-link:focus-visible {
+  outline: 2px solid var(--accent-red);
+  outline-offset: 2px;
+}
+
+.mobile-link.active {
+  border-color: var(--accent-red);
+  color: var(--accent-red);
+  background: rgba(230, 57, 70, 0.06);
+  box-shadow: 0 0 24px rgba(230, 57, 70, 0.08);
+}
+
+.mobile-link.active .ml-number {
+  color: rgba(230, 57, 70, 0.5);
+}
+
+/* Mobile Footer */
+.mobile-footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.mobile-led {
+  width: 50px;
+  height: 3px;
+  border-radius: 1.5px;
+  background: linear-gradient(90deg, var(--accent-red), var(--accent-orange));
+  box-shadow:
+    0 0 8px  var(--accent-glow),
+    0 0 18px var(--accent-glow);
+  animation: ledPulse 2.4s ease-in-out infinite;
+}
+
+
+/* =============================================================
+   Responsive
+   ============================================================= */
+
+/* Tablets &amp; Small Laptops */
+@media (max-width: 960px) {
+  :root {
+    --nav-max-width: 96vw;
+    --icon-box: 34px;
+    --nav-height: 66px;
+  }
+
+  .nav-link {
+    padding: 6px 10px;
+  }
+
+  .link-label {
+    font-size: 0.55rem;
+    letter-spacing: 1.2px;
+  }
+
+  .link-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .nav-brand {
+    padding: 0 10px 0 26px;
+  }
+
+  .brand-letter {
+    font-size: 1.25rem;
+  }
+
+  .nav-flag {
+    padding: 0 16px 0 6px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .nav-shell {
+    display: none;
+  }
+
+  .velocita-nav::before {
+    display: none;
+  }
+
+  .mobile-toggle {
+    display: flex;
+  }
+
+  .mobile-menu {
+    display: block;
+  }
+}</code></pre>
+      </div>
+    </section>
+
+    <section class="doc-section" id="section-4">
+      <div class="section-head">
+        <span class="section-index">4</span>
+        <h2>JavaScript Code</h2>
+      </div>
+      <p class="section-note">Add this script before the closing &lt;/body&gt; tag (e.g. script.js):</p>
+      <div class="code-window">
+        <div class="code-chrome">
+          <div class="dots"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <span class="filename">script.js</span>
+          <button class="copy-btn" type="button" data-copy-target="code-4">
+            <svg class="icon-copy" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M3 10.5V3.5A1.5 1.5 0 0 1 4.5 2H10"/></svg>
+            <svg class="icon-check" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8.5l3 3 7-7"/></svg>
+            <span class="copy-label">Copy</span>
+          </button>
+        </div>
+        <pre><code id="code-4" class="language-javascript">/**
+ * ============================================================
+ * Velocita — Racing Cockpit Navbar
+ * Interactive navigation with active states, smooth scrolling,
+ * mobile menu, keyboard accessibility, and scroll observation.
+ * ============================================================
+ */
+
+(function () {
+  &#39;use strict&#39;;
+
+  /* ─────────────────────────────────────────────
+     DOM References
+     ───────────────────────────────────────────── */
+  const nav           = document.getElementById(&#39;velocita-nav&#39;);
+  const navLinks      = document.querySelectorAll(&#39;.nav-link&#39;);
+  const mobileToggle  = document.getElementById(&#39;mobile-toggle&#39;);
+  const mobileMenu    = document.getElementById(&#39;mobile-menu&#39;);
+  const mobileLinks   = document.querySelectorAll(&#39;.mobile-link&#39;);
+  const sections      = document.querySelectorAll(&#39;.demo-section&#39;);
+
+  /** Respect user&#39;s reduced-motion preference */
+  const prefersReducedMotion = window.matchMedia(
+    &#39;(prefers-reduced-motion: reduce)&#39;
+  ).matches;
+
+
+  /* ─────────────────────────────────────────────
+     Active State Management
+     ───────────────────────────────────────────── */
+
+  /**
+   * Update the active link across both desktop and mobile navs.
+   * @param {string} targetId — The section id to mark as active.
+   */
+  function setActiveLink(targetId) {
+    // Desktop links
+    navLinks.forEach(function (link) {
+      var isActive = link.dataset.target === targetId;
+      link.classList.toggle(&#39;active&#39;, isActive);
+      if (isActive) {
+        link.setAttribute(&#39;aria-current&#39;, &#39;page&#39;);
+      } else {
+        link.removeAttribute(&#39;aria-current&#39;);
+      }
+    });
+
+    // Mobile links
+    mobileLinks.forEach(function (link) {
+      link.classList.toggle(&#39;active&#39;, link.dataset.target === targetId);
+    });
+  }
+
+
+  /* ─────────────────────────────────────────────
+     Smooth Scrolling
+     ───────────────────────────────────────────── */
+
+  /**
+   * Scroll the viewport to a section.
+   * @param {string} targetId — The section id to scroll to.
+   */
+  function scrollToSection(targetId) {
+    var section = document.getElementById(targetId);
+    if (!section) return;
+
+    section.scrollIntoView({
+      behavior: prefersReducedMotion ? &#39;auto&#39; : &#39;smooth&#39;,
+      block: &#39;start&#39;
+    });
+  }
+
+
+  /* ─────────────────────────────────────────────
+     Navigation Click Handler
+     ───────────────────────────────────────────── */
+
+  /**
+   * Handle a click on any nav link (desktop or mobile).
+   * @param {Event} e — The click event.
+   */
+  function handleNavClick(e) {
+    e.preventDefault();
+    var target = e.currentTarget.dataset.target;
+    if (!target) return;
+
+    setActiveLink(target);
+    scrollToSection(target);
+
+    // Close the mobile menu if it&#39;s open
+    if (mobileMenu &amp;&amp; mobileMenu.classList.contains(&#39;open&#39;)) {
+      closeMobileMenu();
+    }
+  }
+
+
+  /* ─────────────────────────────────────────────
+     Scroll-Based Active Detection
+     ───────────────────────────────────────────── */
+
+  /**
+   * Use IntersectionObserver to auto-highlight the nav link
+   * corresponding to the section currently in view.
+   */
+  function initScrollObserver() {
+    if (!(&#39;IntersectionObserver&#39; in window)) return;
+
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            setActiveLink(entry.target.id);
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: &#39;-20% 0px -60% 0px&#39;,
+        threshold: 0
+      }
+    );
+
+    sections.forEach(function (section) {
+      observer.observe(section);
+    });
+  }
+
+
+  /* ─────────────────────────────────────────────
+     Mobile Menu
+     ───────────────────────────────────────────── */
+
+  function openMobileMenu() {
+    mobileMenu.classList.add(&#39;open&#39;);
+    mobileMenu.setAttribute(&#39;aria-hidden&#39;, &#39;false&#39;);
+    mobileToggle.classList.add(&#39;active&#39;);
+    mobileToggle.setAttribute(&#39;aria-expanded&#39;, &#39;true&#39;);
+    document.body.style.overflow = &#39;hidden&#39;;
+
+    // Focus the first link after transition
+    var firstLink = mobileMenu.querySelector(&#39;.mobile-link&#39;);
+    if (firstLink) {
+      setTimeout(function () {
+        firstLink.focus();
+      }, 350);
+    }
+  }
+
+  function closeMobileMenu() {
+    mobileMenu.classList.remove(&#39;open&#39;);
+    mobileMenu.setAttribute(&#39;aria-hidden&#39;, &#39;true&#39;);
+    mobileToggle.classList.remove(&#39;active&#39;);
+    mobileToggle.setAttribute(&#39;aria-expanded&#39;, &#39;false&#39;);
+    document.body.style.overflow = &#39;&#39;;
+    mobileToggle.focus();
+  }
+
+  function toggleMobileMenu() {
+    if (mobileMenu.classList.contains(&#39;open&#39;)) {
+      closeMobileMenu();
+    } else {
+      openMobileMenu();
+    }
+  }
+
+
+  /* ─────────────────────────────────────────────
+     Keyboard Navigation
+     ───────────────────────────────────────────── */
+
+  /**
+   * Support Escape to close mobile menu,
+   * and arrow keys for nav link traversal.
+   */
+  function handleKeydown(e) {
+    // Escape closes mobile menu
+    if (e.key === &#39;Escape&#39; &amp;&amp; mobileMenu &amp;&amp; mobileMenu.classList.contains(&#39;open&#39;)) {
+      closeMobileMenu();
+      return;
+    }
+
+    var focused = document.activeElement;
+    var isDesktopLink = focused &amp;&amp; focused.classList.contains(&#39;nav-link&#39;);
+    var isMobileLink  = focused &amp;&amp; focused.classList.contains(&#39;mobile-link&#39;);
+
+    if (!isDesktopLink &amp;&amp; !isMobileLink) return;
+
+    var links = isDesktopLink
+      ? Array.from(navLinks)
+      : Array.from(mobileLinks);
+    var currentIndex = links.indexOf(focused);
+    var nextIndex;
+
+    if (isDesktopLink) {
+      // Horizontal: Left/Right arrows
+      if (e.key === &#39;ArrowRight&#39;) {
+        nextIndex = (currentIndex + 1) % links.length;
+      } else if (e.key === &#39;ArrowLeft&#39;) {
+        nextIndex = (currentIndex - 1 + links.length) % links.length;
+      }
+    } else {
+      // Vertical: Up/Down arrows
+      if (e.key === &#39;ArrowDown&#39;) {
+        nextIndex = (currentIndex + 1) % links.length;
+      } else if (e.key === &#39;ArrowUp&#39;) {
+        nextIndex = (currentIndex - 1 + links.length) % links.length;
+      }
+    }
+
+    if (nextIndex !== undefined) {
+      e.preventDefault();
+      links[nextIndex].focus();
+    }
+  }
+
+
+  /* ─────────────────────────────────────────────
+     Initialization
+     ───────────────────────────────────────────── */
+
+  function init() {
+    // Desktop nav clicks
+    navLinks.forEach(function (link) {
+      link.addEventListener(&#39;click&#39;, handleNavClick);
+    });
+
+    // Mobile nav clicks
+    mobileLinks.forEach(function (link) {
+      link.addEventListener(&#39;click&#39;, handleNavClick);
+    });
+
+    // Mobile toggle
+    if (mobileToggle) {
+      mobileToggle.addEventListener(&#39;click&#39;, toggleMobileMenu);
+    }
+
+    // Keyboard
+    document.addEventListener(&#39;keydown&#39;, handleKeydown);
+
+    // Scroll-based active detection
+    initScrollObserver();
+
+    // Close mobile menu if window resizes back to desktop
+    window.addEventListener(&#39;resize&#39;, function () {
+      if (
+        window.innerWidth &gt; 768 &amp;&amp;
+        mobileMenu &amp;&amp;
+        mobileMenu.classList.contains(&#39;open&#39;)
+      ) {
+        closeMobileMenu();
+      }
+    });
+  }
+
+  // Boot
+  if (document.readyState === &#39;loading&#39;) {
+    document.addEventListener(&#39;DOMContentLoaded&#39;, init);
+  } else {
+    init();
+  }
+})();</code></pre>
+      </div>
+    </section>
+
+    </main>
+  </div>
+
+  <footer class="doc-footer">
+    <span>Part of the Modern Navbar Collection</span>
+    <a href="../index.html">&larr; Back to Collection</a>
+  </footer>
+
+<script>
+  hljs.highlightAll();
+
+  document.querySelectorAll('.copy-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var targetId = btn.getAttribute('data-copy-target');
+      var codeEl = document.getElementById(targetId);
+      var text = codeEl.textContent;
+      navigator.clipboard.writeText(text).then(function(){
+        btn.classList.add('is-copied');
+        var label = btn.querySelector('.copy-label');
+        var prev = label.textContent;
+        label.textContent = 'Copied';
+        setTimeout(function(){
+          btn.classList.remove('is-copied');
+          label.textContent = prev;
+        }, 1800);
+      });
+    });
+  });
+
+  var links = document.querySelectorAll('.side-nav a');
+  var sections = document.querySelectorAll('.doc-section');
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting) {
+        links.forEach(function(l){ l.classList.remove('is-active'); });
+        var active = document.querySelector('.side-nav a[href="#' + entry.target.id + '"]');
+        if (active) active.classList.add('is-active');
+      }
+    });
+  }, { rootMargin: '-15% 0px -70% 0px' });
+  sections.forEach(function(s){ observer.observe(s); });
+</script>
+
+</body>
+</html>

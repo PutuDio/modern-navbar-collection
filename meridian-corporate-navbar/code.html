@@ -1,0 +1,1979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meridian — Implementation Guide</title>
+<meta name="description" content="Isolated, copy-paste-ready code for the Meridian Corporate Navigation System — font import, markup, styles, and behavior.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/tomorrow-night.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+<style>
+  :root{
+    --paper:#fbfcfd;
+    --panel:#ffffff;
+    --line:#e2e8f0;
+    --ink:#0f172a;
+    --ink-soft:#475569;
+    --ink-faint:#94a3b8;
+    --accent:#1d4ed8;
+    --accent-soft:#eef2ff;
+    --ok:#059669;
+    --code-bg:#0b1220;
+    --code-chrome:#111a2c;
+    --code-line:#1e293b;
+    --font-display:'Plus Jakarta Sans', system-ui, sans-serif;
+    --font-mono:'IBM Plex Mono', 'SFMono-Regular', monospace;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--font-display);
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{ color:inherit; text-decoration:none; }
+
+  /* ---------- Masthead ---------- */
+  .masthead{
+    max-width:1180px;
+    margin:0 auto;
+    padding:4.5rem 2.5rem 3rem;
+    border-bottom:1px solid var(--line);
+  }
+  .masthead-kicker{
+    font-size:0.8125rem;
+    color:var(--accent);
+    font-weight:600;
+    margin-bottom:0.9rem;
+  }
+  .masthead h1{
+    font-size:clamp(2rem, 4vw, 2.75rem);
+    font-weight:700;
+    letter-spacing:-0.02em;
+    margin:0 0 1rem;
+    max-width:20ch;
+  }
+  .masthead p{
+    color:var(--ink-soft);
+    font-size:1.05rem;
+    line-height:1.65;
+    max-width:62ch;
+    margin:0;
+  }
+  .masthead-meta{
+    display:flex;
+    gap:1.5rem;
+    margin-top:1.75rem;
+    font-size:0.85rem;
+    color:var(--ink-faint);
+    font-family:var(--font-mono);
+  }
+
+  /* ---------- Layout ---------- */
+  .layout{
+    max-width:1180px;
+    margin:0 auto;
+    padding:3rem 2.5rem 6rem;
+    display:grid;
+    grid-template-columns:220px minmax(0,1fr);
+    gap:3.5rem;
+  }
+
+  .side-nav{ align-self:start; position:sticky; top:2.5rem; }
+  .side-nav-label{
+    font-size:0.75rem;
+    color:var(--ink-faint);
+    font-weight:600;
+    margin-bottom:0.9rem;
+  }
+  .side-nav ul{ list-style:none; margin:0; padding:0; }
+  .side-nav li + li{ margin-top:0.35rem; }
+  .side-nav a{
+    display:flex;
+    align-items:baseline;
+    gap:0.6rem;
+    padding:0.45rem 0.6rem;
+    border-radius:8px;
+    font-size:0.9rem;
+    color:var(--ink-soft);
+    transition:background 0.15s ease, color 0.15s ease;
+  }
+  .side-nav a:hover{ background:var(--accent-soft); color:var(--ink); }
+  .side-nav a.is-active{ background:var(--accent-soft); color:var(--accent); font-weight:600; }
+  .side-nav .idx{
+    font-family:var(--font-mono);
+    font-size:0.78rem;
+    color:var(--ink-faint);
+    width:1.1rem;
+  }
+  .side-nav a.is-active .idx{ color:var(--accent); }
+
+  /* ---------- Doc sections ---------- */
+  .doc-section{ margin-bottom:3.5rem; scroll-margin-top:2rem; }
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:0.9rem;
+    margin-bottom:0.5rem;
+  }
+  .section-index{
+    font-family:var(--font-mono);
+    font-size:0.95rem;
+    color:var(--accent);
+    font-weight:600;
+  }
+  .section-head h2{
+    font-size:1.35rem;
+    font-weight:700;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+  .section-note{
+    color:var(--ink-soft);
+    font-size:0.98rem;
+    line-height:1.6;
+    margin:0 0 1.1rem;
+    max-width:60ch;
+  }
+
+  /* ---------- Code window ---------- */
+  .code-window{
+    background:var(--code-bg);
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 1px 2px rgba(15,23,42,0.06), 0 12px 32px -16px rgba(15,23,42,0.35);
+  }
+  .code-chrome{
+    display:flex;
+    align-items:center;
+    gap:0.9rem;
+    padding:0.7rem 1rem;
+    background:var(--code-chrome);
+    border-bottom:1px solid var(--code-line);
+  }
+  .dots{ display:flex; gap:6px; flex-shrink:0; }
+  .dot{ width:10px; height:10px; border-radius:50%; display:block; }
+  .dot-a{ background:#f4756b; }
+  .dot-b{ background:#f5b95b; }
+  .dot-c{ background:#4fbf6b; }
+  .filename{
+    font-family:var(--font-mono);
+    font-size:0.78rem;
+    color:#8592ad;
+    flex:1;
+  }
+  .copy-btn{
+    display:flex;
+    align-items:center;
+    gap:0.4rem;
+    background:transparent;
+    border:1px solid var(--code-line);
+    color:#c3cbe0;
+    font-family:var(--font-display);
+    font-size:0.78rem;
+    font-weight:500;
+    padding:0.32rem 0.65rem;
+    border-radius:6px;
+    cursor:pointer;
+    transition:background 0.15s ease, border-color 0.15s ease;
+  }
+  .copy-btn:hover{ background:rgba(255,255,255,0.06); border-color:#334155; }
+  .copy-btn .icon-check{ display:none; }
+  .copy-btn.is-copied .icon-copy{ display:none; }
+  .copy-btn.is-copied .icon-check{ display:block; color:var(--ok); }
+  .copy-btn.is-copied{ border-color:var(--ok); color:var(--ok); }
+
+  .code-window pre{
+    margin:0;
+    padding:1.25rem 1.4rem;
+    overflow-x:auto;
+    max-height:520px;
+    overflow-y:auto;
+  }
+  .code-window code{
+    font-family:var(--font-mono);
+    font-size:0.84rem;
+    line-height:1.65;
+    background:transparent !important;
+  }
+
+  .code-window pre::-webkit-scrollbar{ height:8px; width:8px; }
+  .code-window pre::-webkit-scrollbar-thumb{ background:#293449; border-radius:8px; }
+  .code-window pre::-webkit-scrollbar-track{ background:transparent; }
+
+  /* ---------- Footer ---------- */
+  .doc-footer{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 2.5rem 4rem;
+    border-top:1px solid var(--line);
+    padding-top:2rem;
+    color:var(--ink-faint);
+    font-size:0.85rem;
+    display:flex;
+    justify-content:space-between;
+  }
+  .doc-footer a{ color:var(--accent); font-weight:500; }
+
+  @media (max-width: 860px){
+    .layout{ grid-template-columns:1fr; }
+    .side-nav{ position:static; margin-bottom:1rem; }
+    .side-nav ul{ display:flex; flex-wrap:wrap; gap:0.4rem; }
+    .side-nav li + li{ margin-top:0; }
+    .masthead{ padding:3rem 1.5rem 2.25rem; }
+    .layout{ padding:2rem 1.5rem 4rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .copy-btn, .side-nav a{ transition:none; }
+  }
+</style>
+</head>
+<body>
+
+  <header class="masthead">
+    <p class="masthead-kicker">Implementation guide</p>
+    <h1>Meridian Corporate Navigation System</h1>
+    <p>Isolated, dependency-free code for the header and navigation only — no hero sections or demo page content. Copy each block in order into your own project: font, markup, styles, then behavior.</p>
+    <div class="masthead-meta">
+      <span>4 files</span>
+      <span>Vanilla HTML / CSS / JS</span>
+      <span>Zero dependencies</span>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="side-nav" aria-label="Implementation steps">
+      <p class="side-nav-label">On this page</p>
+      <ul>
+<li><a href="#section-1"><span class="idx">1</span>Google Font Import</a></li>
+<li><a href="#section-2"><span class="idx">2</span>HTML Markup</a></li>
+<li><a href="#section-3"><span class="idx">3</span>CSS Stylesheet</a></li>
+<li><a href="#section-4"><span class="idx">4</span>JavaScript Code</a></li>
+      </ul>
+    </nav>
+
+    <main>
+
+    <section class="doc-section" id="section-1">
+      <div class="section-head">
+        <span class="section-index">1</span>
+        <h2>Google Font Import</h2>
+      </div>
+      <p class="section-note">Add this to your HTML <head>:</p>
+      <div class="code-window">
+        <div class="code-chrome">
+          <div class="dots"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <span class="filename">index.html — <head></span>
+          <button class="copy-btn" type="button" data-copy-target="code-1">
+            <svg class="icon-copy" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M3 10.5V3.5A1.5 1.5 0 0 1 4.5 2H10"/></svg>
+            <svg class="icon-check" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8.5l3 3 7-7"/></svg>
+            <span class="copy-label">Copy</span>
+          </button>
+        </div>
+        <pre><code id="code-1" class="language-html">&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+&lt;link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"&gt;
+</code></pre>
+      </div>
+    </section>
+
+    <section class="doc-section" id="section-2">
+      <div class="section-head">
+        <span class="section-index">2</span>
+        <h2>HTML Markup</h2>
+      </div>
+      <p class="section-note">Place this at the top of your <body>:</p>
+      <div class="code-window">
+        <div class="code-chrome">
+          <div class="dots"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <span class="filename">index.html — <body></span>
+          <button class="copy-btn" type="button" data-copy-target="code-2">
+            <svg class="icon-copy" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M3 10.5V3.5A1.5 1.5 0 0 1 4.5 2H10"/></svg>
+            <svg class="icon-check" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8.5l3 3 7-7"/></svg>
+            <span class="copy-label">Copy</span>
+          </button>
+        </div>
+        <pre><code id="code-2" class="language-html">&lt;!-- ================================================================
+     MERIDIAN CORPORATE HEADER &amp; NAVIGATION
+     ================================================================ --&gt;
+&lt;header class="meridian-header" id="meridian-header"&gt;
+
+  &lt;!-- Top Utility Bar (Formal Corporate Indicator) --&gt;
+  &lt;div class="header-utility"&gt;
+    &lt;div class="utility-inner container"&gt;
+      &lt;div class="utility-left"&gt;
+        &lt;span class="utility-pill"&gt;GLOBAL OFFICES&lt;/span&gt;
+        &lt;span class="utility-locations"&gt;London &amp;bull; New York &amp;bull; Zurich &amp;bull; Singapore &amp;bull; Tokyo&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div class="utility-right"&gt;
+        &lt;a href="#investors" class="utility-link"&gt;Investor Relations&lt;/a&gt;
+        &lt;span class="utility-sep" aria-hidden="true"&gt;&amp;bull;&lt;/span&gt;
+        &lt;a href="#careers" class="utility-link"&gt;
+          Careers
+          &lt;span class="utility-badge"&gt;We're hiring&lt;/span&gt;
+        &lt;/a&gt;
+        &lt;span class="utility-sep" aria-hidden="true"&gt;&amp;bull;&lt;/span&gt;
+        &lt;a href="#news" class="utility-link"&gt;Press &amp;amp; Media&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Main Navigation Bar --&gt;
+  &lt;div class="header-main"&gt;
+    &lt;div class="header-inner container"&gt;
+
+      &lt;!-- Corporate Brand Logo --&gt;
+      &lt;a href="#home" class="brand-logo" aria-label="Meridian Group — Home"&gt;
+        &lt;span class="logo-mark" aria-hidden="true"&gt;
+          &lt;svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"&gt;
+            &lt;path d="M14 2L2 8V20L14 26L26 20V8L14 2Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/&gt;
+            &lt;path d="M14 2V26" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/&gt;
+            &lt;path d="M2 8L14 14L26 8" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/&gt;
+            &lt;circle cx="14" cy="14" r="2.5" fill="currentColor"/&gt;
+          &lt;/svg&gt;
+        &lt;/span&gt;
+        &lt;span class="logo-text"&gt;
+          &lt;span class="logo-name"&gt;MERIDIAN&lt;/span&gt;
+          &lt;span class="logo-sub"&gt;ENTERPRISE ADVISORY&lt;/span&gt;
+        &lt;/span&gt;
+      &lt;/a&gt;
+
+      &lt;!-- Desktop Navigation Menu --&gt;
+      &lt;nav class="nav-desktop" aria-label="Primary Navigation"&gt;
+        &lt;ul class="nav-list" role="menubar"&gt;
+
+          &lt;!-- Item 1: Mega-Menu (Solutions) --&gt;
+          &lt;li class="nav-item has-dropdown has-megamenu" role="none"&gt;
+            &lt;button type="button" 
+                    class="nav-link dropdown-trigger" 
+                    role="menuitem" 
+                    aria-haspopup="true" 
+                    aria-expanded="false" 
+                    aria-controls="megamenu-solutions"&gt;
+              &lt;span&gt;Solutions&lt;/span&gt;
+              &lt;svg class="chevron-icon" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"&gt;
+                &lt;path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/&gt;
+              &lt;/svg&gt;
+            &lt;/button&gt;
+
+            &lt;!-- Mega-Menu Container --&gt;
+            &lt;div class="megamenu" id="megamenu-solutions" role="menu" aria-label="Solutions Menu"&gt;
+              &lt;div class="megamenu-inner"&gt;
+                
+                &lt;!-- Column 1: Strategy &amp; Advisory --&gt;
+                &lt;div class="megamenu-col"&gt;
+                  &lt;span class="megamenu-header"&gt;STRATEGY &amp;amp; ADVISORY&lt;/span&gt;
+                  &lt;ul class="megamenu-links"&gt;
+                    &lt;li&gt;
+                      &lt;a href="#solutions" class="megamenu-item" role="menuitem"&gt;
+                        &lt;span class="menu-item-icon"&gt;
+                          &lt;svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;&lt;path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/&gt;&lt;/svg&gt;
+                        &lt;/span&gt;
+                        &lt;div class="menu-item-body"&gt;
+                          &lt;span class="menu-item-title"&gt;Enterprise Architecture&lt;/span&gt;
+                          &lt;span class="menu-item-desc"&gt;Comprehensive digital and operating model redesign.&lt;/span&gt;
+                        &lt;/div&gt;
+                      &lt;/a&gt;
+                    &lt;/li&gt;
+                    &lt;li&gt;
+                      &lt;a href="#solutions" class="megamenu-item" role="menuitem"&gt;
+                        &lt;span class="menu-item-icon"&gt;
+                          &lt;svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;&lt;rect x="2" y="7" width="20" height="14" rx="2"/&gt;&lt;path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/&gt;&lt;/svg&gt;
+                        &lt;/span&gt;
+                        &lt;div class="menu-item-body"&gt;
+                          &lt;span class="menu-item-title"&gt;Capital Advisory &amp;amp; M&amp;amp;A&lt;/span&gt;
+                          &lt;span class="menu-item-desc"&gt;Due diligence, transaction structuring, and liquidity.&lt;/span&gt;
+                        &lt;/div&gt;
+                      &lt;/a&gt;
+                    &lt;/li&gt;
+                    &lt;li&gt;
+                      &lt;a href="#solutions" class="megamenu-item" role="menuitem"&gt;
+                        &lt;span class="menu-item-icon"&gt;
+                          &lt;svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;&lt;path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/&gt;&lt;/svg&gt;
+                        &lt;/span&gt;
+                        &lt;div class="menu-item-body"&gt;
+                          &lt;span class="menu-item-title"&gt;Regulatory &amp;amp; Compliance&lt;/span&gt;
+                          &lt;span class="menu-item-desc"&gt;Global governance frameworks and risk resilience.&lt;/span&gt;
+                        &lt;/div&gt;
+                      &lt;/a&gt;
+                    &lt;/li&gt;
+                  &lt;/ul&gt;
+                &lt;/div&gt;
+
+                &lt;!-- Column 2: Technology &amp; Transformation --&gt;
+                &lt;div class="megamenu-col"&gt;
+                  &lt;span class="megamenu-header"&gt;TECHNOLOGY PLATFORMS&lt;/span&gt;
+                  &lt;ul class="megamenu-links"&gt;
+                    &lt;li&gt;
+                      &lt;a href="#solutions" class="megamenu-item" role="menuitem"&gt;
+                        &lt;span class="menu-item-icon"&gt;
+                          &lt;svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;&lt;path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/&gt;&lt;/svg&gt;
+                        &lt;/span&gt;
+                        &lt;div class="menu-item-body"&gt;
+                          &lt;span class="menu-item-title"&gt;Cloud Infrastructure&lt;/span&gt;
+                          &lt;span class="menu-item-desc"&gt;High-reliability hybrid and multi-cloud ecosystems.&lt;/span&gt;
+                        &lt;/div&gt;
+                      &lt;/a&gt;
+                    &lt;/li&gt;
+                    &lt;li&gt;
+                      &lt;a href="#solutions" class="megamenu-item" role="menuitem"&gt;
+                        &lt;span class="menu-item-icon"&gt;
+                          &lt;svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;&lt;path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/&gt;&lt;/svg&gt;
+                        &lt;/span&gt;
+                        &lt;div class="menu-item-body"&gt;
+                          &lt;span class="menu-item-title"&gt;Data Intelligence &amp;amp; AI&lt;/span&gt;
+                          &lt;span class="menu-item-desc"&gt;Executive decision telemetry and data mesh systems.&lt;/span&gt;
+                        &lt;/div&gt;
+                      &lt;/a&gt;
+                    &lt;/li&gt;
+                    &lt;li&gt;
+                      &lt;a href="#solutions" class="megamenu-item" role="menuitem"&gt;
+                        &lt;span class="menu-item-icon"&gt;
+                          &lt;svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;&lt;circle cx="12" cy="12" r="10"/&gt;&lt;line x1="2" y1="12" x2="22" y2="12"/&gt;&lt;path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/&gt;&lt;/svg&gt;
+                        &lt;/span&gt;
+                        &lt;div class="menu-item-body"&gt;
+                          &lt;span class="menu-item-title"&gt;Cyber Defense &amp;amp; Zero Trust&lt;/span&gt;
+                          &lt;span class="menu-item-desc"&gt;Enterprise security postures for mission-critical assets.&lt;/span&gt;
+                        &lt;/div&gt;
+                      &lt;/a&gt;
+                    &lt;/li&gt;
+                  &lt;/ul&gt;
+                &lt;/div&gt;
+
+                &lt;!-- Column 3: Featured Case Study / Research Card --&gt;
+                &lt;div class="megamenu-featured"&gt;
+                  &lt;div class="featured-card"&gt;
+                    &lt;div class="featured-tag"&gt;2026 GLOBAL BENCHMARK&lt;/div&gt;
+                    &lt;h4 class="featured-title"&gt;Enterprise Operating Model Trends&lt;/h4&gt;
+                    &lt;p class="featured-summary"&gt;How Fortune 500 leadership navigates capital allocation and AI governance.&lt;/p&gt;
+                    &lt;a href="#insights" class="featured-cta"&gt;
+                      &lt;span&gt;Download Executive Summary&lt;/span&gt;
+                      &lt;svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"&gt;
+                        &lt;path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/&gt;
+                      &lt;/svg&gt;
+                    &lt;/a&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/li&gt;
+
+          &lt;!-- Item 2: Standard Dropdown (Company) --&gt;
+          &lt;li class="nav-item has-dropdown" role="none"&gt;
+            &lt;button type="button" 
+                    class="nav-link dropdown-trigger" 
+                    role="menuitem" 
+                    aria-haspopup="true" 
+                    aria-expanded="false" 
+                    aria-controls="dropdown-company"&gt;
+              &lt;span&gt;Company&lt;/span&gt;
+              &lt;svg class="chevron-icon" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"&gt;
+                &lt;path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/&gt;
+              &lt;/svg&gt;
+            &lt;/button&gt;
+
+            &lt;ul class="dropdown-menu" id="dropdown-company" role="menu" aria-label="Company Menu"&gt;
+              &lt;li role="none"&gt;
+                &lt;a href="#about" class="dropdown-link" role="menuitem"&gt;
+                  &lt;span class="dropdown-title"&gt;About Meridian&lt;/span&gt;
+                  &lt;span class="dropdown-desc"&gt;Our heritage, global board, and fiduciary philosophy.&lt;/span&gt;
+                &lt;/a&gt;
+              &lt;/li&gt;
+              &lt;li role="none"&gt;
+                &lt;a href="#leadership" class="dropdown-link" role="menuitem"&gt;
+                  &lt;span class="dropdown-title"&gt;Executive Leadership&lt;/span&gt;
+                  &lt;span class="dropdown-desc"&gt;Meet our managing partners and regional directors.&lt;/span&gt;
+                &lt;/a&gt;
+              &lt;/li&gt;
+              &lt;li role="none"&gt;
+                &lt;a href="#careers" class="dropdown-link" role="menuitem"&gt;
+                  &lt;span class="dropdown-title"&gt;
+                    Careers &amp;amp; Culture
+                    &lt;span class="badge-hiring"&gt;Hiring&lt;/span&gt;
+                  &lt;/span&gt;
+                  &lt;span class="dropdown-desc"&gt;Build your career among industry-leading advisors.&lt;/span&gt;
+                &lt;/a&gt;
+              &lt;/li&gt;
+              &lt;li role="none"&gt;
+                &lt;a href="#esg" class="dropdown-link" role="menuitem"&gt;
+                  &lt;span class="dropdown-title"&gt;ESG &amp;amp; Global Impact&lt;/span&gt;
+                  &lt;span class="dropdown-desc"&gt;Sustainability commitments and governance principles.&lt;/span&gt;
+                &lt;/a&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+
+          &lt;!-- Item 3: Direct Link (Case Studies) --&gt;
+          &lt;li class="nav-item" role="none"&gt;
+            &lt;a href="#cases" class="nav-link" role="menuitem"&gt;Case Studies&lt;/a&gt;
+          &lt;/li&gt;
+
+          &lt;!-- Item 4: Direct Link (Insights) --&gt;
+          &lt;li class="nav-item" role="none"&gt;
+            &lt;a href="#insights" class="nav-link" role="menuitem"&gt;Insights &amp;amp; Reports&lt;/a&gt;
+          &lt;/li&gt;
+
+          &lt;!-- Item 5: Direct Link (Contact) --&gt;
+          &lt;li class="nav-item" role="none"&gt;
+            &lt;a href="#contact" class="nav-link" role="menuitem"&gt;Contact&lt;/a&gt;
+          &lt;/li&gt;
+
+        &lt;/ul&gt;
+      &lt;/nav&gt;
+
+      &lt;!-- Right Utility &amp; Action Area --&gt;
+      &lt;div class="header-actions"&gt;
+
+        &lt;!-- Search Trigger --&gt;
+        &lt;button type="button" class="btn-icon" id="search-trigger" aria-label="Search site content"&gt;
+          &lt;svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;
+            &lt;circle cx="11" cy="11" r="8"/&gt;
+            &lt;line x1="21" y1="21" x2="16.65" y2="16.65"/&gt;
+          &lt;/svg&gt;
+        &lt;/button&gt;
+
+        &lt;!-- Theme Switcher (Light / Dark) --&gt;
+        &lt;button type="button" class="btn-icon theme-toggle" id="theme-toggle" aria-label="Switch to dark theme"&gt;
+          &lt;svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;
+            &lt;circle cx="12" cy="12" r="5"/&gt;
+            &lt;line x1="12" y1="1" x2="12" y2="3"/&gt;
+            &lt;line x1="12" y1="21" x2="12" y2="23"/&gt;
+            &lt;line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/&gt;
+            &lt;line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/&gt;
+            &lt;line x1="1" y1="12" x2="3" y2="12"/&gt;
+            &lt;line x1="21" y1="12" x2="23" y2="12"/&gt;
+            &lt;line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/&gt;
+            &lt;line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/&gt;
+          &lt;/svg&gt;
+          &lt;svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;
+            &lt;path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/&gt;
+          &lt;/svg&gt;
+        &lt;/button&gt;
+
+        &lt;!-- Secondary Action: Client Portal --&gt;
+        &lt;a href="#portal" class="btn-portal"&gt;
+          &lt;svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;
+            &lt;path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/&gt;
+            &lt;polyline points="10 17 15 12 10 7"/&gt;
+            &lt;line x1="15" y1="12" x2="3" y2="12"/&gt;
+          &lt;/svg&gt;
+          &lt;span&gt;Client Portal&lt;/span&gt;
+        &lt;/a&gt;
+
+        &lt;!-- Primary CTA Button --&gt;
+        &lt;a href="#contact" class="btn-primary"&gt;
+          &lt;span&gt;Schedule Consultation&lt;/span&gt;
+          &lt;svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"&gt;
+            &lt;path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/&gt;
+          &lt;/svg&gt;
+        &lt;/a&gt;
+
+        &lt;!-- Mobile Hamburger Toggle --&gt;
+        &lt;button type="button" 
+                class="btn-hamburger" 
+                id="mobile-hamburger" 
+                aria-label="Open mobile navigation menu" 
+                aria-expanded="false" 
+                aria-controls="mobile-drawer"&gt;
+          &lt;span class="hamburger-bar" aria-hidden="true"&gt;&lt;/span&gt;
+          &lt;span class="hamburger-bar" aria-hidden="true"&gt;&lt;/span&gt;
+        &lt;/button&gt;
+
+      &lt;/div&gt;
+
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Collapsible Search Bar Overlay --&gt;
+  &lt;div class="search-overlay" id="search-overlay" aria-hidden="true"&gt;
+    &lt;div class="search-container container"&gt;
+      &lt;form class="search-form" role="search" onsubmit="event.preventDefault();"&gt;
+        &lt;svg class="search-input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;
+          &lt;circle cx="11" cy="11" r="8"/&gt;
+          &lt;line x1="21" y1="21" x2="16.65" y2="16.65"/&gt;
+        &lt;/svg&gt;
+        &lt;input type="search" class="search-input" id="search-input" placeholder="Search advisory services, insights, leadership..." autocomplete="off"&gt;
+        &lt;button type="button" class="search-close" id="search-close" aria-label="Close search"&gt;
+          &lt;svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"&gt;&lt;line x1="18" y1="6" x2="6" y2="18"/&gt;&lt;line x1="6" y1="6" x2="18" y2="18"/&gt;&lt;/svg&gt;
+        &lt;/button&gt;
+      &lt;/form&gt;
+      &lt;div class="search-suggestions"&gt;
+        &lt;span class="suggestion-label"&gt;Suggested searches:&lt;/span&gt;
+        &lt;button type="button" class="suggestion-tag"&gt;Capital Allocation&lt;/button&gt;
+        &lt;button type="button" class="suggestion-tag"&gt;Zero-Trust Framework&lt;/button&gt;
+        &lt;button type="button" class="suggestion-tag"&gt;Global Tax Architecture&lt;/button&gt;
+        &lt;button type="button" class="suggestion-tag"&gt;Q3 2026 Telemetry&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/header&gt;
+
+&lt;!-- ================================================================
+     MOBILE NAVIGATION DRAWER (OFF-CANVAS)
+     ================================================================ --&gt;
+&lt;div class="mobile-drawer" id="mobile-drawer" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Mobile Navigation"&gt;
+  &lt;div class="drawer-backdrop" id="drawer-backdrop"&gt;&lt;/div&gt;
+  &lt;div class="drawer-panel"&gt;
+
+    &lt;!-- Drawer Top Bar --&gt;
+    &lt;div class="drawer-header"&gt;
+      &lt;div class="brand-logo"&gt;
+        &lt;span class="logo-mark" aria-hidden="true"&gt;
+          &lt;svg width="24" height="24" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"&gt;
+            &lt;path d="M14 2L2 8V20L14 26L26 20V8L14 2Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/&gt;
+            &lt;path d="M14 2V26" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/&gt;
+            &lt;path d="M2 8L14 14L26 8" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/&gt;
+            &lt;circle cx="14" cy="14" r="2.5" fill="currentColor"/&gt;
+          &lt;/svg&gt;
+        &lt;/span&gt;
+        &lt;span class="logo-text"&gt;
+          &lt;span class="logo-name"&gt;MERIDIAN&lt;/span&gt;
+        &lt;/span&gt;
+      &lt;/div&gt;
+      &lt;button type="button" class="drawer-close" id="drawer-close" aria-label="Close navigation menu"&gt;
+        &lt;svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"&gt;&lt;line x1="18" y1="6" x2="6" y2="18"/&gt;&lt;line x1="6" y1="6" x2="18" y2="18"/&gt;&lt;/svg&gt;
+      &lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Drawer Content (Scrollable) --&gt;
+    &lt;div class="drawer-body"&gt;
+
+      &lt;!-- Mobile Navigation Accordion --&gt;
+      &lt;nav class="mobile-nav" aria-label="Mobile Navigation Menu"&gt;
+        &lt;ul class="mobile-nav-list"&gt;
+
+          &lt;!-- Solutions Accordion --&gt;
+          &lt;li class="mobile-nav-item mobile-accordion"&gt;
+            &lt;button type="button" class="accordion-trigger" aria-expanded="false"&gt;
+              &lt;span&gt;Solutions&lt;/span&gt;
+              &lt;svg class="chevron-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"&gt;
+                &lt;path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/&gt;
+              &lt;/svg&gt;
+            &lt;/button&gt;
+            &lt;div class="accordion-panel"&gt;
+              &lt;ul class="accordion-links"&gt;
+                &lt;li&gt;&lt;a href="#solutions" class="accordion-link"&gt;Enterprise Architecture&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#solutions" class="accordion-link"&gt;Capital Advisory &amp;amp; M&amp;amp;A&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#solutions" class="accordion-link"&gt;Regulatory &amp;amp; Compliance&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#solutions" class="accordion-link"&gt;Cloud Infrastructure&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#solutions" class="accordion-link"&gt;Data Intelligence &amp;amp; AI&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#solutions" class="accordion-link"&gt;Cyber Defense &amp;amp; Zero Trust&lt;/a&gt;&lt;/li&gt;
+              &lt;/ul&gt;
+            &lt;/div&gt;
+          &lt;/li&gt;
+
+          &lt;!-- Company Accordion --&gt;
+          &lt;li class="mobile-nav-item mobile-accordion"&gt;
+            &lt;button type="button" class="accordion-trigger" aria-expanded="false"&gt;
+              &lt;span&gt;Company&lt;/span&gt;
+              &lt;svg class="chevron-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"&gt;
+                &lt;path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/&gt;
+              &lt;/svg&gt;
+            &lt;/button&gt;
+            &lt;div class="accordion-panel"&gt;
+              &lt;ul class="accordion-links"&gt;
+                &lt;li&gt;&lt;a href="#about" class="accordion-link"&gt;About Meridian Group&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#leadership" class="accordion-link"&gt;Executive Leadership&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;
+                  &lt;a href="#careers" class="accordion-link"&gt;
+                    &lt;span&gt;Careers &amp;amp; Culture&lt;/span&gt;
+                    &lt;span class="badge-hiring"&gt;Hiring&lt;/span&gt;
+                  &lt;/a&gt;
+                &lt;/li&gt;
+                &lt;li&gt;&lt;a href="#esg" class="accordion-link"&gt;ESG &amp;amp; Global Impact&lt;/a&gt;&lt;/li&gt;
+              &lt;/ul&gt;
+            &lt;/div&gt;
+          &lt;/li&gt;
+
+          &lt;!-- Direct Links --&gt;
+          &lt;li class="mobile-nav-item"&gt;
+            &lt;a href="#cases" class="mobile-direct-link"&gt;Case Studies&lt;/a&gt;
+          &lt;/li&gt;
+          &lt;li class="mobile-nav-item"&gt;
+            &lt;a href="#insights" class="mobile-direct-link"&gt;Insights &amp;amp; Reports&lt;/a&gt;
+          &lt;/li&gt;
+          &lt;li class="mobile-nav-item"&gt;
+            &lt;a href="#contact" class="mobile-direct-link"&gt;Contact&lt;/a&gt;
+          &lt;/li&gt;
+          &lt;li class="mobile-nav-item"&gt;
+            &lt;a href="#portal" class="mobile-direct-link"&gt;Client Portal&lt;/a&gt;
+          &lt;/li&gt;
+
+        &lt;/ul&gt;
+      &lt;/nav&gt;
+
+      &lt;!-- Mobile Drawer CTAs --&gt;
+      &lt;div class="drawer-actions"&gt;
+        &lt;a href="#contact" class="btn-primary btn-block"&gt;
+          &lt;span&gt;Schedule Consultation&lt;/span&gt;
+          &lt;svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"&gt;
+            &lt;path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/&gt;
+          &lt;/svg&gt;
+        &lt;/a&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Corporate Contact Details inside Drawer --&gt;
+      &lt;div class="drawer-corporate-info"&gt;
+        &lt;span class="info-label"&gt;Direct Inquiries&lt;/span&gt;
+        &lt;a href="mailto:advisory@meridian-group.com" class="info-link"&gt;advisory@meridian-group.com&lt;/a&gt;
+        &lt;span class="info-phone"&gt;+1 (212) 555-0190 (New York HQ)&lt;/span&gt;
+        &lt;span class="info-phone"&gt;+44 (20) 7946-0922 (London City)&lt;/span&gt;
+      &lt;/div&gt;
+
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+      </div>
+    </section>
+
+    <section class="doc-section" id="section-3">
+      <div class="section-head">
+        <span class="section-index">3</span>
+        <h2>CSS Stylesheet</h2>
+      </div>
+      <p class="section-note">Add this CSS to your styling:</p>
+      <div class="code-window">
+        <div class="code-chrome">
+          <div class="dots"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <span class="filename">style.css</span>
+          <button class="copy-btn" type="button" data-copy-target="code-3">
+            <svg class="icon-copy" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M3 10.5V3.5A1.5 1.5 0 0 1 4.5 2H10"/></svg>
+            <svg class="icon-check" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8.5l3 3 7-7"/></svg>
+            <span class="copy-label">Copy</span>
+          </button>
+        </div>
+        <pre><code id="code-3" class="language-css">:root {
+  /* Surface &amp; Backgrounds */
+  --bg-page: #fbfcfd;
+  --bg-surface: #ffffff;
+  --bg-surface-elevated: #ffffff;
+  --bg-surface-alt: #f4f6f8;
+  --bg-header: rgba(255, 255, 255, 0.92);
+  --bg-overlay: rgba(15, 23, 42, 0.45);
+
+  /* Typography Colors */
+  --text-primary: #0f172a;       /* Slate 900 */
+  --text-secondary: #475569;     /* Slate 600 */
+  --text-muted: #64748b;         /* Slate 500 */
+  --text-light: #94a3b8;         /* Slate 400 */
+  --text-inverse: #ffffff;
+
+  /* Brand Accents */
+  --brand-primary: #0f172a;      /* Authoritative Charcoal Slate */
+  --brand-primary-hover: #1e293b;
+  --brand-accent: #1d4ed8;       /* Executive Royal Cobalt */
+  --brand-accent-hover: #1e40af;
+  --brand-accent-soft: rgba(29, 78, 216, 0.08);
+  --brand-success: #059669;      /* Forest Green badge */
+  --brand-success-soft: rgba(5, 150, 105, 0.1);
+
+  /* Borders &amp; Dividers */
+  --border-subtle: #e2e8f0;      /* Slate 200 */
+  --border-light: #cbd5e1;       /* Slate 300 */
+  --border-strong: #94a3b8;
+  --border-focus: #1d4ed8;
+
+  /* Shadows (Natural multi-layer ambient occlusion) */
+  --shadow-sm: 0 1px 2px 0 rgba(15, 23, 42, 0.05);
+  --shadow-md: 0 4px 12px -2px rgba(15, 23, 42, 0.08), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
+  --shadow-lg: 0 12px 32px -4px rgba(15, 23, 42, 0.12), 0 4px 8px -2px rgba(15, 23, 42, 0.04);
+  --shadow-dropdown: 0 20px 40px -8px rgba(15, 23, 42, 0.12), 0 0 0 1px rgba(15, 23, 42, 0.06);
+
+  /* Dimensions */
+  --header-utility-height: 38px;
+  --header-main-height: 72px;
+  --header-total-height: 110px;
+  --container-width: 1240px;
+  --border-radius-sm: 6px;
+  --border-radius-md: 10px;
+  --border-radius-lg: 14px;
+  --border-radius-full: 9999px;
+
+  /* Transitions */
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --t-fast: 0.18s var(--ease-smooth);
+  --t-medium: 0.28s var(--ease-smooth);
+
+  /* Typography */
+  --font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+[data-theme="dark"] {
+  --bg-page: #080b11;
+  --bg-surface: #0f1420;
+  --bg-surface-elevated: #141b2a;
+  --bg-surface-alt: #0c101a;
+  --bg-header: rgba(8, 11, 17, 0.92);
+  --bg-overlay: rgba(0, 0, 0, 0.7);
+
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --text-inverse: #080b11;
+
+  --brand-primary: #f8fafc;
+  --brand-primary-hover: #e2e8f0;
+  --brand-accent: #3b82f6;
+  --brand-accent-hover: #60a5fa;
+  --brand-accent-soft: rgba(59, 130, 246, 0.12);
+  --brand-success: #10b981;
+  --brand-success-soft: rgba(16, 185, 129, 0.15);
+
+  --border-subtle: #1e293b;
+  --border-light: #334155;
+  --border-strong: #475569;
+  --border-focus: #3b82f6;
+
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 14px -2px rgba(0, 0, 0, 0.5), 0 2px 6px -2px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 14px 36px -4px rgba(0, 0, 0, 0.6), 0 4px 10px -2px rgba(0, 0, 0, 0.4);
+  --shadow-dropdown: 0 24px 48px -10px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.meridian-header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 900;
+  background: var(--bg-header);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-subtle);
+  transition: border-color var(--t-fast), box-shadow var(--t-fast), background-color var(--t-fast);
+}
+
+.meridian-header.header--scrolled {
+  border-bottom-color: var(--border-light);
+  box-shadow: var(--shadow-md);
+}
+
+.header-utility {
+  height: var(--header-utility-height);
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: 0.775rem;
+  color: var(--text-muted);
+  background: var(--bg-surface-alt);
+  display: flex;
+  align-items: center;
+}
+
+.utility-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.utility-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.utility-pill {
+  font-weight: 700;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  background: var(--bg-surface);
+  padding: 2px 7px;
+  border-radius: var(--border-radius-sm);
+  border: 1px solid var(--border-subtle);
+}
+
+.utility-locations {
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
+.utility-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.utility-link {
+  color: var(--text-secondary);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.utility-link:hover {
+  color: var(--brand-accent);
+}
+
+.utility-sep {
+  color: var(--border-light);
+  font-size: 0.6rem;
+}
+
+.utility-badge {
+  font-size: 0.625rem;
+  font-weight: 600;
+  color: var(--brand-success);
+  background: var(--brand-success-soft);
+  padding: 1px 6px;
+  border-radius: var(--border-radius-full);
+}
+
+.header-main {
+  height: var(--header-main-height);
+  display: flex;
+  align-items: center;
+}
+
+.header-inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 24px;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.logo-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  transition: transform var(--t-fast);
+}
+
+.brand-logo:hover .logo-mark {
+  transform: scale(1.04);
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-name {
+  font-weight: 800;
+  font-size: 1.15rem;
+  letter-spacing: 0.12em;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+.logo-sub {
+  font-weight: 600;
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
+  color: var(--text-muted);
+  margin-top: 1px;
+}
+
+.nav-desktop {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.nav-list {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 100%;
+}
+
+.nav-item {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.nav-item.has-megamenu {
+  position: static;
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  font-size: 0.885rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  border-radius: var(--border-radius-md);
+  transition: color var(--t-fast), background-color var(--t-fast);
+  cursor: pointer;
+  outline: none;
+}
+
+.nav-link:hover,
+.nav-item:hover &gt; .nav-link,
+.nav-link[aria-expanded="true"] {
+  color: var(--text-primary);
+  background-color: var(--bg-surface-alt);
+}
+
+.nav-link:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+.chevron-icon {
+  transition: transform var(--t-fast);
+  color: var(--text-muted);
+}
+
+.nav-item:hover &gt; .nav-link .chevron-icon,
+.nav-link[aria-expanded="true"] .chevron-icon {
+  transform: rotate(180deg);
+  color: var(--text-primary);
+}
+
+/* Mega-Menu */
+.megamenu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  width: min(960px, calc(100% - 48px));
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-dropdown);
+  padding: 24px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity var(--t-fast), transform var(--t-fast), visibility var(--t-fast);
+  z-index: 1000;
+}
+
+/* Pointer bridging pseudo-element to prevent accidental close */
+.megamenu::before {
+  content: '';
+  position: absolute;
+  top: -14px;
+  left: 0;
+  right: 0;
+  height: 14px;
+}
+
+.has-megamenu:hover .megamenu,
+.has-megamenu:focus-within .megamenu,
+.megamenu.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.has-megamenu::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 16px;
+}
+
+.has-megamenu:hover .megamenu,
+.has-megamenu:focus-within .megamenu,
+.megamenu.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.megamenu-inner {
+  display: grid;
+  grid-template-columns: 1.15fr 1.15fr 1fr;
+  gap: 24px;
+}
+
+.megamenu-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.megamenu-header {
+  font-size: 0.675rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  padding-left: 10px;
+}
+
+.megamenu-links {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.megamenu-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px;
+  border-radius: var(--border-radius-md);
+  transition: background-color var(--t-fast);
+}
+
+.megamenu-item:hover {
+  background-color: var(--bg-surface-alt);
+}
+
+.menu-item-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--border-radius-sm);
+  background: var(--bg-surface-alt);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.megamenu-item:hover .menu-item-icon {
+  color: var(--brand-accent);
+  border-color: var(--brand-accent-soft);
+  background: var(--brand-accent-soft);
+}
+
+.menu-item-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-item-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.menu-item-desc {
+  font-size: 0.775rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin-top: 2px;
+}
+
+.megamenu-featured {
+  display: flex;
+  flex-direction: column;
+}
+
+.featured-card {
+  height: 100%;
+  background: var(--bg-surface-alt);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--border-radius-md);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.featured-tag {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--brand-accent);
+  background: var(--brand-accent-soft);
+  padding: 3px 8px;
+  border-radius: var(--border-radius-sm);
+  align-self: flex-start;
+}
+
+.featured-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.featured-summary {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.featured-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--brand-accent);
+  margin-top: auto;
+  transition: gap var(--t-fast);
+}
+
+.featured-cta:hover {
+  gap: 10px;
+}
+
+/* Dropdown */
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  transform: translateY(8px);
+  width: 290px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-dropdown);
+  padding: 10px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity var(--t-fast), transform var(--t-fast), visibility var(--t-fast);
+  z-index: 1000;
+}
+
+.has-dropdown:not(.has-megamenu):hover .dropdown-menu,
+.has-dropdown:not(.has-megamenu):focus-within .dropdown-menu,
+.dropdown-menu.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.dropdown-link {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 12px;
+  border-radius: var(--border-radius-md);
+  transition: background-color var(--t-fast);
+}
+
+.dropdown-link:hover {
+  background-color: var(--bg-surface-alt);
+}
+
+.dropdown-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.dropdown-desc {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin-top: 2px;
+}
+
+.badge-hiring {
+  font-size: 0.625rem;
+  font-weight: 600;
+  color: var(--brand-success);
+  background: var(--brand-success-soft);
+  padding: 1px 6px;
+  border-radius: var(--border-radius-full);
+}
+
+/* Header Actions */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.btn-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--border-radius-md);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+  transition: color var(--t-fast), border-color var(--t-fast), background-color var(--t-fast);
+}
+
+.btn-icon:hover {
+  color: var(--text-primary);
+  border-color: var(--border-light);
+  background-color: var(--bg-surface-alt);
+}
+
+.btn-icon:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+.theme-toggle .icon-sun {
+  display: none;
+}
+.theme-toggle .icon-moon {
+  display: block;
+}
+[data-theme="dark"] .theme-toggle .icon-sun {
+  display: block;
+}
+[data-theme="dark"] .theme-toggle .icon-moon {
+  display: none;
+}
+
+.btn-portal {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  padding: 8px 12px;
+  border-radius: var(--border-radius-md);
+  transition: color var(--t-fast), background-color var(--t-fast);
+}
+
+.btn-portal:hover {
+  color: var(--text-primary);
+  background-color: var(--bg-surface-alt);
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--brand-primary);
+  color: var(--text-inverse);
+  padding: 10px 18px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: var(--border-radius-md);
+  border: 1px solid transparent;
+  box-shadow: var(--shadow-sm);
+  transition: background-color var(--t-fast), transform var(--t-fast), box-shadow var(--t-fast);
+  white-space: nowrap;
+}
+
+.btn-primary:hover {
+  background-color: var(--brand-primary-hover);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.btn-hamburger {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+  cursor: pointer;
+  z-index: 1010;
+}
+
+.hamburger-bar {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--text-primary);
+  border-radius: 1px;
+  transition: transform var(--t-medium), opacity var(--t-medium);
+}
+
+.btn-hamburger.is-active .hamburger-bar:nth-child(1) {
+  transform: translateY(4px) rotate(45deg);
+}
+
+.btn-hamburger.is-active .hamburger-bar:nth-child(2) {
+  transform: translateY(-4px) rotate(-45deg);
+}
+
+/* Search Overlay */
+.search-overlay {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-lg);
+  padding: 24px 0 32px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: opacity var(--t-fast), transform var(--t-fast), visibility var(--t-fast);
+  z-index: 850;
+}
+
+.search-overlay.is-active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.search-form {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-input-icon {
+  position: absolute;
+  left: 16px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  height: 52px;
+  padding: 0 48px 0 50px;
+  font-size: 1.05rem;
+  font-family: inherit;
+  color: var(--text-primary);
+  background: var(--bg-surface-alt);
+  border: 1px solid var(--border-light);
+  border-radius: var(--border-radius-lg);
+  outline: none;
+}
+
+.search-input:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--brand-accent-soft);
+}
+
+.search-close {
+  position: absolute;
+  right: 14px;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 6px;
+}
+
+.search-suggestions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.suggestion-label {
+  font-size: 0.775rem;
+  color: var(--text-muted);
+}
+
+.suggestion-tag {
+  font-size: 0.775rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--bg-surface-alt);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--border-radius-full);
+  padding: 4px 10px;
+  cursor: pointer;
+}
+
+/* Mobile Drawer */
+.mobile-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--t-medium), visibility var(--t-medium);
+}
+
+.mobile-drawer.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.drawer-backdrop {
+  position: absolute;
+  inset: 0;
+  background: var(--bg-overlay);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.drawer-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(400px, 86vw);
+  height: 100%;
+  background: var(--bg-surface);
+  border-left: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform var(--t-medium);
+  overflow-y: auto;
+}
+
+.mobile-drawer.is-open .drawer-panel {
+  transform: translateX(0);
+}
+
+.drawer-header {
+  height: var(--header-main-height);
+  padding: 0 20px;
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.drawer-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--border-radius-sm);
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.drawer-body {
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.mobile-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mobile-nav-item {
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.mobile-nav-item:last-child {
+  border-bottom: none;
+}
+
+.accordion-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 4px;
+  font-size: 0.975rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: left;
+}
+
+.accordion-trigger[aria-expanded="true"] .chevron-icon {
+  transform: rotate(180deg);
+}
+
+.accordion-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--t-medium);
+  overflow: hidden;
+  visibility: hidden;
+}
+
+.accordion-trigger[aria-expanded="true"] + .accordion-panel {
+  grid-template-rows: 1fr;
+  visibility: visible;
+}
+
+.accordion-links {
+  min-height: 0;
+  overflow: hidden;
+  padding: 4px 8px 14px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.accordion-link {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.accordion-link:hover {
+  color: var(--brand-accent);
+}
+
+.mobile-direct-link {
+  display: block;
+  padding: 14px 4px;
+  font-size: 0.975rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.drawer-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.drawer-corporate-info {
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.775rem;
+}
+
+.info-label {
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.675rem;
+}
+
+.info-link {
+  color: var(--brand-accent);
+  font-weight: 600;
+}
+
+.info-phone {
+  color: var(--text-secondary);
+}
+
+/* Responsive Queries */
+@media (max-width: 1080px) {
+  .header-utility {
+    display: none;
+  }
+  .nav-desktop {
+    display: none;
+  }
+  .btn-portal {
+    display: none;
+  }
+  .btn-hamburger {
+    display: flex;
+  }
+  .btn-primary {
+    padding: 8px 14px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .header-actions .btn-primary {
+    display: none;
+  }
+  .header-inner {
+    padding: 0 16px;
+  }
+  .logo-sub {
+    display: none;
+  }
+}
+</code></pre>
+      </div>
+    </section>
+
+    <section class="doc-section" id="section-4">
+      <div class="section-head">
+        <span class="section-index">4</span>
+        <h2>JavaScript Code</h2>
+      </div>
+      <p class="section-note">Place this in your script.js or before </body>:</p>
+      <div class="code-window">
+        <div class="code-chrome">
+          <div class="dots"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <span class="filename">script.js</span>
+          <button class="copy-btn" type="button" data-copy-target="code-4">
+            <svg class="icon-copy" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M3 10.5V3.5A1.5 1.5 0 0 1 4.5 2H10"/></svg>
+            <svg class="icon-check" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8.5l3 3 7-7"/></svg>
+            <span class="copy-label">Copy</span>
+          </button>
+        </div>
+        <pre><code id="code-4" class="language-javascript">(function () {
+  'use strict';
+
+  const htmlElement       = document.documentElement;
+  const header            = document.getElementById('meridian-header');
+  const themeToggle       = document.getElementById('theme-toggle');
+  const searchTrigger     = document.getElementById('search-trigger');
+  const searchOverlay     = document.getElementById('search-overlay');
+  const searchClose       = document.getElementById('search-close');
+  const searchInput       = document.getElementById('search-input');
+  
+  const mobileHamburger   = document.getElementById('mobile-hamburger');
+  const mobileDrawer      = document.getElementById('mobile-drawer');
+  const drawerClose       = document.getElementById('drawer-close');
+  const drawerBackdrop    = document.getElementById('drawer-backdrop');
+  const accordionTriggers = document.querySelectorAll('.accordion-trigger');
+  const mobileNavLinks    = document.querySelectorAll('.mobile-nav a');
+
+  const dropdownTriggers  = document.querySelectorAll('.dropdown-trigger');
+
+  const THEME_STORAGE_KEY = 'meridian_corporate_theme';
+
+  function initTheme() {
+    const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+    if (savedTheme) {
+      applyTheme(savedTheme);
+    } else {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      applyTheme(prefersDark ? 'dark' : 'light');
+    }
+  }
+
+  function applyTheme(theme) {
+    htmlElement.setAttribute('data-theme', theme);
+    localStorage.setItem(THEME_STORAGE_KEY, theme);
+    if (themeToggle) {
+      themeToggle.setAttribute('aria-label', theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
+    }
+  }
+
+  function toggleTheme() {
+    const currentTheme = htmlElement.getAttribute('data-theme') || 'light';
+    const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    applyTheme(nextTheme);
+  }
+
+  if (themeToggle) {
+    themeToggle.addEventListener('click', toggleTheme);
+  }
+
+  function handleScroll() {
+    if (!header) return;
+    const isScrolled = window.scrollY &gt; 15;
+    header.classList.toggle('header--scrolled', isScrolled);
+  }
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+
+  dropdownTriggers.forEach(function (trigger) {
+    trigger.addEventListener('click', function (e) {
+      e.stopPropagation();
+      const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+
+      dropdownTriggers.forEach(function (otherTrigger) {
+        if (otherTrigger !== trigger) {
+          otherTrigger.setAttribute('aria-expanded', 'false');
+          const otherMenu = otherTrigger.nextElementSibling;
+          if (otherMenu) otherMenu.classList.remove('is-open');
+        }
+      });
+
+      trigger.setAttribute('aria-expanded', (!isExpanded).toString());
+      const menu = trigger.nextElementSibling;
+      if (menu) {
+        menu.classList.toggle('is-open', !isExpanded);
+      }
+    });
+  });
+
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.has-dropdown')) {
+      dropdownTriggers.forEach(function (trigger) {
+        trigger.setAttribute('aria-expanded', 'false');
+        const menu = trigger.nextElementSibling;
+        if (menu) menu.classList.remove('is-open');
+      });
+    }
+  });
+
+  function openSearch() {
+    if (!searchOverlay) return;
+    searchOverlay.classList.add('is-active');
+    searchOverlay.setAttribute('aria-hidden', 'false');
+    if (searchInput) {
+      setTimeout(function () { searchInput.focus(); }, 100);
+    }
+  }
+
+  function closeSearch() {
+    if (!searchOverlay) return;
+    searchOverlay.classList.remove('is-active');
+    searchOverlay.setAttribute('aria-hidden', 'true');
+    if (searchTrigger) searchTrigger.focus();
+  }
+
+  if (searchTrigger) searchTrigger.addEventListener('click', openSearch);
+  if (searchClose) searchClose.addEventListener('click', closeSearch);
+
+  function openDrawer() {
+    if (!mobileDrawer) return;
+    mobileDrawer.classList.add('is-open');
+    mobileDrawer.setAttribute('aria-hidden', 'false');
+    if (mobileHamburger) {
+      mobileHamburger.classList.add('is-active');
+      mobileHamburger.setAttribute('aria-expanded', 'true');
+    }
+    document.body.style.overflow = 'hidden';
+    if (drawerClose) {
+      setTimeout(function () { drawerClose.focus(); }, 150);
+    }
+  }
+
+  function closeDrawer() {
+    if (!mobileDrawer) return;
+    mobileDrawer.classList.remove('is-open');
+    mobileDrawer.setAttribute('aria-hidden', 'true');
+    if (mobileHamburger) {
+      mobileHamburger.classList.remove('is-active');
+      mobileHamburger.setAttribute('aria-expanded', 'false');
+      mobileHamburger.focus();
+    }
+    document.body.style.overflow = '';
+  }
+
+  if (mobileHamburger) {
+    mobileHamburger.addEventListener('click', function () {
+      const isOpen = mobileDrawer.classList.contains('is-open');
+      if (isOpen) {
+        closeDrawer();
+      } else {
+        openDrawer();
+      }
+    });
+  }
+
+  if (drawerClose) drawerClose.addEventListener('click', closeDrawer);
+  if (drawerBackdrop) drawerBackdrop.addEventListener('click', closeDrawer);
+
+  accordionTriggers.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', (!isExpanded).toString());
+    });
+  });
+
+  mobileNavLinks.forEach(function (link) {
+    link.addEventListener('click', function () {
+      closeDrawer();
+    });
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      if (searchOverlay &amp;&amp; searchOverlay.classList.contains('is-active')) {
+        closeSearch();
+        return;
+      }
+      if (mobileDrawer &amp;&amp; mobileDrawer.classList.contains('is-open')) {
+        closeDrawer();
+        return;
+      }
+      dropdownTriggers.forEach(function (trigger) {
+        trigger.setAttribute('aria-expanded', 'false');
+        const menu = trigger.nextElementSibling;
+        if (menu) menu.classList.remove('is-open');
+      });
+    }
+  });
+
+  window.addEventListener('resize', function () {
+    if (window.innerWidth &gt; 1080 &amp;&amp; mobileDrawer &amp;&amp; mobileDrawer.classList.contains('is-open')) {
+      closeDrawer();
+    }
+  });
+
+  initTheme();
+  handleScroll();
+})();
+</code></pre>
+      </div>
+    </section>
+
+    </main>
+  </div>
+
+  <footer class="doc-footer">
+    <span>Part of the Modern Navbar Collection</span>
+    <a href="../index.html">Back</a>
+  </footer>
+
+<script>
+  hljs.highlightAll();
+
+  document.querySelectorAll('.copy-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var targetId = btn.getAttribute('data-copy-target');
+      var codeEl = document.getElementById(targetId);
+      var text = codeEl.textContent;
+      navigator.clipboard.writeText(text).then(function(){
+        btn.classList.add('is-copied');
+        var label = btn.querySelector('.copy-label');
+        var prev = label.textContent;
+        label.textContent = 'Copied';
+        setTimeout(function(){
+          btn.classList.remove('is-copied');
+          label.textContent = prev;
+        }, 1800);
+      });
+    });
+  });
+
+  var links = document.querySelectorAll('.side-nav a');
+  var sections = document.querySelectorAll('.doc-section');
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting) {
+        links.forEach(function(l){ l.classList.remove('is-active'); });
+        var active = document.querySelector('.side-nav a[href="#' + entry.target.id + '"]');
+        if (active) active.classList.add('is-active');
+      }
+    });
+  }, { rootMargin: '-15% 0px -70% 0px' });
+  sections.forEach(function(s){ observer.observe(s); });
+</script>
+
+</body>
+</html>

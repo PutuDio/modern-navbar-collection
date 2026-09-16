@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Adaptive Intent Navbar &mdash; Implementation Guide</title>
+<meta name="description" content="Isolated, copy-paste-ready code for AI Adaptive Intent Navbar &mdash; font import, markup, styles, and behavior.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/tomorrow-night.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+<style>
+  :root{
+    --paper:#fbfcfd;
+    --panel:#ffffff;
+    --line:#e2e8f0;
+    --ink:#0f172a;
+    --ink-soft:#475569;
+    --ink-faint:#94a3b8;
+    --accent:#6366f1;
+    --accent-soft:rgba(29, 78, 216, 0.08);
+    --ok:#059669;
+    --code-bg:#0b1220;
+    --code-chrome:#111a2c;
+    --code-line:#1e293b;
+    --font-display:'Plus Jakarta Sans', system-ui, sans-serif;
+    --font-mono:'IBM Plex Mono', 'SFMono-Regular', monospace;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--font-display);
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{ color:inherit; text-decoration:none; }
+
+  /* ---------- Masthead ---------- */
+  .masthead{
+    max-width:1180px;
+    margin:0 auto;
+    padding:4.5rem 2.5rem 3rem;
+    border-bottom:1px solid var(--line);
+  }
+  .masthead-kicker{
+    font-size:0.8125rem;
+    color:var(--accent);
+    font-weight:600;
+    margin-bottom:0.9rem;
+  }
+  .masthead h1{
+    font-size:clamp(2rem, 4vw, 2.75rem);
+    font-weight:700;
+    letter-spacing:-0.02em;
+    margin:0 0 1rem;
+    max-width:24ch;
+  }
+  .masthead p{
+    color:var(--ink-soft);
+    font-size:1.05rem;
+    line-height:1.65;
+    max-width:62ch;
+    margin:0;
+  }
+  .masthead-meta{
+    display:flex;
+    gap:1.5rem;
+    margin-top:1.75rem;
+    font-size:0.85rem;
+    color:var(--ink-faint);
+    font-family:var(--font-mono);
+  }
+
+  /* ---------- Layout ---------- */
+  .layout{
+    max-width:1180px;
+    margin:0 auto;
+    padding:3rem 2.5rem 6rem;
+    display:grid;
+    grid-template-columns:220px minmax(0,1fr);
+    gap:3.5rem;
+  }
+
+  .side-nav{ align-self:start; position:sticky; top:2.5rem; }
+  .side-nav-label{
+    font-size:0.75rem;
+    color:var(--ink-faint);
+    font-weight:600;
+    margin-bottom:0.9rem;
+  }
+  .side-nav ul{ list-style:none; margin:0; padding:0; }
+  .side-nav li + li{ margin-top:0.35rem; }
+  .side-nav a{
+    display:flex;
+    align-items:baseline;
+    gap:0.6rem;
+    padding:0.45rem 0.6rem;
+    border-radius:8px;
+    font-size:0.9rem;
+    color:var(--ink-soft);
+    transition:background 0.15s ease, color 0.15s ease;
+  }
+  .side-nav a:hover{ background:var(--accent-soft); color:var(--ink); }
+  .side-nav a.is-active{ background:var(--accent-soft); color:var(--accent); font-weight:600; }
+  .side-nav .idx{
+    font-family:var(--font-mono);
+    font-size:0.78rem;
+    color:var(--ink-faint);
+    width:1.1rem;
+  }
+  .side-nav a.is-active .idx{ color:var(--accent); }
+
+  /* ---------- Doc sections ---------- */
+  .doc-section{ margin-bottom:3.5rem; scroll-margin-top:2rem; }
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:0.9rem;
+    margin-bottom:0.5rem;
+  }
+  .section-index{
+    font-family:var(--font-mono);
+    font-size:0.95rem;
+    color:var(--accent);
+    font-weight:600;
+  }
+  .section-head h2{
+    font-size:1.35rem;
+    font-weight:700;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+  .section-note{
+    color:var(--ink-soft);
+    font-size:0.98rem;
+    line-height:1.6;
+    margin:0 0 1.1rem;
+    max-width:60ch;
+  }
+
+  /* ---------- Code window ---------- */
+  .code-window{
+    background:var(--code-bg);
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 1px 2px rgba(15,23,42,0.06), 0 12px 32px -16px rgba(15,23,42,0.35);
+  }
+  .code-chrome{
+    display:flex;
+    align-items:center;
+    gap:0.9rem;
+    padding:0.7rem 1rem;
+    background:var(--code-chrome);
+    border-bottom:1px solid var(--code-line);
+  }
+  .dots{ display:flex; gap:6px; flex-shrink:0; }
+  .dot{ width:10px; height:10px; border-radius:50%; display:block; }
+  .dot-a{ background:#f4756b; }
+  .dot-b{ background:#f5b95b; }
+  .dot-c{ background:#4fbf6b; }
+  .filename{
+    font-family:var(--font-mono);
+    font-size:0.78rem;
+    color:#8592ad;
+    flex:1;
+  }
+  .copy-btn{
+    display:flex;
+    align-items:center;
+    gap:0.4rem;
+    background:transparent;
+    border:1px solid var(--code-line);
+    color:#c3cbe0;
+    font-family:var(--font-display);
+    font-size:0.78rem;
+    font-weight:500;
+    padding:0.32rem 0.65rem;
+    border-radius:6px;
+    cursor:pointer;
+    transition:background 0.15s ease, border-color 0.15s ease;
+  }
+  .copy-btn:hover{ background:rgba(255,255,255,0.06); border-color:#334155; }
+  .copy-btn .icon-check{ display:none; }
+  .copy-btn.is-copied .icon-copy{ display:none; }
+  .copy-btn.is-copied .icon-check{ display:block; color:var(--ok); }
+  .copy-btn.is-copied{ border-color:var(--ok); color:var(--ok); }
+
+  .code-window pre{
+    margin:0;
+    padding:1.25rem 1.4rem;
+    overflow-x:auto;
+    max-height:520px;
+    overflow-y:auto;
+  }
+  .code-window code{
+    font-family:var(--font-mono);
+    font-size:0.84rem;
+    line-height:1.65;
+    background:transparent !important;
+  }
+
+  .code-window pre::-webkit-scrollbar{ height:8px; width:8px; }
+  .code-window pre::-webkit-scrollbar-thumb{ background:#293449; border-radius:8px; }
+  .code-window pre::-webkit-scrollbar-track{ background:transparent; }
+
+  /* ---------- Footer ---------- */
+  .doc-footer{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 2.5rem 4rem;
+    border-top:1px solid var(--line);
+    padding-top:2rem;
+    color:var(--ink-faint);
+    font-size:0.85rem;
+    display:flex;
+    justify-content:space-between;
+  }
+  .doc-footer a{ color:var(--accent); font-weight:500; }
+
+  @media (max-width: 860px){
+    .layout{ grid-template-columns:1fr; }
+    .side-nav{ position:static; margin-bottom:1rem; }
+    .side-nav ul{ display:flex; flex-wrap:wrap; gap:0.4rem; }
+    .side-nav li + li{ margin-top:0; }
+    .masthead{ padding:3rem 1.5rem 2.25rem; }
+    .layout{ padding:2rem 1.5rem 4rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .copy-btn, .side-nav a{ transition:none; }
+  }
+</style>
+</head>
+<body>
+
+  <header class="masthead">
+    <p class="masthead-kicker">Implementation guide</p>
+    <h1>AI Adaptive Intent Navbar</h1>
+    <p>Isolated, dependency-free code for the navigation only &mdash; no hero sections or demo page content. Copy each block in order into your own project: font, markup, styles, then behavior.</p>
+    <div class="masthead-meta">
+      <span>4 steps</span>
+      <span>Vanilla HTML / CSS / JS</span>
+      <span>Zero dependencies</span>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="side-nav" aria-label="Implementation steps">
+      <p class="side-nav-label">On this page</p>
+      <ul>
+        <li><a href="#section-1"><span class="idx">1</span>Google Font Import</a></li>
+        <li><a href="#section-2"><span class="idx">2</span>HTML Markup</a></li>
+        <li><a href="#section-3"><span class="idx">3</span>CSS Stylesheet</a></li>
+        <li><a href="#section-4"><span class="idx">4</span>JavaScript Code</a></li>
+      </ul>
+    </nav>
+
+    <main>
+
+    <section class="doc-section" id="section-1">
+      <div class="section-head">
+        <span class="section-index">1</span>
+        <h2>Google Font Import</h2>
+      </div>
+      <p class="section-note">Add this to your HTML &lt;head&gt;:</p>
+      <div class="code-window">
+        <div class="code-chrome">
+          <div class="dots"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <span class="filename">index.html &mdash; &lt;head&gt;</span>
+          <button class="copy-btn" type="button" data-copy-target="code-1">
+            <svg class="icon-copy" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M3 10.5V3.5A1.5 1.5 0 0 1 4.5 2H10"/></svg>
+            <svg class="icon-check" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8.5l3 3 7-7"/></svg>
+            <span class="copy-label">Copy</span>
+          </button>
+        </div>
+        <pre><code id="code-1" class="language-html">&lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.googleapis.com&quot;&gt;
+&lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.gstatic.com&quot; crossorigin&gt;
+&lt;link href=&quot;https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;</code></pre>
+      </div>
+    </section>
+
+    <section class="doc-section" id="section-2">
+      <div class="section-head">
+        <span class="section-index">2</span>
+        <h2>HTML Markup</h2>
+      </div>
+      <p class="section-note">Place this navigation component markup into your &lt;body&gt;:</p>
+      <div class="code-window">
+        <div class="code-chrome">
+          <div class="dots"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <span class="filename">index.html &mdash; &lt;body&gt;</span>
+          <button class="copy-btn" type="button" data-copy-target="code-2">
+            <svg class="icon-copy" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M3 10.5V3.5A1.5 1.5 0 0 1 4.5 2H10"/></svg>
+            <svg class="icon-check" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8.5l3 3 7-7"/></svg>
+            <span class="copy-label">Copy</span>
+          </button>
+        </div>
+        <pre><code id="code-2" class="language-html">&lt;!-- ================================================================
+     AI ADAPTIVE INTENT NAVBAR &amp; SIMULATOR
+     ================================================================ --&gt;
+
+&lt;!-- Top Persona Simulator Toolbar (Optional / Testing) --&gt;
+&lt;aside class=&quot;simulator-strip&quot; aria-label=&quot;Intent Simulation Controls&quot;&gt;
+  &lt;div class=&quot;sim-label&quot;&gt;
+    &lt;span class=&quot;sim-pulse&quot;&gt;&lt;/span&gt;
+    &lt;span&gt;LIVE INTENT SIMULATOR:&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;simulator-buttons&quot;&gt;
+    &lt;button class=&quot;sim-btn active&quot; data-intent=&quot;exploring&quot;&gt;01 / Explorer&lt;/button&gt;
+    &lt;button class=&quot;sim-btn&quot; data-intent=&quot;developer&quot;&gt;02 / Developer&lt;/button&gt;
+    &lt;button class=&quot;sim-btn&quot; data-intent=&quot;enterprise&quot;&gt;03 / Enterprise&lt;/button&gt;
+    &lt;button class=&quot;sim-btn&quot; data-intent=&quot;designer&quot;&gt;04 / Designer&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/aside&gt;
+
+&lt;!-- Predictive Morphing Navbar --&gt;
+&lt;header class=&quot;nav-header&quot;&gt;
+  &lt;nav class=&quot;nav-container&quot; aria-label=&quot;Predictive AI Navigation&quot;&gt;
+    
+    &lt;!-- Brand --&gt;
+    &lt;a href=&quot;#hero&quot; class=&quot;nav-brand&quot;&gt;
+      &lt;div class=&quot;brand-icon&quot;&gt;⚡&lt;/div&gt;
+      &lt;span class=&quot;brand-name&quot;&gt;Synapse OS&lt;/span&gt;
+    &lt;/a&gt;
+
+    &lt;!-- Adaptive Links (Dinamis via JS berdasarkan persona) --&gt;
+    &lt;ul class=&quot;nav-menu&quot; id=&quot;nav-menu&quot;&gt;
+      &lt;li class=&quot;adaptive-item&quot;&gt;&lt;a href=&quot;#platform&quot; class=&quot;nav-link&quot;&gt;Platform&lt;/a&gt;&lt;/li&gt;
+      &lt;li class=&quot;adaptive-item&quot;&gt;&lt;a href=&quot;#solutions&quot; class=&quot;nav-link&quot;&gt;Solutions&lt;/a&gt;&lt;/li&gt;
+      &lt;li class=&quot;adaptive-item&quot;&gt;&lt;a href=&quot;#tech-specs&quot; class=&quot;nav-link&quot;&gt;Technology&lt;/a&gt;&lt;/li&gt;
+      &lt;li class=&quot;adaptive-item&quot;&gt;&lt;a href=&quot;#enterprise-security&quot; class=&quot;nav-link&quot;&gt;Enterprise&lt;/a&gt;&lt;/li&gt;
+      &lt;li class=&quot;adaptive-item&quot;&gt;&lt;a href=&quot;#pricing&quot; class=&quot;nav-link&quot;&gt;Pricing&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;!-- Live Intent Confidence Pill --&gt;
+    &lt;div class=&quot;intent-badge-pill&quot; id=&quot;intent-badge&quot; title=&quot;Live Persona Intent Inference&quot;&gt;
+      &lt;span class=&quot;sparkle&quot;&gt;✦&lt;/span&gt;
+      &lt;span class=&quot;intent-text&quot; id=&quot;intent-label&quot;&gt;General Exploration&lt;/span&gt;
+      &lt;span class=&quot;intent-conf&quot; id=&quot;intent-conf&quot;&gt;78%&lt;/span&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Adaptive Action CTAs --&gt;
+    &lt;div class=&quot;nav-actions&quot;&gt;
+      &lt;a href=&quot;#demo&quot; class=&quot;action-btn-adaptive btn-ghost-ai&quot; id=&quot;action-ghost&quot;&gt;Book Demo&lt;/a&gt;
+      &lt;a href=&quot;#cta&quot; class=&quot;action-btn-adaptive btn-primary-ai&quot; id=&quot;action-primary&quot;&gt;Get Started Free →&lt;/a&gt;
+    &lt;/div&gt;
+
+  &lt;/nav&gt;
+&lt;/header&gt;</code></pre>
+      </div>
+    </section>
+
+    <section class="doc-section" id="section-3">
+      <div class="section-head">
+        <span class="section-index">3</span>
+        <h2>CSS Stylesheet</h2>
+      </div>
+      <p class="section-note">Add this CSS to your stylesheet (e.g. style.css):</p>
+      <div class="code-window">
+        <div class="code-chrome">
+          <div class="dots"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <span class="filename">style.css</span>
+          <button class="copy-btn" type="button" data-copy-target="code-3">
+            <svg class="icon-copy" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M3 10.5V3.5A1.5 1.5 0 0 1 4.5 2H10"/></svg>
+            <svg class="icon-check" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8.5l3 3 7-7"/></svg>
+            <span class="copy-label">Copy</span>
+          </button>
+        </div>
+        <pre><code id="code-3" class="language-css">/* ================================================================
+   AI ADAPTIVE INTENT NAVBAR — CSS TOKENS &amp; STYLES
+   ================================================================ */
+@import url(&#39;https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap&#39;);
+
+:root {
+  --bg-dark: #090d16;
+  --bg-surface: #0f172a;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-active: rgba(99, 102, 241, 0.4);
+
+  --text-white: #ffffff;
+  --text-slate-200: #e2e8f0;
+  --text-slate-400: #94a3b8;
+
+  --ai-primary: #6366f1;
+  --ai-cyan: #06b6d4;
+  --ai-emerald: #10b981;
+  --ai-glow: rgba(99, 102, 241, 0.35);
+
+  --font-main: &#39;Plus Jakarta Sans&#39;, sans-serif;
+  --font-code: &#39;JetBrains Mono&#39;, monospace;
+
+  --ease-morph: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-morph: 420ms;
+}
+
+/* ── Top Simulator Toolbar ──────────────────────────────────── */
+.simulator-strip {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: rgba(11, 15, 25, 0.95);
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  z-index: 200;
+  font-family: var(--font-code);
+  font-size: 11px;
+}
+
+.simulator-strip .sim-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-slate-400);
+}
+
+.simulator-strip .sim-pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ai-emerald);
+  box-shadow: 0 0 8px var(--ai-emerald);
+  animation: simPulse 1.5s infinite;
+}
+
+@keyframes simPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.simulator-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sim-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  color: var(--text-slate-400);
+  font-family: var(--font-code);
+  font-size: 11px;
+  padding: 3px 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sim-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.sim-btn.active {
+  background: rgba(99, 102, 241, 0.2);
+  border-color: var(--ai-primary);
+  color: #fff;
+}
+
+/* ── Morphing Navbar Header ─────────────────────────────────── */
+.nav-header {
+  position: fixed;
+  top: 54px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1200px, 94vw);
+  z-index: 180;
+  transition: all var(--duration-morph) var(--ease-morph);
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  background: rgba(15, 23, 42, 0.82);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--border-subtle);
+  border-radius: 9999px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  transition: all var(--duration-morph) var(--ease-morph);
+}
+
+/* Brand Section */
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  padding-left: 8px;
+}
+
+.brand-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--ai-primary), var(--ai-cyan));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 800;
+  font-size: 15px;
+  box-shadow: 0 0 16px var(--ai-glow);
+}
+
+.brand-name {
+  font-weight: 800;
+  font-size: 16px;
+  color: var(--text-white);
+  letter-spacing: -0.02em;
+}
+
+/* Morphing Links */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  list-style: none;
+  transition: all var(--duration-morph) var(--ease-morph);
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 9999px;
+  color: var(--text-slate-400);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.nav-link:hover {
+  color: var(--text-white);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.adaptive-item {
+  transition: all var(--duration-morph) var(--ease-morph);
+}
+
+/* Intent Indicator Pill */
+.intent-badge-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: rgba(99, 102, 241, 0.12);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  font-family: var(--font-code);
+  font-size: 11px;
+  transition: all var(--duration-morph) var(--ease-morph);
+}
+
+.intent-badge-pill .sparkle {
+  color: var(--ai-cyan);
+}
+
+.intent-badge-pill .intent-text {
+  color: var(--text-slate-200);
+  font-weight: 600;
+}
+
+.intent-badge-pill .intent-conf {
+  color: var(--ai-cyan);
+  font-weight: 700;
+}
+
+/* Right Action Buttons */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.action-btn-adaptive {
+  padding: 8px 18px;
+  border-radius: 9999px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.btn-primary-ai {
+  background: linear-gradient(135deg, var(--ai-primary), #4f46e5);
+  color: #fff;
+  box-shadow: 0 4px 14px var(--ai-glow);
+}
+
+.btn-primary-ai:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+}
+
+.btn-ghost-ai {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-slate-200);
+}
+
+.btn-ghost-ai:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+@media (max-width: 900px) {
+  .simulator-strip { display: none; }
+  .nav-header { top: 16px; }
+  .nav-menu { display: none; }
+  .intent-badge-pill { display: none; }
+}</code></pre>
+      </div>
+    </section>
+
+    <section class="doc-section" id="section-4">
+      <div class="section-head">
+        <span class="section-index">4</span>
+        <h2>JavaScript Code</h2>
+      </div>
+      <p class="section-note">Add this script before the closing &lt;/body&gt; tag (e.g. script.js):</p>
+      <div class="code-window">
+        <div class="code-chrome">
+          <div class="dots"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <span class="filename">script.js</span>
+          <button class="copy-btn" type="button" data-copy-target="code-4">
+            <svg class="icon-copy" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M3 10.5V3.5A1.5 1.5 0 0 1 4.5 2H10"/></svg>
+            <svg class="icon-check" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8.5l3 3 7-7"/></svg>
+            <span class="copy-label">Copy</span>
+          </button>
+        </div>
+        <pre><code id="code-4" class="language-javascript">/* ================================================================
+   AI ADAPTIVE INTENT NAVBAR — LOGIC &amp; INFERENCE ENGINE
+   ================================================================ */
+(function () {
+  &#39;use strict&#39;;
+
+  // 1. Definisi Profil Persona &amp; Tautan
+  const INTENTS = {
+    exploring: {
+      id: &#39;exploring&#39;,
+      label: &#39;General Exploration&#39;,
+      confidence: 78,
+      pillColor: &#39;#6366f1&#39;,
+      links: [
+        { label: &#39;Platform&#39;, href: &#39;#hero&#39; },
+        { label: &#39;Solutions&#39;, href: &#39;#solutions&#39; },
+        { label: &#39;Technology&#39;, href: &#39;#tech-specs&#39; },
+        { label: &#39;Enterprise&#39;, href: &#39;#enterprise-security&#39; },
+        { label: &#39;Pricing&#39;, href: &#39;#pricing&#39; }
+      ],
+      primaryAction: { label: &#39;Get Started Free →&#39;, href: &#39;#cta&#39; },
+      ghostAction: { label: &#39;Book Demo&#39;, href: &#39;#demo&#39; }
+    },
+    developer: {
+      id: &#39;developer&#39;,
+      label: &#39;Developer &amp; Architecture&#39;,
+      confidence: 96,
+      pillColor: &#39;#06b6d4&#39;,
+      links: [
+        { label: &#39;API Reference&#39;, href: &#39;#tech-specs&#39; },
+        { label: &#39;Python / TS SDK&#39;, href: &#39;#tech-specs&#39; },
+        { label: &#39;Edge Benchmarks&#39;, href: &#39;#tech-specs&#39; },
+        { label: &#39;GitHub Repo&#39;, href: &#39;https://github.com&#39; }
+      ],
+      primaryAction: { label: &#39;npm i @synapse/sdk 📋&#39;, href: &#39;#copy-sdk&#39; },
+      ghostAction: { label: &#39;Interactive Sandbox&#39;, href: &#39;#sandbox&#39; }
+    },
+    enterprise: {
+      id: &#39;enterprise&#39;,
+      label: &#39;Enterprise Procurement&#39;,
+      confidence: 93,
+      pillColor: &#39;#10b981&#39;,
+      links: [
+        { label: &#39;SOC2 &amp; HIPAA&#39;, href: &#39;#enterprise-security&#39; },
+        { label: &#39;99.999% SLA&#39;, href: &#39;#enterprise-security&#39; },
+        { label: &#39;Security Whitepaper&#39;, href: &#39;#enterprise-security&#39; },
+        { label: &#39;ROI Calculator&#39;, href: &#39;#pricing&#39; }
+      ],
+      primaryAction: { label: &#39;Schedule Executive Demo →&#39;, href: &#39;#demo&#39; },
+      ghostAction: { label: &#39;Custom Contract&#39;, href: &#39;#sales&#39; }
+    },
+    designer: {
+      id: &#39;designer&#39;,
+      label: &#39;Design &amp; Visual Studio&#39;,
+      confidence: 89,
+      pillColor: &#39;#f59e0b&#39;,
+      links: [
+        { label: &#39;UI Architecture&#39;, href: &#39;#hero&#39; },
+        { label: &#39;Design Tokens&#39;, href: &#39;#solutions&#39; },
+        { label: &#39;Figma Community Kit&#39;, href: &#39;#hero&#39; }
+      ],
+      primaryAction: { label: &#39;Download Design Kit 🎨&#39;, href: &#39;#kit&#39; },
+      ghostAction: { label: &#39;Component Gallery&#39;, href: &#39;#components&#39; }
+    }
+  };
+
+  let currentIntent = &#39;exploring&#39;;
+  let dwellTimers = {};
+
+  const navMenu       = document.getElementById(&#39;nav-menu&#39;);
+  const intentLabel   = document.getElementById(&#39;intent-label&#39;);
+  const intentConf    = document.getElementById(&#39;intent-conf&#39;);
+  const intentBadge   = document.getElementById(&#39;intent-badge&#39;);
+  const actionPrimary = document.getElementById(&#39;action-primary&#39;);
+  const actionGhost   = document.getElementById(&#39;action-ghost&#39;);
+  const simButtons    = document.querySelectorAll(&#39;.sim-btn&#39;);
+
+  // 2. Fungsi Transformasi Morphing Navbar
+  function morphNavbar(intentKey) {
+    if (!INTENTS[intentKey]) return;
+    currentIntent = intentKey;
+    const config = INTENTS[intentKey];
+
+    // Update Simulator toolbar
+    simButtons.forEach(btn =&gt; {
+      btn.classList.toggle(&#39;active&#39;, btn.dataset.intent === intentKey);
+    });
+
+    // Update Intent Badge
+    if (intentLabel) intentLabel.textContent = config.label;
+    if (intentConf)  intentConf.textContent  = `${config.confidence}%`;
+    if (intentBadge) {
+      intentBadge.style.borderColor = config.pillColor;
+      intentBadge.style.background  = `${config.pillColor}1a`;
+    }
+
+    // Re-render menu links dengan animasi transisi
+    if (navMenu) {
+      navMenu.style.opacity = &#39;0&#39;;
+      navMenu.style.transform = &#39;translateY(-4px)&#39;;
+
+      setTimeout(() =&gt; {
+        navMenu.innerHTML = &#39;&#39;;
+        config.links.forEach(link =&gt; {
+          const li = document.createElement(&#39;li&#39;);
+          li.className = &#39;adaptive-item&#39;;
+          const a = document.createElement(&#39;a&#39;);
+          a.href = link.href;
+          a.className = &#39;nav-link&#39;;
+          a.textContent = link.label;
+          li.appendChild(a);
+          navMenu.appendChild(li);
+        });
+
+        navMenu.style.opacity = &#39;1&#39;;
+        navMenu.style.transform = &#39;translateY(0)&#39;;
+      }, 180);
+    }
+
+    // Morph CTA buttons
+    if (actionPrimary) {
+      actionPrimary.textContent = config.primaryAction.label;
+      actionPrimary.href = config.primaryAction.href;
+      actionPrimary.style.background = `linear-gradient(135deg, ${config.pillColor}, #4f46e5)`;
+    }
+
+    if (actionGhost) {
+      actionGhost.textContent = config.ghostAction.label;
+      actionGhost.href = config.ghostAction.href;
+    }
+  }
+
+  // 3. Deteksi Dwell Time &amp; Scroll
+  const sectionIntents = [
+    { selector: &#39;#tech-specs&#39;, intent: &#39;developer&#39;, minDwellMs: 1200 },
+    { selector: &#39;#enterprise-security&#39;, intent: &#39;enterprise&#39;, minDwellMs: 1400 },
+    { selector: &#39;#solutions&#39;, intent: &#39;designer&#39;, minDwellMs: 1500 }
+  ];
+
+  const observer = new IntersectionObserver((entries) =&gt; {
+    entries.forEach(entry =&gt; {
+      const match = sectionIntents.find(s =&gt; entry.target.matches(s.selector));
+      if (!match) return;
+
+      if (entry.isIntersecting &amp;&amp; entry.intersectionRatio &gt; 0.4) {
+        dwellTimers[match.intent] = setTimeout(() =&gt; {
+          if (currentIntent !== match.intent) {
+            morphNavbar(match.intent);
+          }
+        }, match.minDwellMs);
+      } else {
+        clearTimeout(dwellTimers[match.intent]);
+      }
+    });
+  }, { threshold: [0.4] });
+
+  sectionIntents.forEach(s =&gt; {
+    const el = document.querySelector(s.selector);
+    if (el) observer.observe(el);
+  });
+
+  // 4. Tombol Simulator Toolbar
+  simButtons.forEach(btn =&gt; {
+    btn.addEventListener(&#39;click&#39;, () =&gt; {
+      morphNavbar(btn.dataset.intent);
+    });
+  });
+
+  // Inisialisasi awal
+  morphNavbar(&#39;exploring&#39;);
+})();</code></pre>
+      </div>
+    </section>
+
+    </main>
+  </div>
+
+  <footer class="doc-footer">
+    <span>Part of the Modern Navbar Collection</span>
+    <a href="../index.html">&larr; Back to Collection</a>
+  </footer>
+
+<script>
+  hljs.highlightAll();
+
+  document.querySelectorAll('.copy-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var targetId = btn.getAttribute('data-copy-target');
+      var codeEl = document.getElementById(targetId);
+      var text = codeEl.textContent;
+      navigator.clipboard.writeText(text).then(function(){
+        btn.classList.add('is-copied');
+        var label = btn.querySelector('.copy-label');
+        var prev = label.textContent;
+        label.textContent = 'Copied';
+        setTimeout(function(){
+          btn.classList.remove('is-copied');
+          label.textContent = prev;
+        }, 1800);
+      });
+    });
+  });
+
+  var links = document.querySelectorAll('.side-nav a');
+  var sections = document.querySelectorAll('.doc-section');
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting) {
+        links.forEach(function(l){ l.classList.remove('is-active'); });
+        var active = document.querySelector('.side-nav a[href="#' + entry.target.id + '"]');
+        if (active) active.classList.add('is-active');
+      }
+    });
+  }, { rootMargin: '-15% 0px -70% 0px' });
+  sections.forEach(function(s){ observer.observe(s); });
+</script>
+
+</body>
+</html>
