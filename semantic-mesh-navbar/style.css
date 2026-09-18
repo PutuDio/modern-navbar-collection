@@ -700,21 +700,168 @@ body {
   color: var(--text-main);
 }
 
-/* ── Mobile responsiveness ─────────────────────────────────── */
+/* ── Mobile responsiveness & Drawer ────────────────────────── */
 .mobile-menu-btn {
   display: none;
-  background: none;
+  background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
-  padding: 7px 10px;
-  color: var(--text-muted);
+  padding: 8px 12px;
+  color: var(--text-main);
   cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.mobile-menu-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.mesh-mobile-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  visibility: hidden;
+  pointer-events: none;
+  transition: visibility 0.3s ease;
+}
+
+.mesh-mobile-drawer.open {
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.mesh-mobile-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(6, 8, 18, 0.8);
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.mesh-mobile-drawer.open .mesh-mobile-backdrop {
+  opacity: 1;
+}
+
+.mesh-mobile-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(85vw, 360px);
+  height: 100%;
+  background: #0d1021;
+  border-left: 1px solid var(--border-subtle);
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.7);
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-y: auto;
+}
+
+.mesh-mobile-drawer.open .mesh-mobile-panel {
+  transform: translateX(0);
+}
+
+.mesh-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.mesh-drawer-close {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  color: #fff;
+  font-size: 24px;
+  line-height: 1;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mesh-drawer-quick-actions {
+  margin-bottom: 24px;
+}
+
+.mesh-drawer-title {
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+}
+
+.mesh-drawer-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mesh-drawer-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.mesh-drawer-link:hover {
+  background: rgba(255, 255, 255, 0.07);
+  color: #fff;
+  border-color: var(--border-subtle);
+}
+
+.node-bullet {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+  .top-bar-right .mesh-hint { display: none; }
+  .btn-open-mesh { padding: 7px 12px; font-size: 12px; }
 }
 
 @media (max-width: 768px) {
-  .top-bar-right .mesh-hint { display: none; }
-  .mobile-menu-btn { display: block; }
-  .hero-title { font-size: 36px; }
+  .top-bar { padding: 0 16px; }
+  .btn-open-mesh { display: none; }
+  .mobile-menu-btn { display: flex; }
+  .hero-title { font-size: clamp(30px, 7vw, 42px); }
   .features-grid { grid-template-columns: 1fr; }
-  .hero-stats { gap: 12px; }
+  .hero-stats { gap: 12px; flex-wrap: wrap; }
+  .node-detail-card { width: min(90vw, 320px); }
+}
+
+@media (max-width: 480px) {
+  .hero { padding: 100px 0 50px; }
+  .hero-cta-group { flex-direction: column; }
+  .hero-cta-group .btn-primary, .hero-cta-group .btn-secondary { width: 100%; justify-content: center; }
+  .top-brand .brand-name { font-size: 14px; }
+  .top-brand .brand-badge { display: none; }
+  .top-bar { padding: 0 12px; height: 52px; }
+  .hero-title { font-size: clamp(24px, 6.5vw, 36px); }
+  .hero-desc { font-size: 14px; padding: 0 16px; }
+  .hero-stats { flex-direction: column; gap: 8px; }
+  .section-container { padding: 0 16px; }
 }

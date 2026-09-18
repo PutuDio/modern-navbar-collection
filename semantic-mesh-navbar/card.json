@@ -7,5 +7,6 @@
   "tech": "HTML5 Canvas · Spring Physics · Vanilla JS",
   "keywords": ["semantic", "mesh", "graph", "mind-map", "physics", "spring", "nodes", "edges", "canvas", "experimental"],
   "featured": true,
-  "order": 8
+  "order": 8,
+  "mobileMenuTrigger": "#mobile-menu-btn"
 }

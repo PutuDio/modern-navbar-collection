@@ -821,6 +821,29 @@ button {
   }
 }
 
+/* Mobile Top Brand Badge */
+.mobile-top-brand {
+  display: none;
+  position: fixed;
+  top: 14px;
+  left: 14px;
+  z-index: 1010;
+  height: 48px;
+  padding: 0 16px;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #18181f 0%, #0e0e14 100%);
+  border: 1px solid var(--border-subtle);
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+  transition: border-color var(--t-fast);
+}
+
+.mobile-top-brand:hover {
+  border-color: var(--border-accent);
+}
+
 /* Mobile */
 @media (max-width: 768px) {
   .nav-shell {
@@ -831,12 +854,48 @@ button {
     display: none;
   }
 
+  .mobile-top-brand {
+    display: flex;
+  }
+
   .mobile-toggle {
     display: flex;
+    top: 14px;
+    right: 14px;
+    bottom: auto;
+    width: 48px;
+    height: 48px;
   }
 
   .mobile-menu {
     display: block;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: clamp(3rem, 16vw, 4.5rem);
+    letter-spacing: 4px;
+    word-break: break-word;
+  }
+  .hero-tagline {
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+  }
+  .section-title {
+    font-size: clamp(1.6rem, 8vw, 2.5rem);
+    letter-spacing: 3px;
+  }
+  .mobile-top-brand {
+    padding: 0 12px;
+    height: 44px;
+  }
+  .mobile-toggle {
+    width: 44px;
+    height: 44px;
+  }
+  .demo-section {
+    padding: 60px 16px 100px;
   }
 }
 

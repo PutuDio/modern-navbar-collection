@@ -71,14 +71,59 @@
   let dwellTimers = {};
 
   /* ── DOM References ─────────────────────────────────────────── */
-  const navMenu       = document.getElementById('nav-menu');
-  const intentLabel   = document.getElementById('intent-label');
-  const intentConf    = document.getElementById('intent-conf');
-  const intentBadge   = document.getElementById('intent-badge');
-  const actionPrimary = document.getElementById('action-primary');
-  const actionGhost   = document.getElementById('action-ghost');
-  const simButtons    = document.querySelectorAll('.sim-btn');
-  const lightOrb      = document.getElementById('light-orb');
+  const navMenu            = document.getElementById('nav-menu');
+  const intentLabel        = document.getElementById('intent-label');
+  const intentConf         = document.getElementById('intent-conf');
+  const intentBadge        = document.getElementById('intent-badge');
+  const actionPrimary      = document.getElementById('action-primary');
+  const actionGhost        = document.getElementById('action-ghost');
+  const simButtons         = document.querySelectorAll('.sim-btn');
+  const lightOrb           = document.getElementById('light-orb');
+
+  // Mobile Drawer Elements
+  const navBurger          = document.getElementById('nav-burger');
+  const mobileDrawer       = document.getElementById('mobile-drawer');
+  const mobileBackdrop     = document.getElementById('mobile-backdrop');
+  const drawerClose        = document.getElementById('drawer-close');
+  const mobileNavMenu      = document.getElementById('mobile-nav-menu');
+  const mobileIntentLabel  = document.getElementById('mobile-intent-label');
+  const mobileIntentConf   = document.getElementById('mobile-intent-conf');
+  const mobileIntentBadge  = document.getElementById('mobile-intent-badge');
+  const mobileActionPrimary = document.getElementById('mobile-action-primary');
+  const mobileActionGhost  = document.getElementById('mobile-action-ghost');
+
+  function openDrawer() {
+    if (!mobileDrawer) return;
+    mobileDrawer.classList.add('is-open');
+    mobileDrawer.setAttribute('aria-hidden', 'false');
+    if (navBurger) {
+      navBurger.classList.add('is-active');
+      navBurger.setAttribute('aria-expanded', 'true');
+    }
+  }
+
+  function closeDrawer() {
+    if (!mobileDrawer) return;
+    mobileDrawer.classList.remove('is-open');
+    mobileDrawer.setAttribute('aria-hidden', 'true');
+    if (navBurger) {
+      navBurger.classList.remove('is-active');
+      navBurger.setAttribute('aria-expanded', 'false');
+    }
+  }
+
+  if (navBurger) {
+    navBurger.addEventListener('click', () => {
+      const isOpen = mobileDrawer && mobileDrawer.classList.contains('is-open');
+      isOpen ? closeDrawer() : openDrawer();
+    });
+  }
+
+  if (mobileBackdrop) mobileBackdrop.addEventListener('click', closeDrawer);
+  if (drawerClose) drawerClose.addEventListener('click', closeDrawer);
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeDrawer();
+  });
 
   /* ── Morph Navbar into Intent State ─────────────────────────── */
   function morphNavbar(intentKey) {
@@ -127,17 +172,51 @@
       }, 180);
     }
 
+    // Update Mobile Intent Badge
+    if (mobileIntentLabel) mobileIntentLabel.textContent = config.label;
+    if (mobileIntentConf)  mobileIntentConf.textContent  = `${config.confidence}%`;
+    if (mobileIntentBadge) {
+      mobileIntentBadge.style.borderColor = config.pillColor;
+      mobileIntentBadge.style.background  = `${config.pillColor}22`;
+    }
+
+    // Render mobile drawer links
+    if (mobileNavMenu) {
+      mobileNavMenu.innerHTML = '';
+      config.links.forEach(link => {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = link.href;
+        a.className = 'nav-link';
+        a.textContent = link.label;
+        a.addEventListener('click', () => closeDrawer());
+        li.appendChild(a);
+        mobileNavMenu.appendChild(li);
+      });
+    }
+
     // Morph primary CTA
     if (actionPrimary) {
       actionPrimary.textContent = config.primaryAction.label;
       actionPrimary.href = config.primaryAction.href;
       actionPrimary.style.background = `linear-gradient(135deg, ${config.pillColor}, #4f46e5)`;
     }
+    if (mobileActionPrimary) {
+      mobileActionPrimary.textContent = config.primaryAction.label;
+      mobileActionPrimary.href = config.primaryAction.href;
+      mobileActionPrimary.style.background = `linear-gradient(135deg, ${config.pillColor}, #4f46e5)`;
+      mobileActionPrimary.addEventListener('click', () => closeDrawer());
+    }
 
     // Morph ghost CTA
     if (actionGhost) {
       actionGhost.textContent = config.ghostAction.label;
       actionGhost.href = config.ghostAction.href;
+    }
+    if (mobileActionGhost) {
+      mobileActionGhost.textContent = config.ghostAction.label;
+      mobileActionGhost.href = config.ghostAction.href;
+      mobileActionGhost.addEventListener('click', () => closeDrawer());
     }
   }
 

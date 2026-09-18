@@ -51,11 +51,11 @@
 
   let followCursorMode = false; // default bottom dock with fluid magnetic drift
 
-  window.addEventListener('mousemove', (e) => {
+  function updatePointer(clientX, clientY) {
     mouse.prevX = mouse.x;
     mouse.prevY = mouse.y;
-    mouse.x = e.clientX;
-    mouse.y = e.clientY;
+    mouse.x = clientX;
+    mouse.y = clientY;
 
     const dx = mouse.x - mouse.prevX;
     const dy = mouse.y - mouse.prevY;
@@ -72,7 +72,7 @@
 
     // Update dock target position
     if (followCursorMode) {
-      dockPos.targetX = Math.max(200, Math.min(width - 200, mouse.x));
+      dockPos.targetX = Math.max(160, Math.min(width - 160, mouse.x));
       dockPos.targetY = Math.max(100, Math.min(height - 60, mouse.y + 60));
     } else {
       // Magnetic pull toward bottom dock when approaching
@@ -85,14 +85,36 @@
         dockPos.targetY = height - 80;
       }
     }
+  }
+
+  window.addEventListener('mousemove', (e) => {
+    updatePointer(e.clientX, e.clientY);
   });
+
+  window.addEventListener('touchmove', (e) => {
+    if (e.touches.length > 0) {
+      updatePointer(e.touches[0].clientX, e.touches[0].clientY);
+    }
+  }, { passive: true });
 
   window.addEventListener('mousedown', () => {
     mouse.isDown = true;
     scatterParticles(mouse.x, mouse.y, 16);
   });
 
+  window.addEventListener('touchstart', (e) => {
+    mouse.isDown = true;
+    if (e.touches.length > 0) {
+      updatePointer(e.touches[0].clientX, e.touches[0].clientY);
+      scatterParticles(mouse.x, mouse.y, 14);
+    }
+  }, { passive: true });
+
   window.addEventListener('mouseup', () => {
+    mouse.isDown = false;
+  });
+
+  window.addEventListener('touchend', () => {
     mouse.isDown = false;
   });
 

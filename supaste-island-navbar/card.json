@@ -7,5 +7,6 @@
   "tech": "HTML · CSS · JS",
   "keywords": ["island", "pill", "macos", "sonoma", "clipboard", "floating", "toast"],
   "featured": true,
-  "order": 1
+  "order": 1,
+  "mobileMenuTrigger": "#island-burger"
 }

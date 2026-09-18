@@ -75,11 +75,42 @@
       Open Mesh
       <kbd style="font-size:10px;background:rgba(255,255,255,0.08);border-radius:3px;padding:1px 4px;border:1px solid rgba(255,255,255,0.1);">⌘G</kbd>
     </button>
-    <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false">
+    <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mesh-mobile-drawer">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
     </button>
   </div>
 </header>
+
+<!-- ── Mobile navigation drawer ──────────────────────────────── -->
+<div class="mesh-mobile-drawer" id="mesh-mobile-drawer" aria-hidden="true">
+  <div class="mesh-mobile-backdrop" id="mesh-mobile-backdrop"></div>
+  <div class="mesh-mobile-panel">
+    <div class="mesh-drawer-header">
+      <div class="top-brand">
+        <div class="brand-orb" aria-hidden="true"></div>
+        <span class="brand-name">Nexus AI Lab</span>
+      </div>
+      <button class="mesh-drawer-close" id="mesh-drawer-close" aria-label="Close menu">&times;</button>
+    </div>
+    
+    <div class="mesh-drawer-quick-actions">
+      <button class="btn-primary" id="mobile-trigger-mesh" style="width:100%; justify-content:center; gap:8px;">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="2" stroke="currentColor" stroke-width="1.3"/><circle cx="2.5" cy="2.5" r="1.5" stroke="currentColor" stroke-width="1.2"/><circle cx="11.5" cy="2.5" r="1.5" stroke="currentColor" stroke-width="1.2"/><circle cx="2.5" cy="11.5" r="1.5" stroke="currentColor" stroke-width="1.2"/><circle cx="11.5" cy="11.5" r="1.5" stroke="currentColor" stroke-width="1.2"/></svg>
+        Open Knowledge Mesh
+      </button>
+    </div>
+
+    <div class="mesh-drawer-title">Knowledge Graph Nodes</div>
+    <nav class="mesh-drawer-nav">
+      <a href="#home" class="mesh-drawer-link"><span class="node-bullet" style="background:#6378ff;"></span>⬡ Home &amp; Overview</a>
+      <a href="#research" class="mesh-drawer-link"><span class="node-bullet" style="background:#a78bfa;"></span>◎ Research Domains</a>
+      <a href="#lab" class="mesh-drawer-link"><span class="node-bullet" style="background:#38bdf8;"></span>◈ Interactive Lab</a>
+      <a href="#publications" class="mesh-drawer-link"><span class="node-bullet" style="background:#fbbf24;"></span>◻ Selected Publications</a>
+      <a href="#team" class="mesh-drawer-link"><span class="node-bullet" style="background:#fb7185;"></span>◇ Research Fellows</a>
+      <a href="../index.html" class="mesh-drawer-link" style="margin-top:12px; border-top:1px solid var(--border-subtle); padding-top:12px; color:var(--text-muted);">← Back to Collection</a>
+    </nav>
+  </div>
+</div>
 
 <!-- ═══════════════════════════════════════════════════════════
      PAGE CONTENT

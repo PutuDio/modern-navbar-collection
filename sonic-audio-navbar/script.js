@@ -308,6 +308,21 @@
       clearSweep();
     });
 
+    link.addEventListener('pointerdown', () => {
+      if (!isUnlocked) { initAudio(); return; }
+      strumVoice(voice, 0);
+      link.classList.add('playing');
+      const ripple = link.querySelector('.link-ripple');
+      if (ripple) {
+        ripple.style.borderColor = voice.color;
+        link.classList.remove('playing');
+        void link.offsetWidth;
+        link.classList.add('playing');
+      }
+      updateVizBars(voice);
+      showBanner(voice);
+    });
+
     link.addEventListener('click', (e) => {
       e.preventDefault();
       if (!isUnlocked) { initAudio(); return; }

@@ -1138,6 +1138,27 @@ button {
   }
 }
 
+@media (max-width: 480px) {
+  .header-main { height: 60px; }
+  .header-inner { padding: 0 12px; }
+  .logo-mark svg { width: 22px; height: 22px; }
+  .logo-name { font-size: 0.95rem; }
+  .hero-section { padding: 60px 0 60px; }
+  .hero-inner { padding: 0 16px; }
+  .hero-title { font-size: clamp(1.8rem, 8vw, 2.8rem); }
+  .hero-lead { font-size: 0.95rem; }
+  .hero-actions { flex-direction: column; gap: 12px; }
+  .hero-actions .btn-primary,
+  .hero-actions .btn-outline { width: 100%; justify-content: center; }
+  .section-header { margin-bottom: 36px; }
+  .practices-grid { grid-template-columns: 1fr; }
+  .cta-box { padding: 40px 20px; }
+  .cta-buttons { flex-direction: column; gap: 12px; }
+  .cta-buttons .btn-primary,
+  .cta-buttons .btn-outline { width: 100%; justify-content: center; }
+  .container { padding: 0 16px; }
+}
+
 /* ─────────────────────────────────────────────
    DEMO PAGE SECTIONS (EXECUTIVE PRESENTATION)
    ───────────────────────────────────────────── */

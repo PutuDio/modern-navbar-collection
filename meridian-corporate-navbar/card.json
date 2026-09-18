@@ -7,5 +7,6 @@
   "tech": "HTML · CSS · JS",
   "keywords": ["corporate", "law", "finance", "luxury", "real estate", "mega menu", "multi tier"],
   "featured": false,
-  "order": 6
+  "order": 6,
+  "mobileMenuTrigger": "#mobile-hamburger"
 }

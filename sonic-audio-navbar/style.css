@@ -601,19 +601,92 @@ body {
 }
 
 /* ── Responsive ───────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .visualizer-strip { display: none; }
+  .tracks-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
 @media (max-width: 768px) {
+  .sonic-nav-wrapper {
+    padding-top: 12px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
   .sonic-nav {
-    flex-wrap: wrap;
+    flex-direction: column;
     height: auto;
-    border-radius: 16px;
+    border-radius: 18px;
+    width: min(94vw, 540px);
+    overflow: hidden;
+  }
+  .sonic-brand {
+    border-right: none;
+    border-bottom: 1px solid var(--border-subtle);
+    padding: 10px 16px;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .sonic-cta {
+    display: none;
   }
   .sonic-links {
     width: 100%;
     overflow-x: auto;
-    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    display: flex;
+    padding: 6px 4px;
   }
-  .sonic-link { min-width: 72px; }
-  .hero-title { font-size: 36px; }
-  .tracks-grid { grid-template-columns: 1fr; }
-  .audio-unlock { padding: 32px; }
+  .sonic-links::-webkit-scrollbar {
+    display: none;
+  }
+  .sonic-link {
+    min-width: 76px;
+    padding: 8px 12px;
+    border-right: none;
+    border-radius: 10px;
+  }
+  .hero-title {
+    font-size: clamp(28px, 7vw, 44px);
+  }
+  .audio-unlock {
+    padding: 24px 20px;
+  }
+  .unlock-title {
+    font-size: 22px;
+  }
+  .unlock-desc {
+    font-size: 13px;
+    max-width: 320px;
+  }
+  .hero-freq-meter {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 540px) {
+  .tracks-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero {
+    padding: 140px 0 60px;
+  }
+  .hero-stats {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sonic-nav-wrapper { padding-top: 8px; padding-left: 8px; padding-right: 8px; }
+  .sonic-brand { padding: 8px 12px; }
+  .brand-name { font-size: 14px; }
+  .sonic-link { min-width: 64px; padding: 6px 10px; font-size: 12px; }
+  .hero { padding: 120px 16px 50px; }
+  .hero-title { font-size: clamp(24px, 6.5vw, 36px); }
+  .hero-subtitle { font-size: 14px; }
+  .audio-unlock { padding: 20px 16px; }
+  .unlock-title { font-size: 18px; }
 }

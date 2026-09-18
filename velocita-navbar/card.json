@@ -7,5 +7,6 @@
   "tech": "HTML · CSS · JS",
   "keywords": ["cyberpunk", "creative", "portfolio", "gaming", "neon", "velocita", "audio", "search"],
   "featured": false,
-  "order": 5
+  "order": 5,
+  "mobileMenuTrigger": "#mobile-toggle"
 }

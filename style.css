@@ -491,6 +491,166 @@ button, input {
   font-size: 13px;
   letter-spacing: 0.06em;
 }
+
+/* ============================================================
+   PHONE-FRAME GRID  (ALL-filter view)
+   ============================================================ */
+.phone-grid {
+  padding-top: var(--space-8);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--space-7) var(--space-5);
+  justify-items: center;
+}
+
+/* Individual phone card wrapper */
+.phone-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  width: 100%;
+  max-width: 260px;
+}
+
+/* The phone shell itself */
+.phone-mockup {
+  position: relative;
+  width: 220px;
+  height: 440px;
+  border-radius: 36px;
+  background: #1a1a1e;
+  box-shadow:
+    0 0 0 1.5px #3a3a42,
+    0 0 0 3px #26262e,
+    0 20px 60px rgba(0,0,0,.45),
+    0 4px 16px rgba(0,0,0,.25);
+  padding: 14px 10px;
+  flex-shrink: 0;
+  transition: transform var(--duration-normal) var(--ease-out),
+              box-shadow var(--duration-normal) var(--ease-out);
+}
+
+.phone-card:hover .phone-mockup {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow:
+    0 0 0 1.5px #4a4a55,
+    0 0 0 3px #32323c,
+    0 32px 72px rgba(0,0,0,.55),
+    0 8px 24px rgba(0,0,0,.3);
+}
+
+/* Notch / Dynamic Island */
+.phone-notch {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 20px;
+  background: #1a1a1e;
+  border-radius: 0 0 14px 14px;
+  z-index: 10;
+  /* subtle inner shadow to blend */
+  box-shadow: inset 0 2px 4px rgba(0,0,0,.5);
+}
+
+/* Camera pill within notch */
+.phone-notch::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 32px;
+  height: 10px;
+  background: #0d0d10;
+  border-radius: 6px;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.06);
+}
+
+/* Side buttons */
+.phone-mockup::before {
+  content: '';
+  position: absolute;
+  right: -3px;
+  top: 88px;
+  width: 3px;
+  height: 52px;
+  background: #2e2e38;
+  border-radius: 0 2px 2px 0;
+  box-shadow: 0 64px 0 #2e2e38;
+}
+.phone-mockup::after {
+  content: '';
+  position: absolute;
+  left: -3px;
+  top: 72px;
+  width: 3px;
+  height: 30px;
+  background: #2e2e38;
+  border-radius: 2px 0 0 2px;
+  box-shadow: 0 44px 0 #2e2e38, 0 88px 0 #2e2e38;
+}
+
+/* The screen area that clips the iframe */
+.phone-screen {
+  width: 100%;
+  height: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #000;
+  position: relative;
+}
+
+/* Iframe fills the screen at 390 wide, scaled down */
+.phone-screen iframe {
+  display: block;
+  /* render as a real mobile viewport, then scale down to fit the phone frame */
+  width: 390px;
+  height: 844px;
+  border: none;
+  transform-origin: top left;
+  transform: scale(calc(200 / 390)); /* 200 / 390 ≈ 0.513 — matches frame width exactly, no horizontal crop */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Saat menu mobile navbar sedang otomatis dibuka oleh script (lihat script.js),
+   beri sedikit highlight halus di tepi layar supaya jelas ini state "menu terbuka" */
+.phone-screen.menu-open {
+  box-shadow: inset 0 0 0 2px rgba(29, 78, 216, 0.35);
+}
+
+/* Meta below the phone */
+.phone-meta {
+  text-align: center;
+}
+
+.phone-meta-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin-bottom: var(--space-1);
+}
+
+.phone-meta-cat {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: var(--space-3);
+}
+
+.phone-meta-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 860px) {
   .specimen-head {
@@ -521,6 +681,16 @@ button, input {
   }
   .search {
     width: 100%;
+  }
+  /* phone grid: 2 columns on tablet */
+  .phone-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 520px) {
+  /* phone grid: single column on small phones */
+  .phone-grid {
+    grid-template-columns: 1fr;
   }
 }
 @media (prefers-reduced-motion: reduce) {

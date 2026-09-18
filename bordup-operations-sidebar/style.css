@@ -1044,3 +1044,11 @@ body {
   .content { padding: 16px; }
   .payment-info { flex-direction: column; gap: 16px; align-items: flex-start; }
 }
+
+@media (max-width: 480px) {
+  .content { padding: 12px; }
+  .dash-title { font-size: 18px; }
+  .card-header { padding: 12px 14px; }
+  .mobile-topbar { padding: 10px 14px; }
+  .mobile-topbar-title { font-size: 14px; }
+}

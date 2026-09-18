@@ -97,6 +97,14 @@
   const closeBtn    = document.getElementById('close-mesh-btn');
   const instruction = document.getElementById('mesh-instruction');
 
+  // Mobile Drawer elements
+  const mobileMenuBtn     = document.getElementById('mobile-menu-btn');
+  const mobileDrawer      = document.getElementById('mesh-mobile-drawer');
+  const mobileBackdrop    = document.getElementById('mesh-mobile-backdrop');
+  const mobileCloseBtn    = document.getElementById('mesh-drawer-close');
+  const mobileTriggerMesh = document.getElementById('mobile-trigger-mesh');
+  const mobileLinks       = document.querySelectorAll('.mesh-drawer-link');
+
   const bgCtx   = bgCanvas ? bgCanvas.getContext('2d') : null;
   const graphCtx = graphCanvas ? graphCanvas.getContext('2d') : null;
 
@@ -417,6 +425,34 @@
     if (graphCtx) graphCtx.clearRect(0, 0, W, H);
   }
 
+  /* ── Mobile Drawer Functions ─────────────────────────────────── */
+  function openMobileDrawer() {
+    if (!mobileDrawer) return;
+    mobileDrawer.classList.add('open');
+    mobileDrawer.setAttribute('aria-hidden', 'false');
+    if (mobileMenuBtn) mobileMenuBtn.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeMobileDrawer() {
+    if (!mobileDrawer) return;
+    mobileDrawer.classList.remove('open');
+    mobileDrawer.setAttribute('aria-hidden', 'true');
+    if (mobileMenuBtn) mobileMenuBtn.setAttribute('aria-expanded', 'false');
+  }
+
+  if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', openMobileDrawer);
+  if (mobileCloseBtn) mobileCloseBtn.addEventListener('click', closeMobileDrawer);
+  if (mobileBackdrop) mobileBackdrop.addEventListener('click', closeMobileDrawer);
+  if (mobileTriggerMesh) {
+    mobileTriggerMesh.addEventListener('click', () => {
+      closeMobileDrawer();
+      setTimeout(openMesh, 200);
+    });
+  }
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', closeMobileDrawer);
+  });
+
   /* ── Event listeners ─────────────────────────────────────────── */
   if (openBtn) openBtn.addEventListener('click', openMesh);
   if (closeBtn) closeBtn.addEventListener('click', closeMesh);
@@ -428,7 +464,10 @@
   }
 
   window.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && isOpen) closeMesh();
+    if (e.key === 'Escape') {
+      if (isOpen) closeMesh();
+      closeMobileDrawer();
+    }
     if ((e.metaKey || e.ctrlKey) && e.key === 'g') { e.preventDefault(); openMesh(); }
   });
 

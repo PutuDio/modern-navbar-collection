@@ -7,28 +7,63 @@
      2. Tambahkan nama foldernya ke navbars.json
    File index.html ini TIDAK PERLU disentuh sama sekali lagi.
    ================================================================ */
+
 function shortLabel(categoryLabel) {
   return categoryLabel.split('—')[0].trim();
 }
-function buildMiniCardHTML(folder, d) {
+
+/* ------ Phone-frame card for the ALL view ------ */
+function buildPhoneCardHTML(folder, d) {
   const number = String(d.order).padStart(2, '0');
   return `
-    <article class="mini-card" data-category="${d.category}" data-keywords="${d.keywords.join(' ')}">
-      <div class="mini-card-top">
-        <span class="mini-card-number">${number}</span>
-        <span class="mini-card-category">${shortLabel(d.categoryLabel)}</span>
+    <article class="phone-card" data-category="${d.category}" data-keywords="${d.keywords.join(' ')}" data-title="${d.title}" data-desc="${d.descriptionShort}">
+      <div class="phone-mockup">
+        <div class="phone-notch"></div>
+        <div class="phone-screen" id="phone-screen-${folder}">
+          <iframe id="phone-iframe-${folder}" src="${folder}/index.html" loading="lazy" title="Preview ${d.title}" tabindex="-1"></iframe>
+        </div>
       </div>
-      <h3 class="mini-card-title">${d.title}</h3>
-      <p class="mini-card-desc">${d.descriptionShort}</p>
-      <div class="mini-card-foot">
-        <span class="mini-card-tech">${d.tech}</span>
-        <div class="mini-card-links">
+      <div class="phone-meta">
+        <p class="phone-meta-title">${d.title}</p>
+        <p class="phone-meta-cat">${shortLabel(d.categoryLabel)} · ${number}</p>
+        <div class="phone-meta-links">
           <a href="${folder}/index.html" class="link-primary" target="_blank">Demo →</a>
-          <a href="${folder}/code.html" class="link-secondary">Kode</a>
+          <a href="${folder}/code.html" class="link-secondary">Code</a>
         </div>
       </div>
     </article>`;
 }
+
+/* ------ Buka menu mobile di dalam iframe secara otomatis ------
+   Butuh field "mobileMenuTrigger" di card.json, isinya CSS selector
+   tombol hamburger/toggle navbar itu, misal: "#mobile-toggle".
+   Kalau field ini tidak ada di card.json, preview tetap tampil
+   apa adanya (menu tertutup) — tidak akan error. */
+function openMobileMenuInFrame(folder, data) {
+  if (!data.mobileMenuTrigger) return;
+
+  const iframe = document.getElementById(`phone-iframe-${folder}`);
+  const screen = document.getElementById(`phone-screen-${folder}`);
+  if (!iframe) return;
+
+  iframe.addEventListener('load', () => {
+    try {
+      const doc = iframe.contentDocument || iframe.contentWindow.document;
+      const trigger = doc.querySelector(data.mobileMenuTrigger);
+      if (trigger) {
+        trigger.click();
+        if (screen) screen.classList.add('menu-open');
+      } else {
+        console.warn(`[phone-preview] Selector "${data.mobileMenuTrigger}" tidak ditemukan di ${folder}`);
+      }
+    } catch (err) {
+      // Kemungkinan iframe belum same-origin (mis. saat dites dari file:// lokal)
+      console.warn(`[phone-preview] Tidak bisa mengakses iframe ${folder}:`, err.message);
+    }
+  });
+}
+
+/* ------ Specimen for category-specific views ------ */
 function buildSpecimenHTML(folder, d) {
   const number = String(d.order).padStart(2, '0');
   return `
@@ -57,10 +92,12 @@ function buildSpecimenHTML(folder, d) {
       </div>
     </article>`;
 }
+
 async function loadAllCards() {
-  const emptyStateGrid = document.getElementById('emptyStateGrid');
-  const emptyState = document.getElementById('emptyState');
-  const filtersNav = document.getElementById('filtersNav');
+  const emptyStatePhone = document.getElementById('emptyStatePhone');
+  const emptyState      = document.getElementById('emptyState');
+  const filtersNav      = document.getElementById('filtersNav');
+
   // 1. Ambil daftar folder dari navbars.json
   let folders = [];
   try {
@@ -70,6 +107,7 @@ async function loadAllCards() {
     console.error('[dynamic-cards] Gagal memuat navbars.json:', err);
     return;
   }
+
   // 2. Ambil card.json tiap folder
   const cards = [];
   for (const folder of folders) {
@@ -82,13 +120,17 @@ async function loadAllCards() {
       console.error(`[dynamic-cards] Gagal memuat ${folder}:`, err);
     }
   }
+
   // 3. Urutkan sesuai field "order" di card.json
   cards.sort((a, b) => a.data.order - b.data.order);
+
   // 4. Sisipkan tiap kartu tepat sebelum pesan "empty state"
   cards.forEach(({ folder, data }) => {
-    emptyStateGrid.insertAdjacentHTML('beforebegin', buildMiniCardHTML(folder, data));
+    emptyStatePhone.insertAdjacentHTML('beforebegin', buildPhoneCardHTML(folder, data));
     emptyState.insertAdjacentHTML('beforebegin', buildSpecimenHTML(folder, data));
+    openMobileMenuInFrame(folder, data);
   });
+
   // 5. Buat tombol filter kategori otomatis dari kategori yang benar-benar dipakai
   const seenCategories = new Map();
   cards.forEach(({ data }) => {
@@ -105,57 +147,76 @@ async function loadAllCards() {
     filtersNav.appendChild(btn);
   });
 }
+
 /* ================================================================
-   BAGIAN 2 — FILTER & SEARCH (logika lama, tidak diubah)
-   Dibungkus jadi fungsi supaya bisa dijalankan SETELAH semua
-   kartu & tombol filter selesai dibuat oleh loadAllCards().
+   BAGIAN 2 — FILTER & SEARCH
    ================================================================ */
 function initFilterAndSearch() {
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const miniCards = document.querySelectorAll('.mini-card');
-  const specimens = document.querySelectorAll('.specimen');
-  const searchInput = document.getElementById('searchInput');
-  const cardGrid = document.getElementById('cardGrid');
-  const archive = document.getElementById('navbarGrid');
-  const emptyStateGrid = document.getElementById('emptyStateGrid');
-  const emptyState = document.getElementById('emptyState');
+  const filterBtns      = document.querySelectorAll('.filter-btn');
+  const phoneCards      = document.querySelectorAll('.phone-card');
+  const specimens       = document.querySelectorAll('.specimen');
+  const searchInput     = document.getElementById('searchInput');
+  const phoneGrid       = document.getElementById('phoneGrid');
+  const archive         = document.getElementById('navbarGrid');
+  const emptyStatePhone = document.getElementById('emptyStatePhone');
+  const emptyState      = document.getElementById('emptyState');
+
   let currentFilter = 'all';
-  let searchQuery = '';
-  function matches(item, titleSel, descSel) {
-    const cat = item.dataset.category;
+  let searchQuery   = '';
+
+  /* Check visibility for phone-cards (ALL view) */
+  function matchesPhone(item) {
+    const cat      = item.dataset.category;
     const keywords = (
       item.dataset.keywords + ' ' +
-      item.querySelector(titleSel).textContent + ' ' +
-      item.querySelector(descSel).textContent
+      item.dataset.title + ' ' +
+      item.dataset.desc
     ).toLowerCase();
     const matchesFilter = currentFilter === 'all' || cat === currentFilter;
     const matchesSearch = searchQuery === '' || keywords.includes(searchQuery);
     return matchesFilter && matchesSearch;
   }
+
+  /* Check visibility for specimens (category view) */
+  function matchesSpecimen(item) {
+    const cat      = item.dataset.category;
+    const keywords = (
+      item.dataset.keywords + ' ' +
+      item.querySelector('.specimen-title').textContent + ' ' +
+      item.querySelector('.specimen-desc').textContent
+    ).toLowerCase();
+    const matchesFilter = currentFilter === 'all' || cat === currentFilter;
+    const matchesSearch = searchQuery === '' || keywords.includes(searchQuery);
+    return matchesFilter && matchesSearch;
+  }
+
   function applyFilterAndSearch() {
-    const showGrid = currentFilter === 'all';
-    cardGrid.classList.toggle('is-hidden', !showGrid);
-    archive.classList.toggle('is-hidden', showGrid);
-    if (showGrid) {
+    const showPhone = currentFilter === 'all';
+
+    phoneGrid.classList.toggle('is-hidden', !showPhone);
+    archive.classList.toggle('is-hidden', showPhone);
+
+    if (showPhone) {
       let visibleCount = 0;
-      miniCards.forEach(item => {
-        const visible = matches(item, '.mini-card-title', '.mini-card-desc');
+      phoneCards.forEach(item => {
+        const visible = matchesPhone(item);
         item.style.display = visible ? '' : 'none';
         if (visible) visibleCount++;
       });
-      emptyStateGrid.style.display = visibleCount === 0 ? 'block' : 'none';
+      emptyStatePhone.style.display = visibleCount === 0 ? 'block' : 'none';
       emptyState.style.display = 'none';
     } else {
       let visibleCount = 0;
       specimens.forEach(item => {
-        const visible = matches(item, '.specimen-title', '.specimen-desc');
+        const visible = matchesSpecimen(item);
         item.style.display = visible ? '' : 'none';
         if (visible) visibleCount++;
       });
       emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
-      emptyStateGrid.style.display = 'none';
+      emptyStatePhone.style.display = 'none';
     }
   }
+
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       filterBtns.forEach(b => {
@@ -168,15 +229,18 @@ function initFilterAndSearch() {
       applyFilterAndSearch();
     });
   });
+
   searchInput.addEventListener('input', (e) => {
     searchQuery = e.target.value.toLowerCase().trim();
     applyFilterAndSearch();
   });
+
   document.getElementById('toTop').addEventListener('click', (e) => {
     e.preventDefault();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 }
+
 /* ================================================================
    BAGIAN 3 — JALANKAN BERURUTAN
    Kartu & tombol filter harus selesai dibuat DULU, baru filter

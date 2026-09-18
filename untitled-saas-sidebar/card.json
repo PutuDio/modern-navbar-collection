@@ -7,5 +7,6 @@
   "tech": "HTML · CSS · JS",
   "keywords": ["saas", "admin", "sidebar", "dual tier", "command palette", "popover", "profile"],
   "featured": false,
-  "order": 2
+  "order": 2,
+  "mobileMenuTrigger": "#topbar-menu-btn"
 }

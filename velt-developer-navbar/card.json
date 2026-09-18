@@ -7,5 +7,6 @@
   "tech": "HTML · CSS · JS",
   "keywords": ["developer", "sdk", "mega-menu", "realtime", "cursors", "dark", "cli", "api"],
   "featured": false,
-  "order": 3
+  "order": 3,
+  "mobileMenuTrigger": "#nav-burger"
 }

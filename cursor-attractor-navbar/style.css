@@ -495,15 +495,55 @@ html, body {
   color: var(--chrome-300);
 }
 
-/* Responsive adjustments */
+/* ── Responsive adjustments ────────────────────────────────── */
+@media (max-width: 900px) {
+  .top-metrics .metric-pill:first-child { display: none; }
+  .cards-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
 @media (max-width: 768px) {
-  .top-nav { padding: 0 20px; }
-  .content-wrapper { padding: 100px 20px 60px; }
-  .hero-title { font-size: 38px; }
-  .liquid-dock {
-    flex-wrap: wrap;
-    border-radius: 20px;
-    padding: 8px;
-    justify-content: center;
+  .top-nav {
+    height: 60px;
+    padding: 0 16px;
   }
+  .content-wrapper {
+    padding: 90px 16px 120px;
+  }
+  .hero-title {
+    font-size: clamp(28px, 7vw, 42px);
+  }
+  .liquid-dock {
+    gap: 4px;
+    padding: 6px 10px;
+    max-width: 94vw;
+  }
+  .liquid-item {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 640px) {
+  .top-metrics #toggle-mode-btn { display: none; }
+  .cards-grid { grid-template-columns: 1fr; }
+  .top-metrics .metric-pill { font-size: 10px; padding: 4px 10px; }
+  .liquid-dock {
+    overflow-x: auto;
+    white-space: nowrap;
+    justify-content: flex-start;
+    border-radius: 999px;
+    padding: 6px 8px;
+  }
+  .liquid-item {
+    padding: 6px 10px;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .brand-wrapper .brand-title { font-size: 16px; }
+  .top-nav { padding: 0 12px; }
+  .back-btn { font-size: 11px; padding: 4px 8px; }
+  .hero-subtitle { font-size: 14px; }
 }

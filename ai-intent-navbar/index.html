@@ -56,8 +56,44 @@
         <a href="#cta" class="action-btn-adaptive btn-primary-ai" id="action-primary">Get Started Free →</a>
       </div>
 
+      <!-- Mobile Hamburger Button -->
+      <button class="nav-burger-btn" id="nav-burger" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="mobile-drawer">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
     </nav>
   </header>
+
+  <!-- MOBILE DRAWER -->
+  <div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
+    <div class="mobile-drawer-backdrop" id="mobile-backdrop"></div>
+    <div class="mobile-drawer-panel">
+      <div class="mobile-drawer-header">
+        <div class="nav-brand">
+          <div class="brand-icon">⚡</div>
+          <span class="brand-name">Synapse OS</span>
+        </div>
+        <button class="drawer-close-btn" id="drawer-close" aria-label="Close menu">&times;</button>
+      </div>
+
+      <div class="mobile-intent-status" id="mobile-intent-badge">
+        <span class="sparkle">✦</span>
+        <span class="intent-text" id="mobile-intent-label">General Exploration</span>
+        <span class="intent-conf" id="mobile-intent-conf">78%</span>
+      </div>
+
+      <ul class="mobile-nav-menu" id="mobile-nav-menu">
+        <!-- Injected dynamically by script.js -->
+      </ul>
+
+      <div class="mobile-drawer-actions">
+        <a href="#demo" class="action-btn-adaptive btn-ghost-ai" id="mobile-action-ghost">Book Demo</a>
+        <a href="#cta" class="action-btn-adaptive btn-primary-ai" id="mobile-action-primary">Get Started Free →</a>
+      </div>
+    </div>
+  </div>
 
   <!-- MAIN SHOWCASE CONTENT -->
   <main class="page-container">

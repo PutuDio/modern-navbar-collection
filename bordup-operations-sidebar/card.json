@@ -7,5 +7,6 @@
   "tech": "HTML · CSS · JS",
   "keywords": ["enterprise", "hr", "operations", "rail", "collapsible", "sidebar", "department", "taxonomy"],
   "featured": false,
-  "order": 4
+  "order": 4,
+  "mobileMenuTrigger": "#mobile-menu-btn"
 }

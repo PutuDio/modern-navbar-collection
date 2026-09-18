@@ -1246,4 +1246,13 @@ body {
   .user-table td:nth-child(3),
   .user-table th:nth-child(4),
   .user-table td:nth-child(4) { display: none; }
+  .cmd-dialog { width: min(92vw, 420px); }
+  .account-popover { right: 12px; left: 12px; width: auto; }
+}
+
+@media (max-width: 480px) {
+  .topbar { padding: 0 12px; height: 56px; }
+  .page-content { padding: 16px 12px; }
+  .content-title { font-size: 18px; }
+  .content-desc { font-size: 13px; }
 }
