@@ -220,36 +220,6 @@
     }
   }
 
-  /* ── Dwell Time & Scroll Detection Heuristics ───────────────── */
-  const sectionIntents = [
-    { selector: '#tech-specs', intent: 'developer', minDwellMs: 1200 },
-    { selector: '#enterprise-security', intent: 'enterprise', minDwellMs: 1400 },
-    { selector: '#solutions', intent: 'designer', minDwellMs: 1500 }
-  ];
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      const match = sectionIntents.find(s => entry.target.matches(s.selector));
-      if (!match) return;
-
-      if (entry.isIntersecting && entry.intersectionRatio > 0.4) {
-        entry.target.classList.add('focused');
-        dwellTimers[match.intent] = setTimeout(() => {
-          if (currentIntent !== match.intent) {
-            morphNavbar(match.intent);
-          }
-        }, match.minDwellMs);
-      } else {
-        entry.target.classList.remove('focused');
-        clearTimeout(dwellTimers[match.intent]);
-      }
-    });
-  }, { threshold: [0.4] });
-
-  sectionIntents.forEach(s => {
-    const el = document.querySelector(s.selector);
-    if (el) observer.observe(el);
-  });
 
   /* ── Interactive Simulator Buttons ──────────────────────────── */
   simButtons.forEach(btn => {

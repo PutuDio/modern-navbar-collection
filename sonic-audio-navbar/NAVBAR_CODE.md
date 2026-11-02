@@ -9,11 +9,26 @@ File ini berisi kode komponen bersih (*clean isolated code*) yang mencakup ketig
 Letakkan markup navigasi audio ini di dalam tag `<body>`:
 
 ```html
-<!-- ================================================================
-     SONIC AUDIO HARMONIC NAVBAR
-     ================================================================ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frequency Studio — Audio-Spatial Sonic Navigation</title>
+  <meta name="description" content="An experimental sonic navbar where each menu item plays a unique synthesizer voice. Sweep the nav to generate a harmonic chord progression. Built with Web Audio API.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ── Background ambient canvas ────────────────────────────── -->
+<canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     SONIC NAVBAR
+     ═══════════════════════════════════════════════════════════ -->
 <div class="sonic-nav-wrapper" role="banner">
-  <nav class="sonic-nav" id="sonic-nav" aria-label="Harmonic sonic navigation">
+  <nav class="sonic-nav" aria-label="Sonic harmonic navigation">
 
     <!-- Brand -->
     <a href="#home" class="sonic-brand" aria-label="Frequency Studio — Home">
@@ -25,67 +40,92 @@ Letakkan markup navigasi audio ini di dalam tag `<body>`:
       <span class="sonic-brand-name">Freq Studio</span>
     </a>
 
-    <!-- Live Visualizer Equalizer Meter -->
-    <div class="visualizer-strip" aria-hidden="true" title="Audio meter">
+    <!-- Live Visualizer Bars -->
+    <div class="visualizer-strip" aria-hidden="true" title="Live audio level meter">
       <div class="viz-bar" style="height:8px;"></div>
       <div class="viz-bar" style="height:14px;"></div>
       <div class="viz-bar" style="height:22px;"></div>
       <div class="viz-bar" style="height:10px;"></div>
-      <div class="viz-bar" style="height:26px;"></div>
-      <div class="viz-bar" style="height:16px;"></div>
+      <div class="viz-bar" style="height:28px;"></div>
+      <div class="viz-bar" style="height:18px;"></div>
       <div class="viz-bar" style="height:12px;"></div>
+      <div class="viz-bar" style="height:20px;"></div>
+      <div class="viz-bar" style="height:6px;"></div>
+      <div class="viz-bar" style="height:16px;"></div>
+      <div class="viz-bar" style="height:24px;"></div>
+      <div class="viz-bar" style="height:10px;"></div>
+      <div class="viz-bar" style="height:18px;"></div>
     </div>
 
-    <!-- Sonic Nav Links (Each item triggers a synth instrument) -->
+    <!-- Sonic Nav Links -->
     <ul class="sonic-links" role="list">
+
       <li>
-        <a class="sonic-link active" data-voice="home" href="#home" role="listitem">
-          <span class="link-instrument">🎛️</span>
+        <a class="sonic-link active" data-voice="home" href="#home" role="listitem" aria-label="Home — plays Ambient Pad chord in A3 (220 Hz)">
+          <span class="link-ripple" style="border:2px solid #a855f7;" aria-hidden="true"></span>
+          <span class="link-instrument" aria-hidden="true">🎛️</span>
           <span>Home</span>
           <span class="link-freq">A3 · 220Hz</span>
-          <span class="link-glow-bar" style="background:#a855f7;"></span>
+          <span class="link-glow-bar" style="background:#a855f7;" aria-hidden="true"></span>
         </a>
       </li>
 
       <li>
-        <a class="sonic-link" data-voice="project" href="#projects" role="listitem">
-          <span class="link-instrument">🎸</span>
+        <a class="sonic-link" data-voice="project" href="#projects" role="listitem" aria-label="Projects — plays Synth Lead in A4 (440 Hz)">
+          <span class="link-ripple" style="border:2px solid #06b6d4;" aria-hidden="true"></span>
+          <span class="link-instrument" aria-hidden="true">🎸</span>
           <span>Projects</span>
           <span class="link-freq">A4 · 440Hz</span>
-          <span class="link-glow-bar" style="background:#06b6d4;"></span>
+          <span class="link-glow-bar" style="background:#06b6d4;" aria-hidden="true"></span>
         </a>
       </li>
 
       <li>
-        <a class="sonic-link" data-voice="lab" href="#lab" role="listitem">
-          <span class="link-instrument">🎹</span>
+        <a class="sonic-link" data-voice="lab" href="#lab" role="listitem" aria-label="Lab — plays Arpeggiator in E4 (330 Hz)">
+          <span class="link-ripple" style="border:2px solid #10b981;" aria-hidden="true"></span>
+          <span class="link-instrument" aria-hidden="true">🎹</span>
           <span>Lab</span>
           <span class="link-freq">E4 · 330Hz</span>
-          <span class="link-glow-bar" style="background:#10b981;"></span>
+          <span class="link-glow-bar" style="background:#10b981;" aria-hidden="true"></span>
         </a>
       </li>
 
       <li>
-        <a class="sonic-link" data-voice="about" href="#about" role="listitem">
-          <span class="link-instrument">🎺</span>
+        <a class="sonic-link" data-voice="about" href="#about" role="listitem" aria-label="About — plays Electric Piano in C4 (264 Hz)">
+          <span class="link-ripple" style="border:2px solid #f59e0b;" aria-hidden="true"></span>
+          <span class="link-instrument" aria-hidden="true">🎺</span>
           <span>About</span>
           <span class="link-freq">C4 · 264Hz</span>
-          <span class="link-glow-bar" style="background:#f59e0b;"></span>
+          <span class="link-glow-bar" style="background:#f59e0b;" aria-hidden="true"></span>
         </a>
       </li>
 
       <li>
-        <a class="sonic-link" data-voice="contact" href="#contact" role="listitem">
-          <span class="link-instrument">🥁</span>
+        <a class="sonic-link" data-voice="contact" href="#contact" role="listitem" aria-label="Contact — plays Rhythm Tap in A2 (110 Hz)">
+          <span class="link-ripple" style="border:2px solid #f43f5e;" aria-hidden="true"></span>
+          <span class="link-instrument" aria-hidden="true">🥁</span>
           <span>Contact</span>
           <span class="link-freq">A2 · 110Hz</span>
-          <span class="link-glow-bar" style="background:#f43f5e;"></span>
+          <span class="link-glow-bar" style="background:#f43f5e;" aria-hidden="true"></span>
         </a>
       </li>
+
     </ul>
+
 
   </nav>
 </div>
+
+<!-- ── Soundscape change banner ──────────────────────────────── -->
+<div class="soundscape-banner" id="soundscape-banner" role="status" aria-live="polite">
+  <span class="soundscape-icon" id="banner-icon">🎛️</span>
+  <span class="soundscape-key">Now playing → </span>
+  <span class="soundscape-value" id="banner-value">Ambient Pad · A3 · 220 Hz</span>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
 ```
 
 ---
@@ -95,33 +135,78 @@ Letakkan markup navigasi audio ini di dalam tag `<body>`:
 Tambahkan CSS ini ke stylesheet Anda:
 
 ```css
-/* ================================================================
-   SONIC AUDIO NAVBAR — CSS DESIGN TOKENS & STYLES
-   ================================================================ */
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+/* =============================================================
+   SONIC AUDIO NAVBAR — style.css
+   Web Audio API Harmonic Navigation · Creative Music Studio
+   ============================================================= */
 
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* ── Design Tokens ─────────────────────────────────────────── */
 :root {
+  --bg-void: #08060e;
+  --bg-studio: #0e0b1a;
+  --bg-surface: rgba(20, 16, 36, 0.92);
   --bg-panel: rgba(28, 22, 48, 0.88);
+
   --border-subtle: rgba(255, 255, 255, 0.06);
   --border-dim: rgba(255, 255, 255, 0.10);
 
-  --note-home:    #a855f7;
-  --note-project: #06b6d4;
-  --note-lab:     #10b981;
-  --note-about:   #f59e0b;
-  --note-contact: #f43f5e;
+  /* Audio frequency color palette */
+  --note-home:    #a855f7; /* Ambient Pad — violet */
+  --note-project: #06b6d4; /* Synth Lead — cyan */
+  --note-lab:     #10b981; /* Arpeggiator — emerald */
+  --note-about:   #f59e0b; /* Electric Piano — amber */
+  --note-contact: #f43f5e; /* Rhythm Tap — rose */
 
   --text-main: #f0eaff;
   --text-muted: #8b7db5;
+  --text-dim: #4a4070;
+
   --font-display: 'Space Grotesk', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast: 150ms;
+  --duration-med: 280ms;
+  --duration-slow: 480ms;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-pill: 9999px;
 }
 
-/* ── Fixed Navbar Container ──────────────────────────────────── */
+/* ── Reset ───────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-display);
+  background: var(--bg-void);
+  color: var(--text-main);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Oscilloscope background canvas ─────────────────────────── */
+#bg-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SONIC NAVBAR
+   ═══════════════════════════════════════════════════════════════ */
 .sonic-nav-wrapper {
   position: fixed;
   top: 0; left: 0; right: 0;
-  z-index: 100;
+  z-index: 300;
   display: flex;
   justify-content: center;
   padding-top: 20px;
@@ -137,7 +222,8 @@ Tambahkan CSS ini ke stylesheet Anda:
   overflow: hidden;
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7),
+              inset 0 1px 0 rgba(255, 255, 255, 0.06);
   pointer-events: all;
   height: 64px;
 }
@@ -165,19 +251,19 @@ Tambahkan CSS ini ke stylesheet Anda:
 }
 
 .sonic-brand-name {
-  font-family: var(--font-display);
   font-size: 14px;
   font-weight: 600;
   color: var(--text-main);
+  letter-spacing: -0.01em;
 }
 
-/* ── Equalizer Meter ─────────────────────────────────────────── */
+/* ── Visualizer strip ────────────────────────────────────────── */
 .visualizer-strip {
   display: flex;
   align-items: center;
   padding: 0 16px;
   border-right: 1px solid var(--border-subtle);
-  gap: 3px;
+  gap: 2px;
   flex-shrink: 0;
 }
 
@@ -185,17 +271,15 @@ Tambahkan CSS ini ke stylesheet Anda:
   width: 3px;
   border-radius: 2px;
   background: var(--note-home);
-  transition: height 150ms ease;
+  transition: height var(--duration-fast) ease;
   min-height: 2px;
 }
 
-/* ── Menu Links ──────────────────────────────────────────────── */
+/* ── Nav items (Sound Buttons) ─────────────────────────────── */
 .sonic-links {
   display: flex;
   align-items: stretch;
   list-style: none;
-  margin: 0;
-  padding: 0;
 }
 
 .sonic-link {
@@ -208,28 +292,35 @@ Tambahkan CSS ini ke stylesheet Anda:
   gap: 3px;
   cursor: pointer;
   text-decoration: none;
+  background: none;
+  border: none;
   color: var(--text-muted);
   font-family: var(--font-display);
   font-size: 13px;
   font-weight: 500;
-  transition: color 150ms ease, background 150ms ease;
+  transition: color var(--duration-fast) ease, background var(--duration-fast) ease;
   border-right: 1px solid var(--border-subtle);
-  min-width: 88px;
+  min-width: 90px;
 }
 
-.sonic-links li:last-child .sonic-link {
-  border-right: none;
+.sonic-link:last-child { border-right: none; }
+
+.sonic-link:hover {
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.04);
 }
 
-.sonic-link:hover, .sonic-link.active {
+.sonic-link.active {
   color: var(--text-main);
   background: rgba(255, 255, 255, 0.05);
 }
 
+/* Instrument icon */
 .link-instrument {
-  font-size: 17px;
+  font-size: 18px;
   line-height: 1;
-  transition: transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: transform var(--duration-fast) var(--ease-spring),
+              filter var(--duration-fast) ease;
 }
 
 .sonic-link:hover .link-instrument,
@@ -237,13 +328,15 @@ Tambahkan CSS ini ke stylesheet Anda:
   transform: scale(1.2);
 }
 
+/* Frequency label */
 .link-freq {
   font-family: var(--font-mono);
   font-size: 9px;
   font-weight: 600;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   opacity: 0.5;
-  transition: opacity 150ms ease;
+  transition: opacity var(--duration-fast) ease;
 }
 
 .sonic-link:hover .link-freq,
@@ -251,19 +344,419 @@ Tambahkan CSS ini ke stylesheet Anda:
   opacity: 1;
 }
 
+/* Active underbar glow */
 .link-glow-bar {
   position: absolute;
   bottom: 0; left: 10%; right: 10%;
   height: 2px;
   border-radius: 2px;
   opacity: 0;
-  transition: opacity 150ms ease;
+  transition: opacity var(--duration-fast) ease;
 }
 
 .sonic-link.active .link-glow-bar,
 .sonic-link:hover .link-glow-bar {
   opacity: 1;
 }
+
+/* Playing ripple ring */
+.link-ripple {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+}
+
+@keyframes ripple-expand {
+  0%   { transform: translate(-50%, -50%) scale(0.4); opacity: 0.6; }
+  100% { transform: translate(-50%, -50%) scale(2.2); opacity: 0; }
+}
+
+.sonic-link.playing .link-ripple {
+  animation: ripple-expand 0.55s var(--ease-out) forwards;
+}
+
+/* ── CTA Button ──────────────────────────────────────────────── */
+.sonic-cta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 14px;
+  padding: 0 16px;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.4);
+  transition: box-shadow var(--duration-fast) ease, transform var(--duration-fast) var(--ease-spring);
+  border-left: 1px solid var(--border-subtle);
+  margin-left: 4px;
+  flex-shrink: 0;
+}
+
+.sonic-cta:hover {
+  box-shadow: 0 6px 22px rgba(168, 85, 247, 0.55);
+  transform: scale(1.03);
+}
+
+/* ── Soundscape banner ───────────────────────────────────────── */
+.soundscape-banner {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 20px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-dim);
+  border-radius: var(--radius-pill);
+  backdrop-filter: blur(16px);
+  font-size: 12px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  opacity: 0;
+  transition: opacity var(--duration-med) ease, transform var(--duration-med) ease;
+  transform: translateX(-50%) translateY(10px);
+}
+
+.soundscape-banner.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.soundscape-icon { font-size: 16px; }
+
+.soundscape-key { color: var(--text-dim); }
+
+.soundscape-value {
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PAGE CONTENT
+   ═══════════════════════════════════════════════════════════════ */
+.page-wrap {
+  position: relative;
+  z-index: 1;
+  padding-top: 104px;
+}
+
+/* ── Hero ────────────────────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 24px;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--note-home);
+  margin-bottom: 24px;
+  padding: 5px 14px;
+  background: rgba(168, 85, 247, 0.08);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  border-radius: var(--radius-pill);
+}
+
+.hero-title {
+  font-size: clamp(40px, 6vw, 82px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #f0eaff 30%, var(--note-home) 90%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-subtitle {
+  font-size: 17px;
+  color: var(--text-muted);
+  max-width: 560px;
+  margin: 0 auto 40px;
+  line-height: 1.65;
+}
+
+/* ── Large oscilloscope canvas in hero ───────────────────────── */
+.hero-visualizer {
+  width: min(700px, 92vw);
+  height: 120px;
+  margin: 32px auto;
+  background: rgba(14, 11, 26, 0.8);
+  border: 1px solid var(--border-dim);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+}
+
+#hero-canvas {
+  width: 100%; height: 100%;
+}
+
+.hero-viz-label {
+  position: absolute;
+  top: 10px; left: 14px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-dim);
+}
+
+.hero-viz-freq {
+  position: absolute;
+  top: 10px; right: 14px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--note-home);
+  transition: color var(--duration-med) ease;
+}
+
+/* ── Chord/note labels ───────────────────────────────────────── */
+.notes-palette {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
+.note-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.note-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 8px currentColor;
+}
+
+.note-name { color: var(--text-main); font-weight: 600; }
+.note-freq { color: var(--text-dim); }
+
+/* ── Feature sections ─────────────────────────────────────────── */
+.section {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 80px 24px;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.section-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--note-home);
+  margin-bottom: 10px;
+}
+
+.section-title {
+  font-size: clamp(24px, 3.5vw, 40px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--text-main);
+}
+
+/* ── Track cards ─────────────────────────────────────────────── */
+.tracks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.track-card {
+  padding: 24px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  position: relative;
+  overflow: hidden;
+  transition: all var(--duration-med) var(--ease-out);
+  cursor: pointer;
+}
+
+.track-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--border-dim);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+}
+
+.track-color-bar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+
+.track-icon { font-size: 28px; margin-bottom: 14px; }
+
+.track-name {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+  margin-bottom: 6px;
+}
+
+.track-type {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-dim);
+  margin-bottom: 10px;
+}
+
+.track-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ── Mini waveform canvas in each card ──────────────────────── */
+.mini-wave-canvas {
+  width: 100%;
+  height: 40px;
+  margin-top: 14px;
+  border-radius: var(--radius-sm);
+  background: rgba(0,0,0,0.3);
+}
+
+/* ── Footer ───────────────────────────────────────────────────── */
+.page-footer {
+  border-top: 1px solid var(--border-subtle);
+  padding: 28px 24px;
+  text-align: center;
+}
+
+.page-footer p {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+/* ── Responsive ───────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .visualizer-strip { display: none; }
+  .tracks-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .sonic-nav-wrapper {
+    padding-top: 12px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  .sonic-nav {
+    flex-direction: column;
+    height: auto;
+    border-radius: 18px;
+    width: min(94vw, 540px);
+    overflow: hidden;
+  }
+  .sonic-brand {
+    border-right: none;
+    border-bottom: 1px solid var(--border-subtle);
+    padding: 10px 16px;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .sonic-cta {
+    display: none;
+  }
+  .sonic-links {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    display: flex;
+    padding: 6px 4px;
+  }
+  .sonic-links::-webkit-scrollbar {
+    display: none;
+  }
+  .sonic-link {
+    min-width: 76px;
+    padding: 8px 12px;
+    border-right: none;
+    border-radius: 10px;
+  }
+  .hero-title {
+    font-size: clamp(28px, 7vw, 44px);
+  }
+  .hero-freq-meter {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 540px) {
+  .tracks-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero {
+    padding: 140px 0 60px;
+  }
+  .hero-stats {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sonic-nav-wrapper { padding-top: 8px; padding-left: 8px; padding-right: 8px; }
+  .sonic-brand { padding: 8px 12px; }
+  .brand-name { font-size: 14px; }
+  .sonic-link { min-width: 64px; padding: 6px 10px; font-size: 12px; }
+  .hero { padding: 120px 16px 50px; }
+  .hero-title { font-size: clamp(24px, 6.5vw, 36px); }
+  .hero-subtitle { font-size: 14px; }
+}
+body {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(124, 58, 237, 0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 30% at 80% 20%, rgba(59, 130, 246, 0.12) 0%, transparent 60%),
+    radial-gradient(circle, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    #090a0f !important;
+  background-size: auto, auto, 24px 24px !important;
+}
+
 ```
 
 ---
@@ -273,37 +766,60 @@ Tambahkan CSS ini ke stylesheet Anda:
 Sematkan script Web Audio synthesizer ini sebelum penutup tag `</body>`:
 
 ```javascript
-/* ================================================================
-   SONIC AUDIO NAVBAR — WEB AUDIO API SYNTHESIZER ENGINE
-   ================================================================ */
+/* =============================================================
+   SONIC AUDIO NAVBAR — script.js
+   Web Audio API Synthesizer · Harmonic Navigation Engine
+   ============================================================= */
 (function () {
   'use strict';
 
-  // 1. Definisi Karakter Nada & Synthesizer Per Menu
+  /* ─────────────────────────────────────────────────────────────
+     AUDIO ENGINE
+     Each nav link has a unique synthesizer voice:
+     Home    → Ambient Pad (sine + lowpass)     220 Hz
+     Projects→ Synth Lead (sawtooth + highpass)  440 Hz
+     Lab     → Arpeggiator (square + echo-ish)   330 Hz
+     About   → Electric Piano (triangle + warm)  264 Hz
+     Contact → Rhythm Tap (pulse + punch)        110 Hz
+  ────────────────────────────────────────────────────────────── */
+
   const VOICES = [
-    { id: 'home',    freq: 220, chord: [220, 277, 330],  type: 'sine',     filterFreq: 600,  color: '#a855f7' },
-    { id: 'project', freq: 440, chord: [440, 554, 660],  type: 'sawtooth', filterFreq: 1200, color: '#06b6d4' },
-    { id: 'lab',     freq: 330, chord: [330, 415, 495],  type: 'square',   filterFreq: 800,  color: '#10b981' },
-    { id: 'about',   freq: 264, chord: [264, 330, 396],  type: 'triangle', filterFreq: 1400, color: '#f59e0b' },
-    { id: 'contact', freq: 110, chord: [110, 165, 220],  type: 'sine',     filterFreq: 200,  color: '#f43f5e' }
+    { id: 'home',    label: 'Home',     instrument: '🎛️',  freq: 220, chord: [220, 277, 330],  type: 'sine',     filterType: 'lowpass',  filterFreq: 600,  color: '#a855f7', soundLabel: 'Ambient Pad',     note: 'A3' },
+    { id: 'project', label: 'Projects', instrument: '🎸',  freq: 440, chord: [440, 554, 660],  type: 'sawtooth', filterType: 'bandpass', filterFreq: 1200, color: '#06b6d4', soundLabel: 'Synth Lead',      note: 'A4' },
+    { id: 'lab',     label: 'Lab',      instrument: '🎹',  freq: 330, chord: [330, 415, 495],  type: 'square',   filterType: 'lowpass',  filterFreq: 800,  color: '#10b981', soundLabel: 'Arpeggiator',     note: 'E4' },
+    { id: 'about',   label: 'About',    instrument: '🎺',  freq: 264, chord: [264, 330, 396],  type: 'triangle', filterType: 'lowpass',  filterFreq: 1400, color: '#f59e0b', soundLabel: 'Electric Piano',   note: 'C4' },
+    { id: 'contact', label: 'Contact',  instrument: '🥁',  freq: 110, chord: [110, 165, 220],  type: 'sine',     filterType: 'highpass', filterFreq: 200,  color: '#f43f5e', soundLabel: 'Rhythm Tap',       note: 'A2' },
   ];
 
   let audioCtx = null;
   let masterGain = null;
+  let isUnlocked = false;
+  let activeVoice = VOICES[0];
+  let sweepTimeouts = [];
+  /* ── DOM refs ───────────────────────────────────────────────── */
+  const sonicLinks  = document.querySelectorAll('.sonic-link');
+  const vizBars     = document.querySelectorAll('.viz-bar');
+  const banner      = document.getElementById('soundscape-banner');
+  const bannerIcon  = document.getElementById('banner-icon');
+  const bannerValue = document.getElementById('banner-value');
 
+  /* ── Audio context init (requires user gesture) ─────────────── */
   function initAudio() {
     if (audioCtx) return;
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    audioCtx  = new (window.AudioContext || window.webkitAudioContext)();
     masterGain = audioCtx.createGain();
-    masterGain.gain.value = 0.35;
+    masterGain.gain.value = 0.4;
     masterGain.connect(audioCtx.destination);
+
+    isUnlocked = true;
+
+
+    playVoice(VOICES[0], false); // play ambient welcome note
   }
 
-  // 2. Mainkan Nada Synthesizer Polyphonic Poly-chord
-  function playVoice(voice) {
-    initAudio();
-    if (audioCtx.state === 'suspended') audioCtx.resume();
-
+  /* ── Play a synthesizer voice ────────────────────────────────── */
+  function playVoice(voice, isClick) {
+    if (!audioCtx) return;
     const now = audioCtx.currentTime;
 
     voice.chord.forEach((freq, i) => {
@@ -311,51 +827,185 @@ Sematkan script Web Audio synthesizer ini sebelum penutup tag `</body>`:
       const gain = audioCtx.createGain();
       const filt = audioCtx.createBiquadFilter();
 
-      osc.type = voice.type;
+      osc.type      = voice.type;
       osc.frequency.setValueAtTime(freq, now);
 
-      filt.type = 'lowpass';
+      // Slight vibrato for richness
+      const lfo = audioCtx.createOscillator();
+      const lfoGain = audioCtx.createGain();
+      lfo.frequency.setValueAtTime(4, now);
+      lfoGain.gain.setValueAtTime(voice.type === 'sawtooth' ? 8 : 3, now);
+      lfo.connect(lfoGain);
+      lfoGain.connect(osc.frequency);
+      lfo.start(now);
+
+      filt.type            = voice.filterType;
       filt.frequency.value = voice.filterFreq;
+      filt.Q.value         = 2;
 
       // ADSR envelope
+      const attackTime  = isClick ? 0.01 : 0.08;
+      const decayTime   = isClick ? 0.08 : 0.12;
+      const sustainLevel = isClick ? 0.5  : 0.35;
+      const releaseTime  = isClick ? 0.5  : 1.4;
+      const totalDuration = attackTime + decayTime + (isClick ? 0.4 : 1.0) + releaseTime;
+
       gain.gain.setValueAtTime(0, now);
-      gain.gain.linearRampToValueAtTime(0.5 / (i + 1), now + 0.05);
-      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.8);
+      gain.gain.linearRampToValueAtTime(0.6 / (i + 1), now + attackTime);
+      gain.gain.linearRampToValueAtTime(sustainLevel / (i + 1), now + attackTime + decayTime);
+      gain.gain.setValueAtTime(sustainLevel / (i + 1), now + totalDuration - releaseTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + totalDuration);
 
       osc.connect(filt);
       filt.connect(gain);
       gain.connect(masterGain);
 
       osc.start(now);
-      osc.stop(now + 0.8);
+      osc.stop(now + totalDuration);
+      lfo.stop(now + totalDuration);
     });
 
-    // Update equalizer viz bars color
-    document.querySelectorAll('.viz-bar').forEach(b => {
-      b.style.background = voice.color;
-      b.style.height = `${Math.floor(Math.random() * 24 + 6)}px`;
+    activeVoice = voice;
+    updateNavColors(voice);
+    showBanner(voice);
+  }
+
+  /* ── Strumming: sweep fast over nav ─────────────────────────── */
+  let lastStrumIdx = -1;
+  let strumChain = [];
+
+  function strumVoice(voice, delayMs) {
+    const t = setTimeout(() => {
+      if (!audioCtx) return;
+      const now = audioCtx.currentTime;
+      const osc  = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = voice.type;
+      osc.frequency.setValueAtTime(voice.freq, now);
+      gain.gain.setValueAtTime(0, now);
+      gain.gain.linearRampToValueAtTime(0.25, now + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.4);
+      osc.connect(gain);
+      gain.connect(masterGain);
+      osc.start(now);
+      osc.stop(now + 0.5);
+    }, delayMs);
+    sweepTimeouts.push(t);
+  }
+
+  function clearSweep() {
+    sweepTimeouts.forEach(clearTimeout);
+    sweepTimeouts = [];
+  }
+
+  /* ── Visualizer bars animation ───────────────────────────────── */
+  function updateVizBars(voice) {
+    if (!vizBars.length) return;
+    const heights = [6, 12, 20, 14, 28, 18, 10, 22, 8, 16, 24, 10, 18];
+    vizBars.forEach((bar, i) => {
+      const h = (heights[i % heights.length] + Math.random() * 10);
+      bar.style.height = h + 'px';
+      bar.style.background = voice.color;
+      bar.style.boxShadow = `0 0 6px ${voice.color}80`;
     });
   }
 
-  // 3. Attach Event Listener (Hover & Click)
-  const sonicLinks = document.querySelectorAll('.sonic-link');
-  sonicLinks.forEach(link => {
-    const voiceId = link.dataset.voice;
-    const voice = VOICES.find(v => v.id === voiceId);
+
+  function updateNavColors(voice) {
+    sonicLinks.forEach(link => {
+      link.classList.remove('active');
+      const gBar = link.querySelector('.link-glow-bar');
+      if (gBar) gBar.style.background = '';
+    });
+    const active = document.querySelector(`.sonic-link[data-voice="${voice.id}"]`);
+    if (active) {
+      active.classList.add('active');
+      const gBar = active.querySelector('.link-glow-bar');
+      if (gBar) gBar.style.background = voice.color;
+    }
+  }
+
+  /* ── Banner ──────────────────────────────────────────────────── */
+  let bannerTimer = null;
+  function showBanner(voice) {
+    if (!banner) return;
+    if (bannerIcon)  bannerIcon.textContent  = voice.instrument;
+    if (bannerValue) bannerValue.textContent = `${voice.soundLabel} · ${voice.note} · ${voice.freq} Hz`;
+    banner.classList.add('visible');
+    clearTimeout(bannerTimer);
+    bannerTimer = setTimeout(() => banner.classList.remove('visible'), 2800);
+  }
+
+  /* ── Nav events ─────────────────────────────────────────────── */
+  sonicLinks.forEach((link, idx) => {
+    const voice = VOICES.find(v => v.id === link.dataset.voice);
     if (!voice) return;
 
     link.addEventListener('mouseenter', () => {
-      playVoice(voice);
+      if (!isUnlocked) return;
+      // Trigger strum chord note on hover
+      strumVoice(voice, 0);
+      link.classList.add('playing');
+
+      const ripple = link.querySelector('.link-ripple');
+      if (ripple) {
+        ripple.style.borderColor = voice.color;
+        link.classList.remove('playing');
+        void link.offsetWidth; // trigger reflow
+        link.classList.add('playing');
+      }
+
+      updateVizBars(voice);
+
+      // If sweeping fast (mouse moves across multiple links)
+      clearSweep();
+    });
+
+    link.addEventListener('pointerdown', () => {
+      if (!isUnlocked) { initAudio(); return; }
+      strumVoice(voice, 0);
+      link.classList.add('playing');
+      const ripple = link.querySelector('.link-ripple');
+      if (ripple) {
+        ripple.style.borderColor = voice.color;
+        link.classList.remove('playing');
+        void link.offsetWidth;
+        link.classList.add('playing');
+      }
+      updateVizBars(voice);
+      showBanner(voice);
     });
 
     link.addEventListener('click', (e) => {
-      sonicLinks.forEach(l => l.classList.remove('active'));
-      link.classList.add('active');
-      playVoice(voice);
+      e.preventDefault();
+      if (!isUnlocked) { initAudio(); return; }
+      playVoice(voice, true);
+      // Navigate
+      const target = document.querySelector(voice.href || `#${voice.id}`);
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
     });
   });
 
-  // Unlock gesture pada klik pertama di window
-  window.addEventListener('click', initAudio, { once: true });
+  /* ── Sweep detection (fast hover creates harmonic sweep) ────── */
+  let lastHoverTime = 0;
+  let hoverIdx = -1;
+  sonicLinks.forEach((link, idx) => {
+    link.addEventListener('mouseenter', () => {
+      const now = Date.now();
+      if (now - lastHoverTime < 180 && hoverIdx !== idx) {
+        // Fast sweep — schedule strum
+        strumVoice(VOICES[idx] || VOICES[0], 0);
+      }
+      lastHoverTime = now;
+      hoverIdx = idx;
+    });
+  });
+
+
+
+
+
+
+
 })();
 ```

@@ -1072,3 +1072,5 @@ button {
 .demo-section:nth-child(even) {
   background: rgba(255, 255, 255, 0.008);
 }
+body { background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(124,58,237,.18), transparent 70%), radial-gradient(ellipse 40% 30% at 80% 20%, rgba(59,130,246,.12), transparent 60%), radial-gradient(circle, rgba(255,255,255,.08) 1px, transparent 1px), #090a0f !important; background-size: auto, auto, 24px 24px !important; }
+body { background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(124,58,237,.18), transparent 70%), radial-gradient(ellipse 40% 30% at 80% 20%, rgba(59,130,246,.12), transparent 60%), radial-gradient(circle, rgba(255,255,255,.08) 1px, transparent 1px), #090a0f !important; background-size: auto, auto, 24px 24px !important; }

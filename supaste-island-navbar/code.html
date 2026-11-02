@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Supaste Dynamic Island &mdash; Implementation Guide</title>
-<meta name="description" content="Isolated, copy-paste-ready code for Supaste Dynamic Island &mdash; font import, markup, styles, and behavior.">
+<title>Dynamic Island Navigation &mdash; Implementation Guide</title>
+<meta name="description" content="Isolated, copy-paste-ready code for Dynamic Island Navigation &mdash; font import, markup, styles, and behavior.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -244,7 +244,7 @@
 
   <header class="masthead">
     <p class="masthead-kicker">Implementation guide</p>
-    <h1>Supaste Dynamic Island</h1>
+    <h1>Dynamic Island Navigation</h1>
     <p>Isolated, dependency-free code for the navigation only &mdash; no hero sections or demo page content. Copy each block in order into your own project: font, markup, styles, then behavior.</p>
     <div class="masthead-meta">
       <span>4 steps</span>
@@ -304,77 +304,97 @@
             <span class="copy-label">Copy</span>
           </button>
         </div>
-        <pre><code id="code-2" class="language-html">&lt;!-- ================================================================
-     SUPASTE DYNAMIC ISLAND NAVBAR
-     ================================================================ --&gt;
-&lt;div class=&quot;island-nav-wrapper&quot; role=&quot;banner&quot;&gt;
-  &lt;nav class=&quot;island-nav&quot; id=&quot;island-nav&quot; aria-label=&quot;Main navigation&quot;&gt;
+        <pre><code id="code-2" class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+  &lt;title&gt;Dynamic Island Navigation&lt;/title&gt;
+  &lt;meta name=&quot;description&quot; content=&quot;Dynamic Island navigation component with desktop navbar and mobile drawer preview.&quot;&gt;
+  &lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.googleapis.com&quot;&gt;
+  &lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.gstatic.com&quot; crossorigin&gt;
+  &lt;link href=&quot;https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;preview-stage&quot;&gt;
 
-    &lt;!-- Brand --&gt;
-    &lt;a href=&quot;#home&quot; class=&quot;island-brand&quot; aria-label=&quot;Supaste — Home&quot;&gt;
-      &lt;div class=&quot;island-brand-icon&quot; aria-hidden=&quot;true&quot;&gt;
-        &lt;!-- Minimalist App Icon --&gt;
-        &lt;svg width=&quot;14&quot; height=&quot;14&quot; viewBox=&quot;0 0 14 14&quot; fill=&quot;none&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;
-          &lt;rect x=&quot;1&quot; y=&quot;3&quot; width=&quot;12&quot; height=&quot;10&quot; rx=&quot;2&quot; stroke=&quot;white&quot; stroke-width=&quot;1.3&quot;/&gt;
-          &lt;path d=&quot;M5 3V2.5A1.5 1.5 0 0 1 9 2.5V3&quot; stroke=&quot;white&quot; stroke-width=&quot;1.3&quot; stroke-linecap=&quot;round&quot;/&gt;
-          &lt;path d=&quot;M4 7H10M4 9.5H8&quot; stroke=&quot;white&quot; stroke-width=&quot;1.3&quot; stroke-linecap=&quot;round&quot;/&gt;
-        &lt;/svg&gt;
-      &lt;/div&gt;
-      &lt;span class=&quot;island-brand-name&quot;&gt;Supaste&lt;/span&gt;
-    &lt;/a&gt;
+  &lt;!-- ═══════════════════════════════════════════════════════
+       DYNAMIC ISLAND NAVBAR
+       ═══════════════════════════════════════════════════════ --&gt;
+  &lt;div class=&quot;island-nav-wrapper&quot; role=&quot;banner&quot;&gt;
+    &lt;nav class=&quot;island-nav&quot; id=&quot;island-nav&quot; aria-label=&quot;Main navigation&quot;&gt;
 
-    &lt;!-- Separator --&gt;
-    &lt;div class=&quot;island-sep&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;
+      &lt;!-- Brand --&gt;
+      &lt;a href=&quot;#&quot; class=&quot;island-brand&quot; aria-label=&quot;Dynamic Island navigation&quot;&gt;
+        &lt;div class=&quot;island-brand-icon&quot; aria-hidden=&quot;true&quot;&gt;
+          &lt;!-- Clipboard icon --&gt;
+          &lt;svg width=&quot;14&quot; height=&quot;14&quot; viewBox=&quot;0 0 14 14&quot; fill=&quot;none&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;
+            &lt;rect x=&quot;1&quot; y=&quot;3&quot; width=&quot;12&quot; height=&quot;10&quot; rx=&quot;2&quot; stroke=&quot;white&quot; stroke-width=&quot;1.3&quot;/&gt;
+            &lt;path d=&quot;M5 3V2.5A1.5 1.5 0 0 1 9 2.5V3&quot; stroke=&quot;white&quot; stroke-width=&quot;1.3&quot; stroke-linecap=&quot;round&quot;/&gt;
+            &lt;path d=&quot;M4 7H10M4 9.5H8&quot; stroke=&quot;white&quot; stroke-width=&quot;1.3&quot; stroke-linecap=&quot;round&quot;/&gt;
+          &lt;/svg&gt;
+        &lt;/div&gt;
+        &lt;span class=&quot;island-brand-name&quot;&gt;Dynamic Island&lt;/span&gt;
+      &lt;/a&gt;
 
-    &lt;!-- Nav Links --&gt;
-    &lt;ul class=&quot;island-links&quot; role=&quot;list&quot;&gt;
-      &lt;li&gt;&lt;a href=&quot;#features&quot;&gt;Features&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#faq&quot;&gt;FAQ&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#pricing&quot;&gt;Pricing&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#changelog&quot;&gt;Changelog&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
+      &lt;!-- Separator --&gt;
+      &lt;div class=&quot;island-sep&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;
 
-    &lt;!-- CTA Button --&gt;
-    &lt;a href=&quot;#download&quot; class=&quot;island-cta&quot; id=&quot;island-cta-download&quot;&gt;
-      &lt;span class=&quot;island-cta-icon&quot; aria-hidden=&quot;true&quot;&gt;
-        &lt;!-- Apple Icon SVG --&gt;
-        &lt;svg width=&quot;14&quot; height=&quot;14&quot; viewBox=&quot;0 0 14 14&quot; fill=&quot;none&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;
+      &lt;!-- Nav Links --&gt;
+      &lt;ul class=&quot;island-links&quot; role=&quot;list&quot;&gt;
+        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Features&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;FAQ&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Pricing&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+
+      &lt;!-- CTA Button --&gt;
+      &lt;a href=&quot;#&quot; class=&quot;island-cta&quot; id=&quot;island-cta-download&quot;&gt;
+        &lt;span class=&quot;island-cta-icon&quot; aria-hidden=&quot;true&quot;&gt;
+          &lt;!-- Apple icon --&gt;
+          &lt;svg width=&quot;14&quot; height=&quot;14&quot; viewBox=&quot;0 0 14 14&quot; fill=&quot;none&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;
+            &lt;path d=&quot;M9.5 1.5C9.5 1.5 9.9 3.1 8.5 4.2C7.2 5.2 6 4.5 6 4.5&quot; stroke=&quot;black&quot; stroke-width=&quot;1.3&quot; stroke-linecap=&quot;round&quot;/&gt;
+            &lt;path d=&quot;M2.5 9.5C2.5 11.5 3.8 12.8 5.2 12.8C5.8 12.8 6.3 12.5 6.8 12.5C7.3 12.5 7.8 12.8 8.5 12.8C10 12.8 11.5 11.2 11.5 9.2C11.5 7.5 10.3 6.2 8.5 5.8C7.8 5.6 7.1 5.7 6.5 5.7C5.9 5.7 5.2 5.5 4.5 5.8C3.3 6.3 2.5 7.8 2.5 9.5Z&quot; fill=&quot;black&quot;/&gt;
+          &lt;/svg&gt;
+        &lt;/span&gt;
+        Navigation
+      &lt;/a&gt;
+
+      &lt;!-- Mobile Burger --&gt;
+      &lt;button class=&quot;island-burger&quot; id=&quot;island-burger&quot; aria-label=&quot;Toggle mobile menu&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;island-drawer&quot;&gt;
+        &lt;span&gt;&lt;/span&gt;
+        &lt;span&gt;&lt;/span&gt;
+        &lt;span&gt;&lt;/span&gt;
+      &lt;/button&gt;
+
+    &lt;/nav&gt;
+  &lt;/div&gt;
+
+  &lt;!-- ── Mobile Drawer (Island Sheet) ──────────────────────── --&gt;
+  &lt;div class=&quot;island-drawer&quot; id=&quot;island-drawer&quot; role=&quot;dialog&quot; aria-label=&quot;Mobile navigation&quot; aria-modal=&quot;true&quot;&gt;
+    &lt;div class=&quot;island-drawer-overlay&quot; id=&quot;drawer-overlay&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;island-drawer-sheet&quot;&gt;
+      &lt;ul class=&quot;drawer-nav-links&quot; role=&quot;list&quot;&gt;
+        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Features&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;FAQ&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Pricing&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;a href=&quot;#&quot; class=&quot;drawer-cta&quot;&gt;
+        &lt;svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 14 14&quot; fill=&quot;none&quot;&gt;
           &lt;path d=&quot;M9.5 1.5C9.5 1.5 9.9 3.1 8.5 4.2C7.2 5.2 6 4.5 6 4.5&quot; stroke=&quot;black&quot; stroke-width=&quot;1.3&quot; stroke-linecap=&quot;round&quot;/&gt;
           &lt;path d=&quot;M2.5 9.5C2.5 11.5 3.8 12.8 5.2 12.8C5.8 12.8 6.3 12.5 6.8 12.5C7.3 12.5 7.8 12.8 8.5 12.8C10 12.8 11.5 11.2 11.5 9.2C11.5 7.5 10.3 6.2 8.5 5.8C7.8 5.6 7.1 5.7 6.5 5.7C5.9 5.7 5.2 5.5 4.5 5.8C3.3 6.3 2.5 7.8 2.5 9.5Z&quot; fill=&quot;black&quot;/&gt;
         &lt;/svg&gt;
-      &lt;/span&gt;
-      Download for macOS
-    &lt;/a&gt;
-
-    &lt;!-- Mobile Burger Toggle --&gt;
-    &lt;button class=&quot;island-burger&quot; id=&quot;island-burger&quot; aria-label=&quot;Toggle mobile menu&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;island-drawer&quot;&gt;
-      &lt;span&gt;&lt;/span&gt;
-      &lt;span&gt;&lt;/span&gt;
-      &lt;span&gt;&lt;/span&gt;
-    &lt;/button&gt;
-
-  &lt;/nav&gt;
-&lt;/div&gt;
-
-&lt;!-- Mobile Drawer Sheet --&gt;
-&lt;div class=&quot;island-drawer&quot; id=&quot;island-drawer&quot; role=&quot;dialog&quot; aria-label=&quot;Mobile navigation&quot; aria-modal=&quot;true&quot;&gt;
-  &lt;div class=&quot;island-drawer-overlay&quot; id=&quot;drawer-overlay&quot;&gt;&lt;/div&gt;
-  &lt;div class=&quot;island-drawer-sheet&quot;&gt;
-    &lt;ul class=&quot;drawer-nav-links&quot; role=&quot;list&quot;&gt;
-      &lt;li&gt;&lt;a href=&quot;#features&quot;&gt;Features&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#faq&quot;&gt;FAQ&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#pricing&quot;&gt;Pricing&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#changelog&quot;&gt;Changelog&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-    &lt;a href=&quot;#download&quot; class=&quot;drawer-cta&quot;&gt;
-      &lt;svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 14 14&quot; fill=&quot;none&quot;&gt;
-        &lt;path d=&quot;M9.5 1.5C9.5 1.5 9.9 3.1 8.5 4.2C7.2 5.2 6 4.5 6 4.5&quot; stroke=&quot;black&quot; stroke-width=&quot;1.3&quot; stroke-linecap=&quot;round&quot;/&gt;
-        &lt;path d=&quot;M2.5 9.5C2.5 11.5 3.8 12.8 5.2 12.8C5.8 12.8 6.3 12.5 6.8 12.5C7.3 12.5 7.8 12.8 8.5 12.8C10 12.8 11.5 11.2 11.5 9.2C11.5 7.5 10.3 6.2 8.5 5.8C7.8 5.6 7.1 5.7 6.5 5.7C5.9 5.7 5.2 5.5 4.5 5.8C3.3 6.3 2.5 7.8 2.5 9.5Z&quot; fill=&quot;black&quot;/&gt;
-      &lt;/svg&gt;
-      Download for macOS
-    &lt;/a&gt;
+        Navigation
+      &lt;/a&gt;
+    &lt;/div&gt;
   &lt;/div&gt;
-&lt;/div&gt;</code></pre>
+
+  &lt;script src=&quot;script.js&quot;&gt;&lt;/script&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
       </div>
     </section>
 
@@ -394,25 +414,100 @@
             <span class="copy-label">Copy</span>
           </button>
         </div>
-        <pre><code id="code-3" class="language-css">/* ================================================================
-   SUPASTE DYNAMIC ISLAND NAVBAR STYLES
-   ================================================================ */
+        <pre><code id="code-3" class="language-css">/* Dynamic Island navigation component */
+@import url(&#39;https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap&#39;);
+
+
+/* ── Design Tokens ──────────────────────────────────────────── */
 :root {
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* Typography */
+  --font-sans: &#39;Inter&#39;, -apple-system, BlinkMacSystemFont, &#39;SF Pro Display&#39;, &#39;Segoe UI&#39;, sans-serif;
+  --text-xs: 11px;
+  --text-sm: 13px;
+  --text-base: 15px;
+  --text-md: 17px;
+  --text-lg: 20px;
+  --text-xl: 28px;
+  --text-2xl: 40px;
+  --text-3xl: 56px;
+  --text-4xl: 72px;
+
+  /* Apple-inspired Color Palette */
   --island-bg: rgba(10, 10, 12, 0.88);
   --island-border: rgba(255, 255, 255, 0.10);
   --island-shadow: 0 24px 60px rgba(0,0,0,0.55), 0 4px 12px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.08);
   --island-blur: blur(28px) saturate(180%);
-  --radius-pill: 9999px;
+
+
+  /* Glassmorphism surfaces */
+  --glass-light: rgba(255, 255, 255, 0.12);
+  --glass-border: rgba(255, 255, 255, 0.18);
   --glass-text: rgba(255, 255, 255, 0.92);
   --glass-text-muted: rgba(255, 255, 255, 0.60);
+
+  /* Transition */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --duration-fast: 180ms;
   --duration-med: 320ms;
   --duration-slow: 500ms;
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Border radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-pill: 9999px;
 }
 
-/* Island Wrapper */
+/* ── Reset &amp; Base ────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: 1.5;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+.preview-stage {
+  min-height: 100vh;
+  background-color: #111;
+  background-image:
+    linear-gradient(45deg, #202020 25%, transparent 25%),
+    linear-gradient(-45deg, #202020 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #202020 75%),
+    linear-gradient(-45deg, transparent 75%, #202020 75%);
+  background-size: 32px 32px;
+  background-position: 0 0, 0 16px, 16px -16px, -16px 0;
+  position: relative;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   DYNAMIC ISLAND NAVBAR
+   ═══════════════════════════════════════════════════════════════ */
 .island-nav-wrapper {
   position: fixed;
   top: 0;
@@ -421,15 +516,14 @@
   z-index: 1000;
   display: flex;
   justify-content: center;
-  padding-top: 16px;
+  padding-top: var(--space-4);
   pointer-events: none;
 }
 
-/* Island Body */
 .island-nav {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--space-3);
   padding: 9px 14px;
   background: var(--island-bg);
   border: 1px solid var(--island-border);
@@ -445,10 +539,10 @@
   width: max-content;
 }
 
-/* Morph on Scroll */
+/* Scrolled state */
 .island-nav.scrolled {
   padding: 7px 12px;
-  gap: 8px;
+  gap: var(--space-2);
   background: rgba(5, 5, 7, 0.95);
 }
 
@@ -456,7 +550,7 @@
 .island-brand {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-2);
   text-decoration: none;
   flex-shrink: 0;
 }
@@ -475,7 +569,7 @@
 }
 
 .island-brand-name {
-  font-size: 13px;
+  font-size: var(--text-sm);
   font-weight: 600;
   color: var(--glass-text);
   letter-spacing: -0.01em;
@@ -493,31 +587,30 @@
 .island-links {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: var(--space-1);
   list-style: none;
-  margin: 0;
-  padding: 0;
 }
 
 .island-links li a {
   display: block;
   padding: 5px 10px;
-  font-size: 13px;
+  font-size: var(--text-sm);
   font-weight: 500;
   color: var(--glass-text-muted);
   text-decoration: none;
   border-radius: var(--radius-pill);
-  transition: color var(--duration-fast) ease, background var(--duration-fast) ease;
+  transition: color var(--duration-fast) ease,
+              background var(--duration-fast) ease;
   white-space: nowrap;
   letter-spacing: -0.01em;
 }
 
 .island-links li a:hover {
   color: var(--glass-text);
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255,255,255,0.08);
 }
 
-/* CTA */
+/* CTA Button */
 .island-cta {
   display: flex;
   align-items: center;
@@ -525,13 +618,14 @@
   padding: 7px 14px;
   background: #ffffff;
   color: #000000;
-  font-size: 13px;
+  font-size: var(--text-sm);
   font-weight: 600;
   text-decoration: none;
   border-radius: var(--radius-pill);
   border: none;
   cursor: pointer;
-  transition: background var(--duration-fast) ease, transform var(--duration-fast) var(--ease-spring);
+  transition: background var(--duration-fast) ease,
+              transform var(--duration-fast) var(--ease-spring);
   white-space: nowrap;
   letter-spacing: -0.01em;
   flex-shrink: 0;
@@ -542,11 +636,14 @@
   transform: scale(1.02);
 }
 
-.island-cta:active {
-  transform: scale(0.98);
+.island-cta:active { transform: scale(0.98); }
+
+.island-cta-icon {
+  font-size: 14px;
+  line-height: 1;
 }
 
-/* Mobile Hamburger */
+/* Mobile hamburger */
 .island-burger {
   display: none;
   flex-direction: column;
@@ -570,16 +667,13 @@
   transform: translateY(6px) rotate(45deg);
   background: var(--glass-text);
 }
-.island-burger.open span:nth-child(2) {
-  opacity: 0;
-  transform: scaleX(0);
-}
+.island-burger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
 .island-burger.open span:nth-child(3) {
   transform: translateY(-6px) rotate(-45deg);
   background: var(--glass-text);
 }
 
-/* Mobile Drawer */
+/* ── Mobile Drawer (Island Sheet) ──────────────────────────── */
 .island-drawer {
   position: fixed;
   top: 0;
@@ -593,7 +687,7 @@
 .island-drawer-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0,0,0,0.6);
   backdrop-filter: blur(8px);
   opacity: 0;
   transition: opacity var(--duration-med) ease;
@@ -605,9 +699,9 @@
   left: 0;
   right: 0;
   background: rgba(18, 18, 22, 0.97);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 0 0 24px 24px;
-  padding: 80px 20px 32px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+  padding: 80px var(--space-5) var(--space-8);
   transform: translateY(-100%);
   transition: transform var(--duration-slow) var(--ease-out);
 }
@@ -628,42 +722,44 @@
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  margin: 0 0 24px 0;
-  padding: 0;
+  gap: var(--space-1);
+  margin-bottom: var(--space-6);
 }
 
 .drawer-nav-links a {
   display: block;
-  padding: 12px 16px;
-  font-size: 17px;
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--text-md);
   font-weight: 500;
   color: var(--glass-text-muted);
   text-decoration: none;
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   transition: color var(--duration-fast) ease, background var(--duration-fast) ease;
 }
 
 .drawer-nav-links a:hover {
   color: var(--glass-text);
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255,255,255,0.07);
 }
 
 .drawer-cta {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 13px 20px;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-6);
   background: #ffffff;
-  color: #000000;
-  font-size: 15px;
+  color: #000;
+  font-size: var(--text-base);
   font-weight: 600;
   text-decoration: none;
   border-radius: var(--radius-pill);
+  width: 100%;
+  transition: background var(--duration-fast) ease;
 }
+.drawer-cta:hover { background: #e8e8e8; }
 
-/* Responsive queries */
+
 @media (max-width: 768px) {
   .island-links,
   .island-cta,
@@ -700,65 +796,36 @@
             <span class="copy-label">Copy</span>
           </button>
         </div>
-        <pre><code id="code-4" class="language-javascript">(function () {
+        <pre><code id="code-4" class="language-javascript">/* Dynamic Island navigation interactions */
+(function () {
   &#39;use strict&#39;;
 
-  const islandNav     = document.getElementById(&#39;island-nav&#39;);
-  const islandBurger  = document.getElementById(&#39;island-burger&#39;);
-  const islandDrawer  = document.getElementById(&#39;island-drawer&#39;);
+  const islandBurger = document.getElementById(&#39;island-burger&#39;);
+  const islandDrawer = document.getElementById(&#39;island-drawer&#39;);
   const drawerOverlay = document.getElementById(&#39;drawer-overlay&#39;);
 
-  if (!islandNav) return;
-
-  // 1. Morph on Scroll
-  let ticking = false;
-  window.addEventListener(&#39;scroll&#39;, function () {
-    if (!ticking) {
-      requestAnimationFrame(function () {
-        if (window.scrollY &gt; 40) {
-          islandNav.classList.add(&#39;scrolled&#39;);
-        } else {
-          islandNav.classList.remove(&#39;scrolled&#39;);
-        }
-        ticking = false;
-      });
-      ticking = true;
-    }
-  }, { passive: true });
-
-  // 2. Mobile Drawer Controls
-  function openDrawer () {
-    if (!islandDrawer || !islandBurger) return;
-    islandDrawer.classList.add(&#39;open&#39;);
-    islandBurger.classList.add(&#39;open&#39;);
-    islandBurger.setAttribute(&#39;aria-expanded&#39;, &#39;true&#39;);
-    document.body.style.overflow = &#39;hidden&#39;;
-  }
-
   function closeDrawer () {
-    if (!islandDrawer || !islandBurger) return;
     islandDrawer.classList.remove(&#39;open&#39;);
     islandBurger.classList.remove(&#39;open&#39;);
     islandBurger.setAttribute(&#39;aria-expanded&#39;, &#39;false&#39;);
     document.body.style.overflow = &#39;&#39;;
   }
 
-  if (islandBurger) {
-    islandBurger.addEventListener(&#39;click&#39;, function () {
-      if (islandDrawer.classList.contains(&#39;open&#39;)) {
-        closeDrawer();
-      } else {
-        openDrawer();
-      }
-    });
+  function openDrawer () {
+    islandDrawer.classList.add(&#39;open&#39;);
+    islandBurger.classList.add(&#39;open&#39;);
+    islandBurger.setAttribute(&#39;aria-expanded&#39;, &#39;true&#39;);
+    document.body.style.overflow = &#39;hidden&#39;;
   }
 
-  if (drawerOverlay) {
-    drawerOverlay.addEventListener(&#39;click&#39;, closeDrawer);
-  }
-
-  // Close drawer when clicking any link
-  document.querySelectorAll(&#39;.drawer-nav-links a, .drawer-cta&#39;).forEach(link =&gt; {
+  islandBurger.addEventListener(&#39;click&#39;, () =&gt; {
+    islandDrawer.classList.contains(&#39;open&#39;) ? closeDrawer() : openDrawer();
+  });
+  drawerOverlay.addEventListener(&#39;click&#39;, closeDrawer);
+  document.addEventListener(&#39;keydown&#39;, event =&gt; {
+    if (event.key === &#39;Escape&#39;) closeDrawer();
+  });
+  document.querySelectorAll(&#39;#island-drawer a&#39;).forEach(link =&gt; {
     link.addEventListener(&#39;click&#39;, closeDrawer);
   });
 })();</code></pre>

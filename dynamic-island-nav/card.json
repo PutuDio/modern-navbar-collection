@@ -1,0 +1,11 @@
+{
+  "title": "Dynamic Island Nav",
+  "category": "experimental",
+  "categoryLabel": "Experimental — Dynamic Island Navigation",
+  "descriptionShort": "Expandable Dynamic Island navigation with page search and pointer interactions.",
+  "descriptionLong": "Interactive expandable island navigation with selectable pages, searchable menu results, hover behavior, and keyboard dismissal.",
+  "tech": "HTML · CSS · JavaScript",
+  "keywords": ["dynamic island", "expandable", "navigation", "search", "interactive"],
+  "featured": false,
+  "order": 13
+}

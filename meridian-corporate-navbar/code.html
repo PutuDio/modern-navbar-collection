@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Meridian — Implementation Guide</title>
-<meta name="description" content="Isolated, copy-paste-ready code for the Meridian Corporate Navigation System — font import, markup, styles, and behavior.">
+<title>Meridian Luxury Corporate &mdash; Implementation Guide</title>
+<meta name="description" content="Isolated, copy-paste-ready code for Meridian Luxury Corporate &mdash; font import, markup, styles, and behavior.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,8 +21,8 @@
     --ink:#0f172a;
     --ink-soft:#475569;
     --ink-faint:#94a3b8;
-    --accent:#1d4ed8;
-    --accent-soft:#eef2ff;
+    --accent:#2563eb;
+    --accent-soft:rgba(29, 78, 216, 0.08);
     --ok:#059669;
     --code-bg:#0b1220;
     --code-chrome:#111a2c;
@@ -61,7 +61,7 @@
     font-weight:700;
     letter-spacing:-0.02em;
     margin:0 0 1rem;
-    max-width:20ch;
+    max-width:24ch;
   }
   .masthead p{
     color:var(--ink-soft);
@@ -244,10 +244,10 @@
 
   <header class="masthead">
     <p class="masthead-kicker">Implementation guide</p>
-    <h1>Meridian Corporate Navigation System</h1>
-    <p>Isolated, dependency-free code for the header and navigation only — no hero sections or demo page content. Copy each block in order into your own project: font, markup, styles, then behavior.</p>
+    <h1>Meridian Luxury Corporate</h1>
+    <p>Isolated, dependency-free code for the navigation only &mdash; no hero sections or demo page content. Copy each block in order into your own project: font, markup, styles, then behavior.</p>
     <div class="masthead-meta">
-      <span>4 files</span>
+      <span>4 steps</span>
       <span>Vanilla HTML / CSS / JS</span>
       <span>Zero dependencies</span>
     </div>
@@ -257,10 +257,10 @@
     <nav class="side-nav" aria-label="Implementation steps">
       <p class="side-nav-label">On this page</p>
       <ul>
-<li><a href="#section-1"><span class="idx">1</span>Google Font Import</a></li>
-<li><a href="#section-2"><span class="idx">2</span>HTML Markup</a></li>
-<li><a href="#section-3"><span class="idx">3</span>CSS Stylesheet</a></li>
-<li><a href="#section-4"><span class="idx">4</span>JavaScript Code</a></li>
+        <li><a href="#section-1"><span class="idx">1</span>Google Font Import</a></li>
+        <li><a href="#section-2"><span class="idx">2</span>HTML Markup</a></li>
+        <li><a href="#section-3"><span class="idx">3</span>CSS Stylesheet</a></li>
+        <li><a href="#section-4"><span class="idx">4</span>JavaScript Code</a></li>
       </ul>
     </nav>
 
@@ -271,21 +271,20 @@
         <span class="section-index">1</span>
         <h2>Google Font Import</h2>
       </div>
-      <p class="section-note">Add this to your HTML <head>:</p>
+      <p class="section-note">Add this to your HTML &lt;head&gt;:</p>
       <div class="code-window">
         <div class="code-chrome">
           <div class="dots"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
-          <span class="filename">index.html — <head></span>
+          <span class="filename">index.html &mdash; &lt;head&gt;</span>
           <button class="copy-btn" type="button" data-copy-target="code-1">
             <svg class="icon-copy" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M3 10.5V3.5A1.5 1.5 0 0 1 4.5 2H10"/></svg>
             <svg class="icon-check" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8.5l3 3 7-7"/></svg>
             <span class="copy-label">Copy</span>
           </button>
         </div>
-        <pre><code id="code-1" class="language-html">&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
-&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
-&lt;link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"&gt;
-</code></pre>
+        <pre><code id="code-1" class="language-html">&lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.googleapis.com&quot;&gt;
+&lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.gstatic.com&quot; crossorigin&gt;
+&lt;link href=&quot;https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;</code></pre>
       </div>
     </section>
 
@@ -294,451 +293,476 @@
         <span class="section-index">2</span>
         <h2>HTML Markup</h2>
       </div>
-      <p class="section-note">Place this at the top of your <body>:</p>
+      <p class="section-note">Place this navigation component markup into your &lt;body&gt;:</p>
       <div class="code-window">
         <div class="code-chrome">
           <div class="dots"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
-          <span class="filename">index.html — <body></span>
+          <span class="filename">index.html &mdash; &lt;body&gt;</span>
           <button class="copy-btn" type="button" data-copy-target="code-2">
             <svg class="icon-copy" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M3 10.5V3.5A1.5 1.5 0 0 1 4.5 2H10"/></svg>
             <svg class="icon-check" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8.5l3 3 7-7"/></svg>
             <span class="copy-label">Copy</span>
           </button>
         </div>
-        <pre><code id="code-2" class="language-html">&lt;!-- ================================================================
-     MERIDIAN CORPORATE HEADER &amp; NAVIGATION
-     ================================================================ --&gt;
-&lt;header class="meridian-header" id="meridian-header"&gt;
+        <pre><code id="code-2" class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot; data-theme=&quot;light&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+  &lt;title&gt;Meridian — Corporate &amp; Enterprise Navigation | Modern Navbar Collection&lt;/title&gt;
+  &lt;meta name=&quot;description&quot; content=&quot;A human-crafted, premium corporate navigation system designed for modern enterprises, advisory firms, and global institutions. Features desktop mega-menus, dual light/dark themes, and accessible mobile drawer.&quot;&gt;
+  &lt;meta name=&quot;keywords&quot; content=&quot;corporate navbar, enterprise navigation, mega menu, company profile, accessible UI, vanilla CSS, light dark theme&quot;&gt;
+  &lt;meta name=&quot;author&quot; content=&quot;Modern Navbar Collection&quot;&gt;
 
-  &lt;!-- Top Utility Bar (Formal Corporate Indicator) --&gt;
-  &lt;div class="header-utility"&gt;
-    &lt;div class="utility-inner container"&gt;
-      &lt;div class="utility-left"&gt;
-        &lt;span class="utility-pill"&gt;GLOBAL OFFICES&lt;/span&gt;
-        &lt;span class="utility-locations"&gt;London &amp;bull; New York &amp;bull; Zurich &amp;bull; Singapore &amp;bull; Tokyo&lt;/span&gt;
-      &lt;/div&gt;
-      &lt;div class="utility-right"&gt;
-        &lt;a href="#investors" class="utility-link"&gt;Investor Relations&lt;/a&gt;
-        &lt;span class="utility-sep" aria-hidden="true"&gt;&amp;bull;&lt;/span&gt;
-        &lt;a href="#careers" class="utility-link"&gt;
-          Careers
-          &lt;span class="utility-badge"&gt;We're hiring&lt;/span&gt;
-        &lt;/a&gt;
-        &lt;span class="utility-sep" aria-hidden="true"&gt;&amp;bull;&lt;/span&gt;
-        &lt;a href="#news" class="utility-link"&gt;Press &amp;amp; Media&lt;/a&gt;
+  &lt;!-- Typography: Plus Jakarta Sans &amp; Inter --&gt;
+  &lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.googleapis.com&quot;&gt;
+  &lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.gstatic.com&quot; crossorigin&gt;
+  &lt;link href=&quot;https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;
+
+  &lt;!-- Stylesheet --&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;!-- ================================================================
+       MERIDIAN CORPORATE HEADER &amp; NAVIGATION
+       ================================================================ --&gt;
+  &lt;header class=&quot;meridian-header&quot; id=&quot;meridian-header&quot;&gt;
+
+    &lt;!-- Top Utility Bar (Formal Corporate Indicator) --&gt;
+    &lt;div class=&quot;header-utility&quot;&gt;
+      &lt;div class=&quot;utility-inner container&quot;&gt;
+        &lt;div class=&quot;utility-left&quot;&gt;
+          &lt;span class=&quot;utility-pill&quot;&gt;GLOBAL OFFICES&lt;/span&gt;
+          &lt;span class=&quot;utility-locations&quot;&gt;London &amp;bull; New York &amp;bull; Zurich &amp;bull; Singapore &amp;bull; Tokyo&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;utility-right&quot;&gt;
+          &lt;a href=&quot;#investors&quot; class=&quot;utility-link&quot;&gt;Investor Relations&lt;/a&gt;
+          &lt;span class=&quot;utility-sep&quot; aria-hidden=&quot;true&quot;&gt;&amp;bull;&lt;/span&gt;
+          &lt;a href=&quot;#careers&quot; class=&quot;utility-link&quot;&gt;
+            Careers
+            &lt;span class=&quot;utility-badge&quot;&gt;We&#39;re hiring&lt;/span&gt;
+          &lt;/a&gt;
+          &lt;span class=&quot;utility-sep&quot; aria-hidden=&quot;true&quot;&gt;&amp;bull;&lt;/span&gt;
+          &lt;a href=&quot;#news&quot; class=&quot;utility-link&quot;&gt;Press &amp;amp; Media&lt;/a&gt;
+        &lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
-  &lt;/div&gt;
 
-  &lt;!-- Main Navigation Bar --&gt;
-  &lt;div class="header-main"&gt;
-    &lt;div class="header-inner container"&gt;
+    &lt;!-- Main Navigation Bar --&gt;
+    &lt;div class=&quot;header-main&quot;&gt;
+      &lt;div class=&quot;header-inner container&quot;&gt;
 
-      &lt;!-- Corporate Brand Logo --&gt;
-      &lt;a href="#home" class="brand-logo" aria-label="Meridian Group — Home"&gt;
-        &lt;span class="logo-mark" aria-hidden="true"&gt;
-          &lt;svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"&gt;
-            &lt;path d="M14 2L2 8V20L14 26L26 20V8L14 2Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/&gt;
-            &lt;path d="M14 2V26" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/&gt;
-            &lt;path d="M2 8L14 14L26 8" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/&gt;
-            &lt;circle cx="14" cy="14" r="2.5" fill="currentColor"/&gt;
-          &lt;/svg&gt;
-        &lt;/span&gt;
-        &lt;span class="logo-text"&gt;
-          &lt;span class="logo-name"&gt;MERIDIAN&lt;/span&gt;
-          &lt;span class="logo-sub"&gt;ENTERPRISE ADVISORY&lt;/span&gt;
-        &lt;/span&gt;
-      &lt;/a&gt;
+        &lt;!-- Corporate Brand Logo --&gt;
+        &lt;a href=&quot;#home&quot; class=&quot;brand-logo&quot; aria-label=&quot;Meridian Group — Home&quot;&gt;
+          &lt;span class=&quot;logo-mark&quot; aria-hidden=&quot;true&quot;&gt;
+            &lt;svg width=&quot;28&quot; height=&quot;28&quot; viewBox=&quot;0 0 28 28&quot; fill=&quot;none&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;
+              &lt;path d=&quot;M14 2L2 8V20L14 26L26 20V8L14 2Z&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.2&quot; stroke-linejoin=&quot;round&quot;/&gt;
+              &lt;path d=&quot;M14 2V26&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.2&quot; stroke-linecap=&quot;round&quot;/&gt;
+              &lt;path d=&quot;M2 8L14 14L26 8&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.2&quot; stroke-linejoin=&quot;round&quot;/&gt;
+              &lt;circle cx=&quot;14&quot; cy=&quot;14&quot; r=&quot;2.5&quot; fill=&quot;currentColor&quot;/&gt;
+            &lt;/svg&gt;
+          &lt;/span&gt;
+          &lt;span class=&quot;logo-text&quot;&gt;
+            &lt;span class=&quot;logo-name&quot;&gt;MERIDIAN&lt;/span&gt;
+            &lt;span class=&quot;logo-sub&quot;&gt;ENTERPRISE ADVISORY&lt;/span&gt;
+          &lt;/span&gt;
+        &lt;/a&gt;
 
-      &lt;!-- Desktop Navigation Menu --&gt;
-      &lt;nav class="nav-desktop" aria-label="Primary Navigation"&gt;
-        &lt;ul class="nav-list" role="menubar"&gt;
+        &lt;!-- Desktop Navigation Menu --&gt;
+        &lt;nav class=&quot;nav-desktop&quot; aria-label=&quot;Primary Navigation&quot;&gt;
+          &lt;ul class=&quot;nav-list&quot; role=&quot;menubar&quot;&gt;
 
-          &lt;!-- Item 1: Mega-Menu (Solutions) --&gt;
-          &lt;li class="nav-item has-dropdown has-megamenu" role="none"&gt;
-            &lt;button type="button" 
-                    class="nav-link dropdown-trigger" 
-                    role="menuitem" 
-                    aria-haspopup="true" 
-                    aria-expanded="false" 
-                    aria-controls="megamenu-solutions"&gt;
-              &lt;span&gt;Solutions&lt;/span&gt;
-              &lt;svg class="chevron-icon" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"&gt;
-                &lt;path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/&gt;
-              &lt;/svg&gt;
-            &lt;/button&gt;
+            &lt;!-- Item 1: Mega-Menu (Solutions) --&gt;
+            &lt;li class=&quot;nav-item has-dropdown has-megamenu&quot; role=&quot;none&quot;&gt;
+              &lt;button type=&quot;button&quot; 
+                      class=&quot;nav-link dropdown-trigger&quot; 
+                      role=&quot;menuitem&quot; 
+                      aria-haspopup=&quot;true&quot; 
+                      aria-expanded=&quot;false&quot; 
+                      aria-controls=&quot;megamenu-solutions&quot;&gt;
+                &lt;span&gt;Solutions&lt;/span&gt;
+                &lt;svg class=&quot;chevron-icon&quot; width=&quot;14&quot; height=&quot;14&quot; viewBox=&quot;0 0 16 16&quot; fill=&quot;none&quot; aria-hidden=&quot;true&quot;&gt;
+                  &lt;path d=&quot;M4 6L8 10L12 6&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;
+                &lt;/svg&gt;
+              &lt;/button&gt;
 
-            &lt;!-- Mega-Menu Container --&gt;
-            &lt;div class="megamenu" id="megamenu-solutions" role="menu" aria-label="Solutions Menu"&gt;
-              &lt;div class="megamenu-inner"&gt;
-                
-                &lt;!-- Column 1: Strategy &amp; Advisory --&gt;
-                &lt;div class="megamenu-col"&gt;
-                  &lt;span class="megamenu-header"&gt;STRATEGY &amp;amp; ADVISORY&lt;/span&gt;
-                  &lt;ul class="megamenu-links"&gt;
-                    &lt;li&gt;
-                      &lt;a href="#solutions" class="megamenu-item" role="menuitem"&gt;
-                        &lt;span class="menu-item-icon"&gt;
-                          &lt;svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;&lt;path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/&gt;&lt;/svg&gt;
-                        &lt;/span&gt;
-                        &lt;div class="menu-item-body"&gt;
-                          &lt;span class="menu-item-title"&gt;Enterprise Architecture&lt;/span&gt;
-                          &lt;span class="menu-item-desc"&gt;Comprehensive digital and operating model redesign.&lt;/span&gt;
-                        &lt;/div&gt;
-                      &lt;/a&gt;
-                    &lt;/li&gt;
-                    &lt;li&gt;
-                      &lt;a href="#solutions" class="megamenu-item" role="menuitem"&gt;
-                        &lt;span class="menu-item-icon"&gt;
-                          &lt;svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;&lt;rect x="2" y="7" width="20" height="14" rx="2"/&gt;&lt;path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/&gt;&lt;/svg&gt;
-                        &lt;/span&gt;
-                        &lt;div class="menu-item-body"&gt;
-                          &lt;span class="menu-item-title"&gt;Capital Advisory &amp;amp; M&amp;amp;A&lt;/span&gt;
-                          &lt;span class="menu-item-desc"&gt;Due diligence, transaction structuring, and liquidity.&lt;/span&gt;
-                        &lt;/div&gt;
-                      &lt;/a&gt;
-                    &lt;/li&gt;
-                    &lt;li&gt;
-                      &lt;a href="#solutions" class="megamenu-item" role="menuitem"&gt;
-                        &lt;span class="menu-item-icon"&gt;
-                          &lt;svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;&lt;path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/&gt;&lt;/svg&gt;
-                        &lt;/span&gt;
-                        &lt;div class="menu-item-body"&gt;
-                          &lt;span class="menu-item-title"&gt;Regulatory &amp;amp; Compliance&lt;/span&gt;
-                          &lt;span class="menu-item-desc"&gt;Global governance frameworks and risk resilience.&lt;/span&gt;
-                        &lt;/div&gt;
-                      &lt;/a&gt;
-                    &lt;/li&gt;
-                  &lt;/ul&gt;
-                &lt;/div&gt;
-
-                &lt;!-- Column 2: Technology &amp; Transformation --&gt;
-                &lt;div class="megamenu-col"&gt;
-                  &lt;span class="megamenu-header"&gt;TECHNOLOGY PLATFORMS&lt;/span&gt;
-                  &lt;ul class="megamenu-links"&gt;
-                    &lt;li&gt;
-                      &lt;a href="#solutions" class="megamenu-item" role="menuitem"&gt;
-                        &lt;span class="menu-item-icon"&gt;
-                          &lt;svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;&lt;path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/&gt;&lt;/svg&gt;
-                        &lt;/span&gt;
-                        &lt;div class="menu-item-body"&gt;
-                          &lt;span class="menu-item-title"&gt;Cloud Infrastructure&lt;/span&gt;
-                          &lt;span class="menu-item-desc"&gt;High-reliability hybrid and multi-cloud ecosystems.&lt;/span&gt;
-                        &lt;/div&gt;
-                      &lt;/a&gt;
-                    &lt;/li&gt;
-                    &lt;li&gt;
-                      &lt;a href="#solutions" class="megamenu-item" role="menuitem"&gt;
-                        &lt;span class="menu-item-icon"&gt;
-                          &lt;svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;&lt;path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/&gt;&lt;/svg&gt;
-                        &lt;/span&gt;
-                        &lt;div class="menu-item-body"&gt;
-                          &lt;span class="menu-item-title"&gt;Data Intelligence &amp;amp; AI&lt;/span&gt;
-                          &lt;span class="menu-item-desc"&gt;Executive decision telemetry and data mesh systems.&lt;/span&gt;
-                        &lt;/div&gt;
-                      &lt;/a&gt;
-                    &lt;/li&gt;
-                    &lt;li&gt;
-                      &lt;a href="#solutions" class="megamenu-item" role="menuitem"&gt;
-                        &lt;span class="menu-item-icon"&gt;
-                          &lt;svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;&lt;circle cx="12" cy="12" r="10"/&gt;&lt;line x1="2" y1="12" x2="22" y2="12"/&gt;&lt;path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/&gt;&lt;/svg&gt;
-                        &lt;/span&gt;
-                        &lt;div class="menu-item-body"&gt;
-                          &lt;span class="menu-item-title"&gt;Cyber Defense &amp;amp; Zero Trust&lt;/span&gt;
-                          &lt;span class="menu-item-desc"&gt;Enterprise security postures for mission-critical assets.&lt;/span&gt;
-                        &lt;/div&gt;
-                      &lt;/a&gt;
-                    &lt;/li&gt;
-                  &lt;/ul&gt;
-                &lt;/div&gt;
-
-                &lt;!-- Column 3: Featured Case Study / Research Card --&gt;
-                &lt;div class="megamenu-featured"&gt;
-                  &lt;div class="featured-card"&gt;
-                    &lt;div class="featured-tag"&gt;2026 GLOBAL BENCHMARK&lt;/div&gt;
-                    &lt;h4 class="featured-title"&gt;Enterprise Operating Model Trends&lt;/h4&gt;
-                    &lt;p class="featured-summary"&gt;How Fortune 500 leadership navigates capital allocation and AI governance.&lt;/p&gt;
-                    &lt;a href="#insights" class="featured-cta"&gt;
-                      &lt;span&gt;Download Executive Summary&lt;/span&gt;
-                      &lt;svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"&gt;
-                        &lt;path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/&gt;
-                      &lt;/svg&gt;
-                    &lt;/a&gt;
+              &lt;!-- Mega-Menu Container --&gt;
+              &lt;div class=&quot;megamenu&quot; id=&quot;megamenu-solutions&quot; role=&quot;menu&quot; aria-label=&quot;Solutions Menu&quot;&gt;
+                &lt;div class=&quot;megamenu-inner&quot;&gt;
+                  
+                  &lt;!-- Column 1: Strategy &amp; Advisory --&gt;
+                  &lt;div class=&quot;megamenu-col&quot;&gt;
+                    &lt;span class=&quot;megamenu-header&quot;&gt;STRATEGY &amp;amp; ADVISORY&lt;/span&gt;
+                    &lt;ul class=&quot;megamenu-links&quot;&gt;
+                      &lt;li&gt;
+                        &lt;a href=&quot;#solutions&quot; class=&quot;megamenu-item&quot; role=&quot;menuitem&quot;&gt;
+                          &lt;span class=&quot;menu-item-icon&quot;&gt;
+                            &lt;svg width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot;&gt;&lt;path d=&quot;M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5&quot;/&gt;&lt;/svg&gt;
+                          &lt;/span&gt;
+                          &lt;div class=&quot;menu-item-body&quot;&gt;
+                            &lt;span class=&quot;menu-item-title&quot;&gt;Enterprise Architecture&lt;/span&gt;
+                            &lt;span class=&quot;menu-item-desc&quot;&gt;Comprehensive digital and operating model redesign.&lt;/span&gt;
+                          &lt;/div&gt;
+                        &lt;/a&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;
+                        &lt;a href=&quot;#solutions&quot; class=&quot;megamenu-item&quot; role=&quot;menuitem&quot;&gt;
+                          &lt;span class=&quot;menu-item-icon&quot;&gt;
+                            &lt;svg width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot;&gt;&lt;rect x=&quot;2&quot; y=&quot;7&quot; width=&quot;20&quot; height=&quot;14&quot; rx=&quot;2&quot;/&gt;&lt;path d=&quot;M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16&quot;/&gt;&lt;/svg&gt;
+                          &lt;/span&gt;
+                          &lt;div class=&quot;menu-item-body&quot;&gt;
+                            &lt;span class=&quot;menu-item-title&quot;&gt;Capital Advisory &amp;amp; M&amp;amp;A&lt;/span&gt;
+                            &lt;span class=&quot;menu-item-desc&quot;&gt;Due diligence, transaction structuring, and liquidity.&lt;/span&gt;
+                          &lt;/div&gt;
+                        &lt;/a&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;
+                        &lt;a href=&quot;#solutions&quot; class=&quot;megamenu-item&quot; role=&quot;menuitem&quot;&gt;
+                          &lt;span class=&quot;menu-item-icon&quot;&gt;
+                            &lt;svg width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot;&gt;&lt;path d=&quot;M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z&quot;/&gt;&lt;/svg&gt;
+                          &lt;/span&gt;
+                          &lt;div class=&quot;menu-item-body&quot;&gt;
+                            &lt;span class=&quot;menu-item-title&quot;&gt;Regulatory &amp;amp; Compliance&lt;/span&gt;
+                            &lt;span class=&quot;menu-item-desc&quot;&gt;Global governance frameworks and risk resilience.&lt;/span&gt;
+                          &lt;/div&gt;
+                        &lt;/a&gt;
+                      &lt;/li&gt;
+                    &lt;/ul&gt;
                   &lt;/div&gt;
+
+                  &lt;!-- Column 2: Technology &amp; Transformation --&gt;
+                  &lt;div class=&quot;megamenu-col&quot;&gt;
+                    &lt;span class=&quot;megamenu-header&quot;&gt;TECHNOLOGY PLATFORMS&lt;/span&gt;
+                    &lt;ul class=&quot;megamenu-links&quot;&gt;
+                      &lt;li&gt;
+                        &lt;a href=&quot;#solutions&quot; class=&quot;megamenu-item&quot; role=&quot;menuitem&quot;&gt;
+                          &lt;span class=&quot;menu-item-icon&quot;&gt;
+                            &lt;svg width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot;&gt;&lt;path d=&quot;M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z&quot;/&gt;&lt;/svg&gt;
+                          &lt;/span&gt;
+                          &lt;div class=&quot;menu-item-body&quot;&gt;
+                            &lt;span class=&quot;menu-item-title&quot;&gt;Cloud Infrastructure&lt;/span&gt;
+                            &lt;span class=&quot;menu-item-desc&quot;&gt;High-reliability hybrid and multi-cloud ecosystems.&lt;/span&gt;
+                          &lt;/div&gt;
+                        &lt;/a&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;
+                        &lt;a href=&quot;#solutions&quot; class=&quot;megamenu-item&quot; role=&quot;menuitem&quot;&gt;
+                          &lt;span class=&quot;menu-item-icon&quot;&gt;
+                            &lt;svg width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot;&gt;&lt;path d=&quot;M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z&quot;/&gt;&lt;/svg&gt;
+                          &lt;/span&gt;
+                          &lt;div class=&quot;menu-item-body&quot;&gt;
+                            &lt;span class=&quot;menu-item-title&quot;&gt;Data Intelligence &amp;amp; AI&lt;/span&gt;
+                            &lt;span class=&quot;menu-item-desc&quot;&gt;Executive decision telemetry and data mesh systems.&lt;/span&gt;
+                          &lt;/div&gt;
+                        &lt;/a&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;
+                        &lt;a href=&quot;#solutions&quot; class=&quot;megamenu-item&quot; role=&quot;menuitem&quot;&gt;
+                          &lt;span class=&quot;menu-item-icon&quot;&gt;
+                            &lt;svg width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot;&gt;&lt;circle cx=&quot;12&quot; cy=&quot;12&quot; r=&quot;10&quot;/&gt;&lt;line x1=&quot;2&quot; y1=&quot;12&quot; x2=&quot;22&quot; y2=&quot;12&quot;/&gt;&lt;path d=&quot;M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z&quot;/&gt;&lt;/svg&gt;
+                          &lt;/span&gt;
+                          &lt;div class=&quot;menu-item-body&quot;&gt;
+                            &lt;span class=&quot;menu-item-title&quot;&gt;Cyber Defense &amp;amp; Zero Trust&lt;/span&gt;
+                            &lt;span class=&quot;menu-item-desc&quot;&gt;Enterprise security postures for mission-critical assets.&lt;/span&gt;
+                          &lt;/div&gt;
+                        &lt;/a&gt;
+                      &lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/div&gt;
+
+                  &lt;!-- Column 3: Featured Case Study / Research Card --&gt;
+                  &lt;div class=&quot;megamenu-featured&quot;&gt;
+                    &lt;div class=&quot;featured-card&quot;&gt;
+                      &lt;div class=&quot;featured-tag&quot;&gt;2026 GLOBAL BENCHMARK&lt;/div&gt;
+                      &lt;h4 class=&quot;featured-title&quot;&gt;Enterprise Operating Model Trends&lt;/h4&gt;
+                      &lt;p class=&quot;featured-summary&quot;&gt;How Fortune 500 leadership navigates capital allocation and AI governance.&lt;/p&gt;
+                      &lt;a href=&quot;#insights&quot; class=&quot;featured-cta&quot;&gt;
+                        &lt;span&gt;Download Executive Summary&lt;/span&gt;
+                        &lt;svg width=&quot;14&quot; height=&quot;14&quot; viewBox=&quot;0 0 16 16&quot; fill=&quot;none&quot; aria-hidden=&quot;true&quot;&gt;
+                          &lt;path d=&quot;M3 8h10M9 4l4 4-4 4&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;
+                        &lt;/svg&gt;
+                      &lt;/a&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+
                 &lt;/div&gt;
-
               &lt;/div&gt;
-            &lt;/div&gt;
-          &lt;/li&gt;
+            &lt;/li&gt;
 
-          &lt;!-- Item 2: Standard Dropdown (Company) --&gt;
-          &lt;li class="nav-item has-dropdown" role="none"&gt;
-            &lt;button type="button" 
-                    class="nav-link dropdown-trigger" 
-                    role="menuitem" 
-                    aria-haspopup="true" 
-                    aria-expanded="false" 
-                    aria-controls="dropdown-company"&gt;
-              &lt;span&gt;Company&lt;/span&gt;
-              &lt;svg class="chevron-icon" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"&gt;
-                &lt;path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/&gt;
-              &lt;/svg&gt;
-            &lt;/button&gt;
+            &lt;!-- Item 2: Standard Dropdown (Company) --&gt;
+            &lt;li class=&quot;nav-item has-dropdown&quot; role=&quot;none&quot;&gt;
+              &lt;button type=&quot;button&quot; 
+                      class=&quot;nav-link dropdown-trigger&quot; 
+                      role=&quot;menuitem&quot; 
+                      aria-haspopup=&quot;true&quot; 
+                      aria-expanded=&quot;false&quot; 
+                      aria-controls=&quot;dropdown-company&quot;&gt;
+                &lt;span&gt;Company&lt;/span&gt;
+                &lt;svg class=&quot;chevron-icon&quot; width=&quot;14&quot; height=&quot;14&quot; viewBox=&quot;0 0 16 16&quot; fill=&quot;none&quot; aria-hidden=&quot;true&quot;&gt;
+                  &lt;path d=&quot;M4 6L8 10L12 6&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;
+                &lt;/svg&gt;
+              &lt;/button&gt;
 
-            &lt;ul class="dropdown-menu" id="dropdown-company" role="menu" aria-label="Company Menu"&gt;
-              &lt;li role="none"&gt;
-                &lt;a href="#about" class="dropdown-link" role="menuitem"&gt;
-                  &lt;span class="dropdown-title"&gt;About Meridian&lt;/span&gt;
-                  &lt;span class="dropdown-desc"&gt;Our heritage, global board, and fiduciary philosophy.&lt;/span&gt;
-                &lt;/a&gt;
-              &lt;/li&gt;
-              &lt;li role="none"&gt;
-                &lt;a href="#leadership" class="dropdown-link" role="menuitem"&gt;
-                  &lt;span class="dropdown-title"&gt;Executive Leadership&lt;/span&gt;
-                  &lt;span class="dropdown-desc"&gt;Meet our managing partners and regional directors.&lt;/span&gt;
-                &lt;/a&gt;
-              &lt;/li&gt;
-              &lt;li role="none"&gt;
-                &lt;a href="#careers" class="dropdown-link" role="menuitem"&gt;
-                  &lt;span class="dropdown-title"&gt;
-                    Careers &amp;amp; Culture
-                    &lt;span class="badge-hiring"&gt;Hiring&lt;/span&gt;
-                  &lt;/span&gt;
-                  &lt;span class="dropdown-desc"&gt;Build your career among industry-leading advisors.&lt;/span&gt;
-                &lt;/a&gt;
-              &lt;/li&gt;
-              &lt;li role="none"&gt;
-                &lt;a href="#esg" class="dropdown-link" role="menuitem"&gt;
-                  &lt;span class="dropdown-title"&gt;ESG &amp;amp; Global Impact&lt;/span&gt;
-                  &lt;span class="dropdown-desc"&gt;Sustainability commitments and governance principles.&lt;/span&gt;
-                &lt;/a&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-
-          &lt;!-- Item 3: Direct Link (Case Studies) --&gt;
-          &lt;li class="nav-item" role="none"&gt;
-            &lt;a href="#cases" class="nav-link" role="menuitem"&gt;Case Studies&lt;/a&gt;
-          &lt;/li&gt;
-
-          &lt;!-- Item 4: Direct Link (Insights) --&gt;
-          &lt;li class="nav-item" role="none"&gt;
-            &lt;a href="#insights" class="nav-link" role="menuitem"&gt;Insights &amp;amp; Reports&lt;/a&gt;
-          &lt;/li&gt;
-
-          &lt;!-- Item 5: Direct Link (Contact) --&gt;
-          &lt;li class="nav-item" role="none"&gt;
-            &lt;a href="#contact" class="nav-link" role="menuitem"&gt;Contact&lt;/a&gt;
-          &lt;/li&gt;
-
-        &lt;/ul&gt;
-      &lt;/nav&gt;
-
-      &lt;!-- Right Utility &amp; Action Area --&gt;
-      &lt;div class="header-actions"&gt;
-
-        &lt;!-- Search Trigger --&gt;
-        &lt;button type="button" class="btn-icon" id="search-trigger" aria-label="Search site content"&gt;
-          &lt;svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;
-            &lt;circle cx="11" cy="11" r="8"/&gt;
-            &lt;line x1="21" y1="21" x2="16.65" y2="16.65"/&gt;
-          &lt;/svg&gt;
-        &lt;/button&gt;
-
-        &lt;!-- Theme Switcher (Light / Dark) --&gt;
-        &lt;button type="button" class="btn-icon theme-toggle" id="theme-toggle" aria-label="Switch to dark theme"&gt;
-          &lt;svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;
-            &lt;circle cx="12" cy="12" r="5"/&gt;
-            &lt;line x1="12" y1="1" x2="12" y2="3"/&gt;
-            &lt;line x1="12" y1="21" x2="12" y2="23"/&gt;
-            &lt;line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/&gt;
-            &lt;line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/&gt;
-            &lt;line x1="1" y1="12" x2="3" y2="12"/&gt;
-            &lt;line x1="21" y1="12" x2="23" y2="12"/&gt;
-            &lt;line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/&gt;
-            &lt;line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/&gt;
-          &lt;/svg&gt;
-          &lt;svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;
-            &lt;path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/&gt;
-          &lt;/svg&gt;
-        &lt;/button&gt;
-
-        &lt;!-- Secondary Action: Client Portal --&gt;
-        &lt;a href="#portal" class="btn-portal"&gt;
-          &lt;svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;
-            &lt;path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/&gt;
-            &lt;polyline points="10 17 15 12 10 7"/&gt;
-            &lt;line x1="15" y1="12" x2="3" y2="12"/&gt;
-          &lt;/svg&gt;
-          &lt;span&gt;Client Portal&lt;/span&gt;
-        &lt;/a&gt;
-
-        &lt;!-- Primary CTA Button --&gt;
-        &lt;a href="#contact" class="btn-primary"&gt;
-          &lt;span&gt;Schedule Consultation&lt;/span&gt;
-          &lt;svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"&gt;
-            &lt;path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/&gt;
-          &lt;/svg&gt;
-        &lt;/a&gt;
-
-        &lt;!-- Mobile Hamburger Toggle --&gt;
-        &lt;button type="button" 
-                class="btn-hamburger" 
-                id="mobile-hamburger" 
-                aria-label="Open mobile navigation menu" 
-                aria-expanded="false" 
-                aria-controls="mobile-drawer"&gt;
-          &lt;span class="hamburger-bar" aria-hidden="true"&gt;&lt;/span&gt;
-          &lt;span class="hamburger-bar" aria-hidden="true"&gt;&lt;/span&gt;
-        &lt;/button&gt;
-
-      &lt;/div&gt;
-
-    &lt;/div&gt;
-  &lt;/div&gt;
-
-  &lt;!-- Collapsible Search Bar Overlay --&gt;
-  &lt;div class="search-overlay" id="search-overlay" aria-hidden="true"&gt;
-    &lt;div class="search-container container"&gt;
-      &lt;form class="search-form" role="search" onsubmit="event.preventDefault();"&gt;
-        &lt;svg class="search-input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;
-          &lt;circle cx="11" cy="11" r="8"/&gt;
-          &lt;line x1="21" y1="21" x2="16.65" y2="16.65"/&gt;
-        &lt;/svg&gt;
-        &lt;input type="search" class="search-input" id="search-input" placeholder="Search advisory services, insights, leadership..." autocomplete="off"&gt;
-        &lt;button type="button" class="search-close" id="search-close" aria-label="Close search"&gt;
-          &lt;svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"&gt;&lt;line x1="18" y1="6" x2="6" y2="18"/&gt;&lt;line x1="6" y1="6" x2="18" y2="18"/&gt;&lt;/svg&gt;
-        &lt;/button&gt;
-      &lt;/form&gt;
-      &lt;div class="search-suggestions"&gt;
-        &lt;span class="suggestion-label"&gt;Suggested searches:&lt;/span&gt;
-        &lt;button type="button" class="suggestion-tag"&gt;Capital Allocation&lt;/button&gt;
-        &lt;button type="button" class="suggestion-tag"&gt;Zero-Trust Framework&lt;/button&gt;
-        &lt;button type="button" class="suggestion-tag"&gt;Global Tax Architecture&lt;/button&gt;
-        &lt;button type="button" class="suggestion-tag"&gt;Q3 2026 Telemetry&lt;/button&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-
-&lt;/header&gt;
-
-&lt;!-- ================================================================
-     MOBILE NAVIGATION DRAWER (OFF-CANVAS)
-     ================================================================ --&gt;
-&lt;div class="mobile-drawer" id="mobile-drawer" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Mobile Navigation"&gt;
-  &lt;div class="drawer-backdrop" id="drawer-backdrop"&gt;&lt;/div&gt;
-  &lt;div class="drawer-panel"&gt;
-
-    &lt;!-- Drawer Top Bar --&gt;
-    &lt;div class="drawer-header"&gt;
-      &lt;div class="brand-logo"&gt;
-        &lt;span class="logo-mark" aria-hidden="true"&gt;
-          &lt;svg width="24" height="24" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"&gt;
-            &lt;path d="M14 2L2 8V20L14 26L26 20V8L14 2Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/&gt;
-            &lt;path d="M14 2V26" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/&gt;
-            &lt;path d="M2 8L14 14L26 8" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/&gt;
-            &lt;circle cx="14" cy="14" r="2.5" fill="currentColor"/&gt;
-          &lt;/svg&gt;
-        &lt;/span&gt;
-        &lt;span class="logo-text"&gt;
-          &lt;span class="logo-name"&gt;MERIDIAN&lt;/span&gt;
-        &lt;/span&gt;
-      &lt;/div&gt;
-      &lt;button type="button" class="drawer-close" id="drawer-close" aria-label="Close navigation menu"&gt;
-        &lt;svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"&gt;&lt;line x1="18" y1="6" x2="6" y2="18"/&gt;&lt;line x1="6" y1="6" x2="18" y2="18"/&gt;&lt;/svg&gt;
-      &lt;/button&gt;
-    &lt;/div&gt;
-
-    &lt;!-- Drawer Content (Scrollable) --&gt;
-    &lt;div class="drawer-body"&gt;
-
-      &lt;!-- Mobile Navigation Accordion --&gt;
-      &lt;nav class="mobile-nav" aria-label="Mobile Navigation Menu"&gt;
-        &lt;ul class="mobile-nav-list"&gt;
-
-          &lt;!-- Solutions Accordion --&gt;
-          &lt;li class="mobile-nav-item mobile-accordion"&gt;
-            &lt;button type="button" class="accordion-trigger" aria-expanded="false"&gt;
-              &lt;span&gt;Solutions&lt;/span&gt;
-              &lt;svg class="chevron-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"&gt;
-                &lt;path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/&gt;
-              &lt;/svg&gt;
-            &lt;/button&gt;
-            &lt;div class="accordion-panel"&gt;
-              &lt;ul class="accordion-links"&gt;
-                &lt;li&gt;&lt;a href="#solutions" class="accordion-link"&gt;Enterprise Architecture&lt;/a&gt;&lt;/li&gt;
-                &lt;li&gt;&lt;a href="#solutions" class="accordion-link"&gt;Capital Advisory &amp;amp; M&amp;amp;A&lt;/a&gt;&lt;/li&gt;
-                &lt;li&gt;&lt;a href="#solutions" class="accordion-link"&gt;Regulatory &amp;amp; Compliance&lt;/a&gt;&lt;/li&gt;
-                &lt;li&gt;&lt;a href="#solutions" class="accordion-link"&gt;Cloud Infrastructure&lt;/a&gt;&lt;/li&gt;
-                &lt;li&gt;&lt;a href="#solutions" class="accordion-link"&gt;Data Intelligence &amp;amp; AI&lt;/a&gt;&lt;/li&gt;
-                &lt;li&gt;&lt;a href="#solutions" class="accordion-link"&gt;Cyber Defense &amp;amp; Zero Trust&lt;/a&gt;&lt;/li&gt;
-              &lt;/ul&gt;
-            &lt;/div&gt;
-          &lt;/li&gt;
-
-          &lt;!-- Company Accordion --&gt;
-          &lt;li class="mobile-nav-item mobile-accordion"&gt;
-            &lt;button type="button" class="accordion-trigger" aria-expanded="false"&gt;
-              &lt;span&gt;Company&lt;/span&gt;
-              &lt;svg class="chevron-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"&gt;
-                &lt;path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/&gt;
-              &lt;/svg&gt;
-            &lt;/button&gt;
-            &lt;div class="accordion-panel"&gt;
-              &lt;ul class="accordion-links"&gt;
-                &lt;li&gt;&lt;a href="#about" class="accordion-link"&gt;About Meridian Group&lt;/a&gt;&lt;/li&gt;
-                &lt;li&gt;&lt;a href="#leadership" class="accordion-link"&gt;Executive Leadership&lt;/a&gt;&lt;/li&gt;
-                &lt;li&gt;
-                  &lt;a href="#careers" class="accordion-link"&gt;
-                    &lt;span&gt;Careers &amp;amp; Culture&lt;/span&gt;
-                    &lt;span class="badge-hiring"&gt;Hiring&lt;/span&gt;
+              &lt;ul class=&quot;dropdown-menu&quot; id=&quot;dropdown-company&quot; role=&quot;menu&quot; aria-label=&quot;Company Menu&quot;&gt;
+                &lt;li role=&quot;none&quot;&gt;
+                  &lt;a href=&quot;#about&quot; class=&quot;dropdown-link&quot; role=&quot;menuitem&quot;&gt;
+                    &lt;span class=&quot;dropdown-title&quot;&gt;About Meridian&lt;/span&gt;
+                    &lt;span class=&quot;dropdown-desc&quot;&gt;Our heritage, global board, and fiduciary philosophy.&lt;/span&gt;
                   &lt;/a&gt;
                 &lt;/li&gt;
-                &lt;li&gt;&lt;a href="#esg" class="accordion-link"&gt;ESG &amp;amp; Global Impact&lt;/a&gt;&lt;/li&gt;
+                &lt;li role=&quot;none&quot;&gt;
+                  &lt;a href=&quot;#leadership&quot; class=&quot;dropdown-link&quot; role=&quot;menuitem&quot;&gt;
+                    &lt;span class=&quot;dropdown-title&quot;&gt;Executive Leadership&lt;/span&gt;
+                    &lt;span class=&quot;dropdown-desc&quot;&gt;Meet our managing partners and regional directors.&lt;/span&gt;
+                  &lt;/a&gt;
+                &lt;/li&gt;
+                &lt;li role=&quot;none&quot;&gt;
+                  &lt;a href=&quot;#careers&quot; class=&quot;dropdown-link&quot; role=&quot;menuitem&quot;&gt;
+                    &lt;span class=&quot;dropdown-title&quot;&gt;
+                      Careers &amp;amp; Culture
+                      &lt;span class=&quot;badge-hiring&quot;&gt;Hiring&lt;/span&gt;
+                    &lt;/span&gt;
+                    &lt;span class=&quot;dropdown-desc&quot;&gt;Build your career among industry-leading advisors.&lt;/span&gt;
+                  &lt;/a&gt;
+                &lt;/li&gt;
+                &lt;li role=&quot;none&quot;&gt;
+                  &lt;a href=&quot;#esg&quot; class=&quot;dropdown-link&quot; role=&quot;menuitem&quot;&gt;
+                    &lt;span class=&quot;dropdown-title&quot;&gt;ESG &amp;amp; Global Impact&lt;/span&gt;
+                    &lt;span class=&quot;dropdown-desc&quot;&gt;Sustainability commitments and governance principles.&lt;/span&gt;
+                  &lt;/a&gt;
+                &lt;/li&gt;
               &lt;/ul&gt;
-            &lt;/div&gt;
-          &lt;/li&gt;
+            &lt;/li&gt;
 
-          &lt;!-- Direct Links --&gt;
-          &lt;li class="mobile-nav-item"&gt;
-            &lt;a href="#cases" class="mobile-direct-link"&gt;Case Studies&lt;/a&gt;
-          &lt;/li&gt;
-          &lt;li class="mobile-nav-item"&gt;
-            &lt;a href="#insights" class="mobile-direct-link"&gt;Insights &amp;amp; Reports&lt;/a&gt;
-          &lt;/li&gt;
-          &lt;li class="mobile-nav-item"&gt;
-            &lt;a href="#contact" class="mobile-direct-link"&gt;Contact&lt;/a&gt;
-          &lt;/li&gt;
-          &lt;li class="mobile-nav-item"&gt;
-            &lt;a href="#portal" class="mobile-direct-link"&gt;Client Portal&lt;/a&gt;
-          &lt;/li&gt;
+            &lt;!-- Item 3: Direct Link (Case Studies) --&gt;
+            &lt;li class=&quot;nav-item&quot; role=&quot;none&quot;&gt;
+              &lt;a href=&quot;#cases&quot; class=&quot;nav-link&quot; role=&quot;menuitem&quot;&gt;Case Studies&lt;/a&gt;
+            &lt;/li&gt;
 
-        &lt;/ul&gt;
-      &lt;/nav&gt;
+            &lt;!-- Item 4: Direct Link (Insights) --&gt;
+            &lt;li class=&quot;nav-item&quot; role=&quot;none&quot;&gt;
+              &lt;a href=&quot;#insights&quot; class=&quot;nav-link&quot; role=&quot;menuitem&quot;&gt;Insights &amp;amp; Reports&lt;/a&gt;
+            &lt;/li&gt;
 
-      &lt;!-- Mobile Drawer CTAs --&gt;
-      &lt;div class="drawer-actions"&gt;
-        &lt;a href="#contact" class="btn-primary btn-block"&gt;
-          &lt;span&gt;Schedule Consultation&lt;/span&gt;
-          &lt;svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"&gt;
-            &lt;path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/&gt;
+            &lt;!-- Item 5: Direct Link (Contact) --&gt;
+            &lt;li class=&quot;nav-item&quot; role=&quot;none&quot;&gt;
+              &lt;a href=&quot;#contact&quot; class=&quot;nav-link&quot; role=&quot;menuitem&quot;&gt;Contact&lt;/a&gt;
+            &lt;/li&gt;
+
+          &lt;/ul&gt;
+        &lt;/nav&gt;
+
+        &lt;!-- Right Utility &amp; Action Area --&gt;
+        &lt;div class=&quot;header-actions&quot;&gt;
+
+          &lt;!-- Search Trigger --&gt;
+          &lt;button type=&quot;button&quot; class=&quot;btn-icon&quot; id=&quot;search-trigger&quot; aria-label=&quot;Search site content&quot;&gt;
+            &lt;svg width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;&gt;
+              &lt;circle cx=&quot;11&quot; cy=&quot;11&quot; r=&quot;8&quot;/&gt;
+              &lt;line x1=&quot;21&quot; y1=&quot;21&quot; x2=&quot;16.65&quot; y2=&quot;16.65&quot;/&gt;
+            &lt;/svg&gt;
+          &lt;/button&gt;
+
+          &lt;!-- Theme Switcher (Light / Dark) --&gt;
+          &lt;button type=&quot;button&quot; class=&quot;btn-icon theme-toggle&quot; id=&quot;theme-toggle&quot; aria-label=&quot;Switch to dark theme&quot;&gt;
+            &lt;svg class=&quot;icon-sun&quot; width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;&gt;
+              &lt;circle cx=&quot;12&quot; cy=&quot;12&quot; r=&quot;5&quot;/&gt;
+              &lt;line x1=&quot;12&quot; y1=&quot;1&quot; x2=&quot;12&quot; y2=&quot;3&quot;/&gt;
+              &lt;line x1=&quot;12&quot; y1=&quot;21&quot; x2=&quot;12&quot; y2=&quot;23&quot;/&gt;
+              &lt;line x1=&quot;4.22&quot; y1=&quot;4.22&quot; x2=&quot;5.64&quot; y2=&quot;5.64&quot;/&gt;
+              &lt;line x1=&quot;18.36&quot; y1=&quot;18.36&quot; x2=&quot;19.78&quot; y2=&quot;19.78&quot;/&gt;
+              &lt;line x1=&quot;1&quot; y1=&quot;12&quot; x2=&quot;3&quot; y2=&quot;12&quot;/&gt;
+              &lt;line x1=&quot;21&quot; y1=&quot;12&quot; x2=&quot;23&quot; y2=&quot;12&quot;/&gt;
+              &lt;line x1=&quot;4.22&quot; y1=&quot;19.78&quot; x2=&quot;5.64&quot; y2=&quot;18.36&quot;/&gt;
+              &lt;line x1=&quot;18.36&quot; y1=&quot;5.64&quot; x2=&quot;19.78&quot; y2=&quot;4.22&quot;/&gt;
+            &lt;/svg&gt;
+            &lt;svg class=&quot;icon-moon&quot; width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;&gt;
+              &lt;path d=&quot;M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z&quot;/&gt;
+            &lt;/svg&gt;
+          &lt;/button&gt;
+
+          &lt;!-- Secondary Action: Client Portal --&gt;
+          &lt;a href=&quot;#portal&quot; class=&quot;btn-portal&quot;&gt;
+            &lt;svg width=&quot;15&quot; height=&quot;15&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;&gt;
+              &lt;path d=&quot;M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4&quot;/&gt;
+              &lt;polyline points=&quot;10 17 15 12 10 7&quot;/&gt;
+              &lt;line x1=&quot;15&quot; y1=&quot;12&quot; x2=&quot;3&quot; y2=&quot;12&quot;/&gt;
+            &lt;/svg&gt;
+            &lt;span&gt;Client Portal&lt;/span&gt;
+          &lt;/a&gt;
+
+          &lt;!-- Primary CTA Button --&gt;
+          &lt;a href=&quot;#contact&quot; class=&quot;btn-primary&quot;&gt;
+            &lt;span&gt;Schedule Consultation&lt;/span&gt;
+            &lt;svg width=&quot;14&quot; height=&quot;14&quot; viewBox=&quot;0 0 16 16&quot; fill=&quot;none&quot; aria-hidden=&quot;true&quot;&gt;
+              &lt;path d=&quot;M3 8h10M9 4l4 4-4 4&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;
+            &lt;/svg&gt;
+          &lt;/a&gt;
+
+          &lt;!-- Mobile Hamburger Toggle --&gt;
+          &lt;button type=&quot;button&quot; 
+                  class=&quot;btn-hamburger&quot; 
+                  id=&quot;mobile-hamburger&quot; 
+                  aria-label=&quot;Open mobile navigation menu&quot; 
+                  aria-expanded=&quot;false&quot; 
+                  aria-controls=&quot;mobile-drawer&quot;&gt;
+            &lt;span class=&quot;hamburger-bar&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+            &lt;span class=&quot;hamburger-bar&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+          &lt;/button&gt;
+
+        &lt;/div&gt;
+
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Collapsible Search Bar Overlay --&gt;
+    &lt;div class=&quot;search-overlay&quot; id=&quot;search-overlay&quot; aria-hidden=&quot;true&quot;&gt;
+      &lt;div class=&quot;search-container container&quot;&gt;
+        &lt;form class=&quot;search-form&quot; role=&quot;search&quot; onsubmit=&quot;event.preventDefault();&quot;&gt;
+          &lt;svg class=&quot;search-input-icon&quot; width=&quot;20&quot; height=&quot;20&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot;&gt;
+            &lt;circle cx=&quot;11&quot; cy=&quot;11&quot; r=&quot;8&quot;/&gt;
+            &lt;line x1=&quot;21&quot; y1=&quot;21&quot; x2=&quot;16.65&quot; y2=&quot;16.65&quot;/&gt;
           &lt;/svg&gt;
-        &lt;/a&gt;
+          &lt;input type=&quot;search&quot; class=&quot;search-input&quot; id=&quot;search-input&quot; placeholder=&quot;Search advisory services, insights, leadership...&quot; autocomplete=&quot;off&quot;&gt;
+          &lt;button type=&quot;button&quot; class=&quot;search-close&quot; id=&quot;search-close&quot; aria-label=&quot;Close search&quot;&gt;
+            &lt;svg width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot;&gt;&lt;line x1=&quot;18&quot; y1=&quot;6&quot; x2=&quot;6&quot; y2=&quot;18&quot;/&gt;&lt;line x1=&quot;6&quot; y1=&quot;6&quot; x2=&quot;18&quot; y2=&quot;18&quot;/&gt;&lt;/svg&gt;
+          &lt;/button&gt;
+        &lt;/form&gt;
+        &lt;div class=&quot;search-suggestions&quot;&gt;
+          &lt;span class=&quot;suggestion-label&quot;&gt;Suggested searches:&lt;/span&gt;
+          &lt;button type=&quot;button&quot; class=&quot;suggestion-tag&quot;&gt;Capital Allocation&lt;/button&gt;
+          &lt;button type=&quot;button&quot; class=&quot;suggestion-tag&quot;&gt;Zero-Trust Framework&lt;/button&gt;
+          &lt;button type=&quot;button&quot; class=&quot;suggestion-tag&quot;&gt;Global Tax Architecture&lt;/button&gt;
+          &lt;button type=&quot;button&quot; class=&quot;suggestion-tag&quot;&gt;Q3 2026 Telemetry&lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+  &lt;/header&gt;
+
+  &lt;!-- ================================================================
+       MOBILE NAVIGATION DRAWER (OFF-CANVAS)
+       ================================================================ --&gt;
+  &lt;div class=&quot;mobile-drawer&quot; id=&quot;mobile-drawer&quot; role=&quot;dialog&quot; aria-modal=&quot;true&quot; aria-hidden=&quot;true&quot; aria-label=&quot;Mobile Navigation&quot;&gt;
+    &lt;div class=&quot;drawer-backdrop&quot; id=&quot;drawer-backdrop&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;drawer-panel&quot;&gt;
+
+      &lt;!-- Drawer Top Bar --&gt;
+      &lt;div class=&quot;drawer-header&quot;&gt;
+        &lt;div class=&quot;brand-logo&quot;&gt;
+          &lt;span class=&quot;logo-mark&quot; aria-hidden=&quot;true&quot;&gt;
+            &lt;svg width=&quot;24&quot; height=&quot;24&quot; viewBox=&quot;0 0 28 28&quot; fill=&quot;none&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;
+              &lt;path d=&quot;M14 2L2 8V20L14 26L26 20V8L14 2Z&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.2&quot; stroke-linejoin=&quot;round&quot;/&gt;
+              &lt;path d=&quot;M14 2V26&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.2&quot; stroke-linecap=&quot;round&quot;/&gt;
+              &lt;path d=&quot;M2 8L14 14L26 8&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.2&quot; stroke-linejoin=&quot;round&quot;/&gt;
+              &lt;circle cx=&quot;14&quot; cy=&quot;14&quot; r=&quot;2.5&quot; fill=&quot;currentColor&quot;/&gt;
+            &lt;/svg&gt;
+          &lt;/span&gt;
+          &lt;span class=&quot;logo-text&quot;&gt;
+            &lt;span class=&quot;logo-name&quot;&gt;MERIDIAN&lt;/span&gt;
+          &lt;/span&gt;
+        &lt;/div&gt;
+        &lt;button type=&quot;button&quot; class=&quot;drawer-close&quot; id=&quot;drawer-close&quot; aria-label=&quot;Close navigation menu&quot;&gt;
+          &lt;svg width=&quot;20&quot; height=&quot;20&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot;&gt;&lt;line x1=&quot;18&quot; y1=&quot;6&quot; x2=&quot;6&quot; y2=&quot;18&quot;/&gt;&lt;line x1=&quot;6&quot; y1=&quot;6&quot; x2=&quot;18&quot; y2=&quot;18&quot;/&gt;&lt;/svg&gt;
+        &lt;/button&gt;
       &lt;/div&gt;
 
-      &lt;!-- Corporate Contact Details inside Drawer --&gt;
-      &lt;div class="drawer-corporate-info"&gt;
-        &lt;span class="info-label"&gt;Direct Inquiries&lt;/span&gt;
-        &lt;a href="mailto:advisory@meridian-group.com" class="info-link"&gt;advisory@meridian-group.com&lt;/a&gt;
-        &lt;span class="info-phone"&gt;+1 (212) 555-0190 (New York HQ)&lt;/span&gt;
-        &lt;span class="info-phone"&gt;+44 (20) 7946-0922 (London City)&lt;/span&gt;
+      &lt;!-- Drawer Content (Scrollable) --&gt;
+      &lt;div class=&quot;drawer-body&quot;&gt;
+
+        &lt;!-- Mobile Navigation Accordion --&gt;
+        &lt;nav class=&quot;mobile-nav&quot; aria-label=&quot;Mobile Navigation Menu&quot;&gt;
+          &lt;ul class=&quot;mobile-nav-list&quot;&gt;
+
+            &lt;!-- Solutions Accordion --&gt;
+            &lt;li class=&quot;mobile-nav-item mobile-accordion&quot;&gt;
+              &lt;button type=&quot;button&quot; class=&quot;accordion-trigger&quot; aria-expanded=&quot;false&quot;&gt;
+                &lt;span&gt;Solutions&lt;/span&gt;
+                &lt;svg class=&quot;chevron-icon&quot; width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 16 16&quot; fill=&quot;none&quot; aria-hidden=&quot;true&quot;&gt;
+                  &lt;path d=&quot;M4 6L8 10L12 6&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;
+                &lt;/svg&gt;
+              &lt;/button&gt;
+              &lt;div class=&quot;accordion-panel&quot;&gt;
+                &lt;ul class=&quot;accordion-links&quot;&gt;
+                  &lt;li&gt;&lt;a href=&quot;#solutions&quot; class=&quot;accordion-link&quot;&gt;Enterprise Architecture&lt;/a&gt;&lt;/li&gt;
+                  &lt;li&gt;&lt;a href=&quot;#solutions&quot; class=&quot;accordion-link&quot;&gt;Capital Advisory &amp;amp; M&amp;amp;A&lt;/a&gt;&lt;/li&gt;
+                  &lt;li&gt;&lt;a href=&quot;#solutions&quot; class=&quot;accordion-link&quot;&gt;Regulatory &amp;amp; Compliance&lt;/a&gt;&lt;/li&gt;
+                  &lt;li&gt;&lt;a href=&quot;#solutions&quot; class=&quot;accordion-link&quot;&gt;Cloud Infrastructure&lt;/a&gt;&lt;/li&gt;
+                  &lt;li&gt;&lt;a href=&quot;#solutions&quot; class=&quot;accordion-link&quot;&gt;Data Intelligence &amp;amp; AI&lt;/a&gt;&lt;/li&gt;
+                  &lt;li&gt;&lt;a href=&quot;#solutions&quot; class=&quot;accordion-link&quot;&gt;Cyber Defense &amp;amp; Zero Trust&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/div&gt;
+            &lt;/li&gt;
+
+            &lt;!-- Company Accordion --&gt;
+            &lt;li class=&quot;mobile-nav-item mobile-accordion&quot;&gt;
+              &lt;button type=&quot;button&quot; class=&quot;accordion-trigger&quot; aria-expanded=&quot;false&quot;&gt;
+                &lt;span&gt;Company&lt;/span&gt;
+                &lt;svg class=&quot;chevron-icon&quot; width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 16 16&quot; fill=&quot;none&quot; aria-hidden=&quot;true&quot;&gt;
+                  &lt;path d=&quot;M4 6L8 10L12 6&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;
+                &lt;/svg&gt;
+              &lt;/button&gt;
+              &lt;div class=&quot;accordion-panel&quot;&gt;
+                &lt;ul class=&quot;accordion-links&quot;&gt;
+                  &lt;li&gt;&lt;a href=&quot;#about&quot; class=&quot;accordion-link&quot;&gt;About Meridian Group&lt;/a&gt;&lt;/li&gt;
+                  &lt;li&gt;&lt;a href=&quot;#leadership&quot; class=&quot;accordion-link&quot;&gt;Executive Leadership&lt;/a&gt;&lt;/li&gt;
+                  &lt;li&gt;
+                    &lt;a href=&quot;#careers&quot; class=&quot;accordion-link&quot;&gt;
+                      &lt;span&gt;Careers &amp;amp; Culture&lt;/span&gt;
+                      &lt;span class=&quot;badge-hiring&quot;&gt;Hiring&lt;/span&gt;
+                    &lt;/a&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;&lt;a href=&quot;#esg&quot; class=&quot;accordion-link&quot;&gt;ESG &amp;amp; Global Impact&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/div&gt;
+            &lt;/li&gt;
+
+            &lt;!-- Direct Links --&gt;
+            &lt;li class=&quot;mobile-nav-item&quot;&gt;
+              &lt;a href=&quot;#cases&quot; class=&quot;mobile-direct-link&quot;&gt;Case Studies&lt;/a&gt;
+            &lt;/li&gt;
+            &lt;li class=&quot;mobile-nav-item&quot;&gt;
+              &lt;a href=&quot;#insights&quot; class=&quot;mobile-direct-link&quot;&gt;Insights &amp;amp; Reports&lt;/a&gt;
+            &lt;/li&gt;
+            &lt;li class=&quot;mobile-nav-item&quot;&gt;
+              &lt;a href=&quot;#contact&quot; class=&quot;mobile-direct-link&quot;&gt;Contact&lt;/a&gt;
+            &lt;/li&gt;
+            &lt;li class=&quot;mobile-nav-item&quot;&gt;
+              &lt;a href=&quot;#portal&quot; class=&quot;mobile-direct-link&quot;&gt;Client Portal&lt;/a&gt;
+            &lt;/li&gt;
+
+          &lt;/ul&gt;
+        &lt;/nav&gt;
+
+        &lt;!-- Mobile Drawer CTAs --&gt;
+        &lt;div class=&quot;drawer-actions&quot;&gt;
+          &lt;a href=&quot;#contact&quot; class=&quot;btn-primary btn-block&quot;&gt;
+            &lt;span&gt;Schedule Consultation&lt;/span&gt;
+            &lt;svg width=&quot;14&quot; height=&quot;14&quot; viewBox=&quot;0 0 16 16&quot; fill=&quot;none&quot; aria-hidden=&quot;true&quot;&gt;
+              &lt;path d=&quot;M3 8h10M9 4l4 4-4 4&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;
+            &lt;/svg&gt;
+          &lt;/a&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Corporate Contact Details inside Drawer --&gt;
+        &lt;div class=&quot;drawer-corporate-info&quot;&gt;
+          &lt;span class=&quot;info-label&quot;&gt;Direct Inquiries&lt;/span&gt;
+          &lt;a href=&quot;mailto:advisory@meridian-group.com&quot; class=&quot;info-link&quot;&gt;advisory@meridian-group.com&lt;/a&gt;
+          &lt;span class=&quot;info-phone&quot;&gt;+1 (212) 555-0190 (New York HQ)&lt;/span&gt;
+          &lt;span class=&quot;info-phone&quot;&gt;+44 (20) 7946-0922 (London City)&lt;/span&gt;
+        &lt;/div&gt;
+
       &lt;/div&gt;
 
     &lt;/div&gt;
-
   &lt;/div&gt;
-&lt;/div&gt;
-</code></pre>
+
+
+  &lt;!-- Main JavaScript File --&gt;
+  &lt;script src=&quot;script.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
       </div>
     </section>
 
@@ -747,7 +771,7 @@
         <span class="section-index">3</span>
         <h2>CSS Stylesheet</h2>
       </div>
-      <p class="section-note">Add this CSS to your styling:</p>
+      <p class="section-note">Add this CSS to your stylesheet (e.g. style.css):</p>
       <div class="code-window">
         <div class="code-chrome">
           <div class="dots"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
@@ -758,7 +782,17 @@
             <span class="copy-label">Copy</span>
           </button>
         </div>
-        <pre><code id="code-3" class="language-css">:root {
+        <pre><code id="code-3" class="language-css">/* ============================================================
+   MERIDIAN — Corporate &amp; Enterprise Navigation System
+   Designed with human-crafted executive aesthetics, 
+   structured multi-column mega-menus, dual light/dark themes, 
+   and full WCAG accessibility.
+   ============================================================ */
+
+/* ─────────────────────────────────────────────
+   CSS Custom Properties &amp; Design Tokens
+   ───────────────────────────────────────────── */
+:root {
   /* Surface &amp; Backgrounds */
   --bg-page: #fbfcfd;
   --bg-surface: #ffffff;
@@ -811,10 +845,13 @@
   --t-medium: 0.28s var(--ease-smooth);
 
   /* Typography */
-  --font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-family: &#39;Plus Jakarta Sans&#39;, -apple-system, BlinkMacSystemFont, &#39;Segoe UI&#39;, Roboto, sans-serif;
 }
 
-[data-theme="dark"] {
+/* ─────────────────────────────────────────────
+   Dark Theme Overrides
+   ───────────────────────────────────────────── */
+[data-theme=&quot;dark&quot;] {
   --bg-page: #080b11;
   --bg-surface: #0f1420;
   --bg-surface-elevated: #141b2a;
@@ -847,6 +884,63 @@
   --shadow-dropdown: 0 24px 48px -10px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.08);
 }
 
+/* ─────────────────────────────────────────────
+   Reset &amp; Base Styles
+   ───────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--font-family);
+  font-size: 16px;
+  scroll-behavior: smooth;
+  color-scheme: light dark;
+}
+
+body {
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  transition: background-color var(--t-medium), color var(--t-medium);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--t-fast);
+}
+
+ul, li {
+  list-style: none;
+}
+
+button {
+  font-family: inherit;
+  font-size: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ─────────────────────────────────────────────
+   HEADER WRAPPER (STICKY)
+   ───────────────────────────────────────────── */
 .meridian-header {
   position: sticky;
   top: 0;
@@ -865,6 +959,9 @@
   box-shadow: var(--shadow-md);
 }
 
+/* ─────────────────────────────────────────────
+   TOP UTILITY BAR
+   ───────────────────────────────────────────── */
 .header-utility {
   height: var(--header-utility-height);
   border-bottom: 1px solid var(--border-subtle);
@@ -873,6 +970,7 @@
   background: var(--bg-surface-alt);
   display: flex;
   align-items: center;
+  transition: background-color var(--t-fast), border-color var(--t-fast);
 }
 
 .utility-inner {
@@ -936,6 +1034,9 @@
   border-radius: var(--border-radius-full);
 }
 
+/* ─────────────────────────────────────────────
+   MAIN NAVIGATION BAR
+   ───────────────────────────────────────────── */
 .header-main {
   height: var(--header-main-height);
   display: flex;
@@ -951,6 +1052,7 @@
   gap: 24px;
 }
 
+/* Brand Logo */
 .brand-logo {
   display: flex;
   align-items: center;
@@ -993,6 +1095,9 @@
   margin-top: 1px;
 }
 
+/* ─────────────────────────────────────────────
+   DESKTOP NAVIGATION
+   ───────────────────────────────────────────── */
 .nav-desktop {
   display: flex;
   align-items: center;
@@ -1033,7 +1138,7 @@
 
 .nav-link:hover,
 .nav-item:hover &gt; .nav-link,
-.nav-link[aria-expanded="true"] {
+.nav-link[aria-expanded=&quot;true&quot;] {
   color: var(--text-primary);
   background-color: var(--bg-surface-alt);
 }
@@ -1049,12 +1154,14 @@
 }
 
 .nav-item:hover &gt; .nav-link .chevron-icon,
-.nav-link[aria-expanded="true"] .chevron-icon {
+.nav-link[aria-expanded=&quot;true&quot;] .chevron-icon {
   transform: rotate(180deg);
   color: var(--text-primary);
 }
 
-/* Mega-Menu */
+/* ─────────────────────────────────────────────
+   MEGA-MENU (SOLUTIONS)
+   ───────────────────────────────────────────── */
 .megamenu {
   position: absolute;
   top: 100%;
@@ -1075,30 +1182,12 @@
 
 /* Pointer bridging pseudo-element to prevent accidental close */
 .megamenu::before {
-  content: '';
+  content: &#39;&#39;;
   position: absolute;
   top: -14px;
   left: 0;
   right: 0;
   height: 14px;
-}
-
-.has-megamenu:hover .megamenu,
-.has-megamenu:focus-within .megamenu,
-.megamenu.is-open {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-  transform: translateX(-50%) translateY(0);
-}
-
-.has-megamenu::after {
-  content: '';
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  height: 16px;
 }
 
 .has-megamenu:hover .megamenu,
@@ -1142,7 +1231,7 @@
   gap: 12px;
   padding: 10px;
   border-radius: var(--border-radius-md);
-  transition: background-color var(--t-fast);
+  transition: background-color var(--t-fast), transform var(--t-fast);
 }
 
 .megamenu-item:hover {
@@ -1161,6 +1250,7 @@
   color: var(--text-primary);
   flex-shrink: 0;
   margin-top: 2px;
+  transition: color var(--t-fast), border-color var(--t-fast), background-color var(--t-fast);
 }
 
 .megamenu-item:hover .menu-item-icon {
@@ -1188,6 +1278,7 @@
   margin-top: 2px;
 }
 
+/* Featured Case Study / Report Card in Mega-Menu */
 .megamenu-featured {
   display: flex;
   flex-direction: column;
@@ -1245,7 +1336,9 @@
   gap: 10px;
 }
 
-/* Dropdown */
+/* ─────────────────────────────────────────────
+   STANDARD DROPDOWN (COMPANY)
+   ───────────────────────────────────────────── */
 .dropdown-menu {
   position: absolute;
   top: 100%;
@@ -1262,6 +1355,15 @@
   pointer-events: none;
   transition: opacity var(--t-fast), transform var(--t-fast), visibility var(--t-fast);
   z-index: 1000;
+}
+
+.has-dropdown::after {
+  content: &#39;&#39;;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 16px;
 }
 
 .has-dropdown:not(.has-megamenu):hover .dropdown-menu,
@@ -1310,7 +1412,9 @@
   border-radius: var(--border-radius-full);
 }
 
-/* Header Actions */
+/* ─────────────────────────────────────────────
+   RIGHT ACTIONS GROUP
+   ───────────────────────────────────────────── */
 .header-actions {
   display: flex;
   align-items: center;
@@ -1342,19 +1446,21 @@
   outline-offset: 2px;
 }
 
+/* Theme Switcher */
 .theme-toggle .icon-sun {
   display: none;
 }
 .theme-toggle .icon-moon {
   display: block;
 }
-[data-theme="dark"] .theme-toggle .icon-sun {
+[data-theme=&quot;dark&quot;] .theme-toggle .icon-sun {
   display: block;
 }
-[data-theme="dark"] .theme-toggle .icon-moon {
+[data-theme=&quot;dark&quot;] .theme-toggle .icon-moon {
   display: none;
 }
 
+/* Client Portal Secondary Link */
 .btn-portal {
   display: inline-flex;
   align-items: center;
@@ -1372,6 +1478,7 @@
   background-color: var(--bg-surface-alt);
 }
 
+/* Primary CTA Button */
 .btn-primary {
   display: inline-flex;
   align-items: center;
@@ -1395,6 +1502,56 @@
   transform: translateY(-1px);
 }
 
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-primary:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+.btn-primary svg {
+  transition: transform var(--t-fast);
+}
+
+.btn-primary:hover svg {
+  transform: translateX(2px);
+}
+
+/* Button variants */
+.btn-large {
+  padding: 13px 24px;
+  font-size: 0.95rem;
+  border-radius: var(--border-radius-md);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  padding: 10px 18px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  transition: background-color var(--t-fast), border-color var(--t-fast), color var(--t-fast);
+}
+
+.btn-outline:hover {
+  background-color: var(--bg-surface-alt);
+  border-color: var(--border-strong);
+}
+
+.btn-block {
+  width: 100%;
+}
+
+/* Mobile Hamburger Toggle */
 .btn-hamburger {
   display: none;
   flex-direction: column;
@@ -1408,6 +1565,12 @@
   background: var(--bg-surface);
   cursor: pointer;
   z-index: 1010;
+  transition: border-color var(--t-fast), background-color var(--t-fast);
+}
+
+.btn-hamburger:hover {
+  border-color: var(--border-light);
+  background-color: var(--bg-surface-alt);
 }
 
 .hamburger-bar {
@@ -1427,7 +1590,9 @@
   transform: translateY(-4px) rotate(-45deg);
 }
 
-/* Search Overlay */
+/* ─────────────────────────────────────────────
+   SEARCH OVERLAY
+   ───────────────────────────────────────────── */
 .search-overlay {
   position: absolute;
   top: 100%;
@@ -1474,6 +1639,7 @@
   border: 1px solid var(--border-light);
   border-radius: var(--border-radius-lg);
   outline: none;
+  transition: border-color var(--t-fast), box-shadow var(--t-fast);
 }
 
 .search-input:focus {
@@ -1487,6 +1653,10 @@
   color: var(--text-muted);
   cursor: pointer;
   padding: 6px;
+}
+
+.search-close:hover {
+  color: var(--text-primary);
 }
 
 .search-suggestions {
@@ -1511,9 +1681,17 @@
   border-radius: var(--border-radius-full);
   padding: 4px 10px;
   cursor: pointer;
+  transition: background-color var(--t-fast), color var(--t-fast);
 }
 
-/* Mobile Drawer */
+.suggestion-tag:hover {
+  background-color: var(--border-subtle);
+  color: var(--text-primary);
+}
+
+/* ─────────────────────────────────────────────
+   MOBILE DRAWER (OFF-CANVAS)
+   ───────────────────────────────────────────── */
 .mobile-drawer {
   position: fixed;
   inset: 0;
@@ -1577,6 +1755,11 @@
   cursor: pointer;
 }
 
+.drawer-close:hover {
+  color: var(--text-primary);
+  background: var(--bg-surface-alt);
+}
+
 .drawer-body {
   padding: 24px 20px;
   display: flex;
@@ -1584,6 +1767,7 @@
   gap: 24px;
 }
 
+/* Accordions inside mobile drawer */
 .mobile-nav-list {
   display: flex;
   flex-direction: column;
@@ -1610,7 +1794,11 @@
   text-align: left;
 }
 
-.accordion-trigger[aria-expanded="true"] .chevron-icon {
+.accordion-trigger .chevron-icon {
+  transition: transform var(--t-fast);
+}
+
+.accordion-trigger[aria-expanded=&quot;true&quot;] .chevron-icon {
   transform: rotate(180deg);
 }
 
@@ -1622,7 +1810,7 @@
   visibility: hidden;
 }
 
-.accordion-trigger[aria-expanded="true"] + .accordion-panel {
+.accordion-trigger[aria-expanded=&quot;true&quot;] + .accordion-panel {
   grid-template-rows: 1fr;
   visibility: visible;
 }
@@ -1656,6 +1844,10 @@
   color: var(--text-primary);
 }
 
+.mobile-direct-link:hover {
+  color: var(--brand-accent);
+}
+
 .drawer-actions {
   display: flex;
   flex-direction: column;
@@ -1678,6 +1870,7 @@
   text-transform: uppercase;
   letter-spacing: 0.05em;
   font-size: 0.675rem;
+  margin-bottom: 2px;
 }
 
 .info-link {
@@ -1689,20 +1882,26 @@
   color: var(--text-secondary);
 }
 
-/* Responsive Queries */
+/* ─────────────────────────────────────────────
+   RESPONSIVE MEDIA QUERIES
+   ───────────────────────────────────────────── */
 @media (max-width: 1080px) {
   .header-utility {
     display: none;
   }
+
   .nav-desktop {
     display: none;
   }
+
   .btn-portal {
     display: none;
   }
+
   .btn-hamburger {
     display: flex;
   }
+
   .btn-primary {
     padding: 8px 14px;
     font-size: 0.8rem;
@@ -1713,14 +1912,384 @@
   .header-actions .btn-primary {
     display: none;
   }
+
   .header-inner {
     padding: 0 16px;
   }
+
   .logo-sub {
     display: none;
   }
 }
-</code></pre>
+
+@media (max-width: 480px) {
+  .header-main { height: 60px; }
+  .header-inner { padding: 0 12px; }
+  .logo-mark svg { width: 22px; height: 22px; }
+  .logo-name { font-size: 0.95rem; }
+  .hero-section { padding: 60px 0 60px; }
+  .hero-inner { padding: 0 16px; }
+  .hero-title { font-size: clamp(1.8rem, 8vw, 2.8rem); }
+  .hero-lead { font-size: 0.95rem; }
+  .hero-actions { flex-direction: column; gap: 12px; }
+  .hero-actions .btn-primary,
+  .hero-actions .btn-outline { width: 100%; justify-content: center; }
+  .section-header { margin-bottom: 36px; }
+  .practices-grid { grid-template-columns: 1fr; }
+  .cta-box { padding: 40px 20px; }
+  .cta-buttons { flex-direction: column; gap: 12px; }
+  .cta-buttons .btn-primary,
+  .cta-buttons .btn-outline { width: 100%; justify-content: center; }
+  .container { padding: 0 16px; }
+}
+
+/* ─────────────────────────────────────────────
+   DEMO PAGE SECTIONS (EXECUTIVE PRESENTATION)
+   ───────────────────────────────────────────── */
+.hero-section {
+  padding: 90px 0 80px;
+  background: radial-gradient(circle at 50% 0%, var(--bg-surface-alt) 0%, var(--bg-page) 65%);
+  border-bottom: 1px solid var(--border-subtle);
+  text-align: center;
+}
+
+.hero-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-badge-wrap {
+  margin-bottom: 24px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--border-radius-full);
+  padding: 6px 14px;
+  box-shadow: var(--shadow-sm);
+}
+
+.badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--brand-success);
+}
+
+.hero-title {
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: var(--text-primary);
+  max-width: 860px;
+  margin-bottom: 24px;
+}
+
+.hero-lead {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--text-secondary);
+  max-width: 720px;
+  line-height: 1.6;
+  margin-bottom: 36px;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 60px;
+}
+
+.hero-clients {
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 36px;
+  width: 100%;
+}
+
+.clients-label {
+  display: block;
+  font-size: 0.675rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+.clients-grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+  flex-wrap: wrap;
+}
+
+.client-name {
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--text-light);
+  opacity: 0.85;
+}
+
+/* Stats Section */
+.stats-section {
+  padding: 60px 0;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 32px;
+  text-align: center;
+}
+
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.stat-number {
+  font-size: 2.75rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* Practices &amp; Content Sections */
+.content-section {
+  padding: 100px 0;
+}
+
+.section-alt {
+  background: var(--bg-surface-alt);
+}
+
+.section-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 60px;
+}
+
+.section-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--brand-accent);
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+.section-desc {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.practices-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 28px;
+}
+
+.practice-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--border-radius-lg);
+  padding: 36px 30px;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--t-fast), box-shadow var(--t-fast), border-color var(--t-fast);
+}
+
+.practice-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-light);
+}
+
+.practice-icon {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--brand-accent);
+  margin-bottom: 20px;
+}
+
+.practice-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.practice-desc {
+  font-size: 0.925rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* About Grid */
+.about-grid {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.about-content .section-lead {
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.about-content .section-text {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 30px;
+}
+
+.about-highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.highlight-item {
+  padding: 16px 20px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--border-radius-md);
+  font-size: 0.925rem;
+  color: var(--text-secondary);
+}
+
+.highlight-item strong {
+  color: var(--text-primary);
+}
+
+/* Contact CTA Box */
+.contact-cta-section {
+  padding: 80px 0 100px;
+}
+
+.cta-box {
+  background: var(--brand-primary);
+  color: var(--text-inverse);
+  border-radius: var(--border-radius-lg);
+  padding: 60px 40px;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+}
+
+.cta-title {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+
+.cta-text {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  max-width: 580px;
+  margin: 0 auto 36px;
+}
+
+.cta-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.cta-box .btn-primary {
+  background: var(--text-inverse);
+  color: var(--brand-primary);
+}
+
+.cta-box .btn-primary:hover {
+  background: #e2e8f0;
+}
+
+.cta-box .btn-outline {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--text-inverse);
+  background: transparent;
+}
+
+.cta-box .btn-outline:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Footer */
+.meridian-footer {
+  border-top: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+  padding: 40px 0;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.footer-copyright {
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.footer-links a:hover {
+  color: var(--brand-accent);
+}</code></pre>
       </div>
     </section>
 
@@ -1729,7 +2298,7 @@
         <span class="section-index">4</span>
         <h2>JavaScript Code</h2>
       </div>
-      <p class="section-note">Place this in your script.js or before </body>:</p>
+      <p class="section-note">Add this script before the closing &lt;/body&gt; tag (e.g. script.js):</p>
       <div class="code-window">
         <div class="code-chrome">
           <div class="dots"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
@@ -1740,99 +2309,129 @@
             <span class="copy-label">Copy</span>
           </button>
         </div>
-        <pre><code id="code-4" class="language-javascript">(function () {
-  'use strict';
+        <pre><code id="code-4" class="language-javascript">/**
+ * ============================================================
+ * Meridian — Corporate &amp; Enterprise Navigation System
+ * Handles Mega-Menu interactions, Mobile Drawer accordions,
+ * Light/Dark theme switching, Search overlay, and Keyboard A11y.
+ * ============================================================
+ */
 
+(function () {
+  &#39;use strict&#39;;
+
+  /* ─────────────────────────────────────────────
+     DOM Element References
+     ───────────────────────────────────────────── */
   const htmlElement       = document.documentElement;
-  const header            = document.getElementById('meridian-header');
-  const themeToggle       = document.getElementById('theme-toggle');
-  const searchTrigger     = document.getElementById('search-trigger');
-  const searchOverlay     = document.getElementById('search-overlay');
-  const searchClose       = document.getElementById('search-close');
-  const searchInput       = document.getElementById('search-input');
+  const header            = document.getElementById(&#39;meridian-header&#39;);
+  const themeToggle       = document.getElementById(&#39;theme-toggle&#39;);
+  const searchTrigger     = document.getElementById(&#39;search-trigger&#39;);
+  const searchOverlay     = document.getElementById(&#39;search-overlay&#39;);
+  const searchClose       = document.getElementById(&#39;search-close&#39;);
+  const searchInput       = document.getElementById(&#39;search-input&#39;);
   
-  const mobileHamburger   = document.getElementById('mobile-hamburger');
-  const mobileDrawer      = document.getElementById('mobile-drawer');
-  const drawerClose       = document.getElementById('drawer-close');
-  const drawerBackdrop    = document.getElementById('drawer-backdrop');
-  const accordionTriggers = document.querySelectorAll('.accordion-trigger');
-  const mobileNavLinks    = document.querySelectorAll('.mobile-nav a');
+  // Mobile Drawer elements
+  const mobileHamburger   = document.getElementById(&#39;mobile-hamburger&#39;);
+  const mobileDrawer      = document.getElementById(&#39;mobile-drawer&#39;);
+  const drawerClose       = document.getElementById(&#39;drawer-close&#39;);
+  const drawerBackdrop    = document.getElementById(&#39;drawer-backdrop&#39;);
+  const accordionTriggers = document.querySelectorAll(&#39;.accordion-trigger&#39;);
+  const mobileNavLinks    = document.querySelectorAll(&#39;.mobile-nav a&#39;);
 
-  const dropdownTriggers  = document.querySelectorAll('.dropdown-trigger');
+  // Desktop Dropdown Triggers
+  const dropdownTriggers  = document.querySelectorAll(&#39;.dropdown-trigger&#39;);
+  const dropdownContainers = document.querySelectorAll(&#39;.has-dropdown&#39;);
 
-  const THEME_STORAGE_KEY = 'meridian_corporate_theme';
+  /* ─────────────────────────────────────────────
+     1. Theme Management (Light / Dark)
+     ───────────────────────────────────────────── */
+  const THEME_STORAGE_KEY = &#39;meridian_corporate_theme&#39;;
 
   function initTheme() {
     const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
     if (savedTheme) {
       applyTheme(savedTheme);
     } else {
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      applyTheme(prefersDark ? 'dark' : 'light');
+      const prefersDark = window.matchMedia(&#39;(prefers-color-scheme: dark)&#39;).matches;
+      applyTheme(prefersDark ? &#39;dark&#39; : &#39;light&#39;);
     }
   }
 
   function applyTheme(theme) {
-    htmlElement.setAttribute('data-theme', theme);
+    htmlElement.setAttribute(&#39;data-theme&#39;, theme);
     localStorage.setItem(THEME_STORAGE_KEY, theme);
     if (themeToggle) {
-      themeToggle.setAttribute('aria-label', theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
+      themeToggle.setAttribute(&#39;aria-label&#39;, theme === &#39;dark&#39; ? &#39;Switch to light theme&#39; : &#39;Switch to dark theme&#39;);
     }
   }
 
   function toggleTheme() {
-    const currentTheme = htmlElement.getAttribute('data-theme') || 'light';
-    const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    const currentTheme = htmlElement.getAttribute(&#39;data-theme&#39;) || &#39;light&#39;;
+    const nextTheme = currentTheme === &#39;dark&#39; ? &#39;light&#39; : &#39;dark&#39;;
     applyTheme(nextTheme);
   }
 
   if (themeToggle) {
-    themeToggle.addEventListener('click', toggleTheme);
+    themeToggle.addEventListener(&#39;click&#39;, toggleTheme);
   }
 
+  /* ─────────────────────────────────────────────
+     2. Header Scroll Elevation Effect
+     ───────────────────────────────────────────── */
   function handleScroll() {
     if (!header) return;
     const isScrolled = window.scrollY &gt; 15;
-    header.classList.toggle('header--scrolled', isScrolled);
+    header.classList.toggle(&#39;header--scrolled&#39;, isScrolled);
   }
 
-  window.addEventListener('scroll', handleScroll, { passive: true });
+  window.addEventListener(&#39;scroll&#39;, handleScroll, { passive: true });
 
+  /* ─────────────────────────────────────────────
+     3. Desktop Dropdown &amp; Mega-Menu Keyboard &amp; Click
+     ───────────────────────────────────────────── */
   dropdownTriggers.forEach(function (trigger) {
-    trigger.addEventListener('click', function (e) {
+    trigger.addEventListener(&#39;click&#39;, function (e) {
       e.stopPropagation();
-      const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+      const parent = trigger.closest(&#39;.has-dropdown&#39;);
+      const isExpanded = trigger.getAttribute(&#39;aria-expanded&#39;) === &#39;true&#39;;
 
+      // Close other open menus first
       dropdownTriggers.forEach(function (otherTrigger) {
         if (otherTrigger !== trigger) {
-          otherTrigger.setAttribute('aria-expanded', 'false');
+          otherTrigger.setAttribute(&#39;aria-expanded&#39;, &#39;false&#39;);
           const otherMenu = otherTrigger.nextElementSibling;
-          if (otherMenu) otherMenu.classList.remove('is-open');
+          if (otherMenu) otherMenu.classList.remove(&#39;is-open&#39;);
         }
       });
 
-      trigger.setAttribute('aria-expanded', (!isExpanded).toString());
+      // Toggle current
+      trigger.setAttribute(&#39;aria-expanded&#39;, (!isExpanded).toString());
       const menu = trigger.nextElementSibling;
       if (menu) {
-        menu.classList.toggle('is-open', !isExpanded);
+        menu.classList.toggle(&#39;is-open&#39;, !isExpanded);
       }
     });
   });
 
-  document.addEventListener('click', function (e) {
-    if (!e.target.closest('.has-dropdown')) {
+  // Close desktop dropdowns when clicking outside
+  document.addEventListener(&#39;click&#39;, function (e) {
+    if (!e.target.closest(&#39;.has-dropdown&#39;)) {
       dropdownTriggers.forEach(function (trigger) {
-        trigger.setAttribute('aria-expanded', 'false');
+        trigger.setAttribute(&#39;aria-expanded&#39;, &#39;false&#39;);
         const menu = trigger.nextElementSibling;
-        if (menu) menu.classList.remove('is-open');
+        if (menu) menu.classList.remove(&#39;is-open&#39;);
       });
     }
   });
 
+  /* ─────────────────────────────────────────────
+     4. Search Overlay Toggle
+     ───────────────────────────────────────────── */
   function openSearch() {
     if (!searchOverlay) return;
-    searchOverlay.classList.add('is-active');
-    searchOverlay.setAttribute('aria-hidden', 'false');
+    searchOverlay.classList.add(&#39;is-active&#39;);
+    searchOverlay.setAttribute(&#39;aria-hidden&#39;, &#39;false&#39;);
     if (searchInput) {
       setTimeout(function () { searchInput.focus(); }, 100);
     }
@@ -1840,23 +2439,28 @@
 
   function closeSearch() {
     if (!searchOverlay) return;
-    searchOverlay.classList.remove('is-active');
-    searchOverlay.setAttribute('aria-hidden', 'true');
+    searchOverlay.classList.remove(&#39;is-active&#39;);
+    searchOverlay.setAttribute(&#39;aria-hidden&#39;, &#39;true&#39;);
     if (searchTrigger) searchTrigger.focus();
   }
 
-  if (searchTrigger) searchTrigger.addEventListener('click', openSearch);
-  if (searchClose) searchClose.addEventListener('click', closeSearch);
+  if (searchTrigger) searchTrigger.addEventListener(&#39;click&#39;, openSearch);
+  if (searchClose) searchClose.addEventListener(&#39;click&#39;, closeSearch);
 
+  /* ─────────────────────────────────────────────
+     5. Mobile Off-Canvas Drawer &amp; Accordion
+     ───────────────────────────────────────────── */
   function openDrawer() {
     if (!mobileDrawer) return;
-    mobileDrawer.classList.add('is-open');
-    mobileDrawer.setAttribute('aria-hidden', 'false');
+    mobileDrawer.classList.add(&#39;is-open&#39;);
+    mobileDrawer.setAttribute(&#39;aria-hidden&#39;, &#39;false&#39;);
     if (mobileHamburger) {
-      mobileHamburger.classList.add('is-active');
-      mobileHamburger.setAttribute('aria-expanded', 'true');
+      mobileHamburger.classList.add(&#39;is-active&#39;);
+      mobileHamburger.setAttribute(&#39;aria-expanded&#39;, &#39;true&#39;);
     }
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = &#39;hidden&#39;;
+
+    // Focus close button
     if (drawerClose) {
       setTimeout(function () { drawerClose.focus(); }, 150);
     }
@@ -1864,19 +2468,19 @@
 
   function closeDrawer() {
     if (!mobileDrawer) return;
-    mobileDrawer.classList.remove('is-open');
-    mobileDrawer.setAttribute('aria-hidden', 'true');
+    mobileDrawer.classList.remove(&#39;is-open&#39;);
+    mobileDrawer.setAttribute(&#39;aria-hidden&#39;, &#39;true&#39;);
     if (mobileHamburger) {
-      mobileHamburger.classList.remove('is-active');
-      mobileHamburger.setAttribute('aria-expanded', 'false');
+      mobileHamburger.classList.remove(&#39;is-active&#39;);
+      mobileHamburger.setAttribute(&#39;aria-expanded&#39;, &#39;false&#39;);
       mobileHamburger.focus();
     }
-    document.body.style.overflow = '';
+    document.body.style.overflow = &#39;&#39;;
   }
 
   if (mobileHamburger) {
-    mobileHamburger.addEventListener('click', function () {
-      const isOpen = mobileDrawer.classList.contains('is-open');
+    mobileHamburger.addEventListener(&#39;click&#39;, function () {
+      const isOpen = mobileDrawer.classList.contains(&#39;is-open&#39;);
       if (isOpen) {
         closeDrawer();
       } else {
@@ -1885,50 +2489,62 @@
     });
   }
 
-  if (drawerClose) drawerClose.addEventListener('click', closeDrawer);
-  if (drawerBackdrop) drawerBackdrop.addEventListener('click', closeDrawer);
+  if (drawerClose) drawerClose.addEventListener(&#39;click&#39;, closeDrawer);
+  if (drawerBackdrop) drawerBackdrop.addEventListener(&#39;click&#39;, closeDrawer);
 
+  // Mobile Accordion toggle
   accordionTriggers.forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      const isExpanded = btn.getAttribute('aria-expanded') === 'true';
-      btn.setAttribute('aria-expanded', (!isExpanded).toString());
+    btn.addEventListener(&#39;click&#39;, function () {
+      const isExpanded = btn.getAttribute(&#39;aria-expanded&#39;) === &#39;true&#39;;
+      btn.setAttribute(&#39;aria-expanded&#39;, (!isExpanded).toString());
     });
   });
 
+  // Close drawer when clicking internal anchor links
   mobileNavLinks.forEach(function (link) {
-    link.addEventListener('click', function () {
+    link.addEventListener(&#39;click&#39;, function () {
       closeDrawer();
     });
   });
 
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') {
-      if (searchOverlay &amp;&amp; searchOverlay.classList.contains('is-active')) {
+  /* ─────────────────────────────────────────────
+     6. Global Keyboard A11y (Escape key &amp; Tab)
+     ───────────────────────────────────────────── */
+  document.addEventListener(&#39;keydown&#39;, function (e) {
+    if (e.key === &#39;Escape&#39;) {
+      // Close search if open
+      if (searchOverlay &amp;&amp; searchOverlay.classList.contains(&#39;is-active&#39;)) {
         closeSearch();
         return;
       }
-      if (mobileDrawer &amp;&amp; mobileDrawer.classList.contains('is-open')) {
+      // Close mobile drawer if open
+      if (mobileDrawer &amp;&amp; mobileDrawer.classList.contains(&#39;is-open&#39;)) {
         closeDrawer();
         return;
       }
+      // Close desktop dropdowns
       dropdownTriggers.forEach(function (trigger) {
-        trigger.setAttribute('aria-expanded', 'false');
+        trigger.setAttribute(&#39;aria-expanded&#39;, &#39;false&#39;);
         const menu = trigger.nextElementSibling;
-        if (menu) menu.classList.remove('is-open');
+        if (menu) menu.classList.remove(&#39;is-open&#39;);
       });
     }
   });
 
-  window.addEventListener('resize', function () {
-    if (window.innerWidth &gt; 1080 &amp;&amp; mobileDrawer &amp;&amp; mobileDrawer.classList.contains('is-open')) {
+  // Window resize: auto-close mobile drawer on desktop breakpoint
+  window.addEventListener(&#39;resize&#39;, function () {
+    if (window.innerWidth &gt; 1080 &amp;&amp; mobileDrawer &amp;&amp; mobileDrawer.classList.contains(&#39;is-open&#39;)) {
       closeDrawer();
     }
   });
 
+  /* ─────────────────────────────────────────────
+     Initialization
+     ───────────────────────────────────────────── */
   initTheme();
   handleScroll();
-})();
-</code></pre>
+
+})();</code></pre>
       </div>
     </section>
 
@@ -1937,7 +2553,7 @@
 
   <footer class="doc-footer">
     <span>Part of the Modern Navbar Collection</span>
-    <a href="../index.html">Back</a>
+    <a href="../index.html">&larr; Back to Collection</a>
   </footer>
 
 <script>

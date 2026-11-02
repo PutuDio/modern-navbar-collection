@@ -69,7 +69,7 @@ body {
 .sonic-nav-wrapper {
   position: fixed;
   top: 0; left: 0; right: 0;
-  z-index: 100;
+  z-index: 300;
   display: flex;
   justify-content: center;
   padding-top: 20px;
@@ -266,73 +266,6 @@ body {
 .sonic-cta:hover {
   box-shadow: 0 6px 22px rgba(168, 85, 247, 0.55);
   transform: scale(1.03);
-}
-
-/* ── Audio Unlock Overlay ────────────────────────────────────── */
-.audio-unlock {
-  position: fixed;
-  inset: 0;
-  z-index: 200;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: rgba(8, 6, 14, 0.92);
-  backdrop-filter: blur(12px);
-  text-align: center;
-  gap: 24px;
-  transition: opacity var(--duration-slow) ease;
-}
-
-.audio-unlock.hidden {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.unlock-icon {
-  font-size: 56px;
-  animation: pulse-icon 2s ease-in-out infinite;
-}
-
-@keyframes pulse-icon {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.06); }
-}
-
-.unlock-title {
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  color: var(--text-main);
-}
-
-.unlock-desc {
-  font-size: 14px;
-  color: var(--text-muted);
-  max-width: 380px;
-  line-height: 1.6;
-}
-
-.unlock-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 32px;
-  background: linear-gradient(135deg, #7c3aed, #a855f7);
-  color: #fff;
-  font-size: 15px;
-  font-weight: 700;
-  border: none;
-  border-radius: var(--radius-lg);
-  cursor: pointer;
-  box-shadow: 0 8px 28px rgba(124, 58, 237, 0.5);
-  transition: all var(--duration-med) var(--ease-spring);
-  font-family: var(--font-display);
-}
-
-.unlock-btn:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 14px 36px rgba(168, 85, 247, 0.6);
 }
 
 /* ── Soundscape banner ───────────────────────────────────────── */
@@ -649,16 +582,6 @@ body {
   .hero-title {
     font-size: clamp(28px, 7vw, 44px);
   }
-  .audio-unlock {
-    padding: 24px 20px;
-  }
-  .unlock-title {
-    font-size: 22px;
-  }
-  .unlock-desc {
-    font-size: 13px;
-    max-width: 320px;
-  }
   .hero-freq-meter {
     flex-direction: column;
     align-items: center;
@@ -687,6 +610,12 @@ body {
   .hero { padding: 120px 16px 50px; }
   .hero-title { font-size: clamp(24px, 6.5vw, 36px); }
   .hero-subtitle { font-size: 14px; }
-  .audio-unlock { padding: 20px 16px; }
-  .unlock-title { font-size: 18px; }
+}
+body {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(124, 58, 237, 0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 30% at 80% 20%, rgba(59, 130, 246, 0.12) 0%, transparent 60%),
+    radial-gradient(circle, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    #090a0f !important;
+  background-size: auto, auto, 24px 24px !important;
 }

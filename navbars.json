@@ -10,5 +10,9 @@
   "sonic-audio-navbar",
   "chronological-slider-navbar",
   "cursor-attractor-navbar",
-  "ai-intent-navbar"
+  "ai-intent-navbar",
+  "dynamic-island-nav",
+  "dynamic-island-grid",
+  "magnetic-dock",
+  "gooey-liquid-dock"
 ]

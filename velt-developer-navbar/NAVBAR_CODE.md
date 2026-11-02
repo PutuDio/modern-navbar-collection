@@ -7,163 +7,213 @@ File ini berisi kode komponen bersih (clean isolated code) yang **HANYA** berkai
 ## 1. HTML Markup
 
 ```html
-<!-- ================================================================
-     VELT DEVELOPER NAVBAR & MEGA MENU
-     ================================================================ -->
-<div class="velt-nav-root" id="velt-nav-root">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Velt — Real-Time Collaboration SDK for Developers</title>
+  <meta name="description" content="Add real-time multiplayer features like comments, cursors, presence, and notifications to any product in minutes. The collaboration infrastructure toolkit.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page-wrapper">
 
-  <nav class="velt-navbar" aria-label="Main navigation">
-    <div class="navbar-inner">
+  <!-- ══════════════════════════════════════════════════════════
+       NAVBAR
+       ══════════════════════════════════════════════════════════ -->
+  <header>
+    <nav class="velt-navbar" aria-label="Main navigation">
+      <div class="navbar-inner">
 
-      <!-- Brand -->
-      <a href="#" class="navbar-brand" aria-label="Velt — Home">
-        <div class="brand-mark" aria-hidden="true">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <path d="M2 4L8 12L14 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="8" cy="8" r="2" fill="rgba(255,255,255,0.5)"/>
-          </svg>
-        </div>
-        <span class="brand-name">Velt</span>
-      </a>
-
-      <!-- Nav Links -->
-      <ul class="navbar-nav" role="list">
-        <!-- Product with 4-Column Mega-Menu -->
-        <li class="nav-item-wrap" id="mega-wrap">
-          <button class="nav-link" id="mega-trigger" aria-haspopup="true" aria-expanded="false" aria-controls="mega-menu">
-            Product
-            <span class="nav-link-chevron" aria-hidden="true">▾</span>
-          </button>
-        </li>
-        <li><a href="#use-cases" class="nav-link">Use Cases</a></li>
-        <li><a href="#enterprise" class="nav-link">Enterprise</a></li>
-        <li><a href="#resources" class="nav-link">Resources</a></li>
-        <li><a href="#pricing" class="nav-link">Pricing</a></li>
-      </ul>
-
-      <!-- Right actions -->
-      <div class="navbar-right">
-        <a href="#signin" class="nav-btn-ghost">Sign In</a>
-        <a href="#docs" class="nav-btn-ghost nav-btn-docs">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-            <rect x="2" y="2" width="10" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/>
-            <path d="M4.5 5h5M4.5 7h5M4.5 9h3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
-          </svg>
-          Read Docs
-        </a>
-        <a href="#book-demo" class="nav-btn-primary" id="btn-book-demo">Book Demo</a>
-      </div>
-
-      <!-- Mobile Burger -->
-      <button class="navbar-burger" id="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-drawer">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-
-    </div>
-  </nav>
-
-  <!-- 4-COLUMN MEGA MENU -->
-  <div class="mega-menu-wrapper" role="region">
-    <div class="mega-menu" id="mega-menu" role="menu" aria-label="Product features">
-      <div class="mega-menu-grid">
-
-        <!-- Col 1: SYNC -->
-        <div class="mega-col">
-          <div class="mega-col-label">Sync</div>
-          <a class="mega-item" href="#comments" role="menuitem">
-            <div class="mega-item-icon" aria-hidden="true">💬</div>
-            <span class="mega-item-text">Comments</span>
-          </a>
-          <a class="mega-item" href="#notifications" role="menuitem">
-            <div class="mega-item-icon" aria-hidden="true">🔔</div>
-            <span class="mega-item-text">Notifications</span>
-          </a>
-          <a class="mega-item" href="#recording" role="menuitem">
-            <div class="mega-item-icon" aria-hidden="true">📹</div>
-            <span class="mega-item-text">Recording</span>
-          </a>
-          <a class="mega-item" href="#analytics" role="menuitem">
-            <div class="mega-item-icon" aria-hidden="true">📊</div>
-            <span class="mega-item-text">View Analytics</span>
-          </a>
-          <a class="mega-view-all" href="#sync-all">VIEW ALL ↗</a>
-        </div>
-
-        <!-- Col 2: REAL TIME -->
-        <div class="mega-col">
-          <div class="mega-col-label">Real Time</div>
-          <a class="mega-item" href="#multiplayer" role="menuitem">
-            <div class="mega-item-icon" aria-hidden="true">🖊️</div>
-            <span class="mega-item-text">Multiplayer Editing</span>
-          </a>
-          <a class="mega-item" href="#live-state" role="menuitem">
-            <div class="mega-item-icon" aria-hidden="true">🔄</div>
-            <span class="mega-item-text">Live State Sync</span>
-          </a>
-          <a class="mega-item" href="#presence" role="menuitem">
-            <div class="mega-item-icon" aria-hidden="true">🟢</div>
-            <span class="mega-item-text">Presence</span>
-          </a>
-          <a class="mega-item" href="#cursors" role="menuitem">
-            <div class="mega-item-icon" aria-hidden="true">🖱️</div>
-            <span class="mega-item-text">Live Cursors</span>
-          </a>
-          <a class="mega-view-all" href="#realtime-all">VIEW ALL ↗</a>
-        </div>
-
-        <!-- Col 3: WORKFLOW -->
-        <div class="mega-col">
-          <div class="mega-col-label">Workflow</div>
-          <a class="mega-item" href="#version-history" role="menuitem">
-            <div class="mega-item-icon" aria-hidden="true">⏳</div>
-            <span class="mega-item-text">Version History</span>
-          </a>
-          <a class="mega-item" href="#approval" role="menuitem">
-            <div class="mega-item-icon" aria-hidden="true">✅</div>
-            <span class="mega-item-text">Approval Flow</span>
-          </a>
-          <a class="mega-item" href="#branching" role="menuitem">
-            <div class="mega-item-icon" aria-hidden="true">🌿</div>
-            <span class="mega-item-text">Branching</span>
-          </a>
-          <a class="mega-view-all" href="#workflow-all">VIEW ALL ↗</a>
-        </div>
-
-        <!-- Col 4: FEATURED SDK CARD -->
-        <div class="mega-col mega-col--highlight">
-          <div class="mega-highlight-card">
-            <div class="mega-highlight-tag">SDK 2.0 AVAILABLE</div>
-            <div class="mega-highlight-title">Drop-in Multiplayer in 5 min</div>
-            <div class="mega-highlight-desc">Add real-time cursors, comments, and presence to any React, Vue, or Webflow app.</div>
-            <a href="#quickstart" class="mega-highlight-cta">Explore Quickstart →</a>
+        <!-- Brand -->
+        <a href="#" class="navbar-brand" aria-label="Velt — Home">
+          <div class="brand-mark" aria-hidden="true">
+            <!-- Velt V logo -->
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M2 4L8 12L14 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="8" cy="8" r="2" fill="rgba(255,255,255,0.5)"/>
+            </svg>
           </div>
+          <span class="brand-name">Velt</span>
+        </a>
+
+        <!-- Nav Links -->
+        <ul class="navbar-nav" role="list">
+          <!-- Product (with mega-menu) -->
+          <li class="nav-item-wrap" id="mega-wrap">
+            <button class="nav-link" id="mega-trigger" aria-haspopup="true" aria-expanded="false" aria-controls="mega-menu">
+              Product
+              <span class="nav-link-chevron" aria-hidden="true">▾</span>
+            </button>
+          </li>
+          <li><a href="#use-cases" class="nav-link">Use Cases</a></li>
+          <li><a href="#enterprise" class="nav-link">Enterprise</a></li>
+          <li><a href="#resources" class="nav-link">Resources</a></li>
+          <li><a href="#pricing" class="nav-link">Pricing</a></li>
+        </ul>
+
+        <!-- Right actions -->
+        <div class="navbar-right">
+          <a href="#signin" class="nav-btn-ghost">Sign In</a>
+          <a href="#docs" class="nav-btn-ghost nav-btn-docs">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <rect x="2" y="2" width="10" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/>
+              <path d="M4.5 5h5M4.5 7h5M4.5 9h3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+            </svg>
+            Read Docs
+          </a>
+          <a href="../index.html" class="nav-btn-primary" id="btn-book-demo">Back to Collection</a>
         </div>
 
+        <!-- Mobile Burger -->
+        <button class="navbar-burger" id="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-drawer">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+      </div>
+    </nav>
+
+    <!-- ══ MEGA MENU ══════════════════════════════════════════ -->
+    <div class="mega-menu-wrapper" role="region">
+      <div class="mega-menu" id="mega-menu" role="menu" aria-label="Product features">
+        <div class="mega-menu-grid">
+
+          <!-- Col 1: ASYNC -->
+          <div class="mega-col">
+            <div class="mega-col-label">Sync</div>
+            <a class="mega-item" href="#comments" role="menuitem">
+              <div class="mega-item-icon" aria-hidden="true">💬</div>
+              <span class="mega-item-text">Comments</span>
+            </a>
+            <a class="mega-item" href="#notifications" role="menuitem">
+              <div class="mega-item-icon" aria-hidden="true">🔔</div>
+              <span class="mega-item-text">Notifications</span>
+            </a>
+            <a class="mega-item" href="#recording" role="menuitem">
+              <div class="mega-item-icon" aria-hidden="true">📹</div>
+              <span class="mega-item-text">Recording</span>
+            </a>
+            <a class="mega-item" href="#activity-logs" role="menuitem">
+              <div class="mega-item-icon" aria-hidden="true">📋</div>
+              <span class="mega-item-text">Activity Logs</span>
+            </a>
+            <a class="mega-item" href="#video-editor" role="menuitem">
+              <div class="mega-item-icon" aria-hidden="true">🎬</div>
+              <span class="mega-item-text">Video Editor</span>
+            </a>
+            <a class="mega-item" href="#analytics" role="menuitem">
+              <div class="mega-item-icon" aria-hidden="true">📊</div>
+              <span class="mega-item-text">View Analytics</span>
+            </a>
+            <a class="mega-item" href="#reactions" role="menuitem">
+              <div class="mega-item-icon" aria-hidden="true">⚡</div>
+              <span class="mega-item-text">Reactions</span>
+            </a>
+            <a class="mega-view-all" href="#sync-all" role="menuitem">VIEW ALL ↗</a>
+          </div>
+
+          <!-- Col 2: REALTIME -->
+          <div class="mega-col">
+            <div class="mega-col-label">Real Time</div>
+            <a class="mega-item" href="#multiplayer" role="menuitem">
+              <div class="mega-item-icon" aria-hidden="true">🖊️</div>
+              <span class="mega-item-text">Multiplayer Editing</span>
+            </a>
+            <a class="mega-item" href="#single-editor" role="menuitem">
+              <div class="mega-item-icon" aria-hidden="true">✏️</div>
+              <span class="mega-item-text">Single Editor</span>
+            </a>
+            <a class="mega-item" href="#live-state" role="menuitem">
+              <div class="mega-item-icon" aria-hidden="true">🔄</div>
+              <span class="mega-item-text">Live State Sync</span>
+            </a>
+            <a class="mega-item" href="#live-selection" role="menuitem">
+              <div class="mega-item-icon" aria-hidden="true">🎯</div>
+              <span class="mega-item-text">Live Selection</span>
+            </a>
+            <a class="mega-item" href="#huddle" role="menuitem">
+              <div class="mega-item-icon" aria-hidden="true">🔊</div>
+              <span class="mega-item-text">Huddle</span>
+            </a>
+            <a class="mega-item" href="#presence" role="menuitem">
+              <div class="mega-item-icon" aria-hidden="true">🟢</div>
+              <span class="mega-item-text">Presence</span>
+            </a>
+            <a class="mega-item" href="#cursors" role="menuitem">
+              <div class="mega-item-icon" aria-hidden="true">🖱️</div>
+              <span class="mega-item-text">Cursors</span>
+            </a>
+            <a class="mega-item" href="#follow-mode" role="menuitem">
+              <div class="mega-item-icon" aria-hidden="true">👁️</div>
+              <span class="mega-item-text">Follow Mode</span>
+            </a>
+          </div>
+
+          <!-- Col 3: PLATFORM -->
+          <div class="mega-col">
+            <div class="mega-col-label">Platform</div>
+            <a class="mega-item" href="#admin" role="menuitem">
+              <div class="mega-item-icon" aria-hidden="true">🛡️</div>
+              <span class="mega-item-text">Admin Console</span>
+            </a>
+            <a class="mega-item" href="#devtools" role="menuitem">
+              <div class="mega-item-icon" aria-hidden="true">🔧</div>
+              <span class="mega-item-text">Dev Tools</span>
+            </a>
+            <a class="mega-item" href="#mcp" role="menuitem">
+              <div class="mega-item-icon" aria-hidden="true">🤖</div>
+              <span class="mega-item-text">MCP</span>
+            </a>
+            <a class="mega-item" href="#webhooks" role="menuitem">
+              <div class="mega-item-icon" aria-hidden="true">🔗</div>
+              <span class="mega-item-text">Webhooks &amp; API</span>
+            </a>
+            <a class="mega-item" href="#integrations" role="menuitem">
+              <div class="mega-item-icon" aria-hidden="true">🔌</div>
+              <span class="mega-item-text">Integrations</span>
+            </a>
+          </div>
+
+
+        </div>
       </div>
     </div>
-  </div>
+  </header>
 
   <!-- Mobile Drawer -->
-  <div class="mobile-drawer" id="mobile-drawer">
+  <div class="mobile-drawer" id="mobile-drawer" role="dialog" aria-label="Mobile navigation" aria-modal="true">
     <div class="mobile-drawer-overlay" id="mobile-drawer-overlay"></div>
-    <div class="mobile-drawer-body">
-      <ul class="mobile-nav-list">
-        <li><a href="#products">Product Features</a></li>
-        <li><a href="#use-cases">Use Cases</a></li>
-        <li><a href="#enterprise">Enterprise</a></li>
-        <li><a href="#resources">Resources</a></li>
-        <li><a href="#pricing">Pricing</a></li>
-      </ul>
-      <div class="mobile-actions">
-        <a href="#signin" class="nav-btn-ghost" style="text-align:center;">Sign In</a>
-        <a href="#book-demo" class="nav-btn-primary" style="text-align:center;">Book Demo</a>
-      </div>
+    <div class="mobile-drawer-panel">
+      <div class="drawer-section-label">Product</div>
+      <a href="#comments" class="drawer-link">💬 Comments</a>
+      <a href="#notifications" class="drawer-link">🔔 Notifications</a>
+      <a href="#multiplayer" class="drawer-link">🖊️ Multiplayer Editing</a>
+      <a href="#cursors" class="drawer-link">🖱️ Cursors</a>
+      <a href="#admin" class="drawer-link">🛡️ Admin Console</a>
+      <div class="drawer-divider"></div>
+      <div class="drawer-section-label">Company</div>
+      <a href="#use-cases" class="drawer-link">Use Cases</a>
+      <a href="#enterprise" class="drawer-link">Enterprise</a>
+      <a href="#resources" class="drawer-link">Resources</a>
+      <a href="#pricing" class="drawer-link">Pricing</a>
+      <div class="drawer-divider"></div>
+      <a href="#signin" class="drawer-link">Sign In</a>
+      <a href="#docs" class="drawer-link">Read Docs</a>
+      <a href="../index.html" class="drawer-link" style="color:var(--accent-primary);font-weight:600;">Back to Collection →</a>
     </div>
   </div>
 
-</div>
+
+</div><!-- /.page-wrapper -->
+<script src="script.js"></script>
+</body>
+</html>
 ```
 
 ---
@@ -171,192 +221,368 @@ File ini berisi kode komponen bersih (clean isolated code) yang **HANYA** berkai
 ## 2. CSS Styling
 
 ```css
+/* =============================================================
+   VELT DEVELOPER NAVBAR — style.css
+   Dark Mode Developer Platform + 4-Column Mega-Menu
+   ============================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
+
+/* ── Design Tokens ─────────────────────────────────────────── */
 :root {
-  --bg-nav: rgba(12, 13, 20, 0.85);
-  --border-nav: rgba(255, 255, 255, 0.08);
-  --accent-cyan: #00f2fe;
-  --accent-blue: #4facfe;
-  --text-white: #f8fafc;
-  --text-muted: #94a3b8;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'Fira Code', 'SF Mono', Menlo, monospace;
+
+  /* Dark Palette */
+  --bg-base:       #090a0f;
+  --bg-surface:    #0e0f17;
+  --bg-elevated:   #13141f;
+  --bg-overlay:    #191a27;
+  --bg-hover:      rgba(255,255,255,0.055);
+
+  /* Borders */
+  --border-subtle: rgba(255,255,255,0.07);
+  --border-muted:  rgba(255,255,255,0.12);
+  --border-light:  rgba(255,255,255,0.18);
+
+  /* Text */
+  --text-primary:    rgba(255,255,255,0.95);
+  --text-secondary:  rgba(255,255,255,0.60);
+  --text-muted:      rgba(255,255,255,0.35);
+  --text-disabled:   rgba(255,255,255,0.20);
+
+  /* Accent — Electric Violet/Indigo */
+  --accent-primary:   #7C3AED;
+  --accent-hover:     #6D28D9;
+  --accent-light:     rgba(124, 58, 237, 0.18);
+  --accent-glow:      rgba(124, 58, 237, 0.35);
+
+  /* Neon accents */
+  --neon-pink:    #F43F5E;
+  --neon-cyan:    #06B6D4;
+  --neon-green:   #10B981;
+  --neon-orange:  #F59E0B;
+  --neon-blue:    #3B82F6;
+
+  /* Dot grid pattern */
+  --dot-color: rgba(255,255,255,0.06);
+
+  /* Navbar */
+  --navbar-height: 60px;
+  --navbar-bg: rgba(9, 10, 15, 0.92);
+  --navbar-blur: blur(20px) saturate(160%);
+  --navbar-border: rgba(255,255,255,0.08);
+
+  /* Transitions */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast: 150ms;
+  --dur-med: 280ms;
+  --dur-slow: 450ms;
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-pill: 9999px;
+
+  /* Shadows */
+  --shadow-glow: 0 0 40px rgba(124,58,237,0.15), 0 4px 24px rgba(0,0,0,0.6);
+  --shadow-card: 0 8px 32px rgba(0,0,0,0.5);
 }
 
-.velt-nav-root {
+/* ── Reset ─────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ── Dot Grid Background ─────────────────────────────────── */
+.page-wrapper {
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(124,58,237,0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 30% at 80% 20%, rgba(59,130,246,0.12) 0%, transparent 60%),
+    var(--bg-base);
+  position: relative;
+}
+
+/* Dot grid overlay */
+.page-wrapper::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   NAVBAR
+   ═══════════════════════════════════════════════════════════ */
+.velt-navbar {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
-}
-
-.velt-navbar {
-  background: var(--bg-nav);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border-nav);
-  height: 64px;
+  z-index: 500;
+  height: var(--navbar-height);
+  background: var(--navbar-bg);
+  border-bottom: 1px solid var(--navbar-border);
+  backdrop-filter: var(--navbar-blur);
+  -webkit-backdrop-filter: var(--navbar-blur);
+  display: flex;
+  align-items: center;
 }
 
 .navbar-inner {
-  max-width: 1200px;
+  width: 100%;
+  max-width: 1280px;
   margin: 0 auto;
-  height: 100%;
+  padding: 0 24px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 24px;
+  gap: 0;
 }
 
 /* Brand */
 .navbar-brand {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   text-decoration: none;
+  margin-right: 28px;
+  flex-shrink: 0;
 }
 
 .brand-mark {
   width: 28px;
   height: 28px;
-  border-radius: 6px;
-  background: linear-gradient(135deg, #3b82f6, #06b6d4);
+  border-radius: 7px;
+  background: linear-gradient(135deg, #7C3AED, #4F46E5);
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 0 16px rgba(124,58,237,0.5);
 }
 
 .brand-name {
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 700;
-  color: var(--text-white);
+  color: var(--text-primary);
   letter-spacing: -0.02em;
 }
 
-/* Nav Links */
+/* ── Nav Items ─────────────────────────────────────────────── */
 .navbar-nav {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
   list-style: none;
-  margin: 0;
-  padding: 0;
+  flex: 1;
+}
+
+.nav-item-wrap {
+  position: static;
 }
 
 .nav-link {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 4px;
-  padding: 8px 12px;
+  padding: 6px 12px;
   font-size: 14px;
   font-weight: 500;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   text-decoration: none;
-  background: none;
-  border: none;
+  border-radius: var(--radius-sm);
   cursor: pointer;
-  border-radius: 6px;
-  transition: color 0.15s ease, background 0.15s ease;
+  border: none;
+  background: none;
+  font-family: var(--font-sans);
+  transition: color var(--dur-fast) ease, background var(--dur-fast) ease;
+  white-space: nowrap;
 }
 
-.nav-link:hover, .nav-link.active {
-  color: var(--text-white);
-  background: rgba(255, 255, 255, 0.05);
+.nav-link:hover,
+.nav-link.active {
+  color: var(--text-primary);
+  background: var(--bg-hover);
 }
 
 .nav-link-chevron {
   font-size: 10px;
-  transition: transform 0.2s ease;
+  transition: transform var(--dur-med) var(--ease-out);
+  color: var(--text-muted);
 }
 
-.nav-item-wrap.open .nav-link-chevron {
+.nav-item-wrap.open > .nav-link .nav-link-chevron,
+.nav-item-wrap:hover > .nav-link .nav-link-chevron {
   transform: rotate(180deg);
 }
 
-/* Right Actions */
+/* ── Right Actions ─────────────────────────────────────────── */
 .navbar-right {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
+  flex-shrink: 0;
 }
 
 .nav-btn-ghost {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 6px;
-  padding: 8px 14px;
-  font-size: 13px;
+  padding: 6px 12px;
+  background: none;
+  border: none;
+  font-family: var(--font-sans);
+  font-size: 13.5px;
   font-weight: 500;
-  color: var(--text-muted);
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
   text-decoration: none;
-  border-radius: 6px;
-  transition: all 0.15s ease;
+  transition: color var(--dur-fast) ease, background var(--dur-fast) ease;
+  white-space: nowrap;
 }
 
 .nav-btn-ghost:hover {
-  color: var(--text-white);
-  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+  background: var(--bg-hover);
+}
+
+.nav-btn-docs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .nav-btn-primary {
-  display: inline-block;
-  padding: 8px 16px;
-  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  background: var(--accent-primary);
+  border: none;
+  font-family: var(--font-sans);
+  font-size: 13.5px;
   font-weight: 600;
-  color: #0b0c10;
-  background: linear-gradient(135deg, #00f2fe, #4facfe);
-  border-radius: 6px;
+  color: white;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
   text-decoration: none;
-  box-shadow: 0 4px 14px rgba(0, 242, 254, 0.3);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition: background var(--dur-fast) ease, box-shadow var(--dur-fast) ease, transform var(--dur-fast) ease;
+  white-space: nowrap;
+  box-shadow: 0 0 0 1px rgba(124,58,237,0.5), 0 4px 16px rgba(124,58,237,0.3);
 }
 
 .nav-btn-primary:hover {
+  background: var(--accent-hover);
+  box-shadow: 0 0 0 1px rgba(124,58,237,0.8), 0 6px 24px rgba(124,58,237,0.45);
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(0, 242, 254, 0.45);
 }
 
-/* Mega Menu */
+/* Mobile burger */
+.navbar-burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  margin-left: 8px;
+}
+
+.navbar-burger span {
+  display: block;
+  width: 20px;
+  height: 1.5px;
+  background: var(--text-secondary);
+  border-radius: 99px;
+  transition: all var(--dur-med) var(--ease-out);
+}
+
+.navbar-burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.navbar-burger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.navbar-burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* ═══════════════════════════════════════════════════════════
+   MEGA MENU
+   ═══════════════════════════════════════════════════════════ */
 .mega-menu-wrapper {
-  position: absolute;
-  top: 64px;
+  position: fixed;
+  top: var(--navbar-height);
   left: 0;
   right: 0;
+  z-index: 490;
+  display: flex;
+  justify-content: center;
   pointer-events: none;
 }
 
 .mega-menu {
-  max-width: 1000px;
-  margin: 12px auto 0;
-  background: rgba(14, 16, 24, 0.95);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(20px);
-  padding: 24px;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 24px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-muted);
+  border-top: none;
+  border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+  box-shadow: var(--shadow-glow);
+  overflow: hidden;
+  transform: translateY(-8px);
   opacity: 0;
-  transform: translateY(-10px);
   pointer-events: none;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition: transform var(--dur-med) var(--ease-out),
+              opacity var(--dur-med) ease;
 }
 
-.mega-menu.show {
-  opacity: 1;
+.mega-menu.open {
   transform: translateY(0);
+  opacity: 1;
   pointer-events: all;
 }
 
 .mega-menu-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1.3fr;
-  gap: 24px;
+  grid-template-columns: 1fr 1fr 1fr 300px;
+  gap: 0;
+  padding: 28px 24px;
 }
 
+.mega-col {
+  padding: 0 20px 0 0;
+  border-right: 1px solid var(--border-subtle);
+}
+
+.mega-col:last-child {
+  border-right: none;
+  padding-right: 0;
+  padding-left: 20px;
+}
+
+.mega-col:first-child { padding-left: 0; }
+
 .mega-col-label {
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 700;
-  color: #64748b;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 12px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .mega-item {
@@ -364,86 +590,585 @@ File ini berisi kode komponen bersih (clean isolated code) yang **HANYA** berkai
   align-items: center;
   gap: 10px;
   padding: 7px 8px;
-  border-radius: 6px;
-  color: var(--text-white);
+  border-radius: var(--radius-sm);
   text-decoration: none;
-  font-size: 13px;
-  transition: background 0.15s ease;
+  cursor: pointer;
+  transition: background var(--dur-fast) ease;
+  margin-bottom: 2px;
 }
 
-.mega-item:hover {
-  background: rgba(255, 255, 255, 0.06);
+.mega-item:hover { background: var(--bg-hover); }
+
+.mega-item-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-overlay);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+  transition: border-color var(--dur-fast) ease, background var(--dur-fast) ease;
 }
+
+.mega-item:hover .mega-item-icon {
+  border-color: var(--border-muted);
+  background: var(--bg-hover);
+}
+
+.mega-item-text {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: color var(--dur-fast) ease;
+}
+
+.mega-item:hover .mega-item-text { color: var(--text-primary); }
 
 .mega-view-all {
   display: block;
+  padding: 6px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-primary);
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  margin-top: 6px;
+  transition: background var(--dur-fast) ease, color var(--dur-fast) ease;
+}
+
+.mega-view-all:hover {
+  background: var(--accent-light);
+  color: #9D64FF;
+}
+
+/* ── Showcase Card (4th column) ──────────────────────────── */
+.showcase-card {
+  background: var(--bg-overlay);
+  border: 1px solid var(--border-muted);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.showcase-preview {
+  height: 130px;
+  background: linear-gradient(135deg, #0d0e1a 0%, #1a1b2e 100%);
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/* Canvas grid for preview */
+.showcase-preview::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(124,58,237,0.08) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+.showcase-nodes {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.showcase-node {
+  padding: 5px 10px;
+  border-radius: 6px;
   font-size: 11px;
   font-weight: 600;
-  color: var(--accent-cyan);
-  text-decoration: none;
-  margin-top: 10px;
-  padding-left: 8px;
+  border: 1px solid;
+  white-space: nowrap;
 }
 
-/* Highlight Card */
-.mega-highlight-card {
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(6, 182, 212, 0.15));
-  border: 1px solid rgba(59, 130, 246, 0.3);
-  border-radius: 8px;
-  padding: 16px;
+.node-primary { background: rgba(124,58,237,0.2); border-color: rgba(124,58,237,0.5); color: #9D64FF; }
+.node-secondary { background: rgba(59,130,246,0.15); border-color: rgba(59,130,246,0.4); color: #60A5FA; }
+
+.showcase-connector {
+  position: absolute;
+  top: 50%;
+  left: 42%;
+  width: 16%;
+  height: 1px;
+  background: linear-gradient(to right, rgba(124,58,237,0.5), rgba(59,130,246,0.5));
 }
 
-.mega-highlight-tag {
+.showcase-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  background: rgba(16,185,129,0.15);
+  border: 1px solid rgba(16,185,129,0.3);
+  border-radius: var(--radius-pill);
   font-size: 10px;
-  font-weight: 700;
-  color: var(--accent-cyan);
-  margin-bottom: 6px;
-}
-
-.mega-highlight-title {
-  font-size: 14px;
   font-weight: 600;
-  color: #fff;
-  margin-bottom: 6px;
+  color: #34D399;
 }
 
-.mega-highlight-desc {
+.showcase-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #10B981;
+  animation: pulse-dot 1.5s ease infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.showcase-body {
+  padding: 14px;
+}
+
+.showcase-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 5px;
+  letter-spacing: -0.01em;
+}
+
+.showcase-desc {
   font-size: 12px;
   color: var(--text-muted);
-  line-height: 1.4;
+  line-height: 1.55;
   margin-bottom: 12px;
 }
 
-.mega-highlight-cta {
+.showcase-btns {
+  display: flex;
+  gap: 8px;
+}
+
+.showcase-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: var(--radius-sm);
   font-size: 12px;
   font-weight: 600;
-  color: var(--accent-cyan);
+  cursor: pointer;
+  border: none;
+  font-family: var(--font-sans);
   text-decoration: none;
+  transition: all var(--dur-fast) ease;
 }
 
-/* Mobile burger */
-.navbar-burger {
-  display: none;
+.showcase-btn-secondary {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-muted);
+  color: var(--text-secondary);
+}
+
+.showcase-btn-secondary:hover { background: var(--bg-hover); color: var(--text-primary); }
+
+.showcase-btn-primary {
+  background: var(--accent-primary);
+  color: white;
+  box-shadow: 0 0 12px rgba(124,58,237,0.3);
+}
+
+.showcase-btn-primary:hover {
+  background: var(--accent-hover);
+  box-shadow: 0 0 18px rgba(124,58,237,0.5);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   HERO SECTION
+   ═══════════════════════════════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: calc(var(--navbar-height) + 80px) 24px 80px;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+/* Multiplayer Cursor Tags */
+.cursor-tag {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: transform 0.6s var(--ease-out);
+}
+
+.cursor-tag::before {
+  content: '';
+  display: block;
+  width: 12px;
+  height: 16px;
+  clip-path: polygon(0 0, 100% 20%, 30% 100%);
+  flex-shrink: 0;
+}
+
+.cursor-sean {
+  background: rgba(16,185,129,0.18);
+  border: 1px solid rgba(16,185,129,0.4);
+  color: #34D399;
+  top: 15%;
+  left: 15%;
+}
+
+.cursor-sean::before { background: #10B981; }
+
+.cursor-emma {
+  background: rgba(244,63,94,0.18);
+  border: 1px solid rgba(244,63,94,0.4);
+  color: #FB7185;
+  top: 20%;
+  right: 18%;
+}
+
+.cursor-emma::before { background: #F43F5E; }
+
+/* Hero Content */
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px;
+  background: rgba(124,58,237,0.12);
+  border: 1px solid rgba(124,58,237,0.3);
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 600;
+  color: #9D64FF;
+  margin-bottom: 24px;
+}
+
+.hero-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  box-shadow: 0 0 8px var(--accent-primary);
+}
+
+.hero-title {
+  font-size: clamp(40px, 7vw, 80px);
+  font-weight: 800;
+  line-height: 1.0;
+  letter-spacing: -0.04em;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+  max-width: 700px;
+}
+
+.hero-title-highlight {
+  background: linear-gradient(135deg, #7C3AED, #3B82F6, #06B6D4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-subtitle {
+  font-size: 16px;
+  color: var(--text-secondary);
+  max-width: 520px;
+  line-height: 1.65;
+  margin-bottom: 40px;
+}
+
+/* CLI Command Card */
+.hero-cli {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-muted);
+  border-radius: var(--radius-lg);
+  padding: 12px 20px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--text-primary);
+  margin-bottom: 64px;
+  box-shadow: var(--shadow-card);
+}
+
+.cli-prompt {
+  color: var(--neon-green);
+  font-weight: 500;
+  font-size: 13px;
+}
+
+.cli-cmd {
+  flex: 1;
+  text-align: left;
+  color: var(--text-primary);
+}
+
+.cli-copy-btn {
+  background: var(--bg-overlay);
+  border: 1px solid var(--border-muted);
+  border-radius: var(--radius-sm);
+  padding: 4px 8px;
+  font-size: 13px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all var(--dur-fast) ease;
+  font-family: var(--font-mono);
+}
+
+.cli-copy-btn:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+  border-color: var(--border-light);
+}
+
+.cli-copy-btn.copied { color: var(--neon-green); border-color: rgba(16,185,129,0.4); }
+
+/* ── Use Case Tabs ─────────────────────────────────────────── */
+.use-case-section {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.use-case-tabs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 4px;
+  margin-bottom: 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.use-case-tabs::-webkit-scrollbar { display: none; }
+
+.uc-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border-radius: var(--radius-md);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
   background: none;
   border: none;
-  cursor: pointer;
-  flex-direction: column;
-  gap: 4px;
-}
-.navbar-burger span {
-  width: 20px;
-  height: 2px;
-  background: #fff;
-  border-radius: 2px;
+  font-family: var(--font-sans);
+  white-space: nowrap;
+  transition: all var(--dur-fast) ease;
 }
 
-@media (max-width: 868px) {
-  .navbar-nav, .navbar-right {
+.uc-tab:hover { color: var(--text-secondary); background: var(--bg-hover); }
+
+.uc-tab.active {
+  background: var(--bg-overlay);
+  color: var(--text-primary);
+  border: 1px solid var(--border-muted);
+}
+
+.uc-tab-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.6;
+}
+
+.uc-tab.active .uc-tab-dot { opacity: 1; background: var(--neon-cyan); }
+
+/* Use case content preview */
+.uc-preview {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  aspect-ratio: 16/9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.uc-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-muted);
+}
+
+.uc-placeholder-icon { font-size: 40px; }
+
+.uc-placeholder-label {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-disabled);
+}
+
+/* ── Mobile Drawer ─────────────────────────────────────────── */
+.mobile-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 800;
+  pointer-events: none;
+}
+
+.mobile-drawer-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  transition: opacity var(--dur-med) ease;
+}
+
+.mobile-drawer-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(320px, 85vw);
+  background: var(--bg-surface);
+  border-left: 1px solid var(--border-muted);
+  transform: translateX(100%);
+  transition: transform var(--dur-slow) var(--ease-out);
+  overflow-y: auto;
+  padding: 80px 20px 40px;
+}
+
+.mobile-drawer.open { pointer-events: all; }
+.mobile-drawer.open .mobile-drawer-overlay { opacity: 1; }
+.mobile-drawer.open .mobile-drawer-panel { transform: translateX(0); }
+
+.drawer-section-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 16px 8px 6px;
+}
+
+.drawer-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 8px;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background var(--dur-fast) ease, color var(--dur-fast) ease;
+  margin-bottom: 2px;
+}
+
+.drawer-link:hover { background: var(--bg-hover); color: var(--text-primary); }
+
+.drawer-divider {
+  height: 1px;
+  background: var(--border-subtle);
+  margin: 12px 0;
+}
+
+/* ── Copy Toast ─────────────────────────────────────────────── */
+.velt-toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%) translateY(16px);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-muted);
+  border-radius: var(--radius-pill);
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+  z-index: 2000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-med) ease, transform var(--dur-med) var(--ease-out);
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(16px);
+}
+
+.velt-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .navbar-nav,
+  .navbar-right .nav-btn-ghost {
     display: none;
   }
-  .navbar-burger {
-    display: flex;
+
+  .navbar-burger { display: flex; }
+
+  .mega-menu-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
   }
+
+  .mega-col:nth-child(3),
+  .mega-col:nth-child(4) {
+    border-right: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .navbar-container { padding: 0 14px; }
+  .navbar-brand-tag { display: none; }
+  .navbar-right .nav-btn-primary { padding: 6px 12px; font-size: 12px; }
+  .hero { padding-top: calc(var(--navbar-height) + 40px); }
+  .hero-title { font-size: clamp(32px, 10vw, 48px); }
+  .cursor-sean, .cursor-emma { display: none; }
+  .use-case-tabs { padding: 3px; overflow-x: auto; max-width: 100%; justify-content: flex-start; }
+  .tab-btn { flex-shrink: 0; font-size: 12px; padding: 6px 12px; }
+  .hero-actions { flex-direction: column; width: 100%; max-width: 320px; }
+  .hero-actions .btn-hero-primary, .hero-actions .btn-hero-ghost { width: 100%; justify-content: center; }
+}
+
+@media (max-width: 480px) {
+  .navbar-container { padding: 0 12px; }
+  .hero-title { font-size: clamp(28px, 9vw, 40px); }
+  .hero-subtitle { font-size: 14px; }
+  .hero-cli { padding: 10px 14px; font-size: 12px; }
+  .hero-actions { max-width: 100%; }
+  .hero { padding: 100px 16px 60px; }
+  .navbar-brand-name { font-size: 16px; }
+  .mega-menu { padding: 16px; }
+  .mega-menu-grid { grid-template-columns: 1fr; }
 }
 ```
 
@@ -452,51 +1177,141 @@ File ini berisi kode komponen bersih (clean isolated code) yang **HANYA** berkai
 ## 3. JavaScript Logic
 
 ```javascript
+/* =============================================================
+   VELT DEVELOPER NAVBAR — script.js
+   Mega-menu, cursors, CLI copy, tab switcher, mobile drawer
+   ============================================================= */
 (function () {
   'use strict';
 
-  const megaWrap = document.getElementById('mega-wrap');
-  const megaTrigger = document.getElementById('mega-trigger');
-  const megaMenu = document.getElementById('mega-menu');
+  /* ── DOM refs ──────────────────────────────────────────────── */
+  const megaMenu       = document.getElementById('mega-menu');
+  const megaTrigger    = document.getElementById('mega-trigger');
+  const megaWrap       = document.getElementById('mega-wrap');
+  const mobileDrawer   = document.getElementById('mobile-drawer');
+  const mobileOverlay  = document.getElementById('mobile-drawer-overlay');
+  const navBurger      = document.getElementById('nav-burger');
+  const veltToast      = document.getElementById('velt-toast');
+  const cliCmd         = document.getElementById('cli-cmd-text');
+  let megaCloseTimer = null;
 
-  if (!megaWrap || !megaTrigger || !megaMenu) return;
-
-  let closeTimer = null;
-
-  function openMega() {
-    clearTimeout(closeTimer);
-    megaMenu.classList.add('show');
-    megaWrap.classList.add('open');
-    megaTrigger.setAttribute('aria-expanded', 'true');
+  function openMega () {
+    clearTimeout(megaCloseTimer);
+    megaMenu.classList.add('open');
+    if (megaTrigger) {
+      megaTrigger.classList.add('active');
+      megaTrigger.querySelector('.nav-link-chevron').style.transform = 'rotate(180deg)';
+    }
   }
 
-  function closeMega() {
-    closeTimer = setTimeout(() => {
-      megaMenu.classList.remove('show');
-      megaWrap.classList.remove('open');
-      megaTrigger.setAttribute('aria-expanded', 'false');
-    }, 120);
+  function closeMega () {
+    megaCloseTimer = setTimeout(() => {
+      megaMenu.classList.remove('open');
+      if (megaTrigger) {
+        megaTrigger.classList.remove('active');
+        const chevron = megaTrigger.querySelector('.nav-link-chevron');
+        if (chevron) chevron.style.transform = '';
+      }
+    }, 80);
   }
 
-  // Hover with safe area timeout
-  megaWrap.addEventListener('mouseenter', openMega);
-  megaWrap.addEventListener('mouseleave', closeMega);
-  megaMenu.addEventListener('mouseenter', openMega);
-  megaMenu.addEventListener('mouseleave', closeMega);
+  // Hover on trigger
+  if (megaTrigger) {
+    megaTrigger.addEventListener('mouseenter', openMega);
+    megaTrigger.addEventListener('mouseleave', closeMega);
+    megaTrigger.addEventListener('click', () => {
+      if (megaMenu.classList.contains('open')) closeMega();
+      else openMega();
+    });
+    megaTrigger.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        if (megaMenu.classList.contains('open')) closeMega();
+        else openMega();
+      }
+    });
+  }
 
-  // Click toggle for touchscreen/keyboard
-  megaTrigger.addEventListener('click', (e) => {
-    e.preventDefault();
-    if (megaMenu.classList.contains('show')) {
+  // Hover bridge on mega panel itself
+  if (megaMenu) {
+    megaMenu.addEventListener('mouseenter', () => clearTimeout(megaCloseTimer));
+    megaMenu.addEventListener('mouseleave', closeMega);
+  }
+
+  // Close on outside click
+  document.addEventListener('click', (e) => {
+    if (
+      !megaTrigger?.contains(e.target) &&
+      !megaMenu?.contains(e.target)
+    ) {
       closeMega();
-    } else {
-      openMega();
     }
   });
 
-  // ESC close
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeMega();
+  // Close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeMega();
+      closeMobileDrawer();
+    }
   });
+
+  /* ── 2. Mobile Drawer ────────────────────────────────────── */
+  function openMobileDrawer () {
+    mobileDrawer.classList.add('open');
+    navBurger.classList.add('open');
+    navBurger.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMobileDrawer () {
+    mobileDrawer.classList.remove('open');
+    navBurger.classList.remove('open');
+    navBurger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  if (navBurger) {
+    navBurger.addEventListener('click', () => {
+      if (mobileDrawer.classList.contains('open')) closeMobileDrawer();
+      else openMobileDrawer();
+    });
+  }
+
+  if (mobileOverlay) mobileOverlay.addEventListener('click', closeMobileDrawer);
+
+
+
+  /* ── 5. Multiplayer Cursor Animation ─────────────────────── */
+  const cursorSean = document.getElementById('cursor-sean');
+  const cursorEmma = document.getElementById('cursor-emma');
+
+  if (cursorSean && cursorEmma) {
+    let t = 0;
+    function animateCursors () {
+      t += 0.008;
+      const seanX = 10 + 8 * Math.sin(t * 0.9);
+      const seanY = 10 + 5 * Math.cos(t * 0.7);
+      const emmaX = 12 + 7 * Math.sin(t * 0.8 + 2);
+      const emmaY = 15 + 4 * Math.cos(t * 0.6 + 1);
+      cursorSean.style.transform = `translate(${seanX}px, ${seanY}px)`;
+      cursorEmma.style.transform = `translate(${-emmaX}px, ${emmaY}px)`;
+      requestAnimationFrame(animateCursors);
+    }
+    animateCursors();
+  }
+
+
+  /* ── 7. Smooth scroll ────────────────────────────────────── */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      closeMobileDrawer();
+    });
+  });
+
 })();
 ```

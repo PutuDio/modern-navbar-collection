@@ -304,21 +304,36 @@
             <span class="copy-label">Copy</span>
           </button>
         </div>
-        <pre><code id="code-2" class="language-html">&lt;!-- ================================================================
-     BORDUP OPERATIONS COLLAPSIBLE SIDEBAR &amp; TOPBAR
-     ================================================================ --&gt;
+        <pre><code id="code-2" class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+  &lt;title&gt;BordUp™ — HR &amp; Workforce Operations Dashboard&lt;/title&gt;
+  &lt;meta name=&quot;description&quot; content=&quot;Enterprise B2B HR, workforce management, and operational management suite. Manage employees, schedules, payroll, and recruitment in one unified platform.&quot;&gt;
+  &lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.googleapis.com&quot;&gt;
+  &lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.gstatic.com&quot; crossorigin&gt;
+  &lt;link href=&quot;https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
 
 &lt;!-- Mobile overlay --&gt;
 &lt;div class=&quot;mobile-overlay&quot; id=&quot;mobile-overlay&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;
 
+&lt;!-- ══════════════════════════════════════════════════════════
+     APP SHELL
+     ══════════════════════════════════════════════════════════ --&gt;
 &lt;div class=&quot;app-shell&quot;&gt;
-  &lt;!-- SIDEBAR (Collapsible Rail) --&gt;
+
+  &lt;!-- ── SIDEBAR ────────────────────────────────────────────── --&gt;
   &lt;aside class=&quot;sidebar&quot; id=&quot;sidebar&quot; role=&quot;navigation&quot; aria-label=&quot;Main sidebar&quot;&gt;
 
     &lt;!-- Header: Brand + Toggle --&gt;
     &lt;div class=&quot;sidebar-header&quot;&gt;
       &lt;a href=&quot;#&quot; class=&quot;brand-group&quot; aria-label=&quot;BordUp home&quot;&gt;
         &lt;div class=&quot;brand-icon&quot; aria-hidden=&quot;true&quot;&gt;
+          &lt;!-- BordUp B logo mark --&gt;
           &lt;svg width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 18 18&quot; fill=&quot;none&quot;&gt;
             &lt;rect x=&quot;3&quot; y=&quot;3&quot; width=&quot;5&quot; height=&quot;5&quot; rx=&quot;1.5&quot; fill=&quot;white&quot; opacity=&quot;0.9&quot;/&gt;
             &lt;rect x=&quot;3&quot; y=&quot;10&quot; width=&quot;5&quot; height=&quot;5&quot; rx=&quot;1.5&quot; fill=&quot;white&quot; opacity=&quot;0.7&quot;/&gt;
@@ -331,13 +346,14 @@
         &lt;/div&gt;
       &lt;/a&gt;
       &lt;button class=&quot;sidebar-toggle-btn&quot; id=&quot;sidebar-toggle-btn&quot; aria-label=&quot;Collapse sidebar&quot; aria-expanded=&quot;true&quot; aria-controls=&quot;sidebar&quot;&gt;
+        &lt;!-- Collapse left arrows --&gt;
         &lt;svg width=&quot;14&quot; height=&quot;14&quot; viewBox=&quot;0 0 14 14&quot; fill=&quot;none&quot; aria-hidden=&quot;true&quot;&gt;
           &lt;path d=&quot;M9 3L5 7l4 4&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.5&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;
         &lt;/svg&gt;
       &lt;/button&gt;
     &lt;/div&gt;
 
-    &lt;!-- Company Workspace Selector --&gt;
+    &lt;!-- Company Workspace Card --&gt;
     &lt;div class=&quot;workspace-card&quot; id=&quot;workspace-card&quot; tabindex=&quot;0&quot; role=&quot;button&quot; aria-label=&quot;Switch workspace — Rocks Company&quot;&gt;
       &lt;div class=&quot;workspace-avatar&quot; aria-hidden=&quot;true&quot;&gt;R&lt;/div&gt;
       &lt;div class=&quot;workspace-info&quot;&gt;
@@ -348,12 +364,14 @@
       &lt;div class=&quot;nav-item-tooltip&quot;&gt;Rocks Company&lt;/div&gt;
     &lt;/div&gt;
 
-    &lt;!-- Navigation Menu --&gt;
+    &lt;!-- Nav --&gt;
     &lt;nav class=&quot;sidebar-nav&quot; aria-label=&quot;Sidebar navigation&quot;&gt;
+
+      &lt;!-- MAIN MENU --&gt;
       &lt;div class=&quot;nav-section&quot;&gt;
         &lt;div class=&quot;nav-section-title&quot;&gt;Main Menu&lt;/div&gt;
 
-        &lt;a href=&quot;#&quot; class=&quot;nav-item active&quot; data-nav=&quot;dashboard&quot; aria-label=&quot;Dashboard&quot;&gt;
+        &lt;a href=&quot;#&quot; class=&quot;nav-item active&quot; data-nav=&quot;dashboard&quot; aria-label=&quot;Dashboard&quot; aria-current=&quot;page&quot;&gt;
           &lt;span class=&quot;nav-icon&quot; aria-hidden=&quot;true&quot;&gt;
             &lt;svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 16 16&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;1.5&quot; y=&quot;1.5&quot; width=&quot;5.5&quot; height=&quot;5.5&quot; rx=&quot;1.5&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.5&quot;/&gt;&lt;rect x=&quot;9&quot; y=&quot;1.5&quot; width=&quot;5.5&quot; height=&quot;5.5&quot; rx=&quot;1.5&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.5&quot;/&gt;&lt;rect x=&quot;1.5&quot; y=&quot;9&quot; width=&quot;5.5&quot; height=&quot;5.5&quot; rx=&quot;1.5&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.5&quot;/&gt;&lt;rect x=&quot;9&quot; y=&quot;9&quot; width=&quot;5.5&quot; height=&quot;5.5&quot; rx=&quot;1.5&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.5&quot;/&gt;&lt;/svg&gt;
           &lt;/span&gt;
@@ -396,38 +414,90 @@
 
       &lt;div class=&quot;sidebar-divider&quot;&gt;&lt;/div&gt;
 
-      &lt;!-- Department Color Taxonomy --&gt;
+      &lt;!-- DEPARTMENT --&gt;
       &lt;div class=&quot;nav-section&quot;&gt;
-        &lt;div class=&quot;nav-section-title&quot;&gt;Department&lt;/div&gt;
-        &lt;div class=&quot;dept-item&quot; data-dept=&quot;marketing&quot; tabindex=&quot;0&quot; role=&quot;button&quot;&gt;
-          &lt;div class=&quot;dept-dot&quot; style=&quot;background:#12b886;&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;
-          &lt;span class=&quot;dept-label&quot;&gt;Business &amp; Marketing&lt;/span&gt;
+        &lt;div class=&quot;nav-section-title&quot;&gt;
+          Department
+          &lt;button class=&quot;nav-section-add&quot; aria-label=&quot;Add department&quot; style=&quot;background:none;border:none;cursor:pointer;color:var(--gray-400);font-size:16px;margin-left:4px;&quot;&gt;+&lt;/button&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;dept-item&quot; data-dept=&quot;marketing&quot; tabindex=&quot;0&quot; role=&quot;button&quot; aria-label=&quot;Business and Marketing department&quot;&gt;
+          &lt;div class=&quot;dept-dot&quot; style=&quot;background: var(--dept-marketing);&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;
+          &lt;span class=&quot;dept-label&quot;&gt;Business and Marketing&lt;/span&gt;
           &lt;div class=&quot;nav-item-tooltip&quot;&gt;Marketing&lt;/div&gt;
         &lt;/div&gt;
-        &lt;div class=&quot;dept-item&quot; data-dept=&quot;design&quot; tabindex=&quot;0&quot; role=&quot;button&quot;&gt;
-          &lt;div class=&quot;dept-dot&quot; style=&quot;background:#845ef7;&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;
+
+        &lt;div class=&quot;dept-item&quot; data-dept=&quot;design&quot; tabindex=&quot;0&quot; role=&quot;button&quot; aria-label=&quot;Design department&quot;&gt;
+          &lt;div class=&quot;dept-dot&quot; style=&quot;background: var(--dept-design);&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;
           &lt;span class=&quot;dept-label&quot;&gt;Design&lt;/span&gt;
           &lt;div class=&quot;nav-item-tooltip&quot;&gt;Design&lt;/div&gt;
         &lt;/div&gt;
-        &lt;div class=&quot;dept-item&quot; data-dept=&quot;pm&quot; tabindex=&quot;0&quot; role=&quot;button&quot;&gt;
-          &lt;div class=&quot;dept-dot&quot; style=&quot;background:#4c6ef5;&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;
+
+        &lt;div class=&quot;dept-item&quot; data-dept=&quot;pm&quot; tabindex=&quot;0&quot; role=&quot;button&quot; aria-label=&quot;Project Manager department&quot;&gt;
+          &lt;div class=&quot;dept-dot&quot; style=&quot;background: var(--dept-pm);&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;
           &lt;span class=&quot;dept-label&quot;&gt;Project Manager&lt;/span&gt;
           &lt;div class=&quot;nav-item-tooltip&quot;&gt;Project Manager&lt;/div&gt;
         &lt;/div&gt;
+
+        &lt;div class=&quot;dept-item&quot; data-dept=&quot;hr&quot; tabindex=&quot;0&quot; role=&quot;button&quot; aria-label=&quot;Human Resource department&quot;&gt;
+          &lt;div class=&quot;dept-dot&quot; style=&quot;background: var(--dept-hr);&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;
+          &lt;span class=&quot;dept-label&quot;&gt;Human Resource&lt;/span&gt;
+          &lt;div class=&quot;nav-item-tooltip&quot;&gt;Human Resource&lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;dept-item&quot; data-dept=&quot;dev&quot; tabindex=&quot;0&quot; role=&quot;button&quot; aria-label=&quot;Development department&quot;&gt;
+          &lt;div class=&quot;dept-dot&quot; style=&quot;background: var(--dept-dev);&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;
+          &lt;span class=&quot;dept-label&quot;&gt;Development&lt;/span&gt;
+          &lt;div class=&quot;nav-item-tooltip&quot;&gt;Development&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;sidebar-divider&quot;&gt;&lt;/div&gt;
+
+      &lt;!-- OTHER --&gt;
+      &lt;div class=&quot;nav-section&quot;&gt;
+        &lt;div class=&quot;nav-section-title&quot;&gt;Other&lt;/div&gt;
+
+        &lt;a href=&quot;#&quot; class=&quot;nav-item&quot; data-nav=&quot;settings&quot; aria-label=&quot;Setting&quot;&gt;
+          &lt;span class=&quot;nav-icon&quot; aria-hidden=&quot;true&quot;&gt;
+            &lt;svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 16 16&quot; fill=&quot;none&quot;&gt;&lt;circle cx=&quot;8&quot; cy=&quot;8&quot; r=&quot;2&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.5&quot;/&gt;&lt;path d=&quot;M8 2v1M8 13v1M2 8h1M13 8h1M3.64 3.64l.71.71M11.65 11.65l.7.7M12.36 3.64l-.71.71M4.35 11.65l-.7.7&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.5&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;/svg&gt;
+          &lt;/span&gt;
+          &lt;span class=&quot;nav-label&quot;&gt;Setting&lt;/span&gt;
+          &lt;div class=&quot;nav-item-tooltip&quot;&gt;Setting&lt;/div&gt;
+        &lt;/a&gt;
+
+        &lt;a href=&quot;#&quot; class=&quot;nav-item&quot; data-nav=&quot;help&quot; aria-label=&quot;Help Center&quot;&gt;
+          &lt;span class=&quot;nav-icon&quot; aria-hidden=&quot;true&quot;&gt;
+            &lt;svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 16 16&quot; fill=&quot;none&quot;&gt;&lt;circle cx=&quot;8&quot; cy=&quot;8&quot; r=&quot;6&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.5&quot;/&gt;&lt;path d=&quot;M6 6a2 2 0 1 1 2.5 1.9c-.5.1-.5.6-.5 1.1&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.5&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;circle cx=&quot;8&quot; cy=&quot;11.5&quot; r=&quot;0.75&quot; fill=&quot;currentColor&quot;/&gt;&lt;/svg&gt;
+          &lt;/span&gt;
+          &lt;span class=&quot;nav-label&quot;&gt;Help Center&lt;/span&gt;
+          &lt;div class=&quot;nav-item-tooltip&quot;&gt;Help Center&lt;/div&gt;
+        &lt;/a&gt;
       &lt;/div&gt;
     &lt;/nav&gt;
   &lt;/aside&gt;
 
-  &lt;!-- Main Topbar --&gt;
-  &lt;div class=&quot;main-content&quot;&gt;
-    &lt;header class=&quot;topbar&quot;&gt;
-      &lt;button class=&quot;mobile-toggle-btn&quot; id=&quot;mobile-toggle-btn&quot; aria-label=&quot;Open sidebar&quot;&gt;
-        &lt;svg width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 18 18&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M3 5h12M3 9h12M3 13h12&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.5&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;/svg&gt;
+  &lt;!-- ── MAIN AREA ──────────────────────────────────────────── --&gt;
+  &lt;div class=&quot;main-area&quot;&gt;
+
+    &lt;!-- Mobile topbar --&gt;
+    &lt;div class=&quot;mobile-topbar&quot; role=&quot;banner&quot;&gt;
+      &lt;button class=&quot;mobile-menu-btn&quot; id=&quot;mobile-menu-btn&quot; aria-label=&quot;Open sidebar&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;sidebar&quot;&gt;
+        &lt;svg width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 18 18&quot; fill=&quot;none&quot; aria-hidden=&quot;true&quot;&gt;
+          &lt;path d=&quot;M3 5h12M3 9h12M3 13h12&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.5&quot; stroke-linecap=&quot;round&quot;/&gt;
+        &lt;/svg&gt;
       &lt;/button&gt;
-      &lt;div class=&quot;topbar-title&quot;&gt;Operations Dashboard&lt;/div&gt;
-    &lt;/header&gt;
+      &lt;span class=&quot;mobile-topbar-title&quot;&gt;BordUp™&lt;/span&gt;
+    &lt;/div&gt;
+
   &lt;/div&gt;
-&lt;/div&gt;</code></pre>
+
+&lt;/div&gt;&lt;!-- /.app-shell --&gt;
+
+
+&lt;script src=&quot;script.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
       </div>
     </section>
 
@@ -447,100 +517,140 @@
             <span class="copy-label">Copy</span>
           </button>
         </div>
-        <pre><code id="code-3" class="language-css">:root {
-  --sidebar-width-expanded: 260px;
-  --sidebar-width-collapsed: 76px;
-  --header-height: 68px;
-  --color-sidebar-bg: #ffffff;
-  --color-sidebar-border: #e9ecef;
-  --color-primary: #3b5bdb;
-  --color-primary-light: #e8ecfc;
-  --color-text-main: #1e293b;
-  --color-text-muted: #64748b;
-  --ease-spring: cubic-bezier(0.34, 1.3, 0.64, 1);
+        <pre><code id="code-3" class="language-css">/* =============================================================
+   BORDUP OPERATIONS SIDEBAR — style.css
+   Enterprise B2B HR &amp; Workforce Management Suite
+   Collapsible Rail Navigation
+   ============================================================= */
+
+@import url(&#39;https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap&#39;);
+
+/* ── Design Tokens ─────────────────────────────────────────── */
+:root {
+  --font-sans: &#39;Plus Jakarta Sans&#39;, Inter, -apple-system, sans-serif;
+
+  /* Brand Colors */
+  --brand-50:   #EEF2FF;
+  --brand-100:  #E0E7FF;
+  --brand-200:  #C7D2FE;
+  --brand-500:  #6366F1;
+  --brand-600:  #4F46E5;
+  --brand-700:  #4338CA;
+
+  /* Neutral */
+  --white:      #FFFFFF;
+  --gray-25:    #FCFCFD;
+  --gray-50:    #F9FAFB;
+  --gray-100:   #F3F4F6;
+  --gray-150:   #EBEBEF;
+  --gray-200:   #E5E7EB;
+  --gray-300:   #D1D5DB;
+  --gray-400:   #9CA3AF;
+  --gray-500:   #6B7280;
+  --gray-600:   #4B5563;
+  --gray-700:   #374151;
+  --gray-800:   #1F2937;
+  --gray-900:   #111827;
+
+  /* Department colors */
+  --dept-marketing:  #3B82F6;
+  --dept-design:     #10B981;
+  --dept-pm:         #F59E0B;
+  --dept-hr:         #8B5CF6;
+  --dept-dev:        #6366F1;
+
+  /* Status */
+  --success-100: #D1FAE5;
+  --success-500: #10B981;
+  --success-600: #059669;
+  --danger-100:  #FEE2E2;
+  --danger-500:  #EF4444;
+  --danger-600:  #DC2626;
+  --warning-100: #FEF3C7;
+  --warning-500: #F59E0B;
+
+  /* Layout */
+  --sidebar-expanded:  260px;
+  --sidebar-collapsed: 76px;
+  --content-gap:  24px;
+
+  /* Surfaces */
+  --bg-page:    var(--gray-50);
+  --bg-sidebar: var(--white);
+  --bg-card:    var(--white);
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 8px -2px rgba(0,0,0,0.08), 0 2px 4px -2px rgba(0,0,0,0.04);
+  --shadow-lg: 0 12px 16px -4px rgba(0,0,0,0.06), 0 4px 6px -2px rgba(0,0,0,0.03);
+
+  /* Radius */
+  --radius-sm:  6px;
+  --radius-md:  10px;
+  --radius-lg:  14px;
+  --radius-xl:  20px;
+  --radius-pill: 9999px;
+
+  /* Transitions */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 140ms;
+  --dur-med:  280ms;
+  --dur-slow: 450ms;
 }
 
+/* ── Reset ─────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { height: 100%; }
+body {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--gray-700);
+  background: var(--bg-page);
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   APP SHELL
+   ═══════════════════════════════════════════════════════════ */
 .app-shell {
   display: flex;
-  min-height: 100vh;
-}
-
-/* Sidebar Shell */
-.sidebar {
-  width: var(--sidebar-width-expanded);
-  background: var(--color-sidebar-bg);
-  border-right: 1px solid var(--color-sidebar-border);
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 100;
-  transition: width 0.28s var(--ease-spring);
+  width: 100%;
+  height: 100%;
   overflow: hidden;
 }
 
-/* Collapsed Rail Mode */
-.sidebar.collapsed {
-  width: var(--sidebar-width-collapsed);
+/* ═══════════════════════════════════════════════════════════
+   SIDEBAR
+   ═══════════════════════════════════════════════════════════ */
+.sidebar {
+  width: var(--sidebar-expanded);
+  height: 100%;
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--gray-200);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  overflow: hidden;
+  position: relative;
+  z-index: 100;
+  transition: width var(--dur-slow) var(--ease-out);
 }
 
-.sidebar.collapsed .brand-info,
-.sidebar.collapsed .workspace-info,
-.sidebar.collapsed .workspace-chevron,
-.sidebar.collapsed .nav-label,
-.sidebar.collapsed .dept-label,
-.sidebar.collapsed .nav-section-title {
-  display: none;
-}
+.sidebar.collapsed { width: var(--sidebar-collapsed); }
 
-.sidebar.collapsed .sidebar-toggle-btn svg {
-  transform: rotate(180deg);
-}
-
-.sidebar.collapsed .nav-item,
-.sidebar.collapsed .dept-item {
-  justify-content: center;
-  padding: 10px 0;
-}
-
-.sidebar.collapsed .workspace-card {
-  padding: 8px 0;
-  justify-content: center;
-}
-
-/* Hover Tooltip in Rail Mode */
-.nav-item-tooltip {
-  display: none;
-  position: absolute;
-  left: calc(var(--sidebar-width-collapsed) + 8px);
-  background: #1e293b;
-  color: #fff;
-  font-size: 12px;
-  font-weight: 500;
-  padding: 5px 10px;
-  border-radius: 6px;
-  white-space: nowrap;
-  pointer-events: none;
-  z-index: 500;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.sidebar.collapsed .nav-item:hover .nav-item-tooltip,
-.sidebar.collapsed .dept-item:hover .nav-item-tooltip,
-.sidebar.collapsed .workspace-card:hover .nav-item-tooltip {
-  display: block;
-}
-
-/* Header */
+/* Brand Row */
 .sidebar-header {
-  height: var(--header-height);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 16px;
-  border-bottom: 1px solid var(--color-sidebar-border);
+  padding: 18px 16px 14px;
+  border-bottom: 1px solid var(--gray-100);
+  flex-shrink: 0;
+  overflow: hidden;
 }
 
 .brand-group {
@@ -548,196 +658,918 @@
   align-items: center;
   gap: 10px;
   text-decoration: none;
+  overflow: hidden;
 }
 
 .brand-icon {
   width: 34px;
   height: 34px;
-  border-radius: 8px;
-  background: #2563eb;
+  border-radius: 9px;
+  background: linear-gradient(135deg, var(--brand-500) 0%, #8B5CF6 100%);
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(99,102,241,0.35);
 }
 
+.brand-info {
+  overflow: hidden;
+  transition: opacity var(--dur-med) ease, width var(--dur-slow) var(--ease-out);
+}
+
+.sidebar.collapsed .brand-info { opacity: 0; width: 0; pointer-events: none; }
+
 .brand-name {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--color-text-main);
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--gray-900);
+  letter-spacing: -0.02em;
+  white-space: nowrap;
 }
 
 .brand-tm {
-  font-size: 10px;
-  color: #2563eb;
-  margin-left: 2px;
+  font-size: 9px;
+  font-weight: 600;
+  vertical-align: super;
 }
 
+/* Collapse Toggle Button */
 .sidebar-toggle-btn {
-  background: #f1f5f9;
-  border: 1px solid #e2e8f0;
-  border-radius: 6px;
   width: 28px;
   height: 28px;
+  border-radius: var(--radius-sm);
+  background: var(--gray-100);
+  border: 1px solid var(--gray-200);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: var(--color-text-muted);
+  color: var(--gray-500);
+  flex-shrink: 0;
+  transition: background var(--dur-fast) ease, color var(--dur-fast) ease, transform var(--dur-slow) var(--ease-out);
 }
 
-/* Workspace Card */
+.sidebar-toggle-btn:hover { background: var(--gray-200); color: var(--gray-700); }
+.sidebar.collapsed .sidebar-toggle-btn { transform: rotate(180deg); }
+
+/* Company Workspace Card */
 .workspace-card {
-  margin: 12px 14px;
-  padding: 8px 10px;
-  border-radius: 8px;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  margin: 10px 10px 6px;
+  padding: 10px;
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   gap: 10px;
   cursor: pointer;
+  transition: background var(--dur-fast) ease;
+  overflow: hidden;
   position: relative;
+  flex-shrink: 0;
 }
 
+.workspace-card:hover { background: var(--gray-100); }
+
 .workspace-avatar {
-  width: 28px;
-  height: 28px;
-  border-radius: 6px;
-  background: #6366f1;
-  color: #fff;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 700;
   font-size: 12px;
+  font-weight: 800;
+  color: white;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, var(--brand-500), #8B5CF6);
 }
+
+.workspace-info {
+  flex: 1;
+  overflow: hidden;
+  transition: opacity var(--dur-med) ease;
+  min-width: 0;
+}
+
+.sidebar.collapsed .workspace-info { opacity: 0; pointer-events: none; }
 
 .workspace-name {
   font-size: 13px;
-  font-weight: 600;
-  color: var(--color-text-main);
+  font-weight: 700;
+  color: var(--gray-800);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .workspace-sub {
-  font-size: 11px;
-  color: var(--color-text-muted);
+  font-size: 11.5px;
+  color: var(--gray-400);
+  white-space: nowrap;
 }
 
 .workspace-chevron {
-  margin-left: auto;
+  color: var(--gray-400);
   font-size: 12px;
-  color: var(--color-text-muted);
+  flex-shrink: 0;
+  transition: opacity var(--dur-med) ease;
 }
 
-/* Nav links */
+.sidebar.collapsed .workspace-chevron { opacity: 0; pointer-events: none; }
+
+/* ── Sidebar Nav ───────────────────────────────────────────── */
 .sidebar-nav {
   flex: 1;
   overflow-y: auto;
-  padding: 8px 12px;
+  overflow-x: hidden;
+  padding: 6px 8px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gray-200) transparent;
+}
+
+.sidebar-nav::-webkit-scrollbar { width: 3px; }
+.sidebar-nav::-webkit-scrollbar-thumb { background: var(--gray-200); border-radius: 99px; }
+
+.nav-section {
+  margin-bottom: 4px;
 }
 
 .nav-section-title {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--color-text-muted);
+  padding: 10px 8px 4px;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--gray-400);
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 8px 8px 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: opacity var(--dur-med) ease;
 }
 
+.sidebar.collapsed .nav-section-title { opacity: 0; }
+
+.nav-section-add {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  float: right;
+}
+
+/* Nav Item */
 .nav-item {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 8px 10px;
-  border-radius: 6px;
-  color: var(--color-text-muted);
+  padding: 9px 10px;
+  border-radius: var(--radius-md);
+  color: var(--gray-600);
   text-decoration: none;
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 500;
-  margin-bottom: 2px;
+  cursor: pointer;
+  transition: background var(--dur-fast) ease, color var(--dur-fast) ease;
+  white-space: nowrap;
+  overflow: hidden;
   position: relative;
 }
 
 .nav-item:hover {
-  background: #f8fafc;
-  color: var(--color-text-main);
+  background: var(--gray-100);
+  color: var(--gray-900);
 }
 
 .nav-item.active {
-  background: var(--color-primary-light);
-  color: var(--color-primary);
-  font-weight: 600;
+  background: var(--brand-50);
+  color: var(--brand-700);
 }
 
-.sidebar-divider {
-  height: 1px;
-  background: var(--color-sidebar-border);
-  margin: 12px 0;
+.nav-item.active .nav-icon { color: var(--brand-600); }
+
+.nav-icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--gray-500);
+  transition: color var(--dur-fast) ease;
 }
 
-/* Dept Taxonomy */
+.nav-item:hover .nav-icon { color: var(--gray-700); }
+
+.nav-label {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: opacity var(--dur-med) ease;
+}
+
+.sidebar.collapsed .nav-label { opacity: 0; pointer-events: none; width: 0; }
+
+/* Department Items */
 .dept-item {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 8px 10px;
-  border-radius: 6px;
-  font-size: 13px;
-  color: var(--color-text-muted);
+  padding: 7px 10px;
+  border-radius: var(--radius-md);
   cursor: pointer;
+  transition: background var(--dur-fast) ease;
+  overflow: hidden;
+}
+
+.dept-item:hover { background: var(--gray-100); }
+
+.dept-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  flex-shrink: 0;
+  transition: transform var(--dur-fast) ease;
+}
+
+.dept-item:hover .dept-dot { transform: scale(1.2); }
+
+.dept-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--gray-600);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  transition: opacity var(--dur-med) ease;
+}
+
+.sidebar.collapsed .dept-label { opacity: 0; width: 0; }
+
+/* Sidebar Divider */
+.sidebar-divider {
+  height: 1px;
+  background: var(--gray-100);
+  margin: 8px 10px;
+}
+
+/* ── Tooltip on Collapsed Rail ─────────────────────────────── */
+.sidebar.collapsed .nav-item,
+.sidebar.collapsed .dept-item {
   position: relative;
 }
 
-.dept-dot {
-  width: 8px;
-  height: 8px;
+.nav-item-tooltip {
+  position: absolute;
+  left: calc(var(--sidebar-collapsed) + 8px);
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--gray-900);
+  color: var(--white);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 1000;
+  transition: opacity var(--dur-fast) ease;
+  box-shadow: var(--shadow-md);
+}
+
+.nav-item-tooltip::before {
+  content: &#39;&#39;;
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 5px solid transparent;
+  border-right-color: var(--gray-900);
+}
+
+.sidebar.collapsed .nav-item:hover .nav-item-tooltip,
+.sidebar.collapsed .dept-item:hover .nav-item-tooltip {
+  opacity: 1;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   MAIN CONTENT
+   ═══════════════════════════════════════════════════════════ */
+.main-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+}
+
+/* ── Content Area ──────────────────────────────────────────── */
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--content-gap);
+  scrollbar-width: thin;
+  scrollbar-color: var(--gray-200) transparent;
+}
+
+/* ── Cards ─────────────────────────────────────────────────── */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xs);
+  overflow: hidden;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.card-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gray-800);
+  letter-spacing: -0.01em;
+}
+
+.card-action {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--brand-600);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color var(--dur-fast) ease;
+}
+
+.card-action:hover { color: var(--brand-700); }
+
+/* ── Dashboard Grid Layout ─────────────────────────────────── */
+.dash-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--gray-900);
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+
+.dash-sub {
+  font-size: 13px;
+  color: var(--gray-400);
+  margin-bottom: 20px;
+}
+
+.dash-grid-top {
+  display: grid;
+  grid-template-columns: 1fr 1fr 320px;
+  gap: var(--content-gap);
+  margin-bottom: var(--content-gap);
+}
+
+.dash-grid-mid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--content-gap);
+  margin-bottom: var(--content-gap);
+}
+
+/* Payment Card */
+.payment-card { padding: 0; grid-column: 1 / -1; }
+
+.payment-info {
+  display: flex;
+  gap: 40px;
+  padding: 16px 20px;
+  align-items: center;
+}
+
+.payment-field-label {
+  font-size: 11px;
+  color: var(--gray-400);
+  font-weight: 500;
+  margin-bottom: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.payment-field-value {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gray-800);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.payment-method-logo {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  background: #1a1f71;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 0.05em;
+}
+
+/* What&#39;s On calendar card */
+.whats-on-body { padding: 0; }
+
+.whats-on-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.wo-tab {
+  flex: 1;
+  padding: 12px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gray-400);
+  cursor: pointer;
+  transition: all var(--dur-fast) ease;
+  border-bottom: 2px solid transparent;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  font-family: var(--font-sans);
+}
+
+.wo-tab.active {
+  color: var(--brand-600);
+  border-bottom-color: var(--brand-600);
+}
+
+.wo-tab:hover { color: var(--gray-600); }
+
+.wo-entries { padding: 8px 16px; }
+
+.wo-entry {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--gray-50);
+}
+
+.wo-entry:last-child { border-bottom: none; }
+
+.wo-entry-avatar {
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: white;
   flex-shrink: 0;
 }
 
-/* Main Content Area */
-.main-content {
-  margin-left: var(--sidebar-width-expanded);
-  flex: 1;
-  transition: margin-left 0.28s var(--ease-spring);
+.wo-entry-info { flex: 1; min-width: 0; }
+
+.wo-entry-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gray-800);
 }
 
-.sidebar.collapsed ~ .main-content {
-  margin-left: var(--sidebar-width-collapsed);
+.wo-entry-detail {
+  font-size: 12px;
+  color: var(--gray-400);
+  margin-top: 1px;
 }
 
-.topbar {
-  height: var(--header-height);
-  background: #fff;
-  border-bottom: 1px solid var(--color-sidebar-border);
+/* Schedule timeline card */
+.schedule-body { padding: 16px 20px; }
+
+.schedule-header-row {
   display: flex;
   align-items: center;
-  padding: 0 24px;
-  gap: 16px;
+  justify-content: space-between;
+  margin-bottom: 12px;
 }
 
-.mobile-toggle-btn {
-  display: none;
-  background: none;
-  border: none;
+.schedule-date-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  background: var(--gray-100);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gray-600);
   cursor: pointer;
 }
 
-@media (max-width: 992px) {
+.add-task-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: var(--brand-600);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--dur-fast) ease;
+}
+
+.add-task-btn:hover { background: var(--brand-700); }
+
+/* Timeline */
+.timeline {
+  position: relative;
+  height: 80px;
+  background: var(--gray-50);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.timeline-hours {
+  position: absolute;
+  top: 6px;
+  left: 0;
+  right: 0;
+  display: flex;
+  padding: 0 12px;
+  gap: 0;
+}
+
+.timeline-hour {
+  flex: 1;
+  font-size: 10px;
+  color: var(--gray-400);
+  font-weight: 500;
+  text-align: center;
+}
+
+.timeline-events {
+  position: absolute;
+  top: 22px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  gap: 4px;
+  align-items: stretch;
+  height: 44px;
+}
+
+.timeline-event {
+  border-radius: 6px;
+  padding: 5px 8px;
+  font-size: 10.5px;
+  font-weight: 600;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+}
+
+.timeline-now-indicator {
+  position: absolute;
+  top: 18px;
+  bottom: 0;
+  width: 2px;
+  background: var(--brand-600);
+  border-radius: 99px;
+  left: 42%;
+}
+
+.timeline-now-indicator::before {
+  content: &#39;&#39;;
+  position: absolute;
+  top: -2px;
+  left: -4px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--brand-600);
+  box-shadow: 0 0 8px rgba(99,102,241,0.6);
+}
+
+/* Employee table */
+.emp-table { width: 100%; border-collapse: collapse; }
+
+.emp-table th {
+  padding: 10px 16px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--gray-400);
+  text-align: left;
+  border-bottom: 1px solid var(--gray-100);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.emp-table td {
+  padding: 12px 16px;
+  font-size: 13.5px;
+  color: var(--gray-700);
+  border-bottom: 1px solid var(--gray-50);
+  vertical-align: middle;
+}
+
+.emp-table tr:last-child td { border-bottom: none; }
+.emp-table tr:hover td { background: var(--gray-25); }
+
+.emp-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.emp-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+}
+
+.emp-name { font-weight: 600; color: var(--gray-800); font-size: 13.5px; }
+.emp-email { font-size: 12px; color: var(--gray-400); }
+
+.dept-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.dept-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+/* Work hours chart */
+.hours-chart-wrapper { padding: 16px 20px; }
+
+.hours-big {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--gray-900);
+  letter-spacing: -0.03em;
+  margin-bottom: 14px;
+}
+
+.hours-big span { font-size: 18px; }
+
+.chart-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 80px;
+}
+
+.chart-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.chart-bar-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+  align-items: center;
+  height: 68px;
+  justify-content: flex-end;
+}
+
+.chart-bar {
+  width: 100%;
+  border-radius: 3px 3px 0 0;
+  max-width: 28px;
+  min-height: 4px;
+}
+
+.chart-bar.work { background: var(--brand-500); }
+.chart-bar.overtime { background: var(--warning-100); }
+
+.chart-date {
+  font-size: 10px;
+  color: var(--gray-400);
+  font-weight: 500;
+}
+
+/* Leave action cards */
+.leave-card {
+  background: var(--bg-card);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  box-shadow: var(--shadow-xs);
+}
+
+.leave-emp {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.leave-emp-info .emp-name { font-size: 13px; }
+.leave-emp-info .emp-email { font-size: 12px; }
+
+.leave-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 11.5px;
+  font-weight: 700;
+}
+
+.leave-badge-sick { background: var(--danger-100); color: var(--danger-600); }
+.leave-badge-annual { background: var(--brand-50); color: var(--brand-700); }
+.leave-badge-pending { background: var(--warning-100); color: #92400E; }
+
+.leave-detail { font-size: 12.5px; color: var(--gray-500); margin-bottom: 4px; }
+.leave-detail strong { color: var(--gray-700); }
+
+.leave-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.btn-approve, .btn-reject {
+  flex: 1;
+  padding: 7px;
+  border-radius: var(--radius-sm);
+  font-size: 12.5px;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  border: 1.5px solid;
+  transition: all var(--dur-fast) ease;
+}
+
+.btn-approve {
+  background: var(--success-100);
+  border-color: var(--success-500);
+  color: var(--success-600);
+}
+
+.btn-approve:hover {
+  background: var(--success-500);
+  color: white;
+}
+
+.btn-reject {
+  background: var(--danger-100);
+  border-color: var(--danger-500);
+  color: var(--danger-600);
+}
+
+.btn-reject:hover {
+  background: var(--danger-500);
+  color: white;
+}
+
+/* ── Mobile Overlay ────────────────────────────────────────── */
+.mobile-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 90;
+  opacity: 0;
+  transition: opacity var(--dur-med) ease;
+}
+
+.mobile-overlay.open { opacity: 1; }
+
+/* Mobile topbar */
+.mobile-topbar {
+  display: none;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--white);
+  border-bottom: 1px solid var(--gray-200);
+  flex-shrink: 0;
+}
+
+.mobile-menu-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--gray-500);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  transition: background var(--dur-fast) ease;
+}
+
+.mobile-menu-btn:hover { background: var(--gray-100); }
+
+.mobile-topbar-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--gray-800);
+}
+
+/* ── Toast ─────────────────────────────────────────────────── */
+.bordup-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--gray-900);
+  color: white;
+  border-radius: var(--radius-lg);
+  padding: 12px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: var(--shadow-lg);
+  z-index: 2000;
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition: opacity var(--dur-med) ease, transform var(--dur-med) var(--ease-out);
+  max-width: 320px;
+}
+
+.bordup-toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════════ */
+@media (max-width: 1200px) {
+  .dash-grid-top { grid-template-columns: 1fr 1fr; }
+  .payment-card { grid-column: 1 / -1; }
+}
+
+@media (max-width: 1024px) {
   .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
     transform: translateX(-100%);
-    width: var(--sidebar-width-expanded) !important;
+    z-index: 100;
+    box-shadow: var(--shadow-lg);
+    transition: transform var(--dur-slow) var(--ease-out), width var(--dur-slow) var(--ease-out);
   }
-  .sidebar.open {
+
+  .sidebar.mobile-open {
     transform: translateX(0);
+    width: var(--sidebar-expanded) !important;
   }
-  .main-content {
-    margin-left: 0 !important;
-  }
-  .mobile-toggle-btn {
-    display: block;
-  }
+
+  .mobile-overlay { display: block; }
+  .mobile-topbar { display: flex; }
+
+  .dash-grid-top { grid-template-columns: 1fr; }
+  .dash-grid-mid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .content { padding: 16px; }
+  .payment-info { flex-direction: column; gap: 16px; align-items: flex-start; }
+}
+
+@media (max-width: 480px) {
+  .content { padding: 12px; }
+  .dash-title { font-size: 18px; }
+  .card-header { padding: 12px 14px; }
+  .mobile-topbar { padding: 10px 14px; }
+  .mobile-topbar-title { font-size: 14px; }
 }</code></pre>
       </div>
     </section>
@@ -758,48 +1590,155 @@
             <span class="copy-label">Copy</span>
           </button>
         </div>
-        <pre><code id="code-4" class="language-javascript">(function () {
+        <pre><code id="code-4" class="language-javascript">/* =============================================================
+   BORDUP OPERATIONS SIDEBAR — script.js
+   Sidebar collapse, active nav, mobile drawer, tooltips, toasts
+   ============================================================= */
+(function () {
   &#39;use strict&#39;;
 
-  const sidebar = document.getElementById(&#39;sidebar&#39;);
-  const toggleBtn = document.getElementById(&#39;sidebar-toggle-btn&#39;);
-  const mobileBtn = document.getElementById(&#39;mobile-toggle-btn&#39;);
-  const overlay = document.getElementById(&#39;mobile-overlay&#39;);
+  /* ── DOM refs ──────────────────────────────────────────────── */
+  const sidebar       = document.getElementById(&#39;sidebar&#39;);
+  const toggleBtn     = document.getElementById(&#39;sidebar-toggle-btn&#39;);
+  const mobileOverlay = document.getElementById(&#39;mobile-overlay&#39;);
+  const mobileMenuBtn = document.getElementById(&#39;mobile-menu-btn&#39;);
+  const toast         = document.getElementById(&#39;bordup-toast&#39;);
+  const woTabs        = document.querySelectorAll(&#39;.wo-tab[data-tab]&#39;);
 
-  if (!sidebar) return;
+  /* ── 1. Sidebar Collapse / Expand ────────────────────────── */
+  let collapsed = false;
 
-  // 1. Collapse / Expand Rail Toggle
-  if (toggleBtn) {
-    toggleBtn.addEventListener(&#39;click&#39;, () =&gt; {
-      sidebar.classList.toggle(&#39;collapsed&#39;);
-      const isCollapsed = sidebar.classList.contains(&#39;collapsed&#39;);
-      toggleBtn.setAttribute(&#39;aria-expanded&#39;, !isCollapsed);
-      try {
-        localStorage.setItem(&#39;bordup_sidebar_collapsed&#39;, isCollapsed ? &#39;1&#39; : &#39;0&#39;);
-      } catch (e) {}
-    });
+  function toggleSidebar () {
+    collapsed = !collapsed;
+    if (collapsed) {
+      sidebar.classList.add(&#39;collapsed&#39;);
+      toggleBtn.setAttribute(&#39;aria-label&#39;, &#39;Expand sidebar&#39;);
+      localStorage.setItem(&#39;bordup-sidebar-collapsed&#39;, &#39;1&#39;);
+    } else {
+      sidebar.classList.remove(&#39;collapsed&#39;);
+      toggleBtn.setAttribute(&#39;aria-label&#39;, &#39;Collapse sidebar&#39;);
+      localStorage.removeItem(&#39;bordup-sidebar-collapsed&#39;);
+    }
+  }
 
-    // Restore state from localStorage
-    try {
-      if (localStorage.getItem(&#39;bordup_sidebar_collapsed&#39;) === &#39;1&#39;) {
-        sidebar.classList.add(&#39;collapsed&#39;);
-        toggleBtn.setAttribute(&#39;aria-expanded&#39;, &#39;false&#39;);
+  // Restore state on load
+  if (localStorage.getItem(&#39;bordup-sidebar-collapsed&#39;)) {
+    collapsed = true;
+    sidebar.classList.add(&#39;collapsed&#39;);
+  }
+
+  toggleBtn.addEventListener(&#39;click&#39;, toggleSidebar);
+
+  /* ── 2. Active Nav Item ───────────────────────────────────── */
+  document.querySelectorAll(&#39;.nav-item[data-nav]&#39;).forEach(item =&gt; {
+    item.addEventListener(&#39;click&#39;, (e) =&gt; {
+      e.preventDefault();
+      document.querySelectorAll(&#39;.nav-item&#39;).forEach(n =&gt; n.classList.remove(&#39;active&#39;));
+      item.classList.add(&#39;active&#39;);
+
+      if (window.innerWidth &lt;= 1024) {
+        closeMobileSidebar();
       }
-    } catch (e) {}
+    });
+  });
+
+  document.querySelectorAll(&#39;.dept-item&#39;).forEach(item =&gt; {
+    item.addEventListener(&#39;click&#39;, () =&gt; {
+      const dept = item.querySelector(&#39;.dept-label&#39;);
+      if (dept) showToast(`Switched to ${dept.textContent.trim()} department`);
+    });
+  });
+
+  /* ── 3. Mobile Drawer ────────────────────────────────────── */
+  function openMobileSidebar () {
+    sidebar.classList.add(&#39;mobile-open&#39;);
+    mobileOverlay.classList.add(&#39;open&#39;);
+    document.body.style.overflow = &#39;hidden&#39;;
+    mobileMenuBtn.setAttribute(&#39;aria-expanded&#39;, &#39;true&#39;);
   }
 
-  // 2. Mobile Off-Canvas Drawer
-  function openMobile() {
-    sidebar.classList.add(&#39;open&#39;);
-    if (overlay) overlay.classList.add(&#39;show&#39;);
-  }
-  function closeMobile() {
-    sidebar.classList.remove(&#39;open&#39;);
-    if (overlay) overlay.classList.remove(&#39;show&#39;);
+  function closeMobileSidebar () {
+    sidebar.classList.remove(&#39;mobile-open&#39;);
+    mobileOverlay.classList.remove(&#39;open&#39;);
+    document.body.style.overflow = &#39;&#39;;
+    mobileMenuBtn.setAttribute(&#39;aria-expanded&#39;, &#39;false&#39;);
   }
 
-  if (mobileBtn) mobileBtn.addEventListener(&#39;click&#39;, openMobile);
-  if (overlay) overlay.addEventListener(&#39;click&#39;, closeMobile);
+  mobileMenuBtn.addEventListener(&#39;click&#39;, () =&gt; {
+    if (sidebar.classList.contains(&#39;mobile-open&#39;)) closeMobileSidebar();
+    else openMobileSidebar();
+  });
+
+  mobileOverlay.addEventListener(&#39;click&#39;, closeMobileSidebar);
+
+  document.addEventListener(&#39;keydown&#39;, (e) =&gt; {
+    if (e.key === &#39;Escape&#39;) closeMobileSidebar();
+  });
+
+  /* ── 4. What&#39;s On Tabs ───────────────────────────────────── */
+  const woContents = document.querySelectorAll(&#39;.wo-content[data-tab]&#39;);
+  woTabs.forEach(tab =&gt; {
+    tab.addEventListener(&#39;click&#39;, () =&gt; {
+      const tabId = tab.dataset.tab;
+      woTabs.forEach(t =&gt; t.classList.remove(&#39;active&#39;));
+      tab.classList.add(&#39;active&#39;);
+      woContents.forEach(c =&gt; {
+        c.style.display = c.dataset.tab === tabId ? &#39;block&#39; : &#39;none&#39;;
+      });
+    });
+  });
+
+  /* ── 5. Leave Actions ────────────────────────────────────── */
+  document.querySelectorAll(&#39;.btn-approve&#39;).forEach(btn =&gt; {
+    btn.addEventListener(&#39;click&#39;, () =&gt; {
+      const card = btn.closest(&#39;.leave-card&#39;);
+      const name = card?.querySelector(&#39;.emp-name&#39;)?.textContent?.trim() || &#39;Employee&#39;;
+      showToast(`✅ Leave approved for ${name}`);
+      btn.textContent = &#39;Approved&#39;;
+      btn.disabled = true;
+      btn.style.opacity = &#39;0.6&#39;;
+      card.querySelector(&#39;.btn-reject&#39;).disabled = true;
+      card.querySelector(&#39;.btn-reject&#39;).style.opacity = &#39;0.4&#39;;
+    });
+  });
+
+  document.querySelectorAll(&#39;.btn-reject&#39;).forEach(btn =&gt; {
+    btn.addEventListener(&#39;click&#39;, () =&gt; {
+      const card = btn.closest(&#39;.leave-card&#39;);
+      const name = card?.querySelector(&#39;.emp-name&#39;)?.textContent?.trim() || &#39;Employee&#39;;
+      showToast(`❌ Leave rejected for ${name}`);
+      btn.textContent = &#39;Rejected&#39;;
+      btn.disabled = true;
+      btn.style.opacity = &#39;0.6&#39;;
+      card.querySelector(&#39;.btn-approve&#39;).disabled = true;
+      card.querySelector(&#39;.btn-approve&#39;).style.opacity = &#39;0.4&#39;;
+    });
+  });
+
+  /* ── 6. Toast ────────────────────────────────────────────── */
+  let toastTimer = null;
+
+  function showToast (msg) {
+    if (!toast) return;
+    clearTimeout(toastTimer);
+    const msgEl = toast.querySelector(&#39;.bordup-toast-msg&#39;);
+    if (msgEl) msgEl.textContent = msg;
+    toast.classList.add(&#39;show&#39;);
+    toastTimer = setTimeout(() =&gt; toast.classList.remove(&#39;show&#39;), 3000);
+  }
+
+  /* ── 7. Add Task button ──────────────────────────────────── */
+  const addTaskBtn = document.getElementById(&#39;add-task-btn&#39;);
+  if (addTaskBtn) {
+    addTaskBtn.addEventListener(&#39;click&#39;, () =&gt; showToast(&#39;📋 New task added to schedule&#39;));
+  }
+
+  /* ── 8. Workspace card ───────────────────────────────────── */
+  const workspaceCard = document.getElementById(&#39;workspace-card&#39;);
+  if (workspaceCard) {
+    workspaceCard.addEventListener(&#39;click&#39;, () =&gt; showToast(&#39;🔄 Switch workspace&#39;));
+  }
+
 })();</code></pre>
       </div>
     </section>

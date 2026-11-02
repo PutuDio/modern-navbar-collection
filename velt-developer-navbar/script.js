@@ -13,12 +13,7 @@
   const mobileOverlay  = document.getElementById('mobile-drawer-overlay');
   const navBurger      = document.getElementById('nav-burger');
   const veltToast      = document.getElementById('velt-toast');
-  const cliCopyBtn     = document.getElementById('cli-copy-btn');
   const cliCmd         = document.getElementById('cli-cmd-text');
-  const ucTabs         = document.querySelectorAll('.uc-tab[data-tab]');
-  const ucPreviews     = document.querySelectorAll('.uc-preview[data-tab]');
-
-  /* ── 1. Mega Menu (hover + click with pointer bridge) ─────── */
   let megaCloseTimer = null;
 
   function openMega () {
@@ -106,35 +101,7 @@
 
   if (mobileOverlay) mobileOverlay.addEventListener('click', closeMobileDrawer);
 
-  /* ── 3. CLI Copy ─────────────────────────────────────────── */
-  if (cliCopyBtn && cliCmd) {
-    cliCopyBtn.addEventListener('click', () => {
-      const text = cliCmd.textContent.trim();
-      if (navigator.clipboard) {
-        navigator.clipboard.writeText(text).catch(() => {});
-      }
-      cliCopyBtn.textContent = '✓';
-      cliCopyBtn.classList.add('copied');
-      showToast(`Copied: ${text}`);
-      setTimeout(() => {
-        cliCopyBtn.textContent = '⎘';
-        cliCopyBtn.classList.remove('copied');
-      }, 2000);
-    });
-  }
 
-  /* ── 4. Use Case Tabs ────────────────────────────────────── */
-  ucTabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      const tabId = tab.dataset.tab;
-      ucTabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-
-      ucPreviews.forEach(preview => {
-        preview.style.display = preview.dataset.tab === tabId ? 'flex' : 'none';
-      });
-    });
-  });
 
   /* ── 5. Multiplayer Cursor Animation ─────────────────────── */
   const cursorSean = document.getElementById('cursor-sean');
@@ -155,26 +122,6 @@
     animateCursors();
   }
 
-  /* ── 6. Toast ────────────────────────────────────────────── */
-  let toastTimer = null;
-
-  function showToast (msg) {
-    if (!veltToast) return;
-    clearTimeout(toastTimer);
-    const msgEl = veltToast.querySelector('.velt-toast-msg');
-    if (msgEl) msgEl.textContent = msg;
-    veltToast.classList.add('show');
-    toastTimer = setTimeout(() => veltToast.classList.remove('show'), 2500);
-  }
-
-  // Make mega-menu items interactive
-  document.querySelectorAll('.mega-item').forEach(item => {
-    item.addEventListener('click', () => {
-      const label = item.querySelector('.mega-item-text');
-      if (label) showToast(`Navigating to ${label.textContent}…`);
-      closeMega();
-    });
-  });
 
   /* ── 7. Smooth scroll ────────────────────────────────────── */
   document.querySelectorAll('a[href^="#"]').forEach(a => {

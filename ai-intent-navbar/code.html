@@ -304,58 +304,101 @@
             <span class="copy-label">Copy</span>
           </button>
         </div>
-        <pre><code id="code-2" class="language-html">&lt;!-- ================================================================
-     AI ADAPTIVE INTENT NAVBAR &amp; SIMULATOR
-     ================================================================ --&gt;
+        <pre><code id="code-2" class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+  &lt;title&gt;AI Adaptive Intent Navbar — Predictive Morphing Navigation&lt;/title&gt;
+  &lt;meta name=&quot;description&quot; content=&quot;A context-aware predictive navbar that morphs its menus, links, and CTAs in real-time based on visitor dwell time, scroll intent, and persona inference.&quot;&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
 
-&lt;!-- Top Persona Simulator Toolbar (Optional / Testing) --&gt;
-&lt;aside class=&quot;simulator-strip&quot; aria-label=&quot;Intent Simulation Controls&quot;&gt;
-  &lt;div class=&quot;sim-label&quot;&gt;
-    &lt;span class=&quot;sim-pulse&quot;&gt;&lt;/span&gt;
-    &lt;span&gt;LIVE INTENT SIMULATOR:&lt;/span&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;simulator-buttons&quot;&gt;
-    &lt;button class=&quot;sim-btn active&quot; data-intent=&quot;exploring&quot;&gt;01 / Explorer&lt;/button&gt;
-    &lt;button class=&quot;sim-btn&quot; data-intent=&quot;developer&quot;&gt;02 / Developer&lt;/button&gt;
-    &lt;button class=&quot;sim-btn&quot; data-intent=&quot;enterprise&quot;&gt;03 / Enterprise&lt;/button&gt;
-    &lt;button class=&quot;sim-btn&quot; data-intent=&quot;designer&quot;&gt;04 / Designer&lt;/button&gt;
-  &lt;/div&gt;
-&lt;/aside&gt;
+  &lt;!-- Ambient Light Pattern --&gt;
+  &lt;div class=&quot;bg-grid-pattern&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;ai-light-orb&quot; id=&quot;light-orb&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;
 
-&lt;!-- Predictive Morphing Navbar --&gt;
-&lt;header class=&quot;nav-header&quot;&gt;
-  &lt;nav class=&quot;nav-container&quot; aria-label=&quot;Predictive AI Navigation&quot;&gt;
-    
-    &lt;!-- Brand --&gt;
-    &lt;a href=&quot;#hero&quot; class=&quot;nav-brand&quot;&gt;
-      &lt;div class=&quot;brand-icon&quot;&gt;⚡&lt;/div&gt;
-      &lt;span class=&quot;brand-name&quot;&gt;Synapse OS&lt;/span&gt;
-    &lt;/a&gt;
 
-    &lt;!-- Adaptive Links (Dinamis via JS berdasarkan persona) --&gt;
-    &lt;ul class=&quot;nav-menu&quot; id=&quot;nav-menu&quot;&gt;
-      &lt;li class=&quot;adaptive-item&quot;&gt;&lt;a href=&quot;#platform&quot; class=&quot;nav-link&quot;&gt;Platform&lt;/a&gt;&lt;/li&gt;
-      &lt;li class=&quot;adaptive-item&quot;&gt;&lt;a href=&quot;#solutions&quot; class=&quot;nav-link&quot;&gt;Solutions&lt;/a&gt;&lt;/li&gt;
-      &lt;li class=&quot;adaptive-item&quot;&gt;&lt;a href=&quot;#tech-specs&quot; class=&quot;nav-link&quot;&gt;Technology&lt;/a&gt;&lt;/li&gt;
-      &lt;li class=&quot;adaptive-item&quot;&gt;&lt;a href=&quot;#enterprise-security&quot; class=&quot;nav-link&quot;&gt;Enterprise&lt;/a&gt;&lt;/li&gt;
-      &lt;li class=&quot;adaptive-item&quot;&gt;&lt;a href=&quot;#pricing&quot; class=&quot;nav-link&quot;&gt;Pricing&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-
-    &lt;!-- Live Intent Confidence Pill --&gt;
-    &lt;div class=&quot;intent-badge-pill&quot; id=&quot;intent-badge&quot; title=&quot;Live Persona Intent Inference&quot;&gt;
-      &lt;span class=&quot;sparkle&quot;&gt;✦&lt;/span&gt;
-      &lt;span class=&quot;intent-text&quot; id=&quot;intent-label&quot;&gt;General Exploration&lt;/span&gt;
-      &lt;span class=&quot;intent-conf&quot; id=&quot;intent-conf&quot;&gt;78%&lt;/span&gt;
+  &lt;aside class=&quot;simulator-strip&quot; aria-label=&quot;Intent Simulation Controls&quot;&gt;
+    &lt;div class=&quot;sim-label&quot;&gt;&lt;span class=&quot;sim-pulse&quot;&gt;&lt;/span&gt;&lt;span&gt;LIVE INTENT SIMULATOR:&lt;/span&gt;&lt;/div&gt;
+    &lt;div class=&quot;simulator-buttons&quot;&gt;
+      &lt;button class=&quot;sim-btn active&quot; data-intent=&quot;exploring&quot;&gt;01 / Explorer&lt;/button&gt;
+      &lt;button class=&quot;sim-btn&quot; data-intent=&quot;developer&quot;&gt;02 / Developer&lt;/button&gt;
+      &lt;button class=&quot;sim-btn&quot; data-intent=&quot;enterprise&quot;&gt;03 / Enterprise&lt;/button&gt;
+      &lt;button class=&quot;sim-btn&quot; data-intent=&quot;designer&quot;&gt;04 / Designer&lt;/button&gt;
+      &lt;a href=&quot;../index.html&quot; class=&quot;sim-btn&quot; style=&quot;text-decoration:none;margin-left:8px;border-color:rgba(255,255,255,0.2);color:#fff;&quot;&gt;← Collection&lt;/a&gt;
     &lt;/div&gt;
+  &lt;/aside&gt;
+  &lt;!-- MORPHING PREDICTIVE NAVBAR --&gt;
+  &lt;header class=&quot;nav-header&quot;&gt;
+    &lt;nav class=&quot;nav-container&quot; aria-label=&quot;Predictive AI Navigation&quot;&gt;
+      
+      &lt;!-- Brand --&gt;
+      &lt;a href=&quot;#hero&quot; class=&quot;nav-brand&quot;&gt;
+        &lt;div class=&quot;brand-icon&quot;&gt;⚡&lt;/div&gt;
+        &lt;span class=&quot;brand-name&quot;&gt;Synapse OS&lt;/span&gt;
+      &lt;/a&gt;
 
-    &lt;!-- Adaptive Action CTAs --&gt;
-    &lt;div class=&quot;nav-actions&quot;&gt;
-      &lt;a href=&quot;#demo&quot; class=&quot;action-btn-adaptive btn-ghost-ai&quot; id=&quot;action-ghost&quot;&gt;Book Demo&lt;/a&gt;
-      &lt;a href=&quot;#cta&quot; class=&quot;action-btn-adaptive btn-primary-ai&quot; id=&quot;action-primary&quot;&gt;Get Started Free →&lt;/a&gt;
+      &lt;!-- Adaptive Morphing Links --&gt;
+      &lt;ul class=&quot;nav-menu&quot; id=&quot;nav-menu&quot;&gt;
+        &lt;!-- Injected dynamically by script.js based on intent --&gt;
+      &lt;/ul&gt;
+
+      &lt;!-- Live Intent Status Pill --&gt;
+      &lt;div class=&quot;intent-badge-pill&quot; id=&quot;intent-badge&quot; title=&quot;Live Persona Intent Inference&quot;&gt;
+        &lt;span class=&quot;sparkle&quot;&gt;✦&lt;/span&gt;
+        &lt;span class=&quot;intent-text&quot; id=&quot;intent-label&quot;&gt;General Exploration&lt;/span&gt;
+        &lt;span class=&quot;intent-conf&quot; id=&quot;intent-conf&quot;&gt;78%&lt;/span&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Adaptive Action CTAs --&gt;
+      &lt;div class=&quot;nav-actions&quot;&gt;
+        &lt;a href=&quot;../index.html&quot; class=&quot;action-btn-adaptive btn-ghost-ai&quot; id=&quot;action-ghost&quot;&gt;Collection&lt;/a&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Mobile Hamburger Button --&gt;
+      &lt;button class=&quot;nav-burger-btn&quot; id=&quot;nav-burger&quot; aria-label=&quot;Toggle Navigation Menu&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;mobile-drawer&quot;&gt;
+        &lt;span&gt;&lt;/span&gt;
+        &lt;span&gt;&lt;/span&gt;
+        &lt;span&gt;&lt;/span&gt;
+      &lt;/button&gt;
+
+    &lt;/nav&gt;
+  &lt;/header&gt;
+
+  &lt;!-- MOBILE DRAWER --&gt;
+  &lt;div class=&quot;mobile-drawer&quot; id=&quot;mobile-drawer&quot; aria-hidden=&quot;true&quot;&gt;
+    &lt;div class=&quot;mobile-drawer-backdrop&quot; id=&quot;mobile-backdrop&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;mobile-drawer-panel&quot;&gt;
+      &lt;div class=&quot;mobile-drawer-header&quot;&gt;
+        &lt;div class=&quot;nav-brand&quot;&gt;
+          &lt;div class=&quot;brand-icon&quot;&gt;⚡&lt;/div&gt;
+          &lt;span class=&quot;brand-name&quot;&gt;Synapse OS&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;button class=&quot;drawer-close-btn&quot; id=&quot;drawer-close&quot; aria-label=&quot;Close menu&quot;&gt;&amp;times;&lt;/button&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;mobile-intent-status&quot; id=&quot;mobile-intent-badge&quot;&gt;
+        &lt;span class=&quot;sparkle&quot;&gt;✦&lt;/span&gt;
+        &lt;span class=&quot;intent-text&quot; id=&quot;mobile-intent-label&quot;&gt;General Exploration&lt;/span&gt;
+        &lt;span class=&quot;intent-conf&quot; id=&quot;mobile-intent-conf&quot;&gt;78%&lt;/span&gt;
+      &lt;/div&gt;
+
+      &lt;ul class=&quot;mobile-nav-menu&quot; id=&quot;mobile-nav-menu&quot;&gt;
+        &lt;!-- Injected dynamically by script.js --&gt;
+      &lt;/ul&gt;
+
+      &lt;div class=&quot;mobile-drawer-actions&quot;&gt;
+        &lt;a href=&quot;../index.html&quot; class=&quot;action-btn-adaptive btn-ghost-ai&quot;&gt;Back to Collection&lt;/a&gt;
+      &lt;/div&gt;
     &lt;/div&gt;
+  &lt;/div&gt;
 
-  &lt;/nav&gt;
-&lt;/header&gt;</code></pre>
+
+  &lt;script src=&quot;script.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
       </div>
     </section>
 
@@ -375,24 +418,30 @@
             <span class="copy-label">Copy</span>
           </button>
         </div>
-        <pre><code id="code-3" class="language-css">/* ================================================================
-   AI ADAPTIVE INTENT NAVBAR — CSS TOKENS &amp; STYLES
-   ================================================================ */
+        <pre><code id="code-3" class="language-css">/* =============================================================
+   AI ADAPTIVE INTENT NAVBAR — style.css
+   Predictive Morphing Navigation System
+   ============================================================= */
+
 @import url(&#39;https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap&#39;);
 
+/* ── Design Tokens ─────────────────────────────────────────── */
 :root {
   --bg-dark: #090d16;
   --bg-surface: #0f172a;
+  --bg-card: rgba(15, 23, 42, 0.7);
   --border-subtle: rgba(255, 255, 255, 0.08);
   --border-active: rgba(99, 102, 241, 0.4);
 
   --text-white: #ffffff;
   --text-slate-200: #e2e8f0;
   --text-slate-400: #94a3b8;
+  --text-slate-500: #64748b;
 
   --ai-primary: #6366f1;
   --ai-cyan: #06b6d4;
   --ai-emerald: #10b981;
+  --ai-amber: #f59e0b;
   --ai-glow: rgba(99, 102, 241, 0.35);
 
   --font-main: &#39;Plus Jakarta Sans&#39;, sans-serif;
@@ -402,7 +451,54 @@
   --duration-morph: 420ms;
 }
 
-/* ── Top Simulator Toolbar ──────────────────────────────────── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-slate-200);
+  font-family: var(--font-main);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Background Gradients */
+.bg-grid-pattern {
+  position: fixed;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ai-light-orb {
+  position: fixed;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  height: 380px;
+  background: radial-gradient(ellipse at center, rgba(99, 102, 241, 0.18) 0%, rgba(6, 182, 212, 0.08) 50%, transparent 80%);
+  filter: blur(70px);
+  pointer-events: none;
+  z-index: 0;
+  transition: all 0.8s ease;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TOP SIMULATOR TOOLBAR
+   ═══════════════════════════════════════════════════════════════ */
 .simulator-strip {
   position: fixed;
   top: 0;
@@ -470,7 +566,9 @@
   color: #fff;
 }
 
-/* ── Morphing Navbar Header ─────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════
+   PREDICTIVE AI NAVBAR (MORPHING CONTAINER)
+   ═══════════════════════════════════════════════════════════════ */
 .nav-header {
   position: fixed;
   top: 54px;
@@ -525,7 +623,7 @@
   letter-spacing: -0.02em;
 }
 
-/* Morphing Links */
+/* Morphing Menu Links */
 .nav-menu {
   display: flex;
   align-items: center;
@@ -553,11 +651,28 @@
   background: rgba(255, 255, 255, 0.06);
 }
 
-.adaptive-item {
-  transition: all var(--duration-morph) var(--ease-morph);
+.nav-link.active {
+  color: var(--text-white);
+  background: rgba(255, 255, 255, 0.1);
 }
 
-/* Intent Indicator Pill */
+/* Adaptive Morphing Items (Show/Hide dynamically) */
+.adaptive-item {
+  transition: all var(--duration-morph) var(--ease-morph);
+  overflow: hidden;
+  max-width: 140px;
+  opacity: 1;
+}
+
+.adaptive-item.collapsed {
+  max-width: 0;
+  opacity: 0;
+  padding: 0;
+  margin: 0;
+  pointer-events: none;
+}
+
+/* Live Intent Badge */
 .intent-badge-pill {
   display: flex;
   align-items: center;
@@ -627,11 +742,393 @@
   color: #fff;
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   PAGE CONTENT (SYNAPSE AI ENTERPRISE SECTIONS)
+   ═══════════════════════════════════════════════════════════════ */
+.page-container {
+  position: relative;
+  z-index: 10;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 160px 24px 120px;
+}
+
+/* Hero Section */
+.hero-section {
+  text-align: center;
+  padding: 60px 0 100px;
+}
+
+.ai-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  font-family: var(--font-code);
+  font-size: 12px;
+  color: var(--ai-cyan);
+  margin-bottom: 24px;
+}
+
+.hero-h1 {
+  font-size: clamp(40px, 6vw, 76px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  color: #fff;
+}
+
+.hero-h1 .gradient-ai {
+  background: linear-gradient(135deg, #ffffff 10%, #cbd5e1 40%, var(--ai-cyan) 75%, var(--ai-primary) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-lead {
+  font-size: clamp(16px, 2vw, 19px);
+  color: var(--text-slate-400);
+  max-width: 720px;
+  margin: 0 auto 40px;
+}
+
+/* Content Blocks for Intent Dwell Detection */
+.intent-detector-block {
+  padding: 80px 40px;
+  border-radius: 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  backdrop-filter: blur(16px);
+  margin-bottom: 40px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.4s ease;
+}
+
+.intent-detector-block.focused {
+  border-color: var(--border-active);
+  box-shadow: 0 0 40px rgba(99, 102, 241, 0.15);
+}
+
+.block-tag {
+  font-family: var(--font-code);
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--ai-cyan);
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+}
+
+.block-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 16px;
+}
+
+.block-text {
+  color: var(--text-slate-400);
+  font-size: 15px;
+  max-width: 680px;
+  margin-bottom: 30px;
+}
+
+/* Code Snippet Box for Developer Intent */
+.code-preview {
+  background: #060911;
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 20px;
+  font-family: var(--font-code);
+  font-size: 13px;
+  color: #38bdf8;
+  overflow-x: auto;
+}
+
+/* Enterprise Pricing / Compliance Grid */
+.enterprise-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.spec-card {
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+}
+
+.spec-card h4 {
+  font-size: 18px;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.spec-card p {
+  font-size: 13px;
+  color: var(--text-slate-400);
+}
+
+/* ── Mobile Burger Button ──────────────────────────────────── */
+.nav-burger-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 0;
+  z-index: 101;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.nav-burger-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.nav-burger-btn span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: #fff;
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.nav-burger-btn.is-active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.nav-burger-btn.is-active span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.nav-burger-btn.is-active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ── Mobile Drawer ─────────────────────────────────────────── */
+.mobile-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  visibility: hidden;
+  pointer-events: none;
+  transition: visibility 0.3s ease;
+}
+
+.mobile-drawer.is-open {
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.mobile-drawer-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 7, 15, 0.75);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.mobile-drawer.is-open .mobile-drawer-backdrop {
+  opacity: 1;
+}
+
+.mobile-drawer-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(85vw, 360px);
+  height: 100%;
+  background: #0b0f19;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.6);
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-y: auto;
+}
+
+.mobile-drawer.is-open .mobile-drawer-panel {
+  transform: translateX(0);
+}
+
+.mobile-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.drawer-close-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 24px;
+  line-height: 1;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.drawer-close-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.mobile-intent-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: rgba(99, 102, 241, 0.12);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 999px;
+  margin-bottom: 24px;
+  font-size: 12px;
+  font-family: var(--font-mono, monospace);
+  color: #c7d2fe;
+}
+
+.mobile-intent-status .sparkle {
+  color: #818cf8;
+}
+
+.mobile-intent-status .intent-conf {
+  margin-left: auto;
+  font-weight: 700;
+  color: #a5b4fc;
+}
+
+.mobile-nav-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex-grow: 1;
+}
+
+.mobile-nav-menu .nav-link {
+  display: block;
+  padding: 12px 14px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-slate-300, #cbd5e1);
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.mobile-nav-menu .nav-link:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.mobile-drawer-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.mobile-drawer-actions .action-btn-adaptive {
+  text-align: center;
+  justify-content: center;
+  width: 100%;
+  padding: 12px 18px;
+  font-size: 14px;
+}
+
+/* ── Responsive Breakpoints ───────────────────────────────── */
+@media (max-width: 1024px) {
+  .simulator-strip {
+    overflow-x: auto;
+    white-space: nowrap;
+    justify-content: flex-start;
+    padding: 8px 16px;
+  }
+  .simulator-buttons {
+    flex-wrap: nowrap;
+  }
+}
+
 @media (max-width: 900px) {
-  .simulator-strip { display: none; }
-  .nav-header { top: 16px; }
-  .nav-menu { display: none; }
-  .intent-badge-pill { display: none; }
+  .nav-header {
+    top: 12px;
+    padding: 0 16px;
+  }
+  .nav-container {
+    padding: 8px 14px;
+  }
+  .nav-menu {
+    display: none;
+  }
+  .intent-badge-pill {
+    display: none;
+  }
+  .nav-burger-btn {
+    display: flex;
+  }
+  .hero-title {
+    font-size: clamp(32px, 6vw, 48px);
+  }
+}
+
+@media (max-width: 640px) {
+  .simulator-strip {
+    font-size: 11px;
+    padding: 6px 12px;
+  }
+  .nav-actions {
+    display: none; /* Accessible inside mobile drawer */
+  }
+  .nav-brand .brand-name {
+    font-size: 15px;
+  }
+  .page-container {
+    padding: 110px 16px 60px;
+  }
+  .hero-section {
+    padding: 30px 0 60px;
+  }
+  .spec-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 400px) {
+  .nav-container {
+    padding: 6px 10px;
+  }
+  .nav-brand .brand-name { font-size: 13px; }
+  .hero-title { font-size: clamp(26px, 7vw, 36px); }
+  .hero-subtitle { font-size: 13px; }
+  .page-container { padding: 100px 12px 50px; }
+  .hero-section { padding: 20px 0 40px; }
+  .simulator-strip { font-size: 10px; padding: 5px 10px; }
 }</code></pre>
       </div>
     </section>
@@ -652,13 +1149,15 @@
             <span class="copy-label">Copy</span>
           </button>
         </div>
-        <pre><code id="code-4" class="language-javascript">/* ================================================================
-   AI ADAPTIVE INTENT NAVBAR — LOGIC &amp; INFERENCE ENGINE
-   ================================================================ */
+        <pre><code id="code-4" class="language-javascript">/* =============================================================
+   AI ADAPTIVE INTENT NAVBAR — script.js
+   Predictive Intent Inference Engine &amp; Dynamic Morphing
+   ============================================================= */
+
 (function () {
   &#39;use strict&#39;;
 
-  // 1. Definisi Profil Persona &amp; Tautan
+  /* ── Intent Profiles ────────────────────────────────────────── */
   const INTENTS = {
     exploring: {
       id: &#39;exploring&#39;,
@@ -666,11 +1165,11 @@
       confidence: 78,
       pillColor: &#39;#6366f1&#39;,
       links: [
-        { label: &#39;Platform&#39;, href: &#39;#hero&#39; },
-        { label: &#39;Solutions&#39;, href: &#39;#solutions&#39; },
-        { label: &#39;Technology&#39;, href: &#39;#tech-specs&#39; },
-        { label: &#39;Enterprise&#39;, href: &#39;#enterprise-security&#39; },
-        { label: &#39;Pricing&#39;, href: &#39;#pricing&#39; }
+        { label: &#39;Platform&#39;, href: &#39;#hero&#39;, class: &#39;&#39; },
+        { label: &#39;Solutions&#39;, href: &#39;#solutions&#39;, class: &#39;&#39; },
+        { label: &#39;Technology&#39;, href: &#39;#tech-specs&#39;, class: &#39;&#39; },
+        { label: &#39;Enterprise&#39;, href: &#39;#enterprise-security&#39;, class: &#39;&#39; },
+        { label: &#39;Pricing&#39;, href: &#39;#pricing&#39;, class: &#39;&#39; }
       ],
       primaryAction: { label: &#39;Get Started Free →&#39;, href: &#39;#cta&#39; },
       ghostAction: { label: &#39;Book Demo&#39;, href: &#39;#demo&#39; }
@@ -681,10 +1180,10 @@
       confidence: 96,
       pillColor: &#39;#06b6d4&#39;,
       links: [
-        { label: &#39;API Reference&#39;, href: &#39;#tech-specs&#39; },
-        { label: &#39;Python / TS SDK&#39;, href: &#39;#tech-specs&#39; },
-        { label: &#39;Edge Benchmarks&#39;, href: &#39;#tech-specs&#39; },
-        { label: &#39;GitHub Repo&#39;, href: &#39;https://github.com&#39; }
+        { label: &#39;API Reference&#39;, href: &#39;#tech-specs&#39;, class: &#39;&#39; },
+        { label: &#39;Python / TS SDK&#39;, href: &#39;#tech-specs&#39;, class: &#39;&#39; },
+        { label: &#39;Edge Benchmarks&#39;, href: &#39;#tech-specs&#39;, class: &#39;&#39; },
+        { label: &#39;GitHub Repo&#39;, href: &#39;https://github.com&#39;, class: &#39;&#39; }
       ],
       primaryAction: { label: &#39;npm i @synapse/sdk 📋&#39;, href: &#39;#copy-sdk&#39; },
       ghostAction: { label: &#39;Interactive Sandbox&#39;, href: &#39;#sandbox&#39; }
@@ -695,10 +1194,10 @@
       confidence: 93,
       pillColor: &#39;#10b981&#39;,
       links: [
-        { label: &#39;SOC2 &amp; HIPAA&#39;, href: &#39;#enterprise-security&#39; },
-        { label: &#39;99.999% SLA&#39;, href: &#39;#enterprise-security&#39; },
-        { label: &#39;Security Whitepaper&#39;, href: &#39;#enterprise-security&#39; },
-        { label: &#39;ROI Calculator&#39;, href: &#39;#pricing&#39; }
+        { label: &#39;SOC2 &amp; HIPAA&#39;, href: &#39;#enterprise-security&#39;, class: &#39;&#39; },
+        { label: &#39;99.999% SLA&#39;, href: &#39;#enterprise-security&#39;, class: &#39;&#39; },
+        { label: &#39;Security Whitepaper&#39;, href: &#39;#enterprise-security&#39;, class: &#39;&#39; },
+        { label: &#39;ROI Calculator&#39;, href: &#39;#pricing&#39;, class: &#39;&#39; }
       ],
       primaryAction: { label: &#39;Schedule Executive Demo →&#39;, href: &#39;#demo&#39; },
       ghostAction: { label: &#39;Custom Contract&#39;, href: &#39;#sales&#39; }
@@ -709,33 +1208,81 @@
       confidence: 89,
       pillColor: &#39;#f59e0b&#39;,
       links: [
-        { label: &#39;UI Architecture&#39;, href: &#39;#hero&#39; },
-        { label: &#39;Design Tokens&#39;, href: &#39;#solutions&#39; },
-        { label: &#39;Figma Community Kit&#39;, href: &#39;#hero&#39; }
+        { label: &#39;UI Architecture&#39;, href: &#39;#hero&#39;, class: &#39;&#39; },
+        { label: &#39;Design Tokens&#39;, href: &#39;#solutions&#39;, class: &#39;&#39; },
+        { label: &#39;Figma Community Kit&#39;, href: &#39;#hero&#39;, class: &#39;&#39; }
       ],
       primaryAction: { label: &#39;Download Design Kit 🎨&#39;, href: &#39;#kit&#39; },
       ghostAction: { label: &#39;Component Gallery&#39;, href: &#39;#components&#39; }
     }
   };
 
+  /* ── State ─────────────────────────────────────────────────── */
   let currentIntent = &#39;exploring&#39;;
   let dwellTimers = {};
 
-  const navMenu       = document.getElementById(&#39;nav-menu&#39;);
-  const intentLabel   = document.getElementById(&#39;intent-label&#39;);
-  const intentConf    = document.getElementById(&#39;intent-conf&#39;);
-  const intentBadge   = document.getElementById(&#39;intent-badge&#39;);
-  const actionPrimary = document.getElementById(&#39;action-primary&#39;);
-  const actionGhost   = document.getElementById(&#39;action-ghost&#39;);
-  const simButtons    = document.querySelectorAll(&#39;.sim-btn&#39;);
+  /* ── DOM References ─────────────────────────────────────────── */
+  const navMenu            = document.getElementById(&#39;nav-menu&#39;);
+  const intentLabel        = document.getElementById(&#39;intent-label&#39;);
+  const intentConf         = document.getElementById(&#39;intent-conf&#39;);
+  const intentBadge        = document.getElementById(&#39;intent-badge&#39;);
+  const actionPrimary      = document.getElementById(&#39;action-primary&#39;);
+  const actionGhost        = document.getElementById(&#39;action-ghost&#39;);
+  const simButtons         = document.querySelectorAll(&#39;.sim-btn&#39;);
+  const lightOrb           = document.getElementById(&#39;light-orb&#39;);
 
-  // 2. Fungsi Transformasi Morphing Navbar
+  // Mobile Drawer Elements
+  const navBurger          = document.getElementById(&#39;nav-burger&#39;);
+  const mobileDrawer       = document.getElementById(&#39;mobile-drawer&#39;);
+  const mobileBackdrop     = document.getElementById(&#39;mobile-backdrop&#39;);
+  const drawerClose        = document.getElementById(&#39;drawer-close&#39;);
+  const mobileNavMenu      = document.getElementById(&#39;mobile-nav-menu&#39;);
+  const mobileIntentLabel  = document.getElementById(&#39;mobile-intent-label&#39;);
+  const mobileIntentConf   = document.getElementById(&#39;mobile-intent-conf&#39;);
+  const mobileIntentBadge  = document.getElementById(&#39;mobile-intent-badge&#39;);
+  const mobileActionPrimary = document.getElementById(&#39;mobile-action-primary&#39;);
+  const mobileActionGhost  = document.getElementById(&#39;mobile-action-ghost&#39;);
+
+  function openDrawer() {
+    if (!mobileDrawer) return;
+    mobileDrawer.classList.add(&#39;is-open&#39;);
+    mobileDrawer.setAttribute(&#39;aria-hidden&#39;, &#39;false&#39;);
+    if (navBurger) {
+      navBurger.classList.add(&#39;is-active&#39;);
+      navBurger.setAttribute(&#39;aria-expanded&#39;, &#39;true&#39;);
+    }
+  }
+
+  function closeDrawer() {
+    if (!mobileDrawer) return;
+    mobileDrawer.classList.remove(&#39;is-open&#39;);
+    mobileDrawer.setAttribute(&#39;aria-hidden&#39;, &#39;true&#39;);
+    if (navBurger) {
+      navBurger.classList.remove(&#39;is-active&#39;);
+      navBurger.setAttribute(&#39;aria-expanded&#39;, &#39;false&#39;);
+    }
+  }
+
+  if (navBurger) {
+    navBurger.addEventListener(&#39;click&#39;, () =&gt; {
+      const isOpen = mobileDrawer &amp;&amp; mobileDrawer.classList.contains(&#39;is-open&#39;);
+      isOpen ? closeDrawer() : openDrawer();
+    });
+  }
+
+  if (mobileBackdrop) mobileBackdrop.addEventListener(&#39;click&#39;, closeDrawer);
+  if (drawerClose) drawerClose.addEventListener(&#39;click&#39;, closeDrawer);
+  window.addEventListener(&#39;keydown&#39;, (e) =&gt; {
+    if (e.key === &#39;Escape&#39;) closeDrawer();
+  });
+
+  /* ── Morph Navbar into Intent State ─────────────────────────── */
   function morphNavbar(intentKey) {
     if (!INTENTS[intentKey]) return;
     currentIntent = intentKey;
     const config = INTENTS[intentKey];
 
-    // Update Simulator toolbar
+    // Update Simulator toolbar active state
     simButtons.forEach(btn =&gt; {
       btn.classList.toggle(&#39;active&#39;, btn.dataset.intent === intentKey);
     });
@@ -745,10 +1292,15 @@
     if (intentConf)  intentConf.textContent  = `${config.confidence}%`;
     if (intentBadge) {
       intentBadge.style.borderColor = config.pillColor;
-      intentBadge.style.background  = `${config.pillColor}1a`;
+      intentBadge.style.background  = `${config.pillColor}1a`; // 10% opacity
     }
 
-    // Re-render menu links dengan animasi transisi
+    // Update Ambient light orb tint
+    if (lightOrb) {
+      lightOrb.style.background = `radial-gradient(ellipse at center, ${config.pillColor}33 0%, rgba(6, 182, 212, 0.08) 50%, transparent 80%)`;
+    }
+
+    // Render morphing links with smooth transition
     if (navMenu) {
       navMenu.style.opacity = &#39;0&#39;;
       navMenu.style.transform = &#39;translateY(-4px)&#39;;
@@ -771,57 +1323,79 @@
       }, 180);
     }
 
-    // Morph CTA buttons
+    // Update Mobile Intent Badge
+    if (mobileIntentLabel) mobileIntentLabel.textContent = config.label;
+    if (mobileIntentConf)  mobileIntentConf.textContent  = `${config.confidence}%`;
+    if (mobileIntentBadge) {
+      mobileIntentBadge.style.borderColor = config.pillColor;
+      mobileIntentBadge.style.background  = `${config.pillColor}22`;
+    }
+
+    // Render mobile drawer links
+    if (mobileNavMenu) {
+      mobileNavMenu.innerHTML = &#39;&#39;;
+      config.links.forEach(link =&gt; {
+        const li = document.createElement(&#39;li&#39;);
+        const a = document.createElement(&#39;a&#39;);
+        a.href = link.href;
+        a.className = &#39;nav-link&#39;;
+        a.textContent = link.label;
+        a.addEventListener(&#39;click&#39;, () =&gt; closeDrawer());
+        li.appendChild(a);
+        mobileNavMenu.appendChild(li);
+      });
+    }
+
+    // Morph primary CTA
     if (actionPrimary) {
       actionPrimary.textContent = config.primaryAction.label;
       actionPrimary.href = config.primaryAction.href;
       actionPrimary.style.background = `linear-gradient(135deg, ${config.pillColor}, #4f46e5)`;
     }
+    if (mobileActionPrimary) {
+      mobileActionPrimary.textContent = config.primaryAction.label;
+      mobileActionPrimary.href = config.primaryAction.href;
+      mobileActionPrimary.style.background = `linear-gradient(135deg, ${config.pillColor}, #4f46e5)`;
+      mobileActionPrimary.addEventListener(&#39;click&#39;, () =&gt; closeDrawer());
+    }
 
+    // Morph ghost CTA
     if (actionGhost) {
       actionGhost.textContent = config.ghostAction.label;
       actionGhost.href = config.ghostAction.href;
     }
+    if (mobileActionGhost) {
+      mobileActionGhost.textContent = config.ghostAction.label;
+      mobileActionGhost.href = config.ghostAction.href;
+      mobileActionGhost.addEventListener(&#39;click&#39;, () =&gt; closeDrawer());
+    }
   }
 
-  // 3. Deteksi Dwell Time &amp; Scroll
-  const sectionIntents = [
-    { selector: &#39;#tech-specs&#39;, intent: &#39;developer&#39;, minDwellMs: 1200 },
-    { selector: &#39;#enterprise-security&#39;, intent: &#39;enterprise&#39;, minDwellMs: 1400 },
-    { selector: &#39;#solutions&#39;, intent: &#39;designer&#39;, minDwellMs: 1500 }
-  ];
 
-  const observer = new IntersectionObserver((entries) =&gt; {
-    entries.forEach(entry =&gt; {
-      const match = sectionIntents.find(s =&gt; entry.target.matches(s.selector));
-      if (!match) return;
-
-      if (entry.isIntersecting &amp;&amp; entry.intersectionRatio &gt; 0.4) {
-        dwellTimers[match.intent] = setTimeout(() =&gt; {
-          if (currentIntent !== match.intent) {
-            morphNavbar(match.intent);
-          }
-        }, match.minDwellMs);
-      } else {
-        clearTimeout(dwellTimers[match.intent]);
-      }
-    });
-  }, { threshold: [0.4] });
-
-  sectionIntents.forEach(s =&gt; {
-    const el = document.querySelector(s.selector);
-    if (el) observer.observe(el);
-  });
-
-  // 4. Tombol Simulator Toolbar
+  /* ── Interactive Simulator Buttons ──────────────────────────── */
   simButtons.forEach(btn =&gt; {
     btn.addEventListener(&#39;click&#39;, () =&gt; {
-      morphNavbar(btn.dataset.intent);
+      const targetIntent = btn.dataset.intent;
+      morphNavbar(targetIntent);
     });
   });
 
-  // Inisialisasi awal
+  /* ── Copy SDK Command Feedback ──────────────────────────────── */
+  if (actionPrimary) {
+    actionPrimary.addEventListener(&#39;click&#39;, (e) =&gt; {
+      if (actionPrimary.getAttribute(&#39;href&#39;) === &#39;#copy-sdk&#39;) {
+        e.preventDefault();
+        navigator.clipboard.writeText(&#39;npm install @synapse/sdk&#39;);
+        const prevText = actionPrimary.textContent;
+        actionPrimary.textContent = &#39;Copied to Clipboard! ✓&#39;;
+        setTimeout(() =&gt; { actionPrimary.textContent = prevText; }, 2000);
+      }
+    });
+  }
+
+  /* ── Initial State ──────────────────────────────────────────── */
   morphNavbar(&#39;exploring&#39;);
+
 })();</code></pre>
       </div>
     </section>

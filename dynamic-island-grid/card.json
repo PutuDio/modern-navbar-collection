@@ -1,0 +1,11 @@
+{
+  "title": "Dynamic Island Grid",
+  "category": "experimental",
+  "categoryLabel": "Experimental — Dynamic Island Grid Navigation",
+  "descriptionShort": "Expandable grid navigation with page descriptions and built-in search.",
+  "descriptionLong": "Dynamic Island navigation that expands into a descriptive page grid with searchable page results.",
+  "tech": "HTML · CSS · JavaScript",
+  "keywords": ["dynamic island", "grid", "navigation", "search", "responsive"],
+  "featured": false,
+  "order": 14
+}

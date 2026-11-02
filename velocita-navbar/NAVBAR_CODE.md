@@ -8,7 +8,28 @@ File ini berisi kode bersih (clean code) yang HANYA berhubungan dengan navbar Ve
 Letakkan kode ini di dalam tag `<body>` Anda.
 
 ```html
-<!-- ================================================================
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Velocita — Racing Cockpit Navbar | Creative Navbar Collection</title>
+  <meta name="description" content="Velocita: A premium motorsport-inspired floating navbar with carbon fiber textures, LED accent animations, and cockpit instrument aesthetics.">
+  <meta name="keywords" content="navbar, navigation, racing, motorsport, cockpit, UI component, CSS, JavaScript">
+  <meta name="author" content="Creative Navbar Collection">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+  <!-- ================================================================
        VELOCITA NAVBAR
        ================================================================ -->
   <nav class="velocita-nav" id="velocita-nav" role="navigation" aria-label="Main navigation">
@@ -149,7 +170,11 @@ Letakkan kode ini di dalam tag `<body>` Anda.
 
   </nav>
 
-  <!-- ==================== MOBILE (siblings to nav, not children) ==================== -->
+  <!-- Mobile Top Brand Header -->
+  <a href="#home" class="mobile-top-brand" aria-label="Velocita — Home">
+    <span class="brand-letter">V</span>
+    <span class="brand-name" style="font-family:var(--font-display); font-size:13px; font-weight:700; letter-spacing:2px; color:var(--text-primary);">VELOCITA</span>
+  </a>
 
   <!-- Mobile Toggle Button -->
   <button class="mobile-toggle" id="mobile-toggle"
@@ -201,6 +226,11 @@ Letakkan kode ini di dalam tag `<body>` Anda.
 
     </div>
   </div>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+</body>
+</html>
 ```
 
 ---
@@ -1032,6 +1062,29 @@ button {
   }
 }
 
+/* Mobile Top Brand Badge */
+.mobile-top-brand {
+  display: none;
+  position: fixed;
+  top: 14px;
+  left: 14px;
+  z-index: 1010;
+  height: 48px;
+  padding: 0 16px;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #18181f 0%, #0e0e14 100%);
+  border: 1px solid var(--border-subtle);
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+  transition: border-color var(--t-fast);
+}
+
+.mobile-top-brand:hover {
+  border-color: var(--border-accent);
+}
+
 /* Mobile */
 @media (max-width: 768px) {
   .nav-shell {
@@ -1042,13 +1095,223 @@ button {
     display: none;
   }
 
+  .mobile-top-brand {
+    display: flex;
+  }
+
   .mobile-toggle {
     display: flex;
+    top: 14px;
+    right: 14px;
+    bottom: auto;
+    width: 48px;
+    height: 48px;
   }
 
   .mobile-menu {
     display: block;
   }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: clamp(3rem, 16vw, 4.5rem);
+    letter-spacing: 4px;
+    word-break: break-word;
+  }
+  .hero-tagline {
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+  }
+  .section-title {
+    font-size: clamp(1.6rem, 8vw, 2.5rem);
+    letter-spacing: 3px;
+  }
+  .mobile-top-brand {
+    padding: 0 12px;
+    height: 44px;
+  }
+  .mobile-toggle {
+    width: 44px;
+    height: 44px;
+  }
+  .demo-section {
+    padding: 60px 16px 100px;
+  }
+}
+
+
+/* =============================================================
+   DEMO PAGE STYLES
+   (Remove these when integrating the navbar into your project)
+   ============================================================= */
+.demo-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 80px 24px 120px;
+}
+
+.section-inner {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* ---- Hero ---- */
+.hero-section {
+  overflow: hidden;
+}
+
+.hero-badge {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 5px;
+  color: var(--accent-red);
+  border: 1px solid var(--border-accent);
+  padding: 7px 22px;
+  border-radius: 100px;
+  margin-bottom: 36px;
+  background: var(--accent-glow-muted);
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(3.2rem, 11vw, 8rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 10px;
+  margin-bottom: 20px;
+}
+
+.title-line {
+  color: var(--text-primary);
+}
+
+.title-accent {
+  color: var(--accent-red);
+  text-shadow: 0 0 40px var(--accent-glow);
+}
+
+.hero-tagline {
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  font-weight: 500;
+  letter-spacing: 7px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+
+.hero-divider {
+  width: 56px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-red), var(--accent-orange));
+  margin: 0 auto 28px;
+  border-radius: 1px;
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+
+.hero-description {
+  font-size: 1rem;
+  color: var(--text-muted);
+  line-height: 1.9;
+  max-width: 440px;
+  margin: 0 auto;
+  letter-spacing: 0.3px;
+}
+
+/* Hero Background Decoration */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+  background-size: 70px 70px;
+  mask-image: radial-gradient(ellipse 50% 50% at center, black 10%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse 50% 50% at center, black 10%, transparent 70%);
+}
+
+.bg-radial {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 900px;
+  height: 900px;
+  background: radial-gradient(
+    circle,
+    rgba(230, 57, 70, 0.04) 0%,
+    transparent 55%
+  );
+}
+
+.bg-scanline {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0, 0, 0, 0.06) 3px,
+    rgba(0, 0, 0, 0.06) 4px
+  );
+  opacity: 0.5;
+}
+
+/* ---- Other Sections ---- */
+.section-tag {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 6vw, 4.5rem);
+  font-weight: 800;
+  letter-spacing: 8px;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+
+.section-desc {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+}
+
+/* Section separator */
+.demo-section:not(.hero-section)::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 36px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-accent), transparent);
+}
+
+/* Alternate section subtle bg shift */
+.demo-section:nth-child(even) {
+  background: rgba(255, 255, 255, 0.008);
 }
 ```
 

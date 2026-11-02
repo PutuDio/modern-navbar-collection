@@ -55,4 +55,4 @@ python -m http.server 8080
 npx serve .
 ```
 
-Buka [http://localhost:8080](http://localhost:8080) di browser untuk menjelajahi semua 12 navbar.
+Buka [https://navbar-sidebar-collection.netlify.app/](https://navbar-sidebar-collection.netlify.app/) di browser untuk menjelajahi semua 12 navbar.

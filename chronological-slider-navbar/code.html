@@ -304,107 +304,96 @@
             <span class="copy-label">Copy</span>
           </button>
         </div>
-        <pre><code id="code-2" class="language-html">&lt;!-- ================================================================
-     CHRONOLOGICAL SLIDER NAVBAR &amp; TIMELINE CHAPTERS
-     ================================================================ --&gt;
+        <pre><code id="code-2" class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+  &lt;title&gt;Chronological Slider Navbar — Timeline Time-Machine Storytelling&lt;/title&gt;
+  &lt;meta name=&quot;description&quot; content=&quot;A cinematic time-machine timeline slider navbar for company milestones, founder journey, and product roadmaps.&quot;&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;
+&lt;/head&gt;
+&lt;body class=&quot;era-genesis&quot;&gt;
 
-&lt;!-- Top Bar Indicator --&gt;
-&lt;header class=&quot;top-bar&quot;&gt;
-  &lt;a href=&quot;#&quot; class=&quot;brand-name&quot;&gt;Aetheria Chronos&lt;/a&gt;
-  &lt;div class=&quot;top-bar-right&quot;&gt;
-    &lt;span class=&quot;era-badge&quot; id=&quot;era-badge&quot;&gt;2019 — Genesis&lt;/span&gt;
-  &lt;/div&gt;
-&lt;/header&gt;
-
-&lt;!-- Main Chapters (Target Section yang terhubung ke era) --&gt;
-&lt;main class=&quot;page-content&quot;&gt;
-  &lt;section class=&quot;chapter visible&quot; id=&quot;genesis&quot;&gt;
-    &lt;div class=&quot;chapter-inner&quot;&gt;
-      &lt;div class=&quot;chapter-year-label&quot;&gt;Era 01 &#183; Inception&lt;/div&gt;
-      &lt;h1 class=&quot;chapter-title&quot;&gt;The spark of a &lt;em&gt;borderless&lt;/em&gt; vision.&lt;/h1&gt;
+  &lt;!-- TOP BAR --&gt;
+  &lt;header class=&quot;top-bar&quot;&gt;
+    &lt;div style=&quot;display:flex; align-items:center; gap:20px;&quot;&gt;
+      &lt;a href=&quot;../index.html&quot; style=&quot;text-decoration:none; display:inline-flex; align-items:center; gap:6px; font-size:13px; color:var(--ink-muted); font-weight:500; padding:6px 12px; border-radius:var(--radius-pill); background:rgba(0,0,0,0.04); border:1px solid var(--border-line);&quot;&gt;
+        ← Collection
+      &lt;/a&gt;
+      &lt;a href=&quot;#&quot; class=&quot;brand-name&quot;&gt;Aetheria Chronos&lt;/a&gt;
     &lt;/div&gt;
-  &lt;/section&gt;
-
-  &lt;section class=&quot;chapter&quot; id=&quot;growth&quot;&gt;
-    &lt;div class=&quot;chapter-inner&quot;&gt;
-      &lt;div class=&quot;chapter-year-label&quot;&gt;Era 02 &#183; Rapid Adoption&lt;/div&gt;
-      &lt;h1 class=&quot;chapter-title&quot;&gt;Scaling with &lt;em&gt;velocity&lt;/em&gt; through resonance.&lt;/h1&gt;
+    &lt;div class=&quot;top-bar-right&quot;&gt;
+      &lt;span class=&quot;era-badge&quot; id=&quot;era-badge&quot;&gt;2019 — Genesis&lt;/span&gt;
+      &lt;a href=&quot;https://github.com&quot; target=&quot;_blank&quot; style=&quot;text-decoration:none; font-family:var(--font-mono); font-size:11px; padding:6px 14px; border-radius:var(--radius-pill); background:var(--ink); color:#fff; font-weight:600;&quot;&gt;Explore Archive&lt;/a&gt;
     &lt;/div&gt;
-  &lt;/section&gt;
+  &lt;/header&gt;
 
-  &lt;section class=&quot;chapter&quot; id=&quot;expansion&quot;&gt;
-    &lt;div class=&quot;chapter-inner&quot;&gt;
-      &lt;div class=&quot;chapter-year-label&quot;&gt;Era 03 &#183; Enterprise Sovereign Grid&lt;/div&gt;
-      &lt;h1 class=&quot;chapter-title&quot;&gt;Fortifying the &lt;em&gt;backbone&lt;/em&gt; of critical tech.&lt;/h1&gt;
-    &lt;/div&gt;
-  &lt;/section&gt;
 
-  &lt;section class=&quot;chapter&quot; id=&quot;scale&quot;&gt;
-    &lt;div class=&quot;chapter-inner&quot;&gt;
-      &lt;div class=&quot;chapter-year-label&quot;&gt;Era 04 &#183; Cognitive Mesh&lt;/div&gt;
-      &lt;h1 class=&quot;chapter-title&quot;&gt;Orchestrating &lt;em&gt;hyper-scale&lt;/em&gt; systems.&lt;/h1&gt;
-    &lt;/div&gt;
-  &lt;/section&gt;
+  &lt;!-- TIMELINE SLIDER NAVBAR (MAIN COMPONENT) --&gt;
+  &lt;nav class=&quot;timeline-nav&quot; aria-label=&quot;Chronological Era Navigation&quot;&gt;
+    &lt;div class=&quot;timeline-track&quot; id=&quot;timeline-track&quot;&gt;
+      &lt;div class=&quot;timeline-strip&quot; id=&quot;timeline-strip&quot;&gt;
+        &lt;div class=&quot;timeline-line&quot;&gt;&lt;/div&gt;
+        
+        &lt;div class=&quot;era-node active&quot; tabindex=&quot;0&quot; role=&quot;button&quot; aria-label=&quot;Era 2019 Genesis&quot;&gt;
+          &lt;span class=&quot;era-year&quot;&gt;2019&lt;/span&gt;
+          &lt;span class=&quot;era-dot&quot;&gt;&lt;/span&gt;
+          &lt;span class=&quot;era-label&quot;&gt;Genesis&lt;/span&gt;
+        &lt;/div&gt;
 
-  &lt;section class=&quot;chapter&quot; id=&quot;future&quot;&gt;
-    &lt;div class=&quot;chapter-inner&quot;&gt;
-      &lt;div class=&quot;chapter-year-label&quot;&gt;Era 05 &#183; The Horizon&lt;/div&gt;
-      &lt;h1 class=&quot;chapter-title&quot;&gt;Pioneering the &lt;em&gt;planetary&lt;/em&gt; neural fabric.&lt;/h1&gt;
-    &lt;/div&gt;
-  &lt;/section&gt;
-&lt;/main&gt;
+        &lt;div class=&quot;era-node&quot; tabindex=&quot;0&quot; role=&quot;button&quot; aria-label=&quot;Era 2021 Growth&quot;&gt;
+          &lt;span class=&quot;era-year&quot;&gt;2021&lt;/span&gt;
+          &lt;span class=&quot;era-dot&quot;&gt;&lt;/span&gt;
+          &lt;span class=&quot;era-label&quot;&gt;Growth&lt;/span&gt;
+        &lt;/div&gt;
 
-&lt;!-- Fixed Bottom Timeline Scrubber Navbar --&gt;
-&lt;nav class=&quot;timeline-nav&quot; aria-label=&quot;Chronological Era Navigation&quot;&gt;
-  &lt;div class=&quot;timeline-track&quot; id=&quot;timeline-track&quot;&gt;
-    &lt;div class=&quot;timeline-strip&quot; id=&quot;timeline-strip&quot;&gt;
-      &lt;div class=&quot;timeline-line&quot;&gt;&lt;/div&gt;
-      
-      &lt;div class=&quot;era-node active&quot; tabindex=&quot;0&quot; role=&quot;button&quot; aria-label=&quot;Era 2019 Genesis&quot;&gt;
-        &lt;span class=&quot;era-year&quot;&gt;2019&lt;/span&gt;
-        &lt;span class=&quot;era-dot&quot;&gt;&lt;/span&gt;
-        &lt;span class=&quot;era-label&quot;&gt;Genesis&lt;/span&gt;
+        &lt;div class=&quot;era-node&quot; tabindex=&quot;0&quot; role=&quot;button&quot; aria-label=&quot;Era 2023 Expansion&quot;&gt;
+          &lt;span class=&quot;era-year&quot;&gt;2023&lt;/span&gt;
+          &lt;span class=&quot;era-dot&quot;&gt;&lt;/span&gt;
+          &lt;span class=&quot;era-label&quot;&gt;Expansion&lt;/span&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;era-node&quot; tabindex=&quot;0&quot; role=&quot;button&quot; aria-label=&quot;Era 2025 Scale&quot;&gt;
+          &lt;span class=&quot;era-year&quot;&gt;2025&lt;/span&gt;
+          &lt;span class=&quot;era-dot&quot;&gt;&lt;/span&gt;
+          &lt;span class=&quot;era-label&quot;&gt;Scale&lt;/span&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;era-node&quot; tabindex=&quot;0&quot; role=&quot;button&quot; aria-label=&quot;Era 2026+ Future&quot;&gt;
+          &lt;span class=&quot;era-year&quot;&gt;2026+&lt;/span&gt;
+          &lt;span class=&quot;era-dot&quot;&gt;&lt;/span&gt;
+          &lt;span class=&quot;era-label&quot;&gt;Future&lt;/span&gt;
+        &lt;/div&gt;
       &lt;/div&gt;
 
-      &lt;div class=&quot;era-node&quot; tabindex=&quot;0&quot; role=&quot;button&quot; aria-label=&quot;Era 2021 Growth&quot;&gt;
-        &lt;span class=&quot;era-year&quot;&gt;2021&lt;/span&gt;
-        &lt;span class=&quot;era-dot&quot;&gt;&lt;/span&gt;
-        &lt;span class=&quot;era-label&quot;&gt;Growth&lt;/span&gt;
-      &lt;/div&gt;
-
-      &lt;div class=&quot;era-node&quot; tabindex=&quot;0&quot; role=&quot;button&quot; aria-label=&quot;Era 2023 Expansion&quot;&gt;
-        &lt;span class=&quot;era-year&quot;&gt;2023&lt;/span&gt;
-        &lt;span class=&quot;era-dot&quot;&gt;&lt;/span&gt;
-        &lt;span class=&quot;era-label&quot;&gt;Expansion&lt;/span&gt;
-      &lt;/div&gt;
-
-      &lt;div class=&quot;era-node&quot; tabindex=&quot;0&quot; role=&quot;button&quot; aria-label=&quot;Era 2025 Scale&quot;&gt;
-        &lt;span class=&quot;era-year&quot;&gt;2025&lt;/span&gt;
-        &lt;span class=&quot;era-dot&quot;&gt;&lt;/span&gt;
-        &lt;span class=&quot;era-label&quot;&gt;Scale&lt;/span&gt;
-      &lt;/div&gt;
-
-      &lt;div class=&quot;era-node&quot; tabindex=&quot;0&quot; role=&quot;button&quot; aria-label=&quot;Era 2026+ Future&quot;&gt;
-        &lt;span class=&quot;era-year&quot;&gt;2026+&lt;/span&gt;
-        &lt;span class=&quot;era-dot&quot;&gt;&lt;/span&gt;
-        &lt;span class=&quot;era-label&quot;&gt;Future&lt;/span&gt;
+      &lt;!-- Center Scrubber Cursor --&gt;
+      &lt;div class=&quot;timeline-cursor&quot;&gt;
+        &lt;div class=&quot;cursor-line&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;cursor-diamond&quot;&gt;&lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
 
-    &lt;!-- Center Fixed Scrubber Diamond Cursor --&gt;
-    &lt;div class=&quot;timeline-cursor&quot;&gt;
-      &lt;div class=&quot;cursor-line&quot;&gt;&lt;/div&gt;
-      &lt;div class=&quot;cursor-diamond&quot;&gt;&lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
+    &lt;!-- Scrubber Slider Controls --&gt;
+    &lt;div class=&quot;scrubber-controls&quot;&gt;
+      &lt;button class=&quot;scrub-btn&quot; id=&quot;prev-era&quot; title=&quot;Previous Era (Arrow Left)&quot;&gt;
+        &lt;svg width=&quot;14&quot; height=&quot;14&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot;&gt;&lt;polyline points=&quot;15 18 9 12 15 6&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;
+        Prev
+      &lt;/button&gt;
 
-  &lt;!-- Range Slider Controls --&gt;
-  &lt;div class=&quot;scrubber-controls&quot;&gt;
-    &lt;button class=&quot;scrub-btn&quot; id=&quot;prev-era&quot; title=&quot;Previous Era&quot;&gt;Prev&lt;/button&gt;
-    &lt;input type=&quot;range&quot; id=&quot;scrub-input&quot; class=&quot;scrub-input&quot; min=&quot;0&quot; max=&quot;4&quot; value=&quot;0&quot; step=&quot;1&quot; aria-label=&quot;Timeline Era Scrubber&quot;&gt;
-    &lt;button class=&quot;scrub-btn&quot; id=&quot;next-era&quot; title=&quot;Next Era&quot;&gt;Next&lt;/button&gt;
-  &lt;/div&gt;
-&lt;/nav&gt;</code></pre>
+      &lt;input type=&quot;range&quot; id=&quot;scrub-input&quot; class=&quot;scrub-input&quot; min=&quot;0&quot; max=&quot;4&quot; value=&quot;0&quot; step=&quot;1&quot; aria-label=&quot;Timeline Era Scrubber&quot;&gt;
+
+      &lt;button class=&quot;scrub-btn&quot; id=&quot;next-era&quot; title=&quot;Next Era (Arrow Right)&quot;&gt;
+        Next
+        &lt;svg width=&quot;14&quot; height=&quot;14&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot;&gt;&lt;polyline points=&quot;9 18 15 12 9 6&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/nav&gt;
+
+
+  &lt;script src=&quot;script.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
       </div>
     </section>
 
@@ -424,35 +413,75 @@
             <span class="copy-label">Copy</span>
           </button>
         </div>
-        <pre><code id="code-3" class="language-css">/* ================================================================
-   CHRONOLOGICAL SLIDER NAVBAR — CSS TOKENS &amp; STYLES
-   ================================================================ */
+        <pre><code id="code-3" class="language-css">/* =============================================================
+   CHRONOLOGICAL SLIDER NAVBAR — style.css
+   Timeline Time-Machine Navigation &#183; Company Storytelling
+   ============================================================= */
+
+@import url(&#39;https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&amp;family=Inter:wght@300;400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;display=swap&#39;);
+
+/* ── Design Tokens ─────────────────────────────────────────── */
 :root {
   --bg-deep: #f5f0e8;
+  --bg-surface: #fefcf8;
+  --bg-card: rgba(255, 252, 248, 0.95);
+
+  --border-line: rgba(0, 0, 0, 0.08);
+  --border-strong: rgba(0, 0, 0, 0.18);
+
   --ink: #1a1108;
   --ink-muted: #6b5e48;
   --ink-dim: #a8997e;
-  --border-line: rgba(0, 0, 0, 0.08);
-  --border-strong: rgba(0, 0, 0, 0.18);
-  --era-color: #c8922a;
+
+  --accent-gold: #c8922a;
+  --accent-gold-light: #f0d080;
+  --accent-blue: #1d4ed8;
+  --accent-emerald: #065f46;
+  --accent-rose: #881337;
+
+  /* Era-specific colors (change via JS when switching era) */
+  --era-color: var(--accent-gold);
+
+  --font-display: &#39;Playfair Display&#39;, Georgia, serif;
+  --font-body: &#39;Inter&#39;, -apple-system, sans-serif;
+  --font-mono: &#39;Space Mono&#39;, monospace;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast: 200ms;
+  --duration-med: 380ms;
+  --duration-slow: 620ms;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-pill: 9999px;
 }
 
+/* ── Reset &amp; Base ────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
 body {
-  transition: background-color 1.2s ease;
-  font-family: -apple-system, BlinkMacSystemFont, &#39;Inter&#39;, sans-serif;
+  font-family: var(--font-body);
   background: var(--bg-deep);
   color: var(--ink);
-  margin: 0;
-  padding-bottom: 160px;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 1.2s var(--ease-in-out);
 }
 
-body.era-genesis   { --era-color: #065f46; --bg-deep: #f0f4f0; }
-body.era-growth    { --era-color: #1d4ed8; --bg-deep: #f0f2f8; }
-body.era-expansion { --era-color: #c8922a; --bg-deep: #f8f4ec; }
-body.era-scale     { --era-color: #7c3aed; --bg-deep: #f5f0fa; }
-body.era-future    { --era-color: #0f766e; --bg-deep: #eef8f7; }
+/* ── Era Theme Classes (applied to body) ─────────────────────── */
+body.era-genesis    { --era-color: #065f46; --bg-deep: #f0f4f0; }
+body.era-growth     { --era-color: #1d4ed8; --bg-deep: #f0f2f8; }
+body.era-expansion  { --era-color: #c8922a; --bg-deep: #f8f4ec; }
+body.era-scale      { --era-color: #7c3aed; --bg-deep: #f5f0fa; }
+body.era-future     { --era-color: #0f766e; --bg-deep: #eef8f7; }
 
-/* ── Top Bar ─────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════
+   TOP BAR
+   ═══════════════════════════════════════════════════════════════ */
 .top-bar {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -464,80 +493,129 @@ body.era-future    { --era-color: #0f766e; --bg-deep: #eef8f7; }
   padding: 0 32px;
   background: rgba(245, 240, 232, 0.9);
   backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border-line);
 }
 
 .brand-name {
-  font-weight: 700;
+  font-family: var(--font-display);
   font-size: 17px;
+  font-weight: 700;
   color: var(--ink);
+  letter-spacing: -0.02em;
   text-decoration: none;
 }
 
+.top-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
 .era-badge {
-  font-family: monospace;
+  font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 700;
   padding: 4px 10px;
-  border-radius: 9999px;
-  background: rgba(0, 0, 0, 0.05);
+  border-radius: var(--radius-pill);
+  background: rgba(0,0,0,0.05);
   color: var(--ink-muted);
   border: 1px solid var(--border-line);
+  transition: all var(--duration-med) ease;
 }
 
-/* ── Fixed Bottom Timeline Nav ───────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════
+   TIMELINE SLIDER NAVBAR
+   Fixed bottom strip — the main navigation element
+   ═══════════════════════════════════════════════════════════════ */
 .timeline-nav {
   position: fixed;
   bottom: 0; left: 0; right: 0;
   z-index: 200;
   background: rgba(245, 240, 232, 0.96);
-  backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
   border-top: 1px solid var(--border-strong);
+  padding: 0;
   user-select: none;
+  transition: background var(--duration-med) ease;
 }
 
+/* ── Timeline Track ──────────────────────────────────────────── */
 .timeline-track {
   position: relative;
   height: 100px;
+  padding: 0 80px;
+  display: flex;
+  align-items: center;
   overflow: hidden;
   cursor: grab;
 }
 
 .timeline-track:active { cursor: grabbing; }
 
+/* Fade masks at edges */
+.timeline-track::before,
+.timeline-track::after {
+  content: &#39;&#39;;
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 80px;
+  z-index: 10;
+  pointer-events: none;
+}
+.timeline-track::before {
+  left: 0;
+  background: linear-gradient(to right, var(--bg-deep) 0%, transparent 100%);
+}
+.timeline-track::after {
+  right: 0;
+  background: linear-gradient(to left, var(--bg-deep) 0%, transparent 100%);
+}
+
+/* Inner scrollable strip */
 .timeline-strip {
   display: flex;
   align-items: center;
+  gap: 0;
   position: relative;
-  transition: transform 480ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform var(--duration-slow) var(--ease-out);
+  will-change: transform;
   padding: 0 40%;
 }
 
+/* ── Line connecting all eras ────────────────────────────────── */
 .timeline-line {
   position: absolute;
-  top: 50%; left: 0; right: 0;
+  top: 50%;
+  left: 0; right: 0;
   height: 1px;
   background: var(--border-strong);
   transform: translateY(-50%);
+  z-index: 0;
 }
 
+/* ── Era Node ─────────────────────────────────────────────────── */
 .era-node {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 160px;
+  gap: 0;
+  position: relative;
+  z-index: 1;
   flex-shrink: 0;
+  width: 160px;
   cursor: pointer;
   padding: 8px 0;
 }
 
 .era-year {
-  font-family: monospace;
+  font-family: var(--font-mono);
   font-size: 13px;
   font-weight: 700;
   color: var(--ink-dim);
+  transition: color var(--duration-fast) ease, font-size var(--duration-med) var(--ease-spring);
   margin-bottom: 8px;
-  transition: all 0.2s ease;
 }
 
 .era-dot {
@@ -545,17 +623,22 @@ body.era-future    { --era-color: #0f766e; --bg-deep: #eef8f7; }
   border-radius: 50%;
   background: var(--border-strong);
   border: 2px solid var(--bg-deep);
+  transition: all var(--duration-med) var(--ease-spring);
   margin-bottom: 8px;
-  transition: all 0.3s cubic-bezier(0.34, 1.4, 0.64, 1);
 }
 
 .era-label {
+  font-family: var(--font-display);
   font-size: 13px;
   font-weight: 500;
   color: var(--ink-muted);
-  transition: color 0.2s ease;
+  text-align: center;
+  transition: color var(--duration-fast) ease, font-size var(--duration-med) var(--ease-spring);
+  letter-spacing: -0.01em;
+  max-width: 120px;
 }
 
+/* Active era */
 .era-node.active .era-year {
   color: var(--era-color);
   font-size: 15px;
@@ -565,20 +648,23 @@ body.era-future    { --era-color: #0f766e; --bg-deep: #eef8f7; }
   width: 18px; height: 18px;
   background: var(--era-color);
   border-color: var(--era-color);
-  box-shadow: 0 0 0 4px rgba(200, 146, 42, 0.15);
+  box-shadow: 0 0 0 4px rgba(200, 146, 42, 0.15), 0 0 16px rgba(200, 146, 42, 0.25);
 }
 
 .era-node.active .era-label {
   color: var(--ink);
+  font-size: 14px;
   font-weight: 700;
 }
 
-/* ── Center Scrubber Diamond ──────────────────────────────────── */
+/* Center cursor (fixed overlay) */
 .timeline-cursor {
   position: absolute;
   top: 0; bottom: 0;
   left: 50%;
   transform: translateX(-50%);
+  width: 2px;
+  z-index: 20;
   pointer-events: none;
 }
 
@@ -588,17 +674,20 @@ body.era-future    { --era-color: #0f766e; --bg-deep: #eef8f7; }
   background: var(--era-color);
   margin: 0 auto;
   opacity: 0.6;
+  transition: background var(--duration-med) ease;
 }
 
 .cursor-diamond {
   position: absolute;
-  top: 50%; left: 50%;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%) rotate(45deg);
   width: 10px; height: 10px;
   background: var(--era-color);
+  transition: background var(--duration-med) ease;
 }
 
-/* ── Controls Strip ───────────────────────────────────────────── */
+/* ── Scrubber controls ────────────────────────────────────────── */
 .scrubber-controls {
   display: flex;
   align-items: center;
@@ -614,17 +703,296 @@ body.era-future    { --era-color: #0f766e; --bg-deep: #eef8f7; }
   border: none;
   cursor: pointer;
   color: var(--ink-muted);
-  font-family: monospace;
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  transition: all var(--duration-fast) ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
   font-size: 11px;
-  padding: 6px 10px;
 }
 
-.scrub-btn:hover { color: var(--ink); }
+.scrub-btn:hover { color: var(--ink); background: rgba(0,0,0,0.05); }
 
 .scrub-input {
+  -webkit-appearance: none;
+  appearance: none;
   width: min(400px, 50vw);
   height: 4px;
+  border-radius: var(--radius-pill);
+  background: var(--border-line);
+  outline: none;
   cursor: pointer;
+  transition: background var(--duration-med) ease;
+}
+
+.scrub-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--era-color);
+  border: 2px solid var(--bg-deep);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  transition: background var(--duration-fast) ease, transform var(--duration-fast) var(--ease-spring);
+}
+
+.scrub-input::-webkit-slider-thumb:hover { transform: scale(1.2); }
+
+.scrub-progress-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-dim);
+  min-width: 60px;
+  text-align: center;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PAGE CONTENT — Chapters
+   ═══════════════════════════════════════════════════════════════ */
+.page-content {
+  padding-top: 60px;
+  padding-bottom: 180px; /* space for fixed timeline nav */
+}
+
+/* ── Chapter (full-height section) ────────────────────────────── */
+.chapter {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px;
+  position: relative;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity var(--duration-slow) var(--ease-out),
+              transform var(--duration-slow) var(--ease-out);
+}
+
+.chapter.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.chapter-inner {
+  max-width: 1000px;
+  width: 100%;
+}
+
+/* Chapter header */
+.chapter-year-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--era-color);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.chapter-year-label::after {
+  content: &#39;&#39;;
+  flex: 1;
+  max-width: 60px;
+  height: 1px;
+  background: var(--era-color);
+  opacity: 0.4;
+}
+
+.chapter-title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 72px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--ink);
+  margin-bottom: 20px;
+}
+
+.chapter-title em {
+  font-style: italic;
+  color: var(--era-color);
+}
+
+.chapter-subtitle {
+  font-size: 17px;
+  color: var(--ink-muted);
+  max-width: 620px;
+  line-height: 1.7;
+  margin-bottom: 40px;
+}
+
+/* Chapter stats grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.stat-card {
+  padding: 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-line);
+  border-radius: var(--radius-lg);
+  border-top: 3px solid var(--era-color);
+}
+
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.04em;
+  margin-bottom: 4px;
+}
+
+.stat-lbl {
+  font-size: 12px;
+  color: var(--ink-muted);
+}
+
+/* Milestone list */
+.milestone-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.milestone-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 16px 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-line);
+  border-radius: var(--radius-lg);
+}
+
+.milestone-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+
+.milestone-month {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--ink-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 3px;
+}
+
+.milestone-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+/* ── Footer ───────────────────────────────────────────────────── */
+.page-footer {
+  padding: 24px;
+  text-align: center;
+  border-top: 1px solid var(--border-line);
+}
+
+.page-footer p {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-dim);
+}
+
+/* ── Responsive ───────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .top-bar { padding: 0 20px; }
+  .chapter-title { font-size: clamp(30px, 5vw, 48px); }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .top-bar {
+    padding: 0 16px;
+    height: 58px;
+  }
+  .brand-name { font-size: 15px; }
+  .top-bar-right { gap: 8px; }
+  .top-bar-right a { padding: 5px 10px; font-size: 10px; }
+  .era-badge { font-size: 10px; padding: 3px 8px; }
+  .timeline-nav {
+    padding: 10px 0 14px;
+  }
+  .timeline-track {
+    padding: 0 20px;
+    gap: 0;
+    justify-content: space-between;
+  }
+  .era-node {
+    min-width: 54px;
+  }
+  .era-year {
+    font-size: 11px;
+    margin-bottom: 4px;
+  }
+  .era-dot {
+    width: 10px;
+    height: 10px;
+    margin-bottom: 4px;
+  }
+  .era-label {
+    font-size: 11px;
+    max-width: 70px;
+  }
+  .era-node.active .era-year { font-size: 13px; }
+  .era-node.active .era-label { font-size: 12px; }
+  .scrubber-controls {
+    gap: 12px;
+  }
+  .scrub-input {
+    width: 50vw;
+  }
+  .scrub-btn {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+  .chapter-inner {
+    padding: 90px 20px 160px;
+  }
+}
+
+@media (max-width: 480px) {
+  .top-bar {
+    padding: 0 12px;
+  }
+  .top-bar a[href=&quot;../index.html&quot;] {
+    font-size: 11px;
+    padding: 4px 8px;
+  }
+  .brand-name {
+    font-size: 13px;
+  }
+  .top-bar-right a[href*=&quot;github&quot;] {
+    display: none;
+  }
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  .scrub-input {
+    width: 44vw;
+  }
+  .chapter-subtitle {
+    font-size: 14px;
+  }
+  .era-node { min-width: 44px; }
+  .era-year { font-size: 10px; }
+  .era-label { font-size: 10px; max-width: 60px; }
+  .era-dot { width: 8px; height: 8px; }
+  .timeline-track { padding: 0 12px; }
+  .timeline-nav { padding: 8px 0 12px; }
 }</code></pre>
       </div>
     </section>
@@ -645,23 +1013,30 @@ body.era-future    { --era-color: #0f766e; --bg-deep: #eef8f7; }
             <span class="copy-label">Copy</span>
           </button>
         </div>
-        <pre><code id="code-4" class="language-javascript">/* ================================================================
-   CHRONOLOGICAL SLIDER NAVBAR — TIMELINE SCRUBBER ENGINE
-   ================================================================ */
+        <pre><code id="code-4" class="language-javascript">/* =============================================================
+   CHRONOLOGICAL SLIDER NAVBAR — script.js
+   Timeline Scrubber Navigation Engine
+   ============================================================= */
 (function () {
   &#39;use strict&#39;;
 
+  /* ── Era Data ──────────────────────────────────────────────── */
   const ERAS = [
-    { id: &#39;genesis&#39;,   year: &#39;2019&#39;, label: &#39;Genesis&#39;,   themeClass: &#39;era-genesis&#39;,   eraColor: &#39;#065f46&#39; },
-    { id: &#39;growth&#39;,    year: &#39;2021&#39;, label: &#39;Growth&#39;,    themeClass: &#39;era-growth&#39;,    eraColor: &#39;#1d4ed8&#39; },
-    { id: &#39;expansion&#39;, year: &#39;2023&#39;, label: &#39;Expansion&#39;, themeClass: &#39;era-expansion&#39;, eraColor: &#39;#c8922a&#39; },
-    { id: &#39;scale&#39;,     year: &#39;2025&#39;, label: &#39;Scale&#39;,     themeClass: &#39;era-scale&#39;,     eraColor: &#39;#7c3aed&#39; },
-    { id: &#39;future&#39;,    year: &#39;2026+&#39;,label: &#39;Future&#39;,    themeClass: &#39;era-future&#39;,    eraColor: &#39;#0f766e&#39; },
+    { id: &#39;genesis&#39;,   year: &#39;2019&#39;, label: &#39;Genesis&#39;,   slug: &#39;#genesis&#39;,   themeClass: &#39;era-genesis&#39;,   eraColor: &#39;#065f46&#39;, bg: &#39;#f0f4f0&#39; },
+    { id: &#39;growth&#39;,    year: &#39;2021&#39;, label: &#39;Growth&#39;,    slug: &#39;#growth&#39;,    themeClass: &#39;era-growth&#39;,    eraColor: &#39;#1d4ed8&#39;, bg: &#39;#f0f2f8&#39; },
+    { id: &#39;expansion&#39;, year: &#39;2023&#39;, label: &#39;Expansion&#39;, slug: &#39;#expansion&#39;, themeClass: &#39;era-expansion&#39;, eraColor: &#39;#c8922a&#39;, bg: &#39;#f8f4ec&#39; },
+    { id: &#39;scale&#39;,     year: &#39;2025&#39;, label: &#39;Scale&#39;,     slug: &#39;#scale&#39;,     themeClass: &#39;era-scale&#39;,     eraColor: &#39;#7c3aed&#39;, bg: &#39;#f5f0fa&#39; },
+    { id: &#39;future&#39;,    year: &#39;2026+&#39;,label: &#39;Future&#39;,    slug: &#39;#future&#39;,    themeClass: &#39;era-future&#39;,    eraColor: &#39;#0f766e&#39;, bg: &#39;#eef8f7&#39; },
   ];
 
+  /* ── State ─────────────────────────────────────────────────── */
   let currentEraIdx = 0;
   let isAnimating   = false;
+  let isDragging    = false;
+  let dragStartX    = 0;
+  let stripOffsetX  = 0;
 
+  /* ── DOM refs ───────────────────────────────────────────────── */
   const body          = document.body;
   const timelineStrip = document.getElementById(&#39;timeline-strip&#39;);
   const timelineTrack = document.getElementById(&#39;timeline-track&#39;);
@@ -670,10 +1045,11 @@ body.era-future    { --era-color: #0f766e; --bg-deep: #eef8f7; }
   const eraBadge      = document.getElementById(&#39;era-badge&#39;);
   const cursorLine    = document.querySelector(&#39;.cursor-line&#39;);
   const cursorDiamond = document.querySelector(&#39;.cursor-diamond&#39;);
+  const chapters      = document.querySelectorAll(&#39;.chapter&#39;);
   const prevBtn       = document.getElementById(&#39;prev-era&#39;);
   const nextBtn       = document.getElementById(&#39;next-era&#39;);
 
-  // 1. Terapkan Era &amp; Geser Timeline
+  /* ── Apply era theme ─────────────────────────────────────────── */
   function applyEra(idx, animate) {
     if (isAnimating &amp;&amp; animate) return;
     isAnimating = animate;
@@ -681,77 +1057,128 @@ body.era-future    { --era-color: #0f766e; --bg-deep: #eef8f7; }
     const era = ERAS[idx];
     currentEraIdx = idx;
 
-    // Update body theme class &amp; color tokens
+    // Update body class
     ERAS.forEach(e =&gt; body.classList.remove(e.themeClass));
     body.classList.add(era.themeClass);
+
+    // Update CSS variable for era color
     body.style.setProperty(&#39;--era-color&#39;, era.eraColor);
 
+    // Update era badge
     if (eraBadge) eraBadge.textContent = `${era.year} — ${era.label}`;
 
-    // Update active node
+    // Update active node state
     eraNodes.forEach((node, i) =&gt; {
       node.classList.toggle(&#39;active&#39;, i === idx);
     });
 
-    // Center timeline strip
-    if (timelineStrip) {
-      const nodeWidth = 160;
-      const offset = -(idx * nodeWidth);
-      timelineStrip.style.transition = animate
-        ? &#39;transform 480ms cubic-bezier(0.22, 1, 0.36, 1)&#39;
-        : &#39;none&#39;;
-      timelineStrip.style.transform = `translateX(${offset}px)`;
+    // Center the timeline strip to active node
+    centerTimeline(idx, animate);
+
+    // Update scrubber
+    if (scrubInput) scrubInput.value = idx;
+
+    // Navigate (scroll) to chapter
+    const chapter = document.getElementById(era.id);
+    if (chapter) {
+      if (animate) {
+        chapter.scrollIntoView({ behavior: &#39;smooth&#39;, block: &#39;start&#39; });
+      }
+      // Trigger visibility animation
+      revealChapters();
     }
 
-    if (scrubInput) scrubInput.value = idx;
-    if (cursorLine) cursorLine.style.background = era.eraColor;
+    // Update cursor colors
+    if (cursorLine)    cursorLine.style.background    = era.eraColor;
     if (cursorDiamond) cursorDiamond.style.background = era.eraColor;
 
-    // Scroll ke section target
-    const targetChapter = document.getElementById(era.id);
-    if (targetChapter &amp;&amp; animate) {
-      targetChapter.scrollIntoView({ behavior: &#39;smooth&#39;, block: &#39;start&#39; });
+    // Update stat card top borders and chapter year labels
+    const activeChapter = document.getElementById(era.id);
+    if (activeChapter) {
+      activeChapter.querySelectorAll(&#39;.stat-card&#39;).forEach(c =&gt; {
+        c.style.borderTopColor = era.eraColor;
+      });
+      activeChapter.querySelectorAll(&#39;.chapter-year-label&#39;).forEach(l =&gt; {
+        l.style.color = era.eraColor;
+      });
     }
 
-    setTimeout(() =&gt; { isAnimating = false; }, 600);
+    setTimeout(() =&gt; { isAnimating = false; }, 700);
   }
 
-  // 2. Event Listener Klik Node &amp; Scrubber
+  /* ── Center timeline strip at era ────────────────────────────── */
+  function centerTimeline(idx, animate) {
+    if (!timelineStrip) return;
+    const nodeWidth = 160;
+    const offset = -(idx * nodeWidth);
+    timelineStrip.style.transition = animate
+      ? `transform ${480}ms cubic-bezier(0.22, 1, 0.36, 1)`
+      : &#39;none&#39;;
+    timelineStrip.style.transform = `translateX(${offset}px)`;
+    stripOffsetX = offset;
+  }
+
+  /* ── Chapter visibility (intersection + manual) ──────────────── */
+  function revealChapters() {
+    chapters.forEach(ch =&gt; {
+      ch.classList.remove(&#39;visible&#39;);
+    });
+    requestAnimationFrame(() =&gt; {
+      const active = document.getElementById(ERAS[currentEraIdx].id);
+      if (active) {
+        active.classList.add(&#39;visible&#39;);
+      }
+    });
+  }
+
+  /* ── Era node clicks ─────────────────────────────────────────── */
   eraNodes.forEach((node, i) =&gt; {
     node.addEventListener(&#39;click&#39;, () =&gt; {
       if (i !== currentEraIdx) applyEra(i, true);
     });
+    node.addEventListener(&#39;keydown&#39;, (e) =&gt; {
+      if (e.key === &#39;Enter&#39; || e.key === &#39; &#39;) {
+        e.preventDefault();
+        applyEra(i, true);
+      }
+    });
   });
 
+  /* ── Scrubber input ──────────────────────────────────────────── */
   if (scrubInput) {
-    scrubInput.max = ERAS.length - 1;
+    scrubInput.max  = ERAS.length - 1;
+    scrubInput.value = 0;
     scrubInput.addEventListener(&#39;input&#39;, () =&gt; {
-      applyEra(parseInt(scrubInput.value), true);
+      const idx = parseInt(scrubInput.value);
+      applyEra(idx, true);
     });
   }
 
+  /* ── Prev / Next buttons ─────────────────────────────────────── */
   if (prevBtn) {
     prevBtn.addEventListener(&#39;click&#39;, () =&gt; {
       if (currentEraIdx &gt; 0) applyEra(currentEraIdx - 1, true);
     });
   }
-
   if (nextBtn) {
     nextBtn.addEventListener(&#39;click&#39;, () =&gt; {
       if (currentEraIdx &lt; ERAS.length - 1) applyEra(currentEraIdx + 1, true);
     });
   }
 
-  // 3. Navigasi Keyboard Arrow
+  /* ── Keyboard navigation ─────────────────────────────────────── */
   window.addEventListener(&#39;keydown&#39;, (e) =&gt; {
-    if (e.key === &#39;ArrowLeft&#39;) {
+    if (e.key === &#39;ArrowLeft&#39; || e.key === &#39;ArrowUp&#39;) {
+      e.preventDefault();
       if (currentEraIdx &gt; 0) applyEra(currentEraIdx - 1, true);
-    } else if (e.key === &#39;ArrowRight&#39;) {
+    }
+    if (e.key === &#39;ArrowRight&#39; || e.key === &#39;ArrowDown&#39;) {
+      e.preventDefault();
       if (currentEraIdx &lt; ERAS.length - 1) applyEra(currentEraIdx + 1, true);
     }
   });
 
-  // 4. Mouse Wheel pada Timeline Track
+  /* ── Mouse wheel on timeline ─────────────────────────────────── */
   if (timelineTrack) {
     timelineTrack.addEventListener(&#39;wheel&#39;, (e) =&gt; {
       e.preventDefault();
@@ -761,25 +1188,106 @@ body.era-future    { --era-color: #0f766e; --bg-deep: #eef8f7; }
     }, { passive: false });
   }
 
-  // 5. Intersection Observer (Update otomatis saat halaman di-scroll)
-  const observer = new IntersectionObserver((entries) =&gt; {
+  /* ── Drag-to-scrub on timeline track ──────────────────────────── */
+  let pointerStartX = 0;
+  let startEraIdx   = 0;
+
+  function onPointerDown(e) {
+    isDragging    = true;
+    pointerStartX = e.clientX || e.touches?.[0]?.clientX;
+    startEraIdx   = currentEraIdx;
+    if (timelineStrip) timelineStrip.style.transition = &#39;none&#39;;
+  }
+
+  function onPointerMove(e) {
+    if (!isDragging) return;
+    const x   = e.clientX || e.touches?.[0]?.clientX;
+    const dx  = x - pointerStartX;
+    const nodeWidth = 160;
+    const idxShift  = -Math.round(dx / nodeWidth);
+    const newIdx    = Math.max(0, Math.min(ERAS.length - 1, startEraIdx + idxShift));
+
+    // Move strip live
+    if (timelineStrip) {
+      const liveOffset = -(startEraIdx * nodeWidth) + dx;
+      timelineStrip.style.transform = `translateX(${liveOffset}px)`;
+    }
+
+    // Update active node temporarily
+    eraNodes.forEach((n, i) =&gt; n.classList.toggle(&#39;active&#39;, i === newIdx));
+    if (eraBadge) eraBadge.textContent = `${ERAS[newIdx].year} — ${ERAS[newIdx].label}`;
+  }
+
+  function onPointerUp(e) {
+    if (!isDragging) return;
+    isDragging = false;
+    const x   = e.clientX || e.changedTouches?.[0]?.clientX;
+    const dx  = x - pointerStartX;
+    const nodeWidth = 160;
+    const idxShift  = -Math.round(dx / nodeWidth);
+    const newIdx    = Math.max(0, Math.min(ERAS.length - 1, startEraIdx + idxShift));
+    applyEra(newIdx, true);
+  }
+
+  if (timelineTrack) {
+    timelineTrack.addEventListener(&#39;mousedown&#39;, onPointerDown);
+    window.addEventListener(&#39;mousemove&#39;, onPointerMove);
+    window.addEventListener(&#39;mouseup&#39;, onPointerUp);
+    timelineTrack.addEventListener(&#39;touchstart&#39;, onPointerDown, { passive: true });
+    window.addEventListener(&#39;touchmove&#39;, onPointerMove, { passive: true });
+    window.addEventListener(&#39;touchend&#39;, onPointerUp);
+  }
+
+  /* ── IntersectionObserver: update era when user scrolls ────────── */
+  const chapterObserver = new IntersectionObserver((entries) =&gt; {
     entries.forEach(entry =&gt; {
       if (entry.isIntersecting &amp;&amp; entry.intersectionRatio &gt; 0.4) {
         const idx = ERAS.findIndex(e =&gt; e.id === entry.target.id);
-        if (idx !== -1 &amp;&amp; idx !== currentEraIdx) {
-          applyEra(idx, false);
+        if (idx !== -1 &amp;&amp; idx !== currentEraIdx &amp;&amp; !isDragging) {
+          applyEra(idx, false); // don&#39;t re-scroll, just update nav
         }
       }
     });
-  }, { threshold: 0.4 });
+  }, { threshold: 0.4, rootMargin: &#39;-10% 0px -10% 0px&#39; });
 
-  ERAS.forEach(e =&gt; {
-    const el = document.getElementById(e.id);
-    if (el) observer.observe(el);
-  });
+  chapters.forEach(ch =&gt; chapterObserver.observe(ch));
 
-  // Inisialisasi posisi awal
+  /* ── Counter animation for stat numbers ────────────────────────── */
+  function animateCounter(el) {
+    const target = parseFloat(el.dataset.target);
+    const suffix = el.dataset.suffix || &#39;&#39;;
+    const prefix = el.dataset.prefix || &#39;&#39;;
+    const duration = 1200;
+    const start = performance.now();
+    const isFloat = !Number.isInteger(target);
+
+    function update(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const value = target * eased;
+      el.textContent = prefix + (isFloat ? value.toFixed(1) : Math.round(value)) + suffix;
+      if (progress &lt; 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+  }
+
+  const counterObserver = new IntersectionObserver((entries) =&gt; {
+    entries.forEach(entry =&gt; {
+      if (entry.isIntersecting) {
+        const counters = entry.target.querySelectorAll(&#39;.stat-num[data-target]&#39;);
+        counters.forEach(animateCounter);
+        counterObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  chapters.forEach(ch =&gt; counterObserver.observe(ch));
+
+  /* ── Init ───────────────────────────────────────────────────── */
   applyEra(0, false);
+  revealChapters();
+
 })();</code></pre>
       </div>
     </section>

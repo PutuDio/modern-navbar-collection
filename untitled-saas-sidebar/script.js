@@ -7,21 +7,19 @@
 
   /* ── 1. Mobile Sidebar Drawer ────────────────────────────── */
   const sidebar        = document.getElementById('sidebar');
-  const mobileOverlay  = document.getElementById('mobile-overlay');
   const menuBtn        = document.getElementById('topbar-menu-btn');
 
   function openSidebar () {
+    if (!sidebar || !menuBtn) return;
     sidebar.classList.add('mobile-open');
-    mobileOverlay.classList.add('open');
     document.body.style.overflow = 'hidden';
     menuBtn.setAttribute('aria-expanded', 'true');
   }
 
   function closeSidebar () {
-    sidebar.classList.remove('mobile-open');
-    mobileOverlay.classList.remove('open');
+    if (sidebar) sidebar.classList.remove('mobile-open');
     document.body.style.overflow = '';
-    menuBtn.setAttribute('aria-expanded', 'false');
+    if (menuBtn) menuBtn.setAttribute('aria-expanded', 'false');
   }
 
   if (menuBtn) {
@@ -31,7 +29,6 @@
     });
   }
 
-  mobileOverlay.addEventListener('click', closeSidebar);
 
   /* ── 2. Active Nav Items ─────────────────────────────────── */
   document.querySelectorAll('.nav-item[data-nav]').forEach(item => {

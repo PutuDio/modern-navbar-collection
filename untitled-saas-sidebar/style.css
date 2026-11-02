@@ -447,6 +447,8 @@ body {
   align-items: center;
   gap: 12px;
   padding: 0 24px;
+  position: relative;
+  z-index: 160;
   flex-shrink: 0;
   box-shadow: var(--shadow-xs);
 }
@@ -1256,3 +1258,4 @@ body {
   .content-title { font-size: 18px; }
   .content-desc { font-size: 13px; }
 }
+body { background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(124,58,237,.18), transparent 70%), radial-gradient(ellipse 40% 30% at 80% 20%, rgba(59,130,246,.12), transparent 60%), radial-gradient(circle, rgba(255,255,255,.08) 1px, transparent 1px), #090a0f !important; background-size: auto, auto, 24px 24px !important; }

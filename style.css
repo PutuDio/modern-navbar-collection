@@ -317,43 +317,6 @@ button, input {
   color: var(--text-tertiary);
   margin-top: var(--space-2);
 }
-/* Preview / browser frame */
-.specimen-preview {
-  margin-left: 0;
-}
-.specimen[data-featured="true"] .specimen-preview {
-  margin-top: var(--space-6);
-}
-.browser-frame {
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  background: var(--surface);
-}
-.browser-bar {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: var(--space-3) var(--space-4);
-  border-bottom: 1px solid var(--border);
-  background: var(--surface-muted);
-}
-.browser-bar span {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--border-strong);
-}
-.browser-frame iframe {
-  display: block;
-  width: 100%;
-  height: 460px;
-  border: none;
-  background: var(--surface);
-}
-.specimen[data-featured="true"] .browser-frame iframe {
-  height: 620px;
-}
 /* Specimen footer: description + meta */
 .specimen-footer {
   display: grid;
@@ -492,149 +455,45 @@ button, input {
   letter-spacing: 0.06em;
 }
 
-/* ============================================================
-   PHONE-FRAME GRID  (ALL-filter view)
-   ============================================================ */
-.phone-grid {
+ .phone-grid {
   padding-top: var(--space-8);
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: var(--space-7) var(--space-5);
-  justify-items: center;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-8);
 }
-
-/* Individual phone card wrapper */
 .phone-card {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: var(--space-4);
+  min-width: 0;
+}
+.desktop-preview {
   width: 100%;
-  max-width: 260px;
+  height: 620px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
 }
-
-/* The phone shell itself */
-.phone-mockup {
-  position: relative;
-  width: 220px;
-  height: 440px;
-  border-radius: 36px;
-  background: #1a1a1e;
-  box-shadow:
-    0 0 0 1.5px #3a3a42,
-    0 0 0 3px #26262e,
-    0 20px 60px rgba(0,0,0,.45),
-    0 4px 16px rgba(0,0,0,.25);
-  padding: 14px 10px;
-  flex-shrink: 0;
-  transition: transform var(--duration-normal) var(--ease-out),
-              box-shadow var(--duration-normal) var(--ease-out);
-}
-
-.phone-card:hover .phone-mockup {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow:
-    0 0 0 1.5px #4a4a55,
-    0 0 0 3px #32323c,
-    0 32px 72px rgba(0,0,0,.55),
-    0 8px 24px rgba(0,0,0,.3);
-}
-
-/* Notch / Dynamic Island */
-.phone-notch {
-  position: absolute;
-  top: 14px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 70px;
-  height: 20px;
-  background: #1a1a1e;
-  border-radius: 0 0 14px 14px;
-  z-index: 10;
-  /* subtle inner shadow to blend */
-  box-shadow: inset 0 2px 4px rgba(0,0,0,.5);
-}
-
-/* Camera pill within notch */
-.phone-notch::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 32px;
-  height: 10px;
-  background: #0d0d10;
-  border-radius: 6px;
-  box-shadow: 0 0 0 1px rgba(255,255,255,.06);
-}
-
-/* Side buttons */
-.phone-mockup::before {
-  content: '';
-  position: absolute;
-  right: -3px;
-  top: 88px;
-  width: 3px;
-  height: 52px;
-  background: #2e2e38;
-  border-radius: 0 2px 2px 0;
-  box-shadow: 0 64px 0 #2e2e38;
-}
-.phone-mockup::after {
-  content: '';
-  position: absolute;
-  left: -3px;
-  top: 72px;
-  width: 3px;
-  height: 30px;
-  background: #2e2e38;
-  border-radius: 2px 0 0 2px;
-  box-shadow: 0 44px 0 #2e2e38, 0 88px 0 #2e2e38;
-}
-
-/* The screen area that clips the iframe */
-.phone-screen {
+.desktop-preview iframe {
+  display: block;
   width: 100%;
   height: 100%;
-  border-radius: 24px;
-  overflow: hidden;
-  background: #000;
-  position: relative;
+  border: 0;
 }
-
-/* Iframe fills the screen at 390 wide, scaled down */
-.phone-screen iframe {
-  display: block;
-  /* render as a real mobile viewport, then scale down to fit the phone frame */
-  width: 390px;
-  height: 844px;
-  border: none;
-  transform-origin: top left;
-  transform: scale(calc(200 / 390)); /* 200 / 390 ≈ 0.513 — matches frame width exactly, no horizontal crop */
-  -webkit-overflow-scrolling: touch;
+@media (max-width: 1100px) {
+  .desktop-preview { height: 500px; }
 }
-
-/* Saat menu mobile navbar sedang otomatis dibuka oleh script (lihat script.js),
-   beri sedikit highlight halus di tepi layar supaya jelas ini state "menu terbuka" */
-.phone-screen.menu-open {
-  box-shadow: inset 0 0 0 2px rgba(29, 78, 216, 0.35);
+@media (max-width: 520px) {
+  .desktop-preview { height: 360px; }
 }
-
-/* Meta below the phone */
-.phone-meta {
-  text-align: center;
-}
-
 .phone-meta-title {
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 14px;
-  letter-spacing: -0.02em;
   color: var(--text-primary);
   margin-bottom: var(--space-1);
 }
-
 .phone-meta-cat {
   font-family: var(--font-mono);
   font-size: 10px;
@@ -643,11 +502,8 @@ button, input {
   color: var(--text-tertiary);
   margin-bottom: var(--space-3);
 }
-
 .phone-meta-links {
   display: flex;
-  align-items: center;
-  justify-content: center;
   gap: var(--space-4);
 }
 
@@ -670,10 +526,6 @@ button, input {
     text-align: left;
     flex-direction: row;
     gap: var(--space-5);
-  }
-  .browser-frame iframe,
-  .specimen[data-featured="true"] .browser-frame iframe {
-    height: 320px;
   }
   .toolbar {
     flex-direction: column;

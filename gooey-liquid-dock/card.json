@@ -1,0 +1,11 @@
+{
+  "title": "Gooey Liquid Dock",
+  "category": "experimental",
+  "categoryLabel": "Experimental — Gooey Liquid Dock Navigation",
+  "descriptionShort": "Liquid-style dock with animated gooey active-item indicator.",
+  "descriptionLong": "Compact navigation dock with an SVG-filtered liquid indicator that follows the active destination.",
+  "tech": "HTML · CSS · JavaScript",
+  "keywords": ["gooey", "liquid", "dock", "navigation", "animated", "SVG filter"],
+  "featured": false,
+  "order": 16
+}

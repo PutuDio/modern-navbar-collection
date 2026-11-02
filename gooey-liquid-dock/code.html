@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gooey Liquid Dock &mdash; Implementation Guide</title>
+<meta name="description" content="Isolated, copy-paste-ready code for Gooey Liquid Dock &mdash; font import, markup, styles, and behavior.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/tomorrow-night.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+<style>
+  :root{
+    --paper:#fbfcfd;
+    --panel:#ffffff;
+    --line:#e2e8f0;
+    --ink:#0f172a;
+    --ink-soft:#475569;
+    --ink-faint:#94a3b8;
+    --accent:#f38960;
+    --accent-soft:rgba(29, 78, 216, 0.08);
+    --ok:#059669;
+    --code-bg:#0b1220;
+    --code-chrome:#111a2c;
+    --code-line:#1e293b;
+    --font-display:'Plus Jakarta Sans', system-ui, sans-serif;
+    --font-mono:'IBM Plex Mono', 'SFMono-Regular', monospace;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--font-display);
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{ color:inherit; text-decoration:none; }
+
+  /* ---------- Masthead ---------- */
+  .masthead{
+    max-width:1180px;
+    margin:0 auto;
+    padding:4.5rem 2.5rem 3rem;
+    border-bottom:1px solid var(--line);
+  }
+  .masthead-kicker{
+    font-size:0.8125rem;
+    color:var(--accent);
+    font-weight:600;
+    margin-bottom:0.9rem;
+  }
+  .masthead h1{
+    font-size:clamp(2rem, 4vw, 2.75rem);
+    font-weight:700;
+    letter-spacing:-0.02em;
+    margin:0 0 1rem;
+    max-width:24ch;
+  }
+  .masthead p{
+    color:var(--ink-soft);
+    font-size:1.05rem;
+    line-height:1.65;
+    max-width:62ch;
+    margin:0;
+  }
+  .masthead-meta{
+    display:flex;
+    gap:1.5rem;
+    margin-top:1.75rem;
+    font-size:0.85rem;
+    color:var(--ink-faint);
+    font-family:var(--font-mono);
+  }
+
+  /* ---------- Layout ---------- */
+  .layout{
+    max-width:1180px;
+    margin:0 auto;
+    padding:3rem 2.5rem 6rem;
+    display:grid;
+    grid-template-columns:220px minmax(0,1fr);
+    gap:3.5rem;
+  }
+
+  .side-nav{ align-self:start; position:sticky; top:2.5rem; }
+  .side-nav-label{
+    font-size:0.75rem;
+    color:var(--ink-faint);
+    font-weight:600;
+    margin-bottom:0.9rem;
+  }
+  .side-nav ul{ list-style:none; margin:0; padding:0; }
+  .side-nav li + li{ margin-top:0.35rem; }
+  .side-nav a{
+    display:flex;
+    align-items:baseline;
+    gap:0.6rem;
+    padding:0.45rem 0.6rem;
+    border-radius:8px;
+    font-size:0.9rem;
+    color:var(--ink-soft);
+    transition:background 0.15s ease, color 0.15s ease;
+  }
+  .side-nav a:hover{ background:var(--accent-soft); color:var(--ink); }
+  .side-nav a.is-active{ background:var(--accent-soft); color:var(--accent); font-weight:600; }
+  .side-nav .idx{
+    font-family:var(--font-mono);
+    font-size:0.78rem;
+    color:var(--ink-faint);
+    width:1.1rem;
+  }
+  .side-nav a.is-active .idx{ color:var(--accent); }
+
+  /* ---------- Doc sections ---------- */
+  .doc-section{ margin-bottom:3.5rem; scroll-margin-top:2rem; }
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:0.9rem;
+    margin-bottom:0.5rem;
+  }
+  .section-index{
+    font-family:var(--font-mono);
+    font-size:0.95rem;
+    color:var(--accent);
+    font-weight:600;
+  }
+  .section-head h2{
+    font-size:1.35rem;
+    font-weight:700;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+  .section-note{
+    color:var(--ink-soft);
+    font-size:0.98rem;
+    line-height:1.6;
+    margin:0 0 1.1rem;
+    max-width:60ch;
+  }
+
+  /* ---------- Code window ---------- */
+  .code-window{
+    background:var(--code-bg);
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 1px 2px rgba(15,23,42,0.06), 0 12px 32px -16px rgba(15,23,42,0.35);
+  }
+  .code-chrome{
+    display:flex;
+    align-items:center;
+    gap:0.9rem;
+    padding:0.7rem 1rem;
+    background:var(--code-chrome);
+    border-bottom:1px solid var(--code-line);
+  }
+  .dots{ display:flex; gap:6px; flex-shrink:0; }
+  .dot{ width:10px; height:10px; border-radius:50%; display:block; }
+  .dot-a{ background:#f4756b; }
+  .dot-b{ background:#f5b95b; }
+  .dot-c{ background:#4fbf6b; }
+  .filename{
+    font-family:var(--font-mono);
+    font-size:0.78rem;
+    color:#8592ad;
+    flex:1;
+  }
+  .copy-btn{
+    display:flex;
+    align-items:center;
+    gap:0.4rem;
+    background:transparent;
+    border:1px solid var(--code-line);
+    color:#c3cbe0;
+    font-family:var(--font-display);
+    font-size:0.78rem;
+    font-weight:500;
+    padding:0.32rem 0.65rem;
+    border-radius:6px;
+    cursor:pointer;
+    transition:background 0.15s ease, border-color 0.15s ease;
+  }
+  .copy-btn:hover{ background:rgba(255,255,255,0.06); border-color:#334155; }
+  .copy-btn .icon-check{ display:none; }
+  .copy-btn.is-copied .icon-copy{ display:none; }
+  .copy-btn.is-copied .icon-check{ display:block; color:var(--ok); }
+  .copy-btn.is-copied{ border-color:var(--ok); color:var(--ok); }
+
+  .code-window pre{
+    margin:0;
+    padding:1.25rem 1.4rem;
+    overflow-x:auto;
+    max-height:520px;
+    overflow-y:auto;
+  }
+  .code-window code{
+    font-family:var(--font-mono);
+    font-size:0.84rem;
+    line-height:1.65;
+    background:transparent !important;
+  }
+
+  .code-window pre::-webkit-scrollbar{ height:8px; width:8px; }
+  .code-window pre::-webkit-scrollbar-thumb{ background:#293449; border-radius:8px; }
+  .code-window pre::-webkit-scrollbar-track{ background:transparent; }
+
+  /* ---------- Footer ---------- */
+  .doc-footer{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 2.5rem 4rem;
+    border-top:1px solid var(--line);
+    padding-top:2rem;
+    color:var(--ink-faint);
+    font-size:0.85rem;
+    display:flex;
+    justify-content:space-between;
+  }
+  .doc-footer a{ color:var(--accent); font-weight:500; }
+
+  @media (max-width: 860px){
+    .layout{ grid-template-columns:1fr; }
+    .side-nav{ position:static; margin-bottom:1rem; }
+    .side-nav ul{ display:flex; flex-wrap:wrap; gap:0.4rem; }
+    .side-nav li + li{ margin-top:0; }
+    .masthead{ padding:3rem 1.5rem 2.25rem; }
+    .layout{ padding:2rem 1.5rem 4rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .copy-btn, .side-nav a{ transition:none; }
+  }
+</style>
+</head>
+<body>
+
+  <header class="masthead">
+    <p class="masthead-kicker">Implementation guide</p>
+    <h1>Gooey Liquid Dock</h1>
+    <p>Isolated, dependency-free code for the navigation only &mdash; no hero sections or demo page content. Copy each block in order into your own project: font, markup, styles, then behavior.</p>
+    <div class="masthead-meta">
+      <span>4 steps</span>
+      <span>Vanilla HTML / CSS / JS</span>
+      <span>Zero dependencies</span>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="side-nav" aria-label="Implementation steps">
+      <p class="side-nav-label">On this page</p>
+      <ul>
+        <li><a href="#section-1"><span class="idx">1</span>Google Font Import</a></li>
+        <li><a href="#section-2"><span class="idx">2</span>HTML Markup</a></li>
+        <li><a href="#section-3"><span class="idx">3</span>CSS Stylesheet</a></li>
+        <li><a href="#section-4"><span class="idx">4</span>JavaScript Code</a></li>
+      </ul>
+    </nav>
+
+    <main>
+
+    <section class="doc-section" id="section-1">
+      <div class="section-head">
+        <span class="section-index">1</span>
+        <h2>Google Font Import</h2>
+      </div>
+      <p class="section-note">Add this to your HTML &lt;head&gt;:</p>
+      <div class="code-window">
+        <div class="code-chrome">
+          <div class="dots"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <span class="filename">index.html &mdash; &lt;head&gt;</span>
+          <button class="copy-btn" type="button" data-copy-target="code-1">
+            <svg class="icon-copy" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M3 10.5V3.5A1.5 1.5 0 0 1 4.5 2H10"/></svg>
+            <svg class="icon-check" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8.5l3 3 7-7"/></svg>
+            <span class="copy-label">Copy</span>
+          </button>
+        </div>
+        <pre><code id="code-1" class="language-html">&lt;meta charset=&quot;utf-8&quot;&gt;</code></pre>
+      </div>
+    </section>
+
+    <section class="doc-section" id="section-2">
+      <div class="section-head">
+        <span class="section-index">2</span>
+        <h2>HTML Markup</h2>
+      </div>
+      <p class="section-note">Place this navigation component markup into your &lt;body&gt;:</p>
+      <div class="code-window">
+        <div class="code-chrome">
+          <div class="dots"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <span class="filename">index.html &mdash; &lt;body&gt;</span>
+          <button class="copy-btn" type="button" data-copy-target="code-2">
+            <svg class="icon-copy" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M3 10.5V3.5A1.5 1.5 0 0 1 4.5 2H10"/></svg>
+            <svg class="icon-check" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8.5l3 3 7-7"/></svg>
+            <span class="copy-label">Copy</span>
+          </button>
+        </div>
+        <pre><code id="code-2" class="language-html">&lt;!doctype html&gt;
+&lt;html lang=&quot;id&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;&lt;title&gt;Gooey Liquid Dock&lt;/title&gt;&lt;link rel=&quot;stylesheet&quot; href=&quot;styles.css&quot;&gt;&lt;/head&gt;&lt;body&gt;&lt;main class=&quot;stage dock-stage&quot;&gt;&lt;svg width=&quot;0&quot; height=&quot;0&quot; aria-hidden=&quot;true&quot; style=&quot;position:absolute&quot;&gt;&lt;filter id=&quot;goo&quot;&gt;&lt;feGaussianBlur in=&quot;SourceGraphic&quot; stdDeviation=&quot;9&quot; result=&quot;b&quot;/&gt;&lt;feColorMatrix in=&quot;b&quot; values=&quot;1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 22 -10&quot;/&gt;&lt;/filter&gt;&lt;/svg&gt;&lt;nav class=&quot;dock&quot; aria-label=&quot;Gooey Liquid Dock&quot;&gt;&lt;div class=&quot;goo-layer&quot;&gt;&lt;div class=&quot;goo-base&quot;&gt;&lt;/div&gt;&lt;div class=&quot;bubble&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;button data-index=&quot;0&quot; aria-pressed=&quot;true&quot; class=&quot;active&quot;&gt;&lt;span class=&quot;icon&quot; aria-hidden=&quot;true&quot;&gt;◐&lt;/span&gt;&lt;span class=&quot;label&quot;&gt;Home&lt;/span&gt;&lt;/button&gt;&lt;button data-index=&quot;1&quot; aria-pressed=&quot;false&quot; class=&quot;&quot;&gt;&lt;span class=&quot;icon&quot; aria-hidden=&quot;true&quot;&gt;✦&lt;/span&gt;&lt;span class=&quot;label&quot;&gt;Explore&lt;/span&gt;&lt;/button&gt;&lt;button data-index=&quot;2&quot; aria-pressed=&quot;false&quot; class=&quot;&quot;&gt;&lt;span class=&quot;icon&quot; aria-hidden=&quot;true&quot;&gt;♡&lt;/span&gt;&lt;span class=&quot;label&quot;&gt;Saved&lt;/span&gt;&lt;/button&gt;&lt;button data-index=&quot;3&quot; aria-pressed=&quot;false&quot; class=&quot;&quot;&gt;&lt;span class=&quot;icon&quot; aria-hidden=&quot;true&quot;&gt;✉&lt;/span&gt;&lt;span class=&quot;label&quot;&gt;Inbox&lt;/span&gt;&lt;/button&gt;&lt;button data-index=&quot;4&quot; aria-pressed=&quot;false&quot; class=&quot;&quot;&gt;&lt;span class=&quot;icon&quot; aria-hidden=&quot;true&quot;&gt;◎&lt;/span&gt;&lt;span class=&quot;label&quot;&gt;Profil&lt;/span&gt;&lt;/button&gt;&lt;/nav&gt;&lt;/main&gt;&lt;script src=&quot;script.js&quot;&gt;&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;</code></pre>
+      </div>
+    </section>
+
+    <section class="doc-section" id="section-3">
+      <div class="section-head">
+        <span class="section-index">3</span>
+        <h2>CSS Stylesheet</h2>
+      </div>
+      <p class="section-note">Add this CSS to your stylesheet (e.g. style.css):</p>
+      <div class="code-window">
+        <div class="code-chrome">
+          <div class="dots"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <span class="filename">style.css</span>
+          <button class="copy-btn" type="button" data-copy-target="code-3">
+            <svg class="icon-copy" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M3 10.5V3.5A1.5 1.5 0 0 1 4.5 2H10"/></svg>
+            <svg class="icon-check" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8.5l3 3 7-7"/></svg>
+            <span class="copy-label">Copy</span>
+          </button>
+        </div>
+        <pre><code id="code-3" class="language-css">@charset &quot;UTF-8&quot;;
+:root{--bg:#101417;--grid:#ffffff10;--ink:#f5f6f2;--muted:#929a9e;--surface:#1d2327;--lime:#c4f23c;--orange:#f38960;--paper:#f2efe5;--dark:#080a0b;--shadow:0 18px 40px #0005;--line:#ffffff14;--radius:8px}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px system-ui,sans-serif;letter-spacing:0}button,input{font:inherit}button{cursor:pointer;border:0;color:inherit}button:focus-visible,input:focus-visible{outline:2px solid var(--lime);outline-offset:3px}button:disabled{cursor:default}.stage{height:340px;position:relative;display:flex;justify-content:center;align-items:flex-start;padding:30px 12px;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:28px 28px;overflow:hidden}.island{background:var(--dark);border-radius:28px;width:220px;max-width:100%;box-shadow:var(--shadow);transition:width .5s cubic-bezier(.2,1.2,.4,1),height .5s;overflow:hidden}.island.open{width:540px}.island.grid.open{width:364px}.head{width:100%;height:46px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;background:transparent;font-weight:700;gap:12px}.dot{width:9px;height:9px;border-radius:50%;background:var(--lime);display:inline-block;margin-right:8px}.wave{display:flex;align-items:center;gap:3px;height:20px}.wave i{width:3px;background:var(--lime);height:14px;border-radius:2px;animation:wave 1s ease-in-out infinite alternate}.wave i:nth-child(2){height:20px;animation-delay:.2s}.wave i:nth-child(3){height:13px;animation-delay:.4s}.wave i:nth-child(4){height:8px;animation-delay:.6s}.menu{display:none;padding:0 12px 12px;gap:6px}.open .menu{display:flex;flex-wrap:wrap}.menu button{background:var(--surface);padding:12px 10px;border-radius:var(--radius);flex:1;font-size:12px;text-align:left;font-weight:700}.menu button.active{color:var(--lime)}.menu button:hover{background:var(--line)}.grid .menu{display:none;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 26px}.grid.open .menu{display:grid}.menu small{display:block;font-weight:400;color:var(--muted);font-size:11px;margin-top:4px}.search{display:flex;padding:0 14px 14px;gap:8px}.search input{width:100%;min-width:0;border:0;background:var(--surface);border-radius:var(--radius);padding:10px;color:var(--ink)}.search button{background:var(--lime);color:var(--dark);border-radius:var(--radius);padding:0 10px}.results{padding:0 14px 14px}.results button{background:var(--surface);border-radius:var(--radius);padding:10px;width:100%;text-align:left}.results p{color:var(--muted);font-size:12px}.dock-stage{align-items:flex-end;padding-bottom:40px}.dock{display:flex;align-items:flex-end;position:relative;width:min(376px,100%);height:80px;padding:8px;background:var(--paper);color:var(--dark);border-radius:25px;box-shadow:var(--shadow)}.dock button{position:relative;flex:1;min-width:0;display:flex;align-items:center;justify-content:flex-end;flex-direction:column;height:64px;background:transparent;color:var(--dark);padding:0 0 8px;gap:7px}.dock .icon{height:28px;display:flex;align-items:center;font-size:24px;transition:transform .5s cubic-bezier(.5,1.6,.4,1)}.dock .label{font-size:10px;opacity:.5;font-weight:700}.dock button.active .icon{transform:translateY(-29px) scale(1.2)}.dock button.active .label{opacity:1}.goo-layer{position:absolute;inset:0 8px 8px;filter:url(#goo);pointer-events:none}.goo-base{position:absolute;inset:16px 0 0;background:var(--paper);border-radius:22px}.bubble{position:absolute;width:56px;height:56px;background:var(--orange);border-radius:50%;top:-17px;left:calc((100% / 5 - 56px) / 2);transition:left .5s cubic-bezier(.5,1.6,.4,1)}.magnetic{height:64px;width:auto;max-width:100%;padding:8px;gap:3px;border:1px solid var(--line);background:var(--surface);border-radius:22px;color:var(--ink)}.magnetic button{background:var(--surface);color:var(--ink);width:48px;flex:none;height:46px;border-radius:16px;justify-content:center;padding:0;transition:transform .18s;transform-origin:bottom center}.magnetic button:hover{transform:translateY(-9px) scale(1.35);z-index:2}.magnetic button.near{transform:translateY(-3px) scale(1.1)}.magnetic button.active{color:var(--lime)}.magnetic .command{background:var(--lime);color:var(--dark);font-size:13px;font-weight:700;margin-left:7px}.tip{position:absolute;bottom:66px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:11px;background:var(--dark);border-radius:14px;padding:7px 10px;opacity:0;pointer-events:none}.magnetic button:hover .tip,.magnetic button:focus-visible .tip{opacity:1}.magnetic svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8}.palette{position:absolute;inset:0;background:var(--dark);padding:20px;z-index:5;display:none}.palette.show{display:block}.palette header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;font-weight:700}.palette header button{background:var(--surface);width:28px;height:28px;border-radius:6px}.palette input{width:100%;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:10px;border-radius:var(--radius)}.palette-list{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:10px}.palette-list button{background:var(--surface);border-radius:var(--radius);padding:10px;text-align:left}.palette-list button:hover{color:var(--lime)}.current{position:absolute;top:26px;left:0;right:0;text-align:center;color:var(--muted);font-size:11px}.current strong{display:block;font-size:22px;color:var(--ink);margin-top:6px;font-weight:500}@keyframes wave{to{transform:scaleY(.5)}}@media(max-width:420px){.magnetic{gap:1px;padding:6px}.magnetic button{width:36px}.magnetic .command{margin-left:3px}.menu button{flex:1 1 28%}.island.open{width:100%}.stage{height:340px}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}</code></pre>
+      </div>
+    </section>
+
+    <section class="doc-section" id="section-4">
+      <div class="section-head">
+        <span class="section-index">4</span>
+        <h2>JavaScript Code</h2>
+      </div>
+      <p class="section-note">Add this script before the closing &lt;/body&gt; tag (e.g. script.js):</p>
+      <div class="code-window">
+        <div class="code-chrome">
+          <div class="dots"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <span class="filename">script.js</span>
+          <button class="copy-btn" type="button" data-copy-target="code-4">
+            <svg class="icon-copy" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M3 10.5V3.5A1.5 1.5 0 0 1 4.5 2H10"/></svg>
+            <svg class="icon-check" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8.5l3 3 7-7"/></svg>
+            <span class="copy-label">Copy</span>
+          </button>
+        </div>
+        <pre><code id="code-4" class="language-javascript">const buttons=[...document.querySelectorAll(&#39;.dock button&#39;)];buttons.forEach((b,i)=&gt;b.addEventListener(&#39;click&#39;,()=&gt;{buttons.forEach((x,j)=&gt;{x.classList.toggle(&#39;active&#39;,i===j);x.setAttribute(&#39;aria-pressed&#39;,String(i===j))});document.querySelector(&#39;.bubble&#39;).style.left=`calc(100% / 5 * ${i} + (100% / 5 - 56px) / 2)`}));</code></pre>
+      </div>
+    </section>
+
+    </main>
+  </div>
+
+  <footer class="doc-footer">
+    <span>Part of the Modern Navbar Collection</span>
+    <a href="../index.html">&larr; Back to Collection</a>
+  </footer>
+
+<script>
+  hljs.highlightAll();
+
+  document.querySelectorAll('.copy-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var targetId = btn.getAttribute('data-copy-target');
+      var codeEl = document.getElementById(targetId);
+      var text = codeEl.textContent;
+      navigator.clipboard.writeText(text).then(function(){
+        btn.classList.add('is-copied');
+        var label = btn.querySelector('.copy-label');
+        var prev = label.textContent;
+        label.textContent = 'Copied';
+        setTimeout(function(){
+          btn.classList.remove('is-copied');
+          label.textContent = prev;
+        }, 1800);
+      });
+    });
+  });
+
+  var links = document.querySelectorAll('.side-nav a');
+  var sections = document.querySelectorAll('.doc-section');
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting) {
+        links.forEach(function(l){ l.classList.remove('is-active'); });
+        var active = document.querySelector('.side-nav a[href="#' + entry.target.id + '"]');
+        if (active) active.classList.add('is-active');
+      }
+    });
+  }, { rootMargin: '-15% 0px -70% 0px' });
+  sections.forEach(function(s){ observer.observe(s); });
+</script>
+
+</body>
+</html>
