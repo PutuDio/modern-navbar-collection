@@ -1,118 +1,366 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nexus AI Research Lab — Semantic Mesh Navigation</title>
-  <meta name="description" content="An experimental mind-map graph navigation where pages connect as semantic nodes with spring-physics and live edge traversal animations.">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nexus AI Research Lab — Semantic Mesh Navigation</title>
+    <meta
+      name="description"
+      content="An experimental mind-map graph navigation where pages connect as semantic nodes with spring-physics and live edge traversal animations."
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- ── Ambient background canvas (always visible) ───────────── -->
+    <canvas id="mesh-canvas" aria-hidden="true"></canvas>
 
-<!-- ── Ambient background canvas (always visible) ───────────── -->
-<canvas id="mesh-canvas" aria-hidden="true"></canvas>
+    <!-- ── Mesh overlay backdrop ────────────────────────────────── -->
+    <div
+      class="mesh-overlay"
+      id="mesh-overlay"
+      role="dialog"
+      aria-label="Semantic navigation mesh"
+      aria-modal="true"
+    ></div>
 
-<!-- ── Mesh overlay backdrop ────────────────────────────────── -->
-<div class="mesh-overlay" id="mesh-overlay" role="dialog" aria-label="Semantic navigation mesh" aria-modal="true"></div>
+    <!-- ── Interactive graph canvas ──────────────────────────────── -->
+    <canvas
+      id="graph-canvas"
+      role="img"
+      aria-label="Interactive semantic graph navigation — drag and hover nodes to explore"
+      tabindex="0"
+    ></canvas>
 
-<!-- ── Interactive graph canvas ──────────────────────────────── -->
-<canvas id="graph-canvas" role="img" aria-label="Interactive semantic graph navigation — drag and hover nodes to explore" tabindex="0"></canvas>
+    <!-- ── Node hover card ───────────────────────────────────────── -->
+    <div class="node-card" id="node-card" role="tooltip" aria-live="polite">
+      <div class="node-card-tag" id="card-tag">Knowledge Domain</div>
+      <div class="node-card-title" id="card-title">Research</div>
+      <div class="node-card-desc" id="card-desc">
+        Explore connected research domains.
+      </div>
+      <div class="node-card-children" id="card-children"></div>
+      <a class="node-card-cta" id="card-cta" href="#">Go to Research →</a>
+    </div>
 
-<!-- ── Node hover card ───────────────────────────────────────── -->
-<div class="node-card" id="node-card" role="tooltip" aria-live="polite">
-  <div class="node-card-tag" id="card-tag">Knowledge Domain</div>
-  <div class="node-card-title" id="card-title">Research</div>
-  <div class="node-card-desc" id="card-desc">Explore connected research domains.</div>
-  <div class="node-card-children" id="card-children"></div>
-  <a class="node-card-cta" id="card-cta" href="#">Go to Research →</a>
-</div>
+    <!-- ── Close mesh button ─────────────────────────────────────── -->
+    <button
+      class="close-mesh-btn"
+      id="close-mesh-btn"
+      aria-label="Close semantic mesh navigation"
+    >
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+        <path
+          d="M1 1l10 10M11 1L1 11"
+          stroke="currentColor"
+          stroke-width="1.6"
+          stroke-linecap="round"
+        />
+      </svg>
+      Close <kbd>ESC</kbd>
+    </button>
 
-<!-- ── Close mesh button ─────────────────────────────────────── -->
-<button class="close-mesh-btn" id="close-mesh-btn" aria-label="Close semantic mesh navigation">
-  <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 1l10 10M11 1L1 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-  Close  <kbd>ESC</kbd>
-</button>
-
-<!-- ═══════════════════════════════════════════════════════════
+    <!-- ═══════════════════════════════════════════════════════════
      TOP MINIMAL BRAND BAR
      ═══════════════════════════════════════════════════════════ -->
-<header class="top-bar" role="banner">
-  <a href="#home" class="top-brand" aria-label="Nexus AI Research Lab — Home">
-    <div class="brand-orb" aria-hidden="true">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-        <circle cx="8" cy="8" r="2.5" fill="white" opacity="0.9"/>
-        <line x1="8" y1="2" x2="8" y2="5" stroke="white" stroke-width="1.3" stroke-linecap="round"/>
-        <line x1="8" y1="11" x2="8" y2="14" stroke="white" stroke-width="1.3" stroke-linecap="round"/>
-        <line x1="2" y1="8" x2="5" y2="8" stroke="white" stroke-width="1.3" stroke-linecap="round"/>
-        <line x1="11" y1="8" x2="14" y2="8" stroke="white" stroke-width="1.3" stroke-linecap="round"/>
-        <line x1="3.8" y1="3.8" x2="5.9" y2="5.9" stroke="white" stroke-width="1.3" stroke-linecap="round" opacity="0.6"/>
-        <line x1="10.1" y1="10.1" x2="12.2" y2="12.2" stroke="white" stroke-width="1.3" stroke-linecap="round" opacity="0.6"/>
-        <line x1="12.2" y1="3.8" x2="10.1" y2="5.9" stroke="white" stroke-width="1.3" stroke-linecap="round" opacity="0.6"/>
-        <line x1="5.9" y1="10.1" x2="3.8" y2="12.2" stroke="white" stroke-width="1.3" stroke-linecap="round" opacity="0.6"/>
-      </svg>
-    </div>
-    <span class="brand-name">Nexus AI Lab</span>
-    <span class="brand-badge">α 0.9</span>
-  </a>
-
-  <div class="top-bar-right">
-    <span class="mesh-hint" aria-hidden="true">
-      <span class="hint-dot"></span>
-      <span id="hint-text">Click node to navigate</span>
-    </span>
-    <button class="btn-open-mesh" id="open-mesh-btn" aria-label="Open semantic mesh navigation" aria-haspopup="dialog">
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-        <circle cx="7" cy="7" r="2" stroke="currentColor" stroke-width="1.3"/>
-        <circle cx="2.5" cy="2.5" r="1.5" stroke="currentColor" stroke-width="1.2"/>
-        <circle cx="11.5" cy="2.5" r="1.5" stroke="currentColor" stroke-width="1.2"/>
-        <circle cx="2.5" cy="11.5" r="1.5" stroke="currentColor" stroke-width="1.2"/>
-        <circle cx="11.5" cy="11.5" r="1.5" stroke="currentColor" stroke-width="1.2"/>
-        <line x1="3.6" y1="3.6" x2="5.5" y2="5.5" stroke="currentColor" stroke-width="1.2"/>
-        <line x1="10.4" y1="3.6" x2="8.5" y2="5.5" stroke="currentColor" stroke-width="1.2"/>
-        <line x1="3.6" y1="10.4" x2="5.5" y2="8.5" stroke="currentColor" stroke-width="1.2"/>
-        <line x1="10.4" y1="10.4" x2="8.5" y2="8.5" stroke="currentColor" stroke-width="1.2"/>
-      </svg>
-      Open Mesh
-      <kbd style="font-size:10px;background:rgba(255,255,255,0.08);border-radius:3px;padding:1px 4px;border:1px solid rgba(255,255,255,0.1);">⌘G</kbd>
-    </button>
-    <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mesh-mobile-drawer">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-    </button>
-  </div>
-</header>
-
-<!-- ── Mobile navigation drawer ──────────────────────────────── -->
-<div class="mesh-mobile-drawer" id="mesh-mobile-drawer" aria-hidden="true">
-  <div class="mesh-mobile-backdrop" id="mesh-mobile-backdrop"></div>
-  <div class="mesh-mobile-panel">
-    <div class="mesh-drawer-header">
-      <div class="top-brand">
-        <div class="brand-orb" aria-hidden="true"></div>
+    <header class="top-bar" role="banner">
+      <a
+        href="#"
+        class="top-brand"
+        aria-label="Nexus AI Research Lab — Home"
+      >
+        <div class="brand-orb" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <circle cx="8" cy="8" r="2.5" fill="white" opacity="0.9" />
+            <line
+              x1="8"
+              y1="2"
+              x2="8"
+              y2="5"
+              stroke="white"
+              stroke-width="1.3"
+              stroke-linecap="round"
+            />
+            <line
+              x1="8"
+              y1="11"
+              x2="8"
+              y2="14"
+              stroke="white"
+              stroke-width="1.3"
+              stroke-linecap="round"
+            />
+            <line
+              x1="2"
+              y1="8"
+              x2="5"
+              y2="8"
+              stroke="white"
+              stroke-width="1.3"
+              stroke-linecap="round"
+            />
+            <line
+              x1="11"
+              y1="8"
+              x2="14"
+              y2="8"
+              stroke="white"
+              stroke-width="1.3"
+              stroke-linecap="round"
+            />
+            <line
+              x1="3.8"
+              y1="3.8"
+              x2="5.9"
+              y2="5.9"
+              stroke="white"
+              stroke-width="1.3"
+              stroke-linecap="round"
+              opacity="0.6"
+            />
+            <line
+              x1="10.1"
+              y1="10.1"
+              x2="12.2"
+              y2="12.2"
+              stroke="white"
+              stroke-width="1.3"
+              stroke-linecap="round"
+              opacity="0.6"
+            />
+            <line
+              x1="12.2"
+              y1="3.8"
+              x2="10.1"
+              y2="5.9"
+              stroke="white"
+              stroke-width="1.3"
+              stroke-linecap="round"
+              opacity="0.6"
+            />
+            <line
+              x1="5.9"
+              y1="10.1"
+              x2="3.8"
+              y2="12.2"
+              stroke="white"
+              stroke-width="1.3"
+              stroke-linecap="round"
+              opacity="0.6"
+            />
+          </svg>
+        </div>
         <span class="brand-name">Nexus AI Lab</span>
+        <span class="brand-badge">α 0.9</span>
+      </a>
+
+      <div class="top-bar-right">
+        <span class="mesh-hint" aria-hidden="true">
+          <span class="hint-dot"></span>
+          <span id="hint-text">Click node to navigate</span>
+        </span>
+        <button
+          class="btn-open-mesh"
+          id="open-mesh-btn"
+          aria-label="Open semantic mesh navigation"
+          aria-haspopup="dialog"
+        >
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 14 14"
+            fill="none"
+            aria-hidden="true"
+          >
+            <circle
+              cx="7"
+              cy="7"
+              r="2"
+              stroke="currentColor"
+              stroke-width="1.3"
+            />
+            <circle
+              cx="2.5"
+              cy="2.5"
+              r="1.5"
+              stroke="currentColor"
+              stroke-width="1.2"
+            />
+            <circle
+              cx="11.5"
+              cy="2.5"
+              r="1.5"
+              stroke="currentColor"
+              stroke-width="1.2"
+            />
+            <circle
+              cx="2.5"
+              cy="11.5"
+              r="1.5"
+              stroke="currentColor"
+              stroke-width="1.2"
+            />
+            <circle
+              cx="11.5"
+              cy="11.5"
+              r="1.5"
+              stroke="currentColor"
+              stroke-width="1.2"
+            />
+            <line
+              x1="3.6"
+              y1="3.6"
+              x2="5.5"
+              y2="5.5"
+              stroke="currentColor"
+              stroke-width="1.2"
+            />
+            <line
+              x1="10.4"
+              y1="3.6"
+              x2="8.5"
+              y2="5.5"
+              stroke="currentColor"
+              stroke-width="1.2"
+            />
+            <line
+              x1="3.6"
+              y1="10.4"
+              x2="5.5"
+              y2="8.5"
+              stroke="currentColor"
+              stroke-width="1.2"
+            />
+            <line
+              x1="10.4"
+              y1="10.4"
+              x2="8.5"
+              y2="8.5"
+              stroke="currentColor"
+              stroke-width="1.2"
+            />
+          </svg>
+          Open Mesh
+          <kbd
+            style="
+              font-size: 10px;
+              background: rgba(255, 255, 255, 0.08);
+              border-radius: 3px;
+              padding: 1px 4px;
+              border: 1px solid rgba(255, 255, 255, 0.1);
+            "
+            >⌘G</kbd
+          >
+        </button>
+        <button
+          class="mobile-menu-btn"
+          id="mobile-menu-btn"
+          aria-label="Open menu"
+          aria-expanded="false"
+          aria-controls="mesh-mobile-drawer"
+        >
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path
+              d="M2 4h12M2 8h12M2 12h12"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+            />
+          </svg>
+        </button>
       </div>
-      <button class="mesh-drawer-close" id="mesh-drawer-close" aria-label="Close menu">&times;</button>
-    </div>
-    
-    <div class="mesh-drawer-quick-actions">
-      <button class="btn-primary" id="mobile-trigger-mesh" style="width:100%; justify-content:center; gap:8px;">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="2" stroke="currentColor" stroke-width="1.3"/><circle cx="2.5" cy="2.5" r="1.5" stroke="currentColor" stroke-width="1.2"/><circle cx="11.5" cy="2.5" r="1.5" stroke="currentColor" stroke-width="1.2"/><circle cx="2.5" cy="11.5" r="1.5" stroke="currentColor" stroke-width="1.2"/><circle cx="11.5" cy="11.5" r="1.5" stroke="currentColor" stroke-width="1.2"/></svg>
-        Open Knowledge Mesh
-      </button>
+    </header>
+
+    <!-- ── Mobile navigation drawer ──────────────────────────────── -->
+    <div class="mesh-mobile-drawer" id="mesh-mobile-drawer" aria-hidden="true">
+      <div class="mesh-mobile-backdrop" id="mesh-mobile-backdrop"></div>
+      <div class="mesh-mobile-panel">
+        <div class="mesh-drawer-header">
+          <div class="top-brand">
+            <div class="brand-orb" aria-hidden="true"></div>
+            <span class="brand-name">Nexus AI Lab</span>
+          </div>
+          <button
+            class="mesh-drawer-close"
+            id="mesh-drawer-close"
+            aria-label="Close menu"
+          >
+            &times;
+          </button>
+        </div>
+
+        <div class="mesh-drawer-quick-actions">
+          <button
+            class="btn-primary"
+            id="mobile-trigger-mesh"
+            style="width: 100%; justify-content: center; gap: 8px"
+          >
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <circle
+                cx="7"
+                cy="7"
+                r="2"
+                stroke="currentColor"
+                stroke-width="1.3"
+              />
+              <circle
+                cx="2.5"
+                cy="2.5"
+                r="1.5"
+                stroke="currentColor"
+                stroke-width="1.2"
+              />
+              <circle
+                cx="11.5"
+                cy="2.5"
+                r="1.5"
+                stroke="currentColor"
+                stroke-width="1.2"
+              />
+              <circle
+                cx="2.5"
+                cy="11.5"
+                r="1.5"
+                stroke="currentColor"
+                stroke-width="1.2"
+              />
+              <circle
+                cx="11.5"
+                cy="11.5"
+                r="1.5"
+                stroke="currentColor"
+                stroke-width="1.2"
+              />
+            </svg>
+            Open Knowledge Mesh
+          </button>
+        </div>
+
+        <div class="mesh-drawer-title">Knowledge Graph Nodes</div>
+        <nav class="mesh-drawer-nav">
+          <a href="#" class="mesh-drawer-link"
+            ><span class="node-bullet" style="background: #6378ff"></span>⬡ Home
+            &amp; Overview</a
+          >
+          <a href="#" class="mesh-drawer-link"
+            ><span class="node-bullet" style="background: #a78bfa"></span>◎
+            Research Domains</a
+          >
+          <a href="#" class="mesh-drawer-link"
+            ><span class="node-bullet" style="background: #38bdf8"></span>◈
+            Interactive Lab</a
+          >
+          <a href="#" class="mesh-drawer-link"
+            ><span class="node-bullet" style="background: #fbbf24"></span>◻
+            Selected Publications</a
+          >
+          <a href="#" class="mesh-drawer-link"
+            ><span class="node-bullet" style="background: #fb7185"></span>◇
+            Research Fellows</a
+          >
+      </div>
     </div>
 
-    <div class="mesh-drawer-title">Knowledge Graph Nodes</div>
-    <nav class="mesh-drawer-nav">
-      <a href="#home" class="mesh-drawer-link"><span class="node-bullet" style="background:#6378ff;"></span>⬡ Home &amp; Overview</a>
-      <a href="#research" class="mesh-drawer-link"><span class="node-bullet" style="background:#a78bfa;"></span>◎ Research Domains</a>
-      <a href="#lab" class="mesh-drawer-link"><span class="node-bullet" style="background:#38bdf8;"></span>◈ Interactive Lab</a>
-      <a href="#publications" class="mesh-drawer-link"><span class="node-bullet" style="background:#fbbf24;"></span>◻ Selected Publications</a>
-      <a href="#team" class="mesh-drawer-link"><span class="node-bullet" style="background:#fb7185;"></span>◇ Research Fellows</a>
-      <a href="../index.html" class="mesh-drawer-link" style="margin-top:12px; border-top:1px solid var(--border-subtle); padding-top:12px; color:var(--text-muted);">← Back to Collection</a>
-    </nav>
-  </div>
-</div>
-
-<!-- Semantic mesh navigation -->
-<script src="script.js"></script>
-</body>
+    <!-- Semantic mesh navigation -->
+    <script src="script.js"></script>
+  </body>
 </html>

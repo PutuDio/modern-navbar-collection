@@ -3,7 +3,7 @@
    Predictive Morphing Navigation System
    ============================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap");
 
 /* ── Design Tokens ─────────────────────────────────────────── */
 :root {
@@ -24,14 +24,16 @@
   --ai-amber: #f59e0b;
   --ai-glow: rgba(99, 102, 241, 0.35);
 
-  --font-main: 'Plus Jakarta Sans', sans-serif;
-  --font-code: 'JetBrains Mono', monospace;
+  --font-main: "Plus Jakarta Sans", sans-serif;
+  --font-code: "JetBrains Mono", monospace;
 
   --ease-morph: cubic-bezier(0.16, 1, 0.3, 1);
   --duration-morph: 420ms;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -54,26 +56,12 @@ body {
 .bg-grid-pattern {
   position: fixed;
   inset: 0;
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 40px 40px;
+  background-image:
+    linear-gradient(#ffffff10 1px, transparent 1px),
+    linear-gradient(90deg, #ffffff10 1px, transparent 1px);
+  background-size: 28px 28px;
   pointer-events: none;
   z-index: 0;
-}
-
-.ai-light-orb {
-  position: fixed;
-  top: -100px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 700px;
-  height: 380px;
-  background: radial-gradient(ellipse at center, rgba(99, 102, 241, 0.18) 0%, rgba(6, 182, 212, 0.08) 50%, transparent 80%);
-  filter: blur(70px);
-  pointer-events: none;
-  z-index: 0;
-  transition: all 0.8s ease;
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -113,8 +101,13 @@ body {
 }
 
 @keyframes simPulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
 }
 
 .simulator-buttons {
@@ -169,7 +162,9 @@ body {
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid var(--border-subtle);
   border-radius: 9999px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
   transition: all var(--duration-morph) var(--ease-morph);
 }
 
@@ -363,7 +358,13 @@ body {
 }
 
 .hero-h1 .gradient-ai {
-  background: linear-gradient(135deg, #ffffff 10%, #cbd5e1 40%, var(--ai-cyan) 75%, var(--ai-primary) 100%);
+  background: linear-gradient(
+    135deg,
+    #ffffff 10%,
+    #cbd5e1 40%,
+    var(--ai-cyan) 75%,
+    var(--ai-primary) 100%
+  );
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -469,7 +470,9 @@ body {
   cursor: pointer;
   padding: 0;
   z-index: 101;
-  transition: background 0.2s ease, border-color 0.2s ease;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .nav-burger-btn:hover {
@@ -483,7 +486,9 @@ body {
   height: 2px;
   background: #fff;
   border-radius: 2px;
-  transition: transform 0.25s ease, opacity 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease;
 }
 
 .nav-burger-btn.is-active span:nth-child(1) {
@@ -617,7 +622,9 @@ body {
   font-weight: 500;
   color: var(--text-slate-300, #cbd5e1);
   text-decoration: none;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
 }
 
 .mobile-nav-menu .nav-link:hover {
@@ -657,7 +664,7 @@ body {
 
 @media (max-width: 900px) {
   .nav-header {
-    top: 12px;
+    top: 52px;
     padding: 0 16px;
   }
   .nav-container {
@@ -703,10 +710,23 @@ body {
   .nav-container {
     padding: 6px 10px;
   }
-  .nav-brand .brand-name { font-size: 13px; }
-  .hero-title { font-size: clamp(26px, 7vw, 36px); }
-  .hero-subtitle { font-size: 13px; }
-  .page-container { padding: 100px 12px 50px; }
-  .hero-section { padding: 20px 0 40px; }
-  .simulator-strip { font-size: 10px; padding: 5px 10px; }
+  .nav-brand .brand-name {
+    font-size: 13px;
+  }
+  .hero-title {
+    font-size: clamp(26px, 7vw, 36px);
+  }
+  .hero-subtitle {
+    font-size: 13px;
+  }
+  .page-container {
+    padding: 100px 12px 50px;
+  }
+  .hero-section {
+    padding: 20px 0 40px;
+  }
+  .simulator-strip {
+    font-size: 10px;
+    padding: 5px 10px;
+  }
 }

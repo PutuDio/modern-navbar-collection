@@ -1,11 +1,19 @@
 {
   "title": "Untitled UI SaaS Sidebar",
-  "category": "saas",
-  "categoryLabel": "SaaS & Admin — Cloud / Team Management",
+  "category": "sidebar",
+  "categoryLabel": "Sidebar — Cloud / Team Management",
   "descriptionShort": "Sidebar dual-tier enterprise dengan ⌘K command palette dan account switcher.",
   "descriptionLong": "Sidebar bertingkat ganda kelas enterprise terinspirasi oleh Untitled UI v4.0. Dilengkapi ⌘K command palette, popover account switcher, dan status kehadiran live.",
   "tech": "HTML · CSS · JS",
-  "keywords": ["saas", "admin", "sidebar", "dual tier", "command palette", "popover", "profile"],
+  "keywords": [
+    "saas",
+    "admin",
+    "sidebar",
+    "dual tier",
+    "command palette",
+    "popover",
+    "profile"
+  ],
   "featured": false,
   "order": 2,
   "mobileMenuTrigger": "#topbar-menu-btn"

@@ -1,11 +1,19 @@
 {
   "title": "AI Adaptive Intent Navbar",
-  "category": "experimental",
-  "categoryLabel": "Experimental — Predictive / Adaptive UX",
+  "category": "floating-islands",
+  "categoryLabel": "Floating & Islands — Predictive / Adaptive UX",
   "descriptionShort": "Navbar prediktif cerdas — berubah bentuk secara dinamis mendeteksi persona pengunjung (Developer, Enterprise, Designer) via dwell-time.",
   "descriptionLong": "Navbar yang memantau perilaku scroll dan dwell-time pengunjung untuk menyimpulkan persona (Developer, Enterprise, Designer), lalu memorph ulang menu, CTA, dan status badge secara real-time. Dilengkapi simulator toolbar untuk memaksa ganti persona secara manual.",
   "tech": "Intent Heuristics · Intersection Observer · CSS Morphing",
-  "keywords": ["ai", "predictive", "adaptive", "persona", "intent", "morphing", "dwell time"],
+  "keywords": [
+    "ai",
+    "predictive",
+    "adaptive",
+    "persona",
+    "intent",
+    "morphing",
+    "dwell time"
+  ],
   "featured": false,
   "order": 12,
   "mobileMenuTrigger": "#nav-burger"

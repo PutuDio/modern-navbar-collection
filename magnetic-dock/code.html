@@ -303,7 +303,97 @@
           </button>
         </div>
         <pre><code id="code-2" class="language-html">&lt;!doctype html&gt;
-&lt;html lang=&quot;id&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;&lt;title&gt;Magnetic Dock + ⌘K&lt;/title&gt;&lt;link rel=&quot;stylesheet&quot; href=&quot;styles.css&quot;&gt;&lt;/head&gt;&lt;body&gt;&lt;main class=&quot;stage dock-stage&quot;&gt;&lt;div class=&quot;current&quot;&gt;WORKSPACE&lt;strong id=&quot;active&quot;&gt;Home&lt;/strong&gt;&lt;/div&gt;&lt;nav class=&quot;dock magnetic&quot; aria-label=&quot;Magnetic Dock&quot;&gt;&lt;button data-page=&quot;Home&quot; aria-label=&quot;Home&quot; aria-pressed=&quot;true&quot; class=&quot;active&quot;&gt;&lt;svg viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;m3 10 9-7 9 7v10H3z&quot;/&gt;&lt;path d=&quot;M9 20v-7h6v7&quot;/&gt;&lt;/svg&gt;&lt;span class=&quot;tip&quot;&gt;Home&lt;/span&gt;&lt;/button&gt;&lt;button data-page=&quot;Explore&quot; aria-label=&quot;Explore&quot; aria-pressed=&quot;false&quot; class=&quot;&quot;&gt;&lt;svg viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;circle cx=&quot;12&quot; cy=&quot;12&quot; r=&quot;9&quot;/&gt;&lt;circle cx=&quot;12&quot; cy=&quot;12&quot; r=&quot;5&quot;/&gt;&lt;/svg&gt;&lt;span class=&quot;tip&quot;&gt;Explore&lt;/span&gt;&lt;/button&gt;&lt;button data-page=&quot;Create&quot; aria-label=&quot;Create&quot; aria-pressed=&quot;false&quot; class=&quot;&quot;&gt;&lt;svg viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;m12 2 3 7 7 3-7 3-3 7-3-7-7-3 7-3z&quot;/&gt;&lt;/svg&gt;&lt;span class=&quot;tip&quot;&gt;Create&lt;/span&gt;&lt;/button&gt;&lt;button data-page=&quot;Music&quot; aria-label=&quot;Music&quot; aria-pressed=&quot;false&quot; class=&quot;&quot;&gt;&lt;svg viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M9 18V5l11-2v13M9 5l11-2&quot;/&gt;&lt;circle cx=&quot;6&quot; cy=&quot;18&quot; r=&quot;3&quot;/&gt;&lt;circle cx=&quot;17&quot; cy=&quot;16&quot; r=&quot;3&quot;/&gt;&lt;/svg&gt;&lt;span class=&quot;tip&quot;&gt;Music&lt;/span&gt;&lt;/button&gt;&lt;button data-page=&quot;Inbox&quot; aria-label=&quot;Inbox&quot; aria-pressed=&quot;false&quot; class=&quot;&quot;&gt;&lt;svg viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;rect x=&quot;3&quot; y=&quot;5&quot; width=&quot;18&quot; height=&quot;14&quot; rx=&quot;1&quot;/&gt;&lt;path d=&quot;m3 5 9 8 9-8&quot;/&gt;&lt;/svg&gt;&lt;span class=&quot;tip&quot;&gt;Inbox&lt;/span&gt;&lt;/button&gt;&lt;button data-page=&quot;Settings&quot; aria-label=&quot;Settings&quot; aria-pressed=&quot;false&quot; class=&quot;&quot;&gt;&lt;svg viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;m10 3-1 3-3 1-3 3 2 2-1 3 3 3 3-1 2 2 3-2 1-3 3-1v-4l-3-1-1-3z&quot;/&gt;&lt;circle cx=&quot;12&quot; cy=&quot;12&quot; r=&quot;3&quot;/&gt;&lt;/svg&gt;&lt;span class=&quot;tip&quot;&gt;Settings&lt;/span&gt;&lt;/button&gt;&lt;button class=&quot;command&quot; aria-label=&quot;Buka command palette&quot;&gt;⌘K&lt;/button&gt;&lt;/nav&gt;&lt;section class=&quot;palette&quot; role=&quot;dialog&quot; aria-modal=&quot;true&quot; aria-label=&quot;Command palette&quot;&gt;&lt;header&gt;Command palette&lt;button aria-label=&quot;Tutup command palette&quot;&gt;&#215;&lt;/button&gt;&lt;/header&gt;&lt;input placeholder=&quot;Cari halaman…&quot; aria-label=&quot;Cari perintah&quot;&gt;&lt;div class=&quot;palette-list&quot;&gt;&lt;/div&gt;&lt;/section&gt;&lt;/main&gt;&lt;script src=&quot;script.js&quot;&gt;&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;</code></pre>
+&lt;html lang=&quot;id&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot; /&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot; /&gt;
+    &lt;title&gt;Magnetic Dock + ⌘K&lt;/title&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;styles.css&quot; /&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;main class=&quot;stage dock-stage&quot;&gt;
+      &lt;div class=&quot;current&quot;&gt;WORKSPACE&lt;strong id=&quot;active&quot;&gt;Home&lt;/strong&gt;&lt;/div&gt;
+      &lt;nav class=&quot;dock magnetic&quot; aria-label=&quot;Magnetic Dock&quot;&gt;
+        &lt;button
+          data-page=&quot;Home&quot;
+          aria-label=&quot;Home&quot;
+          aria-pressed=&quot;true&quot;
+          class=&quot;active&quot;
+        &gt;
+          &lt;svg viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;
+            &lt;path d=&quot;m3 10 9-7 9 7v10H3z&quot; /&gt;
+            &lt;path d=&quot;M9 20v-7h6v7&quot; /&gt;&lt;/svg
+          &gt;&lt;span class=&quot;tip&quot;&gt;Home&lt;/span&gt;&lt;/button
+        &gt;&lt;button
+          data-page=&quot;Explore&quot;
+          aria-label=&quot;Explore&quot;
+          aria-pressed=&quot;false&quot;
+          class=&quot;&quot;
+        &gt;
+          &lt;svg viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;
+            &lt;circle cx=&quot;12&quot; cy=&quot;12&quot; r=&quot;9&quot; /&gt;
+            &lt;circle cx=&quot;12&quot; cy=&quot;12&quot; r=&quot;5&quot; /&gt;&lt;/svg
+          &gt;&lt;span class=&quot;tip&quot;&gt;Explore&lt;/span&gt;&lt;/button
+        &gt;&lt;button
+          data-page=&quot;Create&quot;
+          aria-label=&quot;Create&quot;
+          aria-pressed=&quot;false&quot;
+          class=&quot;&quot;
+        &gt;
+          &lt;svg viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;
+            &lt;path d=&quot;m12 2 3 7 7 3-7 3-3 7-3-7-7-3 7-3z&quot; /&gt;&lt;/svg
+          &gt;&lt;span class=&quot;tip&quot;&gt;Create&lt;/span&gt;&lt;/button
+        &gt;&lt;button
+          data-page=&quot;Music&quot;
+          aria-label=&quot;Music&quot;
+          aria-pressed=&quot;false&quot;
+          class=&quot;&quot;
+        &gt;
+          &lt;svg viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;
+            &lt;path d=&quot;M9 18V5l11-2v13M9 5l11-2&quot; /&gt;
+            &lt;circle cx=&quot;6&quot; cy=&quot;18&quot; r=&quot;3&quot; /&gt;
+            &lt;circle cx=&quot;17&quot; cy=&quot;16&quot; r=&quot;3&quot; /&gt;&lt;/svg
+          &gt;&lt;span class=&quot;tip&quot;&gt;Music&lt;/span&gt;&lt;/button
+        &gt;&lt;button
+          data-page=&quot;Inbox&quot;
+          aria-label=&quot;Inbox&quot;
+          aria-pressed=&quot;false&quot;
+          class=&quot;&quot;
+        &gt;
+          &lt;svg viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;
+            &lt;rect x=&quot;3&quot; y=&quot;5&quot; width=&quot;18&quot; height=&quot;14&quot; rx=&quot;1&quot; /&gt;
+            &lt;path d=&quot;m3 5 9 8 9-8&quot; /&gt;&lt;/svg
+          &gt;&lt;span class=&quot;tip&quot;&gt;Inbox&lt;/span&gt;&lt;/button
+        &gt;&lt;button
+          data-page=&quot;Settings&quot;
+          aria-label=&quot;Settings&quot;
+          aria-pressed=&quot;false&quot;
+          class=&quot;&quot;
+        &gt;
+          &lt;svg viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;
+            &lt;path
+              d=&quot;m10 3-1 3-3 1-3 3 2 2-1 3 3 3 3-1 2 2 3-2 1-3 3-1v-4l-3-1-1-3z&quot;
+            /&gt;
+            &lt;circle cx=&quot;12&quot; cy=&quot;12&quot; r=&quot;3&quot; /&gt;&lt;/svg
+          &gt;&lt;span class=&quot;tip&quot;&gt;Settings&lt;/span&gt;&lt;/button
+        &gt;&lt;button class=&quot;command&quot; aria-label=&quot;Buka command palette&quot;&gt;⌘K&lt;/button&gt;
+      &lt;/nav&gt;
+      &lt;section
+        class=&quot;palette&quot;
+        role=&quot;dialog&quot;
+        aria-modal=&quot;true&quot;
+        aria-label=&quot;Command palette&quot;
+      &gt;
+        &lt;header&gt;
+          Command palette&lt;button aria-label=&quot;Tutup command palette&quot;&gt;&#215;&lt;/button&gt;
+        &lt;/header&gt;
+        &lt;input placeholder=&quot;Cari halaman…&quot; aria-label=&quot;Cari perintah&quot; /&gt;
+        &lt;div class=&quot;palette-list&quot;&gt;&lt;/div&gt;
+      &lt;/section&gt;
+    &lt;/main&gt;
+    &lt;script src=&quot;script.js&quot;&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
       </div>
     </section>
 
@@ -324,7 +414,426 @@
           </button>
         </div>
         <pre><code id="code-3" class="language-css">@charset &quot;UTF-8&quot;;
-:root{--bg:#101417;--grid:#ffffff10;--ink:#f5f6f2;--muted:#929a9e;--surface:#1d2327;--lime:#c4f23c;--orange:#f38960;--paper:#f2efe5;--dark:#080a0b;--shadow:0 18px 40px #0005;--line:#ffffff14;--radius:8px}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px system-ui,sans-serif;letter-spacing:0}button,input{font:inherit}button{cursor:pointer;border:0;color:inherit}button:focus-visible,input:focus-visible{outline:2px solid var(--lime);outline-offset:3px}button:disabled{cursor:default}.stage{height:340px;position:relative;display:flex;justify-content:center;align-items:flex-start;padding:30px 12px;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:28px 28px;overflow:hidden}.island{background:var(--dark);border-radius:28px;width:220px;max-width:100%;box-shadow:var(--shadow);transition:width .5s cubic-bezier(.2,1.2,.4,1),height .5s;overflow:hidden}.island.open{width:540px}.island.grid.open{width:364px}.head{width:100%;height:46px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;background:transparent;font-weight:700;gap:12px}.dot{width:9px;height:9px;border-radius:50%;background:var(--lime);display:inline-block;margin-right:8px}.wave{display:flex;align-items:center;gap:3px;height:20px}.wave i{width:3px;background:var(--lime);height:14px;border-radius:2px;animation:wave 1s ease-in-out infinite alternate}.wave i:nth-child(2){height:20px;animation-delay:.2s}.wave i:nth-child(3){height:13px;animation-delay:.4s}.wave i:nth-child(4){height:8px;animation-delay:.6s}.menu{display:none;padding:0 12px 12px;gap:6px}.open .menu{display:flex;flex-wrap:wrap}.menu button{background:var(--surface);padding:12px 10px;border-radius:var(--radius);flex:1;font-size:12px;text-align:left;font-weight:700}.menu button.active{color:var(--lime)}.menu button:hover{background:var(--line)}.grid .menu{display:none;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 26px}.grid.open .menu{display:grid}.menu small{display:block;font-weight:400;color:var(--muted);font-size:11px;margin-top:4px}.search{display:flex;padding:0 14px 14px;gap:8px}.search input{width:100%;min-width:0;border:0;background:var(--surface);border-radius:var(--radius);padding:10px;color:var(--ink)}.search button{background:var(--lime);color:var(--dark);border-radius:var(--radius);padding:0 10px}.results{padding:0 14px 14px}.results button{background:var(--surface);border-radius:var(--radius);padding:10px;width:100%;text-align:left}.results p{color:var(--muted);font-size:12px}.dock-stage{align-items:flex-end;padding-bottom:40px}.dock{display:flex;align-items:flex-end;position:relative;width:min(376px,100%);height:80px;padding:8px;background:var(--paper);color:var(--dark);border-radius:25px;box-shadow:var(--shadow)}.dock button{position:relative;flex:1;min-width:0;display:flex;align-items:center;justify-content:flex-end;flex-direction:column;height:64px;background:transparent;color:var(--dark);padding:0 0 8px;gap:7px}.dock .icon{height:28px;display:flex;align-items:center;font-size:24px;transition:transform .5s cubic-bezier(.5,1.6,.4,1)}.dock .label{font-size:10px;opacity:.5;font-weight:700}.dock button.active .icon{transform:translateY(-29px) scale(1.2)}.dock button.active .label{opacity:1}.goo-layer{position:absolute;inset:0 8px 8px;filter:url(#goo);pointer-events:none}.goo-base{position:absolute;inset:16px 0 0;background:var(--paper);border-radius:22px}.bubble{position:absolute;width:56px;height:56px;background:var(--orange);border-radius:50%;top:-17px;left:calc((100% / 5 - 56px) / 2);transition:left .5s cubic-bezier(.5,1.6,.4,1)}.magnetic{height:64px;width:auto;max-width:100%;padding:8px;gap:3px;border:1px solid var(--line);background:var(--surface);border-radius:22px;color:var(--ink)}.magnetic button{background:var(--surface);color:var(--ink);width:48px;flex:none;height:46px;border-radius:16px;justify-content:center;padding:0;transition:transform .18s;transform-origin:bottom center}.magnetic button:hover{transform:translateY(-9px) scale(1.35);z-index:2}.magnetic button.near{transform:translateY(-3px) scale(1.1)}.magnetic button.active{color:var(--lime)}.magnetic .command{background:var(--lime);color:var(--dark);font-size:13px;font-weight:700;margin-left:7px}.tip{position:absolute;bottom:66px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:11px;background:var(--dark);border-radius:14px;padding:7px 10px;opacity:0;pointer-events:none}.magnetic button:hover .tip,.magnetic button:focus-visible .tip{opacity:1}.magnetic svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8}.palette{position:absolute;inset:0;background:var(--dark);padding:20px;z-index:5;display:none}.palette.show{display:block}.palette header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;font-weight:700}.palette header button{background:var(--surface);width:28px;height:28px;border-radius:6px}.palette input{width:100%;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:10px;border-radius:var(--radius)}.palette-list{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:10px}.palette-list button{background:var(--surface);border-radius:var(--radius);padding:10px;text-align:left}.palette-list button:hover{color:var(--lime)}.current{position:absolute;top:26px;left:0;right:0;text-align:center;color:var(--muted);font-size:11px}.current strong{display:block;font-size:22px;color:var(--ink);margin-top:6px;font-weight:500}@keyframes wave{to{transform:scaleY(.5)}}@media(max-width:420px){.magnetic{gap:1px;padding:6px}.magnetic button{width:36px}.magnetic .command{margin-left:3px}.menu button{flex:1 1 28%}.island.open{width:100%}.stage{height:340px}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}</code></pre>
+:root {
+  --bg: #101417;
+  --grid: #ffffff10;
+  --ink: #f5f6f2;
+  --muted: #929a9e;
+  --surface: #1d2327;
+  --lime: #c4f23c;
+  --orange: #f38960;
+  --paper: #f2efe5;
+  --dark: #080a0b;
+  --shadow: 0 18px 40px #0005;
+  --line: #ffffff14;
+  --radius: 8px;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font:
+    14px system-ui,
+    sans-serif;
+  letter-spacing: 0;
+}
+button,
+input {
+  font: inherit;
+}
+button {
+  cursor: pointer;
+  border: 0;
+  color: inherit;
+}
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--lime);
+  outline-offset: 3px;
+}
+button:disabled {
+  cursor: default;
+}
+.stage {
+  min-height: 100vh;
+  min-height: 100dvh;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 30px 12px;
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 28px 28px;
+  overflow: hidden;
+}
+.island {
+  background: var(--dark);
+  border-radius: 28px;
+  width: 220px;
+  max-width: 100%;
+  box-shadow: var(--shadow);
+  transition:
+    width 0.5s cubic-bezier(0.2, 1.2, 0.4, 1),
+    height 0.5s;
+  overflow: hidden;
+}
+.island.open {
+  width: 540px;
+}
+.island.grid.open {
+  width: 364px;
+}
+.head {
+  width: 100%;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 18px;
+  background: transparent;
+  font-weight: 700;
+  gap: 12px;
+}
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--lime);
+  display: inline-block;
+  margin-right: 8px;
+}
+.wave {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 20px;
+}
+.wave i {
+  width: 3px;
+  background: var(--lime);
+  height: 14px;
+  border-radius: 2px;
+  animation: wave 1s ease-in-out infinite alternate;
+}
+.wave i:nth-child(2) {
+  height: 20px;
+  animation-delay: 0.2s;
+}
+.wave i:nth-child(3) {
+  height: 13px;
+  animation-delay: 0.4s;
+}
+.wave i:nth-child(4) {
+  height: 8px;
+  animation-delay: 0.6s;
+}
+.menu {
+  display: none;
+  padding: 0 12px 12px;
+  gap: 6px;
+}
+.open .menu {
+  display: flex;
+  flex-wrap: wrap;
+}
+.menu button {
+  background: var(--surface);
+  padding: 12px 10px;
+  border-radius: var(--radius);
+  flex: 1;
+  font-size: 12px;
+  text-align: left;
+  font-weight: 700;
+}
+.menu button.active {
+  color: var(--lime);
+}
+.menu button:hover {
+  background: var(--line);
+}
+.grid .menu {
+  display: none;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 0 14px 26px;
+}
+.grid.open .menu {
+  display: grid;
+}
+.menu small {
+  display: block;
+  font-weight: 400;
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 4px;
+}
+.search {
+  display: flex;
+  padding: 0 14px 14px;
+  gap: 8px;
+}
+.search input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 10px;
+  color: var(--ink);
+}
+.search button {
+  background: var(--lime);
+  color: var(--dark);
+  border-radius: var(--radius);
+  padding: 0 10px;
+}
+.results {
+  padding: 0 14px 14px;
+}
+.results button {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 10px;
+  width: 100%;
+  text-align: left;
+}
+.results p {
+  color: var(--muted);
+  font-size: 12px;
+}
+.dock-stage {
+  align-items: flex-end;
+  padding-bottom: 40px;
+}
+.dock {
+  display: flex;
+  align-items: flex-end;
+  position: relative;
+  width: min(376px, 100%);
+  height: 80px;
+  padding: 8px;
+  background: var(--paper);
+  color: var(--dark);
+  border-radius: 25px;
+  box-shadow: var(--shadow);
+}
+.dock button {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: column;
+  height: 64px;
+  background: transparent;
+  color: var(--dark);
+  padding: 0 0 8px;
+  gap: 7px;
+}
+.dock .icon {
+  height: 28px;
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  transition: transform 0.5s cubic-bezier(0.5, 1.6, 0.4, 1);
+}
+.dock .label {
+  font-size: 10px;
+  opacity: 0.5;
+  font-weight: 700;
+}
+.dock button.active .icon {
+  transform: translateY(-29px) scale(1.2);
+}
+.dock button.active .label {
+  opacity: 1;
+}
+.goo-layer {
+  position: absolute;
+  inset: 0 8px 8px;
+  filter: url(#goo);
+  pointer-events: none;
+}
+.goo-base {
+  position: absolute;
+  inset: 16px 0 0;
+  background: var(--paper);
+  border-radius: 22px;
+}
+.bubble {
+  position: absolute;
+  width: 56px;
+  height: 56px;
+  background: var(--orange);
+  border-radius: 50%;
+  top: -17px;
+  left: calc((100% / 5 - 56px) / 2);
+  transition: left 0.5s cubic-bezier(0.5, 1.6, 0.4, 1);
+}
+.magnetic {
+  height: 64px;
+  width: auto;
+  max-width: 100%;
+  padding: 8px;
+  gap: 3px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 22px;
+  color: var(--ink);
+}
+.magnetic button {
+  background: var(--surface);
+  color: var(--ink);
+  width: 48px;
+  flex: none;
+  height: 46px;
+  border-radius: 16px;
+  justify-content: center;
+  padding: 0;
+  transition: transform 0.18s;
+  transform-origin: bottom center;
+}
+.magnetic button:hover {
+  transform: translateY(-9px) scale(1.35);
+  z-index: 2;
+}
+.magnetic button.near {
+  transform: translateY(-3px) scale(1.1);
+}
+.magnetic button.active {
+  color: var(--lime);
+}
+.magnetic .command {
+  background: var(--lime);
+  color: var(--dark);
+  font-size: 13px;
+  font-weight: 700;
+  margin-left: 7px;
+}
+.tip {
+  position: absolute;
+  bottom: 66px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 11px;
+  background: var(--dark);
+  border-radius: 14px;
+  padding: 7px 10px;
+  opacity: 0;
+  pointer-events: none;
+}
+.magnetic button:hover .tip,
+.magnetic button:focus-visible .tip {
+  opacity: 1;
+}
+.magnetic svg {
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+}
+.palette {
+  position: absolute;
+  inset: 0;
+  background: var(--dark);
+  padding: 20px;
+  z-index: 5;
+  display: none;
+}
+.palette.show {
+  display: block;
+}
+.palette header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+.palette header button {
+  background: var(--surface);
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+}
+.palette input {
+  width: 100%;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  padding: 10px;
+  border-radius: var(--radius);
+}
+.palette-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+  margin-top: 10px;
+}
+.palette-list button {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 10px;
+  text-align: left;
+}
+.palette-list button:hover {
+  color: var(--lime);
+}
+.current {
+  position: absolute;
+  top: 26px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 11px;
+}
+.current strong {
+  display: block;
+  font-size: 22px;
+  color: var(--ink);
+  margin-top: 6px;
+  font-weight: 500;
+}
+@keyframes wave {
+  to {
+    transform: scaleY(0.5);
+  }
+}
+@media (max-width: 420px) {
+  .magnetic {
+    gap: 1px;
+    padding: 6px;
+  }
+  .magnetic button {
+    width: 36px;
+  }
+  .magnetic .command {
+    margin-left: 3px;
+  }
+  .menu button {
+    flex: 1 1 28%;
+  }
+  .island.open {
+    width: 100%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}</code></pre>
       </div>
     </section>
 
@@ -344,7 +853,85 @@
             <span class="copy-label">Copy</span>
           </button>
         </div>
-        <pre><code id="code-4" class="language-javascript">const buttons=[...document.querySelectorAll(&#39;[data-page]&#39;)],palette=document.querySelector(&#39;.palette&#39;),input=palette.querySelector(&#39;input&#39;),list=document.querySelector(&#39;.palette-list&#39;);let previous=null;function close(){palette.classList.remove(&#39;show&#39;);previous?.focus()}function select(l){document.querySelector(&#39;#active&#39;).textContent=l;buttons.forEach(b=&gt;{b.classList.toggle(&#39;active&#39;,b.dataset.page===l);b.setAttribute(&#39;aria-pressed&#39;,String(b.dataset.page===l))});if(palette.classList.contains(&#39;show&#39;))close()}function render(){list.replaceChildren();buttons.filter(b=&gt;b.dataset.page.toLowerCase().includes(input.value.toLowerCase())).forEach(b=&gt;{const x=document.createElement(&#39;button&#39;);x.textContent=b.dataset.page;x.addEventListener(&#39;click&#39;,()=&gt;select(b.dataset.page));list.append(x)});if(!list.children.length){const p=document.createElement(&#39;p&#39;);p.textContent=&#39;Tidak ada hasil&#39;;list.append(p)}}function show(){previous=document.activeElement;palette.classList.add(&#39;show&#39;);input.value=&#39;&#39;;render();input.focus()}buttons.forEach((b,i)=&gt;{b.addEventListener(&#39;click&#39;,()=&gt;select(b.dataset.page));b.addEventListener(&#39;pointerenter&#39;,()=&gt;buttons.forEach((x,j)=&gt;x.classList.toggle(&#39;near&#39;,Math.abs(i-j)===1)));b.addEventListener(&#39;pointerleave&#39;,()=&gt;buttons.forEach(x=&gt;x.classList.remove(&#39;near&#39;)))});document.querySelector(&#39;.command&#39;).addEventListener(&#39;click&#39;,show);palette.querySelector(&#39;header button&#39;).addEventListener(&#39;click&#39;,close);input.addEventListener(&#39;input&#39;,render);document.addEventListener(&#39;keydown&#39;,e=&gt;{if((e.ctrlKey||e.metaKey)&amp;&amp;e.key.toLowerCase()===&#39;k&#39;){e.preventDefault();show()}if(e.key===&#39;Escape&#39;)close();if(palette.classList.contains(&#39;show&#39;)&amp;&amp;e.key===&#39;Enter&#39;&amp;&amp;document.activeElement===input)list.querySelector(&#39;button&#39;)?.click();if(palette.classList.contains(&#39;show&#39;)&amp;&amp;e.key===&#39;Tab&#39;){const f=[...palette.querySelectorAll(&#39;button,input&#39;)];if(e.shiftKey&amp;&amp;document.activeElement===f[0]){e.preventDefault();f.at(-1)?.focus()}else if(!e.shiftKey&amp;&amp;document.activeElement===f.at(-1)){e.preventDefault();f[0]?.focus()}}});</code></pre>
+        <pre><code id="code-4" class="language-javascript">const buttons = [...document.querySelectorAll(&quot;[data-page]&quot;)],
+  palette = document.querySelector(&quot;.palette&quot;),
+  input = palette.querySelector(&quot;input&quot;),
+  list = document.querySelector(&quot;.palette-list&quot;);
+let previous = null;
+function close() {
+  palette.classList.remove(&quot;show&quot;);
+  previous?.focus();
+}
+function select(l) {
+  document.querySelector(&quot;#active&quot;).textContent = l;
+  buttons.forEach((b) =&gt; {
+    b.classList.toggle(&quot;active&quot;, b.dataset.page === l);
+    b.setAttribute(&quot;aria-pressed&quot;, String(b.dataset.page === l));
+  });
+  if (palette.classList.contains(&quot;show&quot;)) close();
+}
+function render() {
+  list.replaceChildren();
+  buttons
+    .filter((b) =&gt;
+      b.dataset.page.toLowerCase().includes(input.value.toLowerCase()),
+    )
+    .forEach((b) =&gt; {
+      const x = document.createElement(&quot;button&quot;);
+      x.textContent = b.dataset.page;
+      x.addEventListener(&quot;click&quot;, () =&gt; select(b.dataset.page));
+      list.append(x);
+    });
+  if (!list.children.length) {
+    const p = document.createElement(&quot;p&quot;);
+    p.textContent = &quot;Tidak ada hasil&quot;;
+    list.append(p);
+  }
+}
+function show() {
+  previous = document.activeElement;
+  palette.classList.add(&quot;show&quot;);
+  input.value = &quot;&quot;;
+  render();
+  input.focus();
+}
+buttons.forEach((b, i) =&gt; {
+  b.addEventListener(&quot;click&quot;, () =&gt; select(b.dataset.page));
+  b.addEventListener(&quot;pointerenter&quot;, () =&gt;
+    buttons.forEach((x, j) =&gt;
+      x.classList.toggle(&quot;near&quot;, Math.abs(i - j) === 1),
+    ),
+  );
+  b.addEventListener(&quot;pointerleave&quot;, () =&gt;
+    buttons.forEach((x) =&gt; x.classList.remove(&quot;near&quot;)),
+  );
+});
+document.querySelector(&quot;.command&quot;).addEventListener(&quot;click&quot;, show);
+palette.querySelector(&quot;header button&quot;).addEventListener(&quot;click&quot;, close);
+input.addEventListener(&quot;input&quot;, render);
+document.addEventListener(&quot;keydown&quot;, (e) =&gt; {
+  if ((e.ctrlKey || e.metaKey) &amp;&amp; e.key.toLowerCase() === &quot;k&quot;) {
+    e.preventDefault();
+    show();
+  }
+  if (e.key === &quot;Escape&quot;) close();
+  if (
+    palette.classList.contains(&quot;show&quot;) &amp;&amp;
+    e.key === &quot;Enter&quot; &amp;&amp;
+    document.activeElement === input
+  )
+    list.querySelector(&quot;button&quot;)?.click();
+  if (palette.classList.contains(&quot;show&quot;) &amp;&amp; e.key === &quot;Tab&quot;) {
+    const f = [...palette.querySelectorAll(&quot;button,input&quot;)];
+    if (e.shiftKey &amp;&amp; document.activeElement === f[0]) {
+      e.preventDefault();
+      f.at(-1)?.focus();
+    } else if (!e.shiftKey &amp;&amp; document.activeElement === f.at(-1)) {
+      e.preventDefault();
+      f[0]?.focus();
+    }
+  }
+});</code></pre>
       </div>
     </section>
 

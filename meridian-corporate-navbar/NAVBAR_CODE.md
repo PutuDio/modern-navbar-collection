@@ -41,14 +41,14 @@ Add this to your HTML `<head>`:
           <span class="utility-locations">London &bull; New York &bull; Zurich &bull; Singapore &bull; Tokyo</span>
         </div>
         <div class="utility-right">
-          <a href="#investors" class="utility-link">Investor Relations</a>
+          <a href="#" class="utility-link">Investor Relations</a>
           <span class="utility-sep" aria-hidden="true">&bull;</span>
-          <a href="#careers" class="utility-link">
+          <a href="#" class="utility-link">
             Careers
             <span class="utility-badge">We're hiring</span>
           </a>
           <span class="utility-sep" aria-hidden="true">&bull;</span>
-          <a href="#news" class="utility-link">Press &amp; Media</a>
+          <a href="#" class="utility-link">Press &amp; Media</a>
         </div>
       </div>
     </div>
@@ -100,7 +100,7 @@ Add this to your HTML `<head>`:
                     <span class="megamenu-header">STRATEGY &amp; ADVISORY</span>
                     <ul class="megamenu-links">
                       <li>
-                        <a href="#solutions" class="megamenu-item" role="menuitem">
+                        <a href="#" class="megamenu-item" role="menuitem">
                           <span class="menu-item-icon">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
                           </span>
@@ -111,7 +111,7 @@ Add this to your HTML `<head>`:
                         </a>
                       </li>
                       <li>
-                        <a href="#solutions" class="megamenu-item" role="menuitem">
+                        <a href="#" class="megamenu-item" role="menuitem">
                           <span class="menu-item-icon">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
                           </span>
@@ -122,7 +122,7 @@ Add this to your HTML `<head>`:
                         </a>
                       </li>
                       <li>
-                        <a href="#solutions" class="megamenu-item" role="menuitem">
+                        <a href="#" class="megamenu-item" role="menuitem">
                           <span class="menu-item-icon">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                           </span>
@@ -140,7 +140,7 @@ Add this to your HTML `<head>`:
                     <span class="megamenu-header">TECHNOLOGY PLATFORMS</span>
                     <ul class="megamenu-links">
                       <li>
-                        <a href="#solutions" class="megamenu-item" role="menuitem">
+                        <a href="#" class="megamenu-item" role="menuitem">
                           <span class="menu-item-icon">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
                           </span>
@@ -151,7 +151,7 @@ Add this to your HTML `<head>`:
                         </a>
                       </li>
                       <li>
-                        <a href="#solutions" class="megamenu-item" role="menuitem">
+                        <a href="#" class="megamenu-item" role="menuitem">
                           <span class="menu-item-icon">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
                           </span>
@@ -162,7 +162,7 @@ Add this to your HTML `<head>`:
                         </a>
                       </li>
                       <li>
-                        <a href="#solutions" class="megamenu-item" role="menuitem">
+                        <a href="#" class="megamenu-item" role="menuitem">
                           <span class="menu-item-icon">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
                           </span>
@@ -181,7 +181,7 @@ Add this to your HTML `<head>`:
                       <div class="featured-tag">2026 GLOBAL BENCHMARK</div>
                       <h4 class="featured-title">Enterprise Operating Model Trends</h4>
                       <p class="featured-summary">How Fortune 500 leadership navigates capital allocation and AI governance.</p>
-                      <a href="#insights" class="featured-cta">
+                      <a href="#" class="featured-cta">
                         <span>Download Executive Summary</span>
                         <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                           <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -210,19 +210,19 @@ Add this to your HTML `<head>`:
 
               <ul class="dropdown-menu" id="dropdown-company" role="menu" aria-label="Company Menu">
                 <li role="none">
-                  <a href="#about" class="dropdown-link" role="menuitem">
+                  <a href="#" class="dropdown-link" role="menuitem">
                     <span class="dropdown-title">About Meridian</span>
                     <span class="dropdown-desc">Our heritage, global board, and fiduciary philosophy.</span>
                   </a>
                 </li>
                 <li role="none">
-                  <a href="#leadership" class="dropdown-link" role="menuitem">
+                  <a href="#" class="dropdown-link" role="menuitem">
                     <span class="dropdown-title">Executive Leadership</span>
                     <span class="dropdown-desc">Meet our managing partners and regional directors.</span>
                   </a>
                 </li>
                 <li role="none">
-                  <a href="#careers" class="dropdown-link" role="menuitem">
+                  <a href="#" class="dropdown-link" role="menuitem">
                     <span class="dropdown-title">
                       Careers &amp; Culture
                       <span class="badge-hiring">Hiring</span>
@@ -231,7 +231,7 @@ Add this to your HTML `<head>`:
                   </a>
                 </li>
                 <li role="none">
-                  <a href="#esg" class="dropdown-link" role="menuitem">
+                  <a href="#" class="dropdown-link" role="menuitem">
                     <span class="dropdown-title">ESG &amp; Global Impact</span>
                     <span class="dropdown-desc">Sustainability commitments and governance principles.</span>
                   </a>
@@ -241,17 +241,17 @@ Add this to your HTML `<head>`:
 
             <!-- Item 3: Direct Link (Case Studies) -->
             <li class="nav-item" role="none">
-              <a href="#cases" class="nav-link" role="menuitem">Case Studies</a>
+              <a href="#" class="nav-link" role="menuitem">Case Studies</a>
             </li>
 
             <!-- Item 4: Direct Link (Insights) -->
             <li class="nav-item" role="none">
-              <a href="#insights" class="nav-link" role="menuitem">Insights &amp; Reports</a>
+              <a href="#" class="nav-link" role="menuitem">Insights &amp; Reports</a>
             </li>
 
             <!-- Item 5: Direct Link (Contact) -->
             <li class="nav-item" role="none">
-              <a href="#contact" class="nav-link" role="menuitem">Contact</a>
+              <a href="#" class="nav-link" role="menuitem">Contact</a>
             </li>
 
           </ul>
@@ -287,7 +287,7 @@ Add this to your HTML `<head>`:
           </button>
 
           <!-- Secondary Action: Client Portal -->
-          <a href="#portal" class="btn-portal">
+          <a href="#" class="btn-portal">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
               <polyline points="10 17 15 12 10 7"/>
@@ -297,7 +297,7 @@ Add this to your HTML `<head>`:
           </a>
 
           <!-- Primary CTA Button -->
-          <a href="#contact" class="btn-primary">
+          <a href="#" class="btn-primary">
             <span>Schedule Consultation</span>
             <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
               <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -389,12 +389,12 @@ Add this to your HTML `<head>`:
               </button>
               <div class="accordion-panel">
                 <ul class="accordion-links">
-                  <li><a href="#solutions" class="accordion-link">Enterprise Architecture</a></li>
-                  <li><a href="#solutions" class="accordion-link">Capital Advisory &amp; M&amp;A</a></li>
-                  <li><a href="#solutions" class="accordion-link">Regulatory &amp; Compliance</a></li>
-                  <li><a href="#solutions" class="accordion-link">Cloud Infrastructure</a></li>
-                  <li><a href="#solutions" class="accordion-link">Data Intelligence &amp; AI</a></li>
-                  <li><a href="#solutions" class="accordion-link">Cyber Defense &amp; Zero Trust</a></li>
+                  <li><a href="#" class="accordion-link">Enterprise Architecture</a></li>
+                  <li><a href="#" class="accordion-link">Capital Advisory &amp; M&amp;A</a></li>
+                  <li><a href="#" class="accordion-link">Regulatory &amp; Compliance</a></li>
+                  <li><a href="#" class="accordion-link">Cloud Infrastructure</a></li>
+                  <li><a href="#" class="accordion-link">Data Intelligence &amp; AI</a></li>
+                  <li><a href="#" class="accordion-link">Cyber Defense &amp; Zero Trust</a></li>
                 </ul>
               </div>
             </li>
@@ -409,31 +409,31 @@ Add this to your HTML `<head>`:
               </button>
               <div class="accordion-panel">
                 <ul class="accordion-links">
-                  <li><a href="#about" class="accordion-link">About Meridian Group</a></li>
-                  <li><a href="#leadership" class="accordion-link">Executive Leadership</a></li>
+                  <li><a href="#" class="accordion-link">About Meridian Group</a></li>
+                  <li><a href="#" class="accordion-link">Executive Leadership</a></li>
                   <li>
-                    <a href="#careers" class="accordion-link">
+                    <a href="#" class="accordion-link">
                       <span>Careers &amp; Culture</span>
                       <span class="badge-hiring">Hiring</span>
                     </a>
                   </li>
-                  <li><a href="#esg" class="accordion-link">ESG &amp; Global Impact</a></li>
+                  <li><a href="#" class="accordion-link">ESG &amp; Global Impact</a></li>
                 </ul>
               </div>
             </li>
 
             <!-- Direct Links -->
             <li class="mobile-nav-item">
-              <a href="#cases" class="mobile-direct-link">Case Studies</a>
+              <a href="#" class="mobile-direct-link">Case Studies</a>
             </li>
             <li class="mobile-nav-item">
-              <a href="#insights" class="mobile-direct-link">Insights &amp; Reports</a>
+              <a href="#" class="mobile-direct-link">Insights &amp; Reports</a>
             </li>
             <li class="mobile-nav-item">
-              <a href="#contact" class="mobile-direct-link">Contact</a>
+              <a href="#" class="mobile-direct-link">Contact</a>
             </li>
             <li class="mobile-nav-item">
-              <a href="#portal" class="mobile-direct-link">Client Portal</a>
+              <a href="#" class="mobile-direct-link">Client Portal</a>
             </li>
 
           </ul>
@@ -441,7 +441,7 @@ Add this to your HTML `<head>`:
 
         <!-- Mobile Drawer CTAs -->
         <div class="drawer-actions">
-          <a href="#contact" class="btn-primary btn-block">
+          <a href="#" class="btn-primary btn-block">
             <span>Schedule Consultation</span>
             <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
               <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -489,7 +489,7 @@ Place this at the top of your `<body>`:
       <div class="utility-right">
         <a href="#investors" class="utility-link">Investor Relations</a>
         <span class="utility-sep" aria-hidden="true">&bull;</span>
-        <a href="#careers" class="utility-link">
+        <a href="#" class="utility-link">
           Careers
           <span class="utility-badge">We're hiring</span>
         </a>
@@ -546,7 +546,7 @@ Place this at the top of your `<body>`:
                   <span class="megamenu-header">STRATEGY &amp; ADVISORY</span>
                   <ul class="megamenu-links">
                     <li>
-                      <a href="#solutions" class="megamenu-item" role="menuitem">
+                      <a href="#" class="megamenu-item" role="menuitem">
                         <span class="menu-item-icon">
                           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
                         </span>
@@ -557,7 +557,7 @@ Place this at the top of your `<body>`:
                       </a>
                     </li>
                     <li>
-                      <a href="#solutions" class="megamenu-item" role="menuitem">
+                      <a href="#" class="megamenu-item" role="menuitem">
                         <span class="menu-item-icon">
                           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
                         </span>
@@ -568,7 +568,7 @@ Place this at the top of your `<body>`:
                       </a>
                     </li>
                     <li>
-                      <a href="#solutions" class="megamenu-item" role="menuitem">
+                      <a href="#" class="megamenu-item" role="menuitem">
                         <span class="menu-item-icon">
                           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                         </span>
@@ -586,7 +586,7 @@ Place this at the top of your `<body>`:
                   <span class="megamenu-header">TECHNOLOGY PLATFORMS</span>
                   <ul class="megamenu-links">
                     <li>
-                      <a href="#solutions" class="megamenu-item" role="menuitem">
+                      <a href="#" class="megamenu-item" role="menuitem">
                         <span class="menu-item-icon">
                           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
                         </span>
@@ -597,7 +597,7 @@ Place this at the top of your `<body>`:
                       </a>
                     </li>
                     <li>
-                      <a href="#solutions" class="megamenu-item" role="menuitem">
+                      <a href="#" class="megamenu-item" role="menuitem">
                         <span class="menu-item-icon">
                           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
                         </span>
@@ -608,7 +608,7 @@ Place this at the top of your `<body>`:
                       </a>
                     </li>
                     <li>
-                      <a href="#solutions" class="megamenu-item" role="menuitem">
+                      <a href="#" class="megamenu-item" role="menuitem">
                         <span class="menu-item-icon">
                           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
                         </span>
@@ -627,7 +627,7 @@ Place this at the top of your `<body>`:
                     <div class="featured-tag">2026 GLOBAL BENCHMARK</div>
                     <h4 class="featured-title">Enterprise Operating Model Trends</h4>
                     <p class="featured-summary">How Fortune 500 leadership navigates capital allocation and AI governance.</p>
-                    <a href="#insights" class="featured-cta">
+                    <a href="#" class="featured-cta">
                       <span>Download Executive Summary</span>
                       <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                         <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -656,19 +656,19 @@ Place this at the top of your `<body>`:
 
             <ul class="dropdown-menu" id="dropdown-company" role="menu" aria-label="Company Menu">
               <li role="none">
-                <a href="#about" class="dropdown-link" role="menuitem">
+                <a href="#" class="dropdown-link" role="menuitem">
                   <span class="dropdown-title">About Meridian</span>
                   <span class="dropdown-desc">Our heritage, global board, and fiduciary philosophy.</span>
                 </a>
               </li>
               <li role="none">
-                <a href="#leadership" class="dropdown-link" role="menuitem">
+                <a href="#" class="dropdown-link" role="menuitem">
                   <span class="dropdown-title">Executive Leadership</span>
                   <span class="dropdown-desc">Meet our managing partners and regional directors.</span>
                 </a>
               </li>
               <li role="none">
-                <a href="#careers" class="dropdown-link" role="menuitem">
+                <a href="#" class="dropdown-link" role="menuitem">
                   <span class="dropdown-title">
                     Careers &amp; Culture
                     <span class="badge-hiring">Hiring</span>
@@ -677,7 +677,7 @@ Place this at the top of your `<body>`:
                 </a>
               </li>
               <li role="none">
-                <a href="#esg" class="dropdown-link" role="menuitem">
+                <a href="#" class="dropdown-link" role="menuitem">
                   <span class="dropdown-title">ESG &amp; Global Impact</span>
                   <span class="dropdown-desc">Sustainability commitments and governance principles.</span>
                 </a>
@@ -687,17 +687,17 @@ Place this at the top of your `<body>`:
 
           <!-- Item 3: Direct Link (Case Studies) -->
           <li class="nav-item" role="none">
-            <a href="#cases" class="nav-link" role="menuitem">Case Studies</a>
+            <a href="#" class="nav-link" role="menuitem">Case Studies</a>
           </li>
 
           <!-- Item 4: Direct Link (Insights) -->
           <li class="nav-item" role="none">
-            <a href="#insights" class="nav-link" role="menuitem">Insights &amp; Reports</a>
+            <a href="#" class="nav-link" role="menuitem">Insights &amp; Reports</a>
           </li>
 
           <!-- Item 5: Direct Link (Contact) -->
           <li class="nav-item" role="none">
-            <a href="#contact" class="nav-link" role="menuitem">Contact</a>
+            <a href="#" class="nav-link" role="menuitem">Contact</a>
           </li>
 
         </ul>
@@ -733,7 +733,7 @@ Place this at the top of your `<body>`:
         </button>
 
         <!-- Secondary Action: Client Portal -->
-        <a href="#portal" class="btn-portal">
+        <a href="#" class="btn-portal">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
             <polyline points="10 17 15 12 10 7"/>
@@ -743,7 +743,7 @@ Place this at the top of your `<body>`:
         </a>
 
         <!-- Primary CTA Button -->
-        <a href="#contact" class="btn-primary">
+        <a href="#" class="btn-primary">
           <span>Schedule Consultation</span>
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -835,12 +835,12 @@ Place this at the top of your `<body>`:
             </button>
             <div class="accordion-panel">
               <ul class="accordion-links">
-                <li><a href="#solutions" class="accordion-link">Enterprise Architecture</a></li>
-                <li><a href="#solutions" class="accordion-link">Capital Advisory &amp; M&amp;A</a></li>
-                <li><a href="#solutions" class="accordion-link">Regulatory &amp; Compliance</a></li>
-                <li><a href="#solutions" class="accordion-link">Cloud Infrastructure</a></li>
-                <li><a href="#solutions" class="accordion-link">Data Intelligence &amp; AI</a></li>
-                <li><a href="#solutions" class="accordion-link">Cyber Defense &amp; Zero Trust</a></li>
+                <li><a href="#" class="accordion-link">Enterprise Architecture</a></li>
+                <li><a href="#" class="accordion-link">Capital Advisory &amp; M&amp;A</a></li>
+                <li><a href="#" class="accordion-link">Regulatory &amp; Compliance</a></li>
+                <li><a href="#" class="accordion-link">Cloud Infrastructure</a></li>
+                <li><a href="#" class="accordion-link">Data Intelligence &amp; AI</a></li>
+                <li><a href="#" class="accordion-link">Cyber Defense &amp; Zero Trust</a></li>
               </ul>
             </div>
           </li>
@@ -855,31 +855,31 @@ Place this at the top of your `<body>`:
             </button>
             <div class="accordion-panel">
               <ul class="accordion-links">
-                <li><a href="#about" class="accordion-link">About Meridian Group</a></li>
-                <li><a href="#leadership" class="accordion-link">Executive Leadership</a></li>
+                <li><a href="#" class="accordion-link">About Meridian Group</a></li>
+                <li><a href="#" class="accordion-link">Executive Leadership</a></li>
                 <li>
-                  <a href="#careers" class="accordion-link">
+                  <a href="#" class="accordion-link">
                     <span>Careers &amp; Culture</span>
                     <span class="badge-hiring">Hiring</span>
                   </a>
                 </li>
-                <li><a href="#esg" class="accordion-link">ESG &amp; Global Impact</a></li>
+                <li><a href="#" class="accordion-link">ESG &amp; Global Impact</a></li>
               </ul>
             </div>
           </li>
 
           <!-- Direct Links -->
           <li class="mobile-nav-item">
-            <a href="#cases" class="mobile-direct-link">Case Studies</a>
+            <a href="#" class="mobile-direct-link">Case Studies</a>
           </li>
           <li class="mobile-nav-item">
-            <a href="#insights" class="mobile-direct-link">Insights &amp; Reports</a>
+            <a href="#" class="mobile-direct-link">Insights &amp; Reports</a>
           </li>
           <li class="mobile-nav-item">
-            <a href="#contact" class="mobile-direct-link">Contact</a>
+            <a href="#" class="mobile-direct-link">Contact</a>
           </li>
           <li class="mobile-nav-item">
-            <a href="#portal" class="mobile-direct-link">Client Portal</a>
+            <a href="#" class="mobile-direct-link">Client Portal</a>
           </li>
 
         </ul>
@@ -887,7 +887,7 @@ Place this at the top of your `<body>`:
 
       <!-- Mobile Drawer CTAs -->
       <div class="drawer-actions">
-        <a href="#contact" class="btn-primary btn-block">
+        <a href="#" class="btn-primary btn-block">
           <span>Schedule Consultation</span>
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>

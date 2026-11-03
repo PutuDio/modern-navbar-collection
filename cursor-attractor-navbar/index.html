@@ -1,72 +1,89 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Liquid Metal Cursor Attractor Navbar — Magnetic Fluid Dynamics</title>
-  <meta name="description" content="An experimental gaze and cursor-attracted liquid metal navbar with fluid velocity scattering and magnetic particle physics.">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Liquid Metal Cursor Attractor Navbar — Magnetic Fluid Dynamics
+    </title>
+    <meta
+      name="description"
+      content="An experimental gaze and cursor-attracted liquid metal navbar with fluid velocity scattering and magnetic particle physics."
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Ambient Light Blobs -->
+    <div class="ambient-glow" aria-hidden="true"></div>
 
-  <!-- Ambient Light Blobs -->
-  <div class="ambient-glow" aria-hidden="true"></div>
+    <!-- FIXED TOP STATUS BAR -->
+    <header class="top-nav">
+      <div style="display: flex; align-items: center; gap: 20px">
+        <a href="#" class="brand-wrapper">
+          <div class="brand-orb"></div>
+          <span class="brand-title">AURA Liquid</span>
+        </a>
+      </div>
 
-  <!-- FIXED TOP STATUS BAR -->
-  <header class="top-nav">
-    <div style="display:flex; align-items:center; gap:20px;">
-      <a href="../index.html" class="back-btn">← Collection</a>
-      <a href="#" class="brand-wrapper">
-        <div class="brand-orb"></div>
-        <span class="brand-title">AURA Liquid</span>
-      </a>
+      <div class="top-metrics">
+        <div class="metric-pill">
+          <span class="dot"></span>
+          <span>VELOCITY:</span>
+          <strong id="velocity-val" style="color: #fff">0 px/s</strong>
+        </div>
+        <div class="metric-pill">
+          <span>STATE:</span>
+          <strong id="state-val" style="color: var(--neon-cyan)"
+            >RESTING LIQUID</strong
+          >
+        </div>
+        <button
+          id="toggle-mode-btn"
+          class="back-btn"
+          style="
+            cursor: pointer;
+            background: rgba(56, 189, 248, 0.1);
+            border-color: rgba(56, 189, 248, 0.4);
+          "
+        >
+          Mode: Magnetic Dock
+        </button>
+      </div>
+    </header>
+
+    <!-- LIQUID PARTICLES CANVAS -->
+    <canvas id="liquid-canvas"></canvas>
+
+    <!-- MAGNETIC LIQUID DOCK NAVBAR -->
+    <div class="liquid-dock-container" id="liquid-dock-container">
+      <nav
+        class="liquid-dock"
+        id="liquid-dock"
+        aria-label="Liquid Navigation Bar"
+      >
+        <a href="#" class="liquid-item active">
+          <span class="item-bead"></span>
+          <span>Overview</span>
+        </a>
+        <a href="#" class="liquid-item">
+          <span class="item-bead"></span>
+          <span>Fluid Dynamics</span>
+        </a>
+        <a href="#" class="liquid-item">
+          <span class="item-bead"></span>
+          <span>Generative Mesh</span>
+        </a>
+        <a href="#" class="liquid-item">
+          <span class="item-bead"></span>
+          <span>Showcase</span>
+        </a>
+        <a href="#" class="liquid-item">
+          <span class="item-bead"></span>
+          <span>Connect</span>
+        </a>
+      </nav>
     </div>
 
-    <div class="top-metrics">
-      <div class="metric-pill">
-        <span class="dot"></span>
-        <span>VELOCITY:</span>
-        <strong id="velocity-val" style="color:#fff;">0 px/s</strong>
-      </div>
-      <div class="metric-pill">
-        <span>STATE:</span>
-        <strong id="state-val" style="color:var(--neon-cyan);">RESTING LIQUID</strong>
-      </div>
-      <button id="toggle-mode-btn" class="back-btn" style="cursor:pointer; background:rgba(56,189,248,0.1); border-color:rgba(56,189,248,0.4);">
-        Mode: Magnetic Dock
-      </button>
-    </div>
-  </header>
-
-  <!-- LIQUID PARTICLES CANVAS -->
-  <canvas id="liquid-canvas"></canvas>
-
-  <!-- MAGNETIC LIQUID DOCK NAVBAR -->
-  <div class="liquid-dock-container" id="liquid-dock-container">
-    <nav class="liquid-dock" id="liquid-dock" aria-label="Liquid Navigation Bar">
-      <a href="#hero" class="liquid-item active">
-        <span class="item-bead"></span>
-        <span>Overview</span>
-      </a>
-      <a href="#dynamics" class="liquid-item">
-        <span class="item-bead"></span>
-        <span>Fluid Dynamics</span>
-      </a>
-      <a href="#generative" class="liquid-item">
-        <span class="item-bead"></span>
-        <span>Generative Mesh</span>
-      </a>
-      <a href="#showcase" class="liquid-item">
-        <span class="item-bead"></span>
-        <span>Showcase</span>
-      </a>
-      <a href="#contact" class="liquid-item">
-        <span class="item-bead"></span>
-        <span>Connect</span>
-      </a>
-    </nav>
-  </div>
-
-  <script src="script.js"></script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>

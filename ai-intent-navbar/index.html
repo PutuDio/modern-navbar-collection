@@ -1,95 +1,107 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Adaptive Intent Navbar — Predictive Morphing Navigation</title>
-  <meta name="description" content="A context-aware predictive navbar that morphs its menus, links, and CTAs in real-time based on visitor dwell time, scroll intent, and persona inference.">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Adaptive Intent Navbar — Predictive Morphing Navigation</title>
+    <meta
+      name="description"
+      content="A context-aware predictive navbar that morphs its menus, links, and CTAs in real-time based on visitor dwell time, scroll intent, and persona inference."
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Ambient Light Pattern -->
+    <div class="bg-grid-pattern" aria-hidden="true"></div>
+    <div class="ai-light-orb" id="light-orb" aria-hidden="true"></div>
 
-  <!-- Ambient Light Pattern -->
-  <div class="bg-grid-pattern" aria-hidden="true"></div>
-  <div class="ai-light-orb" id="light-orb" aria-hidden="true"></div>
-
-
-  <aside class="simulator-strip" aria-label="Intent Simulation Controls">
-    <div class="sim-label"><span class="sim-pulse"></span><span>LIVE INTENT SIMULATOR:</span></div>
-    <div class="simulator-buttons">
-      <button class="sim-btn active" data-intent="exploring">01 / Explorer</button>
-      <button class="sim-btn" data-intent="developer">02 / Developer</button>
-      <button class="sim-btn" data-intent="enterprise">03 / Enterprise</button>
-      <button class="sim-btn" data-intent="designer">04 / Designer</button>
-      <a href="../index.html" class="sim-btn" style="text-decoration:none;margin-left:8px;border-color:rgba(255,255,255,0.2);color:#fff;">← Collection</a>
-    </div>
-  </aside>
-  <!-- MORPHING PREDICTIVE NAVBAR -->
-  <header class="nav-header">
-    <nav class="nav-container" aria-label="Predictive AI Navigation">
-      
-      <!-- Brand -->
-      <a href="#hero" class="nav-brand">
-        <div class="brand-icon">⚡</div>
-        <span class="brand-name">Synapse OS</span>
-      </a>
-
-      <!-- Adaptive Morphing Links -->
-      <ul class="nav-menu" id="nav-menu">
-        <!-- Injected dynamically by script.js based on intent -->
-      </ul>
-
-      <!-- Live Intent Status Pill -->
-      <div class="intent-badge-pill" id="intent-badge" title="Live Persona Intent Inference">
-        <span class="sparkle">✦</span>
-        <span class="intent-text" id="intent-label">General Exploration</span>
-        <span class="intent-conf" id="intent-conf">78%</span>
+    <aside class="simulator-strip" aria-label="Intent Simulation Controls">
+      <div class="sim-label">
+        <span class="sim-pulse"></span><span>LIVE INTENT SIMULATOR:</span>
       </div>
-
-      <!-- Adaptive Action CTAs -->
-      <div class="nav-actions">
-        <a href="../index.html" class="action-btn-adaptive btn-ghost-ai" id="action-ghost">Collection</a>
+      <div class="simulator-buttons">
+        <button class="sim-btn active" data-intent="exploring">
+          01 / Explorer
+        </button>
+        <button class="sim-btn" data-intent="developer">02 / Developer</button>
+        <button class="sim-btn" data-intent="enterprise">
+          03 / Enterprise
+        </button>
+        <button class="sim-btn" data-intent="designer">04 / Designer</button>
       </div>
-
-      <!-- Mobile Hamburger Button -->
-      <button class="nav-burger-btn" id="nav-burger" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="mobile-drawer">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-
-    </nav>
-  </header>
-
-  <!-- MOBILE DRAWER -->
-  <div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
-    <div class="mobile-drawer-backdrop" id="mobile-backdrop"></div>
-    <div class="mobile-drawer-panel">
-      <div class="mobile-drawer-header">
-        <div class="nav-brand">
+    </aside>
+    <!-- MORPHING PREDICTIVE NAVBAR -->
+    <header class="nav-header">
+      <nav class="nav-container" aria-label="Predictive AI Navigation">
+        <!-- Brand -->
+        <a href="#" class="nav-brand">
           <div class="brand-icon">⚡</div>
           <span class="brand-name">Synapse OS</span>
+        </a>
+
+        <!-- Adaptive Morphing Links -->
+        <ul class="nav-menu" id="nav-menu">
+          <!-- Injected dynamically by script.js based on intent -->
+        </ul>
+
+        <!-- Live Intent Status Pill -->
+        <div
+          class="intent-badge-pill"
+          id="intent-badge"
+          title="Live Persona Intent Inference"
+        >
+          <span class="sparkle">✦</span>
+          <span class="intent-text" id="intent-label">General Exploration</span>
+          <span class="intent-conf" id="intent-conf">78%</span>
         </div>
-        <button class="drawer-close-btn" id="drawer-close" aria-label="Close menu">&times;</button>
-      </div>
 
-      <div class="mobile-intent-status" id="mobile-intent-badge">
-        <span class="sparkle">✦</span>
-        <span class="intent-text" id="mobile-intent-label">General Exploration</span>
-        <span class="intent-conf" id="mobile-intent-conf">78%</span>
-      </div>
+        <!-- Mobile Hamburger Button -->
+        <button
+          class="nav-burger-btn"
+          id="nav-burger"
+          aria-label="Toggle Navigation Menu"
+          aria-expanded="false"
+          aria-controls="mobile-drawer"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </nav>
+    </header>
 
-      <ul class="mobile-nav-menu" id="mobile-nav-menu">
-        <!-- Injected dynamically by script.js -->
-      </ul>
+    <!-- MOBILE DRAWER -->
+    <div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
+      <div class="mobile-drawer-backdrop" id="mobile-backdrop"></div>
+      <div class="mobile-drawer-panel">
+        <div class="mobile-drawer-header">
+          <div class="nav-brand">
+            <div class="brand-icon">⚡</div>
+            <span class="brand-name">Synapse OS</span>
+          </div>
+          <button
+            class="drawer-close-btn"
+            id="drawer-close"
+            aria-label="Close menu"
+          >
+            &times;
+          </button>
+        </div>
 
-      <div class="mobile-drawer-actions">
-        <a href="../index.html" class="action-btn-adaptive btn-ghost-ai">Back to Collection</a>
+        <div class="mobile-intent-status" id="mobile-intent-badge">
+          <span class="sparkle">✦</span>
+          <span class="intent-text" id="mobile-intent-label"
+            >General Exploration</span
+          >
+          <span class="intent-conf" id="mobile-intent-conf">78%</span>
+        </div>
+
+        <ul class="mobile-nav-menu" id="mobile-nav-menu">
+          <!-- Injected dynamically by script.js -->
+        </ul>
       </div>
     </div>
-  </div>
 
-
-  <script src="script.js"></script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>

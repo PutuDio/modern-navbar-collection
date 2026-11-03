@@ -6,18 +6,490 @@ Source preview code; design and interactions unchanged.
 
 ```html
 <!doctype html>
-<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Gooey Liquid Dock</title><link rel="stylesheet" href="styles.css"></head><body><main class="stage dock-stage"><svg width="0" height="0" aria-hidden="true" style="position:absolute"><filter id="goo"><feGaussianBlur in="SourceGraphic" stdDeviation="9" result="b"/><feColorMatrix in="b" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 22 -10"/></filter></svg><nav class="dock" aria-label="Gooey Liquid Dock"><div class="goo-layer"><div class="goo-base"></div><div class="bubble"></div></div><button data-index="0" aria-pressed="true" class="active"><span class="icon" aria-hidden="true">◐</span><span class="label">Home</span></button><button data-index="1" aria-pressed="false" class=""><span class="icon" aria-hidden="true">✦</span><span class="label">Explore</span></button><button data-index="2" aria-pressed="false" class=""><span class="icon" aria-hidden="true">♡</span><span class="label">Saved</span></button><button data-index="3" aria-pressed="false" class=""><span class="icon" aria-hidden="true">✉</span><span class="label">Inbox</span></button><button data-index="4" aria-pressed="false" class=""><span class="icon" aria-hidden="true">◎</span><span class="label">Profil</span></button></nav></main><script src="script.js"></script></body></html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Gooey Liquid Dock</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="stage dock-stage">
+      <svg width="0" height="0" aria-hidden="true" style="position:absolute">
+        <filter id="goo">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="9" result="b" />
+          <feColorMatrix
+            in="b"
+            values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 22 -10"
+          />
+        </filter>
+      </svg>
+      <nav class="dock" aria-label="Gooey Liquid Dock">
+        <div class="goo-layer">
+          <div class="goo-base"></div>
+          <div class="bubble"></div>
+        </div>
+        <button data-index="0" aria-pressed="true" class="active">
+          <span class="icon" aria-hidden="true">◐</span
+          ><span class="label">Home</span></button
+        ><button data-index="1" aria-pressed="false" class="">
+          <span class="icon" aria-hidden="true">✦</span
+          ><span class="label">Explore</span></button
+        ><button data-index="2" aria-pressed="false" class="">
+          <span class="icon" aria-hidden="true">♡</span
+          ><span class="label">Saved</span></button
+        ><button data-index="3" aria-pressed="false" class="">
+          <span class="icon" aria-hidden="true">✉</span
+          ><span class="label">Inbox</span></button
+        ><button data-index="4" aria-pressed="false" class="">
+          <span class="icon" aria-hidden="true">◎</span
+          ><span class="label">Profil</span>
+        </button>
+      </nav>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
 ```
 
 ## CSS
 
 ```css
 @charset "UTF-8";
-:root{--bg:#101417;--grid:#ffffff10;--ink:#f5f6f2;--muted:#929a9e;--surface:#1d2327;--lime:#c4f23c;--orange:#f38960;--paper:#f2efe5;--dark:#080a0b;--shadow:0 18px 40px #0005;--line:#ffffff14;--radius:8px}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px system-ui,sans-serif;letter-spacing:0}button,input{font:inherit}button{cursor:pointer;border:0;color:inherit}button:focus-visible,input:focus-visible{outline:2px solid var(--lime);outline-offset:3px}button:disabled{cursor:default}.stage{height:340px;position:relative;display:flex;justify-content:center;align-items:flex-start;padding:30px 12px;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:28px 28px;overflow:hidden}.island{background:var(--dark);border-radius:28px;width:220px;max-width:100%;box-shadow:var(--shadow);transition:width .5s cubic-bezier(.2,1.2,.4,1),height .5s;overflow:hidden}.island.open{width:540px}.island.grid.open{width:364px}.head{width:100%;height:46px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;background:transparent;font-weight:700;gap:12px}.dot{width:9px;height:9px;border-radius:50%;background:var(--lime);display:inline-block;margin-right:8px}.wave{display:flex;align-items:center;gap:3px;height:20px}.wave i{width:3px;background:var(--lime);height:14px;border-radius:2px;animation:wave 1s ease-in-out infinite alternate}.wave i:nth-child(2){height:20px;animation-delay:.2s}.wave i:nth-child(3){height:13px;animation-delay:.4s}.wave i:nth-child(4){height:8px;animation-delay:.6s}.menu{display:none;padding:0 12px 12px;gap:6px}.open .menu{display:flex;flex-wrap:wrap}.menu button{background:var(--surface);padding:12px 10px;border-radius:var(--radius);flex:1;font-size:12px;text-align:left;font-weight:700}.menu button.active{color:var(--lime)}.menu button:hover{background:var(--line)}.grid .menu{display:none;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 26px}.grid.open .menu{display:grid}.menu small{display:block;font-weight:400;color:var(--muted);font-size:11px;margin-top:4px}.search{display:flex;padding:0 14px 14px;gap:8px}.search input{width:100%;min-width:0;border:0;background:var(--surface);border-radius:var(--radius);padding:10px;color:var(--ink)}.search button{background:var(--lime);color:var(--dark);border-radius:var(--radius);padding:0 10px}.results{padding:0 14px 14px}.results button{background:var(--surface);border-radius:var(--radius);padding:10px;width:100%;text-align:left}.results p{color:var(--muted);font-size:12px}.dock-stage{align-items:flex-end;padding-bottom:40px}.dock{display:flex;align-items:flex-end;position:relative;width:min(376px,100%);height:80px;padding:8px;background:var(--paper);color:var(--dark);border-radius:25px;box-shadow:var(--shadow)}.dock button{position:relative;flex:1;min-width:0;display:flex;align-items:center;justify-content:flex-end;flex-direction:column;height:64px;background:transparent;color:var(--dark);padding:0 0 8px;gap:7px}.dock .icon{height:28px;display:flex;align-items:center;font-size:24px;transition:transform .5s cubic-bezier(.5,1.6,.4,1)}.dock .label{font-size:10px;opacity:.5;font-weight:700}.dock button.active .icon{transform:translateY(-29px) scale(1.2)}.dock button.active .label{opacity:1}.goo-layer{position:absolute;inset:0 8px 8px;filter:url(#goo);pointer-events:none}.goo-base{position:absolute;inset:16px 0 0;background:var(--paper);border-radius:22px}.bubble{position:absolute;width:56px;height:56px;background:var(--orange);border-radius:50%;top:-17px;left:calc((100% / 5 - 56px) / 2);transition:left .5s cubic-bezier(.5,1.6,.4,1)}.magnetic{height:64px;width:auto;max-width:100%;padding:8px;gap:3px;border:1px solid var(--line);background:var(--surface);border-radius:22px;color:var(--ink)}.magnetic button{background:var(--surface);color:var(--ink);width:48px;flex:none;height:46px;border-radius:16px;justify-content:center;padding:0;transition:transform .18s;transform-origin:bottom center}.magnetic button:hover{transform:translateY(-9px) scale(1.35);z-index:2}.magnetic button.near{transform:translateY(-3px) scale(1.1)}.magnetic button.active{color:var(--lime)}.magnetic .command{background:var(--lime);color:var(--dark);font-size:13px;font-weight:700;margin-left:7px}.tip{position:absolute;bottom:66px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:11px;background:var(--dark);border-radius:14px;padding:7px 10px;opacity:0;pointer-events:none}.magnetic button:hover .tip,.magnetic button:focus-visible .tip{opacity:1}.magnetic svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8}.palette{position:absolute;inset:0;background:var(--dark);padding:20px;z-index:5;display:none}.palette.show{display:block}.palette header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;font-weight:700}.palette header button{background:var(--surface);width:28px;height:28px;border-radius:6px}.palette input{width:100%;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:10px;border-radius:var(--radius)}.palette-list{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:10px}.palette-list button{background:var(--surface);border-radius:var(--radius);padding:10px;text-align:left}.palette-list button:hover{color:var(--lime)}.current{position:absolute;top:26px;left:0;right:0;text-align:center;color:var(--muted);font-size:11px}.current strong{display:block;font-size:22px;color:var(--ink);margin-top:6px;font-weight:500}@keyframes wave{to{transform:scaleY(.5)}}@media(max-width:420px){.magnetic{gap:1px;padding:6px}.magnetic button{width:36px}.magnetic .command{margin-left:3px}.menu button{flex:1 1 28%}.island.open{width:100%}.stage{height:340px}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+:root {
+  --bg: #101417;
+  --grid: #ffffff10;
+  --ink: #f5f6f2;
+  --muted: #929a9e;
+  --surface: #1d2327;
+  --lime: #c4f23c;
+  --orange: #f38960;
+  --paper: #f2efe5;
+  --dark: #080a0b;
+  --shadow: 0 18px 40px #0005;
+  --line: #ffffff14;
+  --radius: 8px;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font:
+    14px system-ui,
+    sans-serif;
+  letter-spacing: 0;
+}
+button,
+input {
+  font: inherit;
+}
+button {
+  cursor: pointer;
+  border: 0;
+  color: inherit;
+}
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--lime);
+  outline-offset: 3px;
+}
+button:disabled {
+  cursor: default;
+}
+.stage {
+  min-height: 100vh;
+  min-height: 100dvh;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 30px 12px;
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 28px 28px;
+  overflow: hidden;
+}
+.island {
+  background: var(--dark);
+  border-radius: 28px;
+  width: 220px;
+  max-width: 100%;
+  box-shadow: var(--shadow);
+  transition:
+    width 0.5s cubic-bezier(0.2, 1.2, 0.4, 1),
+    height 0.5s;
+  overflow: hidden;
+}
+.island.open {
+  width: 540px;
+}
+.island.grid.open {
+  width: 364px;
+}
+.head {
+  width: 100%;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 18px;
+  background: transparent;
+  font-weight: 700;
+  gap: 12px;
+}
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--lime);
+  display: inline-block;
+  margin-right: 8px;
+}
+.wave {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 20px;
+}
+.wave i {
+  width: 3px;
+  background: var(--lime);
+  height: 14px;
+  border-radius: 2px;
+  animation: wave 1s ease-in-out infinite alternate;
+}
+.wave i:nth-child(2) {
+  height: 20px;
+  animation-delay: 0.2s;
+}
+.wave i:nth-child(3) {
+  height: 13px;
+  animation-delay: 0.4s;
+}
+.wave i:nth-child(4) {
+  height: 8px;
+  animation-delay: 0.6s;
+}
+.menu {
+  display: none;
+  padding: 0 12px 12px;
+  gap: 6px;
+}
+.open .menu {
+  display: flex;
+  flex-wrap: wrap;
+}
+.menu button {
+  background: var(--surface);
+  padding: 12px 10px;
+  border-radius: var(--radius);
+  flex: 1;
+  font-size: 12px;
+  text-align: left;
+  font-weight: 700;
+}
+.menu button.active {
+  color: var(--lime);
+}
+.menu button:hover {
+  background: var(--line);
+}
+.grid .menu {
+  display: none;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 0 14px 26px;
+}
+.grid.open .menu {
+  display: grid;
+}
+.menu small {
+  display: block;
+  font-weight: 400;
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 4px;
+}
+.search {
+  display: flex;
+  padding: 0 14px 14px;
+  gap: 8px;
+}
+.search input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 10px;
+  color: var(--ink);
+}
+.search button {
+  background: var(--lime);
+  color: var(--dark);
+  border-radius: var(--radius);
+  padding: 0 10px;
+}
+.results {
+  padding: 0 14px 14px;
+}
+.results button {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 10px;
+  width: 100%;
+  text-align: left;
+}
+.results p {
+  color: var(--muted);
+  font-size: 12px;
+}
+.dock-stage {
+  align-items: flex-end;
+  padding-bottom: 40px;
+}
+.dock {
+  display: flex;
+  align-items: flex-end;
+  position: relative;
+  width: min(376px, 100%);
+  height: 80px;
+  padding: 8px;
+  background: var(--paper);
+  color: var(--dark);
+  border-radius: 25px;
+  box-shadow: var(--shadow);
+}
+.dock button {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: column;
+  height: 64px;
+  background: transparent;
+  color: var(--dark);
+  padding: 0 0 8px;
+  gap: 7px;
+}
+.dock .icon {
+  height: 28px;
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  transition: transform 0.5s cubic-bezier(0.5, 1.6, 0.4, 1);
+}
+.dock .label {
+  font-size: 10px;
+  opacity: 0.5;
+  font-weight: 700;
+}
+.dock button.active .icon {
+  transform: translateY(-29px) scale(1.2);
+}
+.dock button.active .label {
+  opacity: 1;
+}
+.goo-layer {
+  position: absolute;
+  inset: 0 8px 8px;
+  filter: url(#goo);
+  pointer-events: none;
+}
+.goo-base {
+  position: absolute;
+  inset: 16px 0 0;
+  background: var(--paper);
+  border-radius: 22px;
+}
+.bubble {
+  position: absolute;
+  width: 56px;
+  height: 56px;
+  background: var(--orange);
+  border-radius: 50%;
+  top: -17px;
+  left: calc((100% / 5 - 56px) / 2);
+  transition: left 0.5s cubic-bezier(0.5, 1.6, 0.4, 1);
+}
+.magnetic {
+  height: 64px;
+  width: auto;
+  max-width: 100%;
+  padding: 8px;
+  gap: 3px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 22px;
+  color: var(--ink);
+}
+.magnetic button {
+  background: var(--surface);
+  color: var(--ink);
+  width: 48px;
+  flex: none;
+  height: 46px;
+  border-radius: 16px;
+  justify-content: center;
+  padding: 0;
+  transition: transform 0.18s;
+  transform-origin: bottom center;
+}
+.magnetic button:hover {
+  transform: translateY(-9px) scale(1.35);
+  z-index: 2;
+}
+.magnetic button.near {
+  transform: translateY(-3px) scale(1.1);
+}
+.magnetic button.active {
+  color: var(--lime);
+}
+.magnetic .command {
+  background: var(--lime);
+  color: var(--dark);
+  font-size: 13px;
+  font-weight: 700;
+  margin-left: 7px;
+}
+.tip {
+  position: absolute;
+  bottom: 66px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 11px;
+  background: var(--dark);
+  border-radius: 14px;
+  padding: 7px 10px;
+  opacity: 0;
+  pointer-events: none;
+}
+.magnetic button:hover .tip,
+.magnetic button:focus-visible .tip {
+  opacity: 1;
+}
+.magnetic svg {
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+}
+.palette {
+  position: absolute;
+  inset: 0;
+  background: var(--dark);
+  padding: 20px;
+  z-index: 5;
+  display: none;
+}
+.palette.show {
+  display: block;
+}
+.palette header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+.palette header button {
+  background: var(--surface);
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+}
+.palette input {
+  width: 100%;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  padding: 10px;
+  border-radius: var(--radius);
+}
+.palette-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+  margin-top: 10px;
+}
+.palette-list button {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 10px;
+  text-align: left;
+}
+.palette-list button:hover {
+  color: var(--lime);
+}
+.current {
+  position: absolute;
+  top: 26px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 11px;
+}
+.current strong {
+  display: block;
+  font-size: 22px;
+  color: var(--ink);
+  margin-top: 6px;
+  font-weight: 500;
+}
+@keyframes wave {
+  to {
+    transform: scaleY(0.5);
+  }
+}
+@media (max-width: 420px) {
+  .magnetic {
+    gap: 1px;
+    padding: 6px;
+  }
+  .magnetic button {
+    width: 36px;
+  }
+  .magnetic .command {
+    margin-left: 3px;
+  }
+  .menu button {
+    flex: 1 1 28%;
+  }
+  .island.open {
+    width: 100%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
 ```
 
 ## JavaScript
 
 ```javascript
-const buttons=[...document.querySelectorAll('.dock button')];buttons.forEach((b,i)=>b.addEventListener('click',()=>{buttons.forEach((x,j)=>{x.classList.toggle('active',i===j);x.setAttribute('aria-pressed',String(i===j))});document.querySelector('.bubble').style.left=`calc(100% / 5 * ${i} + (100% / 5 - 56px) / 2)`}));
+const buttons = [...document.querySelectorAll(".dock button")];
+buttons.forEach((b, i) =>
+  b.addEventListener("click", () => {
+    buttons.forEach((x, j) => {
+      x.classList.toggle("active", i === j);
+      x.setAttribute("aria-pressed", String(i === j));
+    });
+    document.querySelector(".bubble").style.left =
+      `calc(100% / 5 * ${i} + (100% / 5 - 56px) / 2)`;
+  }),
+);
 ```

@@ -822,12 +822,12 @@ button {
 }
 
 /* Mobile Top Brand Badge */
-.mobile-top-brand {
+ .mobile-top-brand {
   display: none;
   position: fixed;
   top: 14px;
   left: 14px;
-  z-index: 1010;
+  z-index: 1000;
   height: 48px;
   padding: 0 16px;
   border-radius: 12px;
@@ -838,7 +838,7 @@ button {
   text-decoration: none;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
   transition: border-color var(--t-fast);
-}
+ }
 
 .mobile-top-brand:hover {
   border-color: var(--border-accent);

@@ -47,8 +47,9 @@ html {
 body {
   font-family: var(--font-body);
   background-color: var(--background);
-  background-image: linear-gradient(rgba(0, 0, 0, .035) 1px, transparent 1px);
-  background-size: 100% 32px;
+  background-image: none;
+  background-size: auto;
+  background-position: 0 0;
   color: var(--text-primary);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -484,9 +485,9 @@ button, input {
 @media (max-width: 1100px) {
   .desktop-preview { height: 500px; }
 }
-@media (max-width: 520px) {
-  .desktop-preview { height: 360px; }
-}
+ @media (max-width: 520px) {
+  .desktop-preview { height: 440px; }
+ }
 .phone-meta-title {
   font-family: var(--font-display);
   font-weight: 600;

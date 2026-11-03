@@ -627,7 +627,7 @@ body.era-future     { --era-color: #0f766e; --bg-deep: #eef8f7; }
     justify-content: space-between;
   }
   .era-node {
-    min-width: 54px;
+    min-width: 0;
   }
   .era-year {
     font-size: 11px;
@@ -637,6 +637,7 @@ body.era-future     { --era-color: #0f766e; --bg-deep: #eef8f7; }
     width: 10px;
     height: 10px;
     margin-bottom: 4px;
+    flex-shrink: 0;
   }
   .era-label {
     font-size: 11px;

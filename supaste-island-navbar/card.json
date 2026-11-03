@@ -1,7 +1,7 @@
 {
   "title": "Dynamic Island Navigation",
-  "category": "landing",
-  "categoryLabel": "Landing — Dynamic Island",
+  "category": "floating-islands",
+  "categoryLabel": "Floating & Islands — Dynamic Island",
   "descriptionShort": "Floating pill navigation dengan tautan desktop dan drawer mobile.",
   "descriptionLong": "Komponen Dynamic Island navigation mandiri dengan tautan desktop dan drawer mobile responsif.",
   "tech": "HTML · CSS · JS",

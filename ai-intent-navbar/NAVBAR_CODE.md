@@ -40,7 +40,7 @@ Letakkan markup ini di dalam tag `<body>`:
     <nav class="nav-container" aria-label="Predictive AI Navigation">
       
       <!-- Brand -->
-      <a href="#hero" class="nav-brand">
+      <a href="#" class="nav-brand">
         <div class="brand-icon">⚡</div>
         <span class="brand-name">Synapse OS</span>
       </a>
@@ -772,7 +772,7 @@ body {
 
 @media (max-width: 900px) {
   .nav-header {
-    top: 12px;
+    top: 52px;
     padding: 0 16px;
   }
   .nav-container {
@@ -850,14 +850,14 @@ Sematkan script ini sebelum penutup tag `</body>`:
       confidence: 78,
       pillColor: '#6366f1',
       links: [
-        { label: 'Platform', href: '#hero', class: '' },
-        { label: 'Solutions', href: '#solutions', class: '' },
-        { label: 'Technology', href: '#tech-specs', class: '' },
-        { label: 'Enterprise', href: '#enterprise-security', class: '' },
-        { label: 'Pricing', href: '#pricing', class: '' }
+        { label: 'Platform', href: '#', class: '' },
+        { label: 'Solutions', href: '#', class: '' },
+        { label: 'Technology', href: '#', class: '' },
+        { label: 'Enterprise', href: '#', class: '' },
+        { label: 'Pricing', href: '#', class: '' }
       ],
-      primaryAction: { label: 'Get Started Free →', href: '#cta' },
-      ghostAction: { label: 'Book Demo', href: '#demo' }
+      primaryAction: { label: 'Get Started Free →', href: '#' },
+      ghostAction: { label: 'Book Demo', href: '#' }
     },
     developer: {
       id: 'developer',
@@ -865,13 +865,13 @@ Sematkan script ini sebelum penutup tag `</body>`:
       confidence: 96,
       pillColor: '#06b6d4',
       links: [
-        { label: 'API Reference', href: '#tech-specs', class: '' },
-        { label: 'Python / TS SDK', href: '#tech-specs', class: '' },
-        { label: 'Edge Benchmarks', href: '#tech-specs', class: '' },
+        { label: 'API Reference', href: '#', class: '' },
+        { label: 'Python / TS SDK', href: '#', class: '' },
+        { label: 'Edge Benchmarks', href: '#', class: '' },
         { label: 'GitHub Repo', href: 'https://github.com', class: '' }
       ],
-      primaryAction: { label: 'npm i @synapse/sdk 📋', href: '#copy-sdk' },
-      ghostAction: { label: 'Interactive Sandbox', href: '#sandbox' }
+      primaryAction: { label: 'npm i @synapse/sdk 📋', href: '#' },
+      ghostAction: { label: 'Interactive Sandbox', href: '#' }
     },
     enterprise: {
       id: 'enterprise',
@@ -879,13 +879,12 @@ Sematkan script ini sebelum penutup tag `</body>`:
       confidence: 93,
       pillColor: '#10b981',
       links: [
-        { label: 'SOC2 & HIPAA', href: '#enterprise-security', class: '' },
-        { label: '99.999% SLA', href: '#enterprise-security', class: '' },
-        { label: 'Security Whitepaper', href: '#enterprise-security', class: '' },
-        { label: 'ROI Calculator', href: '#pricing', class: '' }
-      ],
-      primaryAction: { label: 'Schedule Executive Demo →', href: '#demo' },
-      ghostAction: { label: 'Custom Contract', href: '#sales' }
+        { label: 'SOC2 & HIPAA', href: '#', class: '' },
+        { label: '99.999% SLA', href: '#', class: '' },
+        { label: 'Security Whitepaper', href: '#', class: '' },
+        { label: 'ROI Calculator', href: '#', class: '' }
+      primaryAction: { label: 'Schedule Executive Demo →', href: '#' },
+      ghostAction: { label: 'Custom Contract', href: '#' }
     },
     designer: {
       id: 'designer',
@@ -893,12 +892,12 @@ Sematkan script ini sebelum penutup tag `</body>`:
       confidence: 89,
       pillColor: '#f59e0b',
       links: [
-        { label: 'UI Architecture', href: '#hero', class: '' },
-        { label: 'Design Tokens', href: '#solutions', class: '' },
-        { label: 'Figma Community Kit', href: '#hero', class: '' }
+        { label: 'UI Architecture', href: '#', class: '' },
+        { label: 'Design Tokens', href: '#', class: '' },
+        { label: 'Figma Community Kit', href: '#', class: '' }
       ],
-      primaryAction: { label: 'Download Design Kit 🎨', href: '#kit' },
-      ghostAction: { label: 'Component Gallery', href: '#components' }
+      primaryAction: { label: 'Download Design Kit 🎨', href: '#' },
+      ghostAction: { label: 'Component Gallery', href: '#' }
     }
   };
 

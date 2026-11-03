@@ -1,11 +1,18 @@
 {
   "title": "Magnetic Dock + ⌘K",
-  "category": "experimental",
-  "categoryLabel": "Experimental — Magnetic Dock Navigation",
+  "category": "bottom-docks",
+  "categoryLabel": "Bottom Docks — Magnetic Dock Navigation",
   "descriptionShort": "Magnetic icon dock with hover response and searchable command palette.",
   "descriptionLong": "Interactive magnetic dock with pointer proximity effects, keyboard shortcut command palette, and searchable page actions.",
   "tech": "HTML · CSS · JavaScript",
-  "keywords": ["magnetic", "dock", "command palette", "keyboard", "search", "⌘K"],
+  "keywords": [
+    "magnetic",
+    "dock",
+    "command palette",
+    "keyboard",
+    "search",
+    "⌘K"
+  ],
   "featured": false,
   "order": 15
 }

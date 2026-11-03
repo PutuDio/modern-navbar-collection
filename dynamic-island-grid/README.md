@@ -3,6 +3,7 @@
 Expandable Dynamic Island navigation with page descriptions and searchable page results. Original labels, layout, and interactions remain unchanged.
 
 ## Files
+
 - `index.html` — preview markup
 - `styles.css` — component and responsive styles
 - `script.js` — expand/collapse, selection, and search interactions

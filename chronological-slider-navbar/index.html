@@ -1,90 +1,159 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chronological Slider Navbar — Timeline Time-Machine Storytelling</title>
-  <meta name="description" content="A cinematic time-machine timeline slider navbar for company milestones, founder journey, and product roadmaps.">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body class="era-genesis">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Chronological Slider Navbar — Timeline Time-Machine Storytelling
+    </title>
+    <meta
+      name="description"
+      content="A cinematic time-machine timeline slider navbar for company milestones, founder journey, and product roadmaps."
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="era-genesis">
+    <!-- TOP BAR -->
+    <header class="top-bar">
+      <div style="display: flex; align-items: center; gap: 20px">
+        <a href="#" class="brand-name">Aetheria Chronos</a>
+      </div>
+      <div class="top-bar-right">
+        <span class="era-badge" id="era-badge">2019 — Genesis</span>
+        <a
+          href="https://github.com"
+          target="_blank"
+          style="
+            text-decoration: none;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            padding: 6px 14px;
+            border-radius: var(--radius-pill);
+            background: var(--ink);
+            color: #fff;
+            font-weight: 600;
+          "
+          >Explore Archive</a
+        >
+      </div>
+    </header>
 
-  <!-- TOP BAR -->
-  <header class="top-bar">
-    <div style="display:flex; align-items:center; gap:20px;">
-      <a href="../index.html" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px; font-size:13px; color:var(--ink-muted); font-weight:500; padding:6px 12px; border-radius:var(--radius-pill); background:rgba(0,0,0,0.04); border:1px solid var(--border-line);">
-        ← Collection
-      </a>
-      <a href="#" class="brand-name">Aetheria Chronos</a>
-    </div>
-    <div class="top-bar-right">
-      <span class="era-badge" id="era-badge">2019 — Genesis</span>
-      <a href="https://github.com" target="_blank" style="text-decoration:none; font-family:var(--font-mono); font-size:11px; padding:6px 14px; border-radius:var(--radius-pill); background:var(--ink); color:#fff; font-weight:600;">Explore Archive</a>
-    </div>
-  </header>
+    <!-- TIMELINE SLIDER NAVBAR (MAIN COMPONENT) -->
+    <nav class="timeline-nav" aria-label="Chronological Era Navigation">
+      <div class="timeline-track" id="timeline-track">
+        <div class="timeline-strip" id="timeline-strip">
+          <div class="timeline-line"></div>
 
+          <div
+            class="era-node active"
+            tabindex="0"
+            role="button"
+            aria-label="Era 2019 Genesis"
+          >
+            <span class="era-year">2019</span>
+            <span class="era-dot"></span>
+            <span class="era-label">Genesis</span>
+          </div>
 
-  <!-- TIMELINE SLIDER NAVBAR (MAIN COMPONENT) -->
-  <nav class="timeline-nav" aria-label="Chronological Era Navigation">
-    <div class="timeline-track" id="timeline-track">
-      <div class="timeline-strip" id="timeline-strip">
-        <div class="timeline-line"></div>
-        
-        <div class="era-node active" tabindex="0" role="button" aria-label="Era 2019 Genesis">
-          <span class="era-year">2019</span>
-          <span class="era-dot"></span>
-          <span class="era-label">Genesis</span>
+          <div
+            class="era-node"
+            tabindex="0"
+            role="button"
+            aria-label="Era 2021 Growth"
+          >
+            <span class="era-year">2021</span>
+            <span class="era-dot"></span>
+            <span class="era-label">Growth</span>
+          </div>
+
+          <div
+            class="era-node"
+            tabindex="0"
+            role="button"
+            aria-label="Era 2023 Expansion"
+          >
+            <span class="era-year">2023</span>
+            <span class="era-dot"></span>
+            <span class="era-label">Expansion</span>
+          </div>
+
+          <div
+            class="era-node"
+            tabindex="0"
+            role="button"
+            aria-label="Era 2025 Scale"
+          >
+            <span class="era-year">2025</span>
+            <span class="era-dot"></span>
+            <span class="era-label">Scale</span>
+          </div>
+
+          <div
+            class="era-node"
+            tabindex="0"
+            role="button"
+            aria-label="Era 2026+ Future"
+          >
+            <span class="era-year">2026+</span>
+            <span class="era-dot"></span>
+            <span class="era-label">Future</span>
+          </div>
         </div>
 
-        <div class="era-node" tabindex="0" role="button" aria-label="Era 2021 Growth">
-          <span class="era-year">2021</span>
-          <span class="era-dot"></span>
-          <span class="era-label">Growth</span>
-        </div>
-
-        <div class="era-node" tabindex="0" role="button" aria-label="Era 2023 Expansion">
-          <span class="era-year">2023</span>
-          <span class="era-dot"></span>
-          <span class="era-label">Expansion</span>
-        </div>
-
-        <div class="era-node" tabindex="0" role="button" aria-label="Era 2025 Scale">
-          <span class="era-year">2025</span>
-          <span class="era-dot"></span>
-          <span class="era-label">Scale</span>
-        </div>
-
-        <div class="era-node" tabindex="0" role="button" aria-label="Era 2026+ Future">
-          <span class="era-year">2026+</span>
-          <span class="era-dot"></span>
-          <span class="era-label">Future</span>
+        <!-- Center Scrubber Cursor -->
+        <div class="timeline-cursor">
+          <div class="cursor-line"></div>
+          <div class="cursor-diamond"></div>
         </div>
       </div>
 
-      <!-- Center Scrubber Cursor -->
-      <div class="timeline-cursor">
-        <div class="cursor-line"></div>
-        <div class="cursor-diamond"></div>
+      <!-- Scrubber Slider Controls -->
+      <div class="scrubber-controls">
+        <button
+          class="scrub-btn"
+          id="prev-era"
+          title="Previous Era (Arrow Left)"
+        >
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+          Prev
+        </button>
+
+        <input
+          type="range"
+          id="scrub-input"
+          class="scrub-input"
+          min="0"
+          max="4"
+          value="0"
+          step="1"
+          aria-label="Timeline Era Scrubber"
+        />
+
+        <button class="scrub-btn" id="next-era" title="Next Era (Arrow Right)">
+          Next
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
       </div>
-    </div>
+    </nav>
 
-    <!-- Scrubber Slider Controls -->
-    <div class="scrubber-controls">
-      <button class="scrub-btn" id="prev-era" title="Previous Era (Arrow Left)">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
-        Prev
-      </button>
-
-      <input type="range" id="scrub-input" class="scrub-input" min="0" max="4" value="0" step="1" aria-label="Timeline Era Scrubber">
-
-      <button class="scrub-btn" id="next-era" title="Next Era (Arrow Right)">
-        Next
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-      </button>
-    </div>
-  </nav>
-
-
-  <script src="script.js"></script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>

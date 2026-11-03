@@ -1068,7 +1068,7 @@ button {
   position: fixed;
   top: 14px;
   left: 14px;
-  z-index: 1010;
+  z-index: 1000;
   height: 48px;
   padding: 0 16px;
   border-radius: 12px;

@@ -55,26 +55,26 @@ Letakkan elemen canvas dan dock navigasi ini di dalam tag `<body>`:
   <!-- MAGNETIC LIQUID DOCK NAVBAR -->
   <div class="liquid-dock-container" id="liquid-dock-container">
     <nav class="liquid-dock" id="liquid-dock" aria-label="Liquid Navigation Bar">
-      <a href="#hero" class="liquid-item active">
+      <a href="#" class="liquid-item active">
         <span class="item-bead"></span>
         <span>Overview</span>
       </a>
-      <a href="#dynamics" class="liquid-item">
+      <a href="#" class="liquid-item">
         <span class="item-bead"></span>
         <span>Fluid Dynamics</span>
       </a>
-      <a href="#generative" class="liquid-item">
-        <span class="item-bead"></span>
-        <span>Generative Mesh</span>
-      </a>
-      <a href="#showcase" class="liquid-item">
-        <span class="item-bead"></span>
-        <span>Showcase</span>
-      </a>
-      <a href="#contact" class="liquid-item">
-        <span class="item-bead"></span>
-        <span>Connect</span>
-      </a>
+      <a href="#" class="liquid-item">
+         <span class="item-bead"></span>
+         <span>Generative Mesh</span>
+       </a>
+      <a href="#" class="liquid-item">
+         <span class="item-bead"></span>
+         <span>Showcase</span>
+       </a>
+      <a href="#" class="liquid-item">
+         <span class="item-bead"></span>
+         <span>Connect</span>
+       </a>
     </nav>
   </div>
 

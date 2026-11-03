@@ -46,7 +46,20 @@ async function loadAllCards() {
     }
   }
   cards.sort((a, b) => a.data.order - b.data.order);
-  cards.forEach(({ folder, data }) => emptyState.insertAdjacentHTML('beforebegin', buildPhoneCardHTML(folder, data)));
+  cards.forEach(({ folder, data }) => {
+    emptyState.insertAdjacentHTML('beforebegin', buildPhoneCardHTML(folder, data));
+    if (folder !== 'chronological-slider-navbar') {
+      const card = emptyState.previousElementSibling;
+      const preview = card.querySelector('iframe');
+      preview.addEventListener('load', () => {
+        const body = preview.contentDocument.body;
+        body.style.setProperty('background-color', '#101417', 'important');
+        body.style.setProperty('background-image', 'linear-gradient(#ffffff10 1px, transparent 1px), linear-gradient(90deg, #ffffff10 1px, transparent 1px)', 'important');
+        body.style.setProperty('background-size', '28px 28px', 'important');
+        body.style.setProperty('background-position', '0 0', 'important');
+      });
+    }
+  });
   const seenCategories = new Map();
   cards.forEach(({ data }) => {
     if (!seenCategories.has(data.category)) seenCategories.set(data.category, shortLabel(data.categoryLabel));

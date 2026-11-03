@@ -3,6 +3,7 @@
 Magnetic icon dock with pointer proximity effects and a searchable command palette. Original navigation labels and design remain unchanged.
 
 ## Files
+
 - `index.html` — preview markup
 - `styles.css` — component and responsive styles
 - `script.js` — dock selection and command palette interactions

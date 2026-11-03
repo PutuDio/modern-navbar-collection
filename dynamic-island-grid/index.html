@@ -1,2 +1,42 @@
 <!doctype html>
-<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dynamic Island Grid</title><link rel="stylesheet" href="styles.css"></head><body><main class="stage "><nav class="island grid" aria-label="Dynamic Island Grid"><button class="head" aria-expanded="false" aria-label="Buka menu"><span><span class="dot"></span><span id="active">Beranda</span></span><span class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i></span></button><div class="menu"><button data-page="Beranda" class="active">Beranda<small>Kembali ke awal</small></button><button data-page="Produk" class="">Produk<small>Lihat semua koleksi</small></button><button data-page="Harga" class="">Harga<small>Paket & langganan</small></button><button data-page="Blog" class="">Blog<small>Cerita terbaru</small></button></div><div class="search" hidden><input aria-label="Cari halaman" placeholder="Cari halaman…"><button id="close-search" aria-label="Tutup pencarian">×</button></div><div class="results" hidden></div></nav></main><script src="script.js"></script></body></html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Dynamic Island Grid</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="stage">
+      <nav class="island grid" aria-label="Dynamic Island Grid">
+        <button class="head" aria-expanded="false" aria-label="Buka menu">
+          <span><span class="dot"></span><span id="active">Beranda</span></span
+          ><span class="wave" aria-hidden="true"
+            ><i></i><i></i><i></i><i></i
+          ></span>
+        </button>
+        <div class="menu">
+          <button data-page="Beranda" class="active">
+            Beranda<small>Kembali ke awal</small></button
+          ><button data-page="Produk" class="">
+            Produk<small>Lihat semua koleksi</small></button
+          ><button data-page="Harga" class="">
+            Harga<small>Paket & langganan</small></button
+          ><button data-page="Blog" class="">
+            Blog<small>Cerita terbaru</small>
+          </button>
+        </div>
+        <div class="search" hidden>
+          <input aria-label="Cari halaman" placeholder="Cari halaman…" /><button
+            id="close-search"
+            aria-label="Tutup pencarian"
+          >
+            ×
+          </button>
+        </div>
+        <div class="results" hidden></div>
+      </nav>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>

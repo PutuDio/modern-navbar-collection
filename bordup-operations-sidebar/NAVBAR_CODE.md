@@ -1152,10 +1152,11 @@ body {
   background: rgba(0,0,0,0.45);
   z-index: 90;
   opacity: 0;
+  pointer-events: none;
   transition: opacity var(--dur-med) ease;
 }
 
-.mobile-overlay.open { opacity: 1; }
+.mobile-overlay.open { opacity: 1; pointer-events: auto; }
 
 /* Mobile topbar */
 .mobile-topbar {

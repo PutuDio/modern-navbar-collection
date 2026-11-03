@@ -9,210 +9,266 @@ File ini berisi kode komponen bersih (clean isolated code) yang **HANYA** berkai
 ```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Velt — Real-Time Collaboration SDK for Developers</title>
-  <meta name="description" content="Add real-time multiplayer features like comments, cursors, presence, and notifications to any product in minutes. The collaboration infrastructure toolkit.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-<div class="page-wrapper">
-
-  <!-- ══════════════════════════════════════════════════════════
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Velt — Real-Time Collaboration SDK for Developers</title>
+    <meta
+      name="description"
+      content="Add real-time multiplayer features like comments, cursors, presence, and notifications to any product in minutes. The collaboration infrastructure toolkit."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page-wrapper">
+      <!-- ══════════════════════════════════════════════════════════
        NAVBAR
        ══════════════════════════════════════════════════════════ -->
-  <header>
-    <nav class="velt-navbar" aria-label="Main navigation">
-      <div class="navbar-inner">
+      <header>
+        <nav class="velt-navbar" aria-label="Main navigation">
+          <div class="navbar-inner">
+            <!-- Brand -->
+            <a href="#" class="navbar-brand" aria-label="Velt — Home">
+              <div class="brand-mark" aria-hidden="true">
+                <!-- Velt V logo -->
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path
+                    d="M2 4L8 12L14 4"
+                    stroke="white"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <circle cx="8" cy="8" r="2" fill="rgba(255,255,255,0.5)" />
+                </svg>
+              </div>
+              <span class="brand-name">Velt</span>
+            </a>
 
-        <!-- Brand -->
-        <a href="#" class="navbar-brand" aria-label="Velt — Home">
-          <div class="brand-mark" aria-hidden="true">
-            <!-- Velt V logo -->
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M2 4L8 12L14 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <circle cx="8" cy="8" r="2" fill="rgba(255,255,255,0.5)"/>
-            </svg>
-          </div>
-          <span class="brand-name">Velt</span>
-        </a>
+            <!-- Nav Links -->
+            <ul class="navbar-nav" role="list">
+              <!-- Product (with mega-menu) -->
+              <li class="nav-item-wrap" id="mega-wrap">
+                <button
+                  class="nav-link"
+                  id="mega-trigger"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  aria-controls="mega-menu"
+                >
+                  Product
+                  <span class="nav-link-chevron" aria-hidden="true">▾</span>
+                </button>
+              </li>
+              <li><a href="#use-cases" class="nav-link">Use Cases</a></li>
+              <li><a href="#enterprise" class="nav-link">Enterprise</a></li>
+              <li><a href="#resources" class="nav-link">Resources</a></li>
+              <li><a href="#pricing" class="nav-link">Pricing</a></li>
+            </ul>
 
-        <!-- Nav Links -->
-        <ul class="navbar-nav" role="list">
-          <!-- Product (with mega-menu) -->
-          <li class="nav-item-wrap" id="mega-wrap">
-            <button class="nav-link" id="mega-trigger" aria-haspopup="true" aria-expanded="false" aria-controls="mega-menu">
-              Product
-              <span class="nav-link-chevron" aria-hidden="true">▾</span>
+            <!-- Right actions -->
+            <div class="navbar-right">
+              <a href="#signin" class="nav-btn-ghost">Sign In</a>
+              <a href="#docs" class="nav-btn-ghost nav-btn-docs">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <rect
+                    x="2"
+                    y="2"
+                    width="10"
+                    height="10"
+                    rx="1.5"
+                    stroke="currentColor"
+                    stroke-width="1.3"
+                  />
+                  <path
+                    d="M4.5 5h5M4.5 7h5M4.5 9h3"
+                    stroke="currentColor"
+                    stroke-width="1.3"
+                    stroke-linecap="round"
+                  />
+                </svg>
+                Read Docs
+              </a>
+              <a href="../index.html" class="nav-btn-primary" id="btn-book-demo"
+                >Back to Collection</a
+              >
+            </div>
+
+            <!-- Mobile Burger -->
+            <button
+              class="navbar-burger"
+              id="nav-burger"
+              aria-label="Open menu"
+              aria-expanded="false"
+              aria-controls="mobile-drawer"
+            >
+              <span></span>
+              <span></span>
+              <span></span>
             </button>
-          </li>
-          <li><a href="#use-cases" class="nav-link">Use Cases</a></li>
-          <li><a href="#enterprise" class="nav-link">Enterprise</a></li>
-          <li><a href="#resources" class="nav-link">Resources</a></li>
-          <li><a href="#pricing" class="nav-link">Pricing</a></li>
-        </ul>
+          </div>
+        </nav>
 
-        <!-- Right actions -->
-        <div class="navbar-right">
-          <a href="#signin" class="nav-btn-ghost">Sign In</a>
-          <a href="#docs" class="nav-btn-ghost nav-btn-docs">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-              <rect x="2" y="2" width="10" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/>
-              <path d="M4.5 5h5M4.5 7h5M4.5 9h3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
-            </svg>
-            Read Docs
-          </a>
-          <a href="../index.html" class="nav-btn-primary" id="btn-book-demo">Back to Collection</a>
+        <!-- ══ MEGA MENU ══════════════════════════════════════════ -->
+        <div class="mega-menu-wrapper" role="region">
+          <div
+            class="mega-menu"
+            id="mega-menu"
+            role="menu"
+            aria-label="Product features"
+          >
+            <div class="mega-menu-grid">
+              <!-- Col 1: ASYNC -->
+              <div class="mega-col">
+                <div class="mega-col-label">Sync</div>
+                <a class="mega-item" href="#comments" role="menuitem">
+                  <div class="mega-item-icon" aria-hidden="true">💬</div>
+                  <span class="mega-item-text">Comments</span>
+                </a>
+                <a class="mega-item" href="#notifications" role="menuitem">
+                  <div class="mega-item-icon" aria-hidden="true">🔔</div>
+                  <span class="mega-item-text">Notifications</span>
+                </a>
+                <a class="mega-item" href="#recording" role="menuitem">
+                  <div class="mega-item-icon" aria-hidden="true">📹</div>
+                  <span class="mega-item-text">Recording</span>
+                </a>
+                <a class="mega-item" href="#activity-logs" role="menuitem">
+                  <div class="mega-item-icon" aria-hidden="true">📋</div>
+                  <span class="mega-item-text">Activity Logs</span>
+                </a>
+                <a class="mega-item" href="#video-editor" role="menuitem">
+                  <div class="mega-item-icon" aria-hidden="true">🎬</div>
+                  <span class="mega-item-text">Video Editor</span>
+                </a>
+                <a class="mega-item" href="#analytics" role="menuitem">
+                  <div class="mega-item-icon" aria-hidden="true">📊</div>
+                  <span class="mega-item-text">View Analytics</span>
+                </a>
+                <a class="mega-item" href="#reactions" role="menuitem">
+                  <div class="mega-item-icon" aria-hidden="true">⚡</div>
+                  <span class="mega-item-text">Reactions</span>
+                </a>
+                <a class="mega-view-all" href="#sync-all" role="menuitem"
+                  >VIEW ALL ↗</a
+                >
+              </div>
+
+              <!-- Col 2: REALTIME -->
+              <div class="mega-col">
+                <div class="mega-col-label">Real Time</div>
+                <a class="mega-item" href="#multiplayer" role="menuitem">
+                  <div class="mega-item-icon" aria-hidden="true">🖊️</div>
+                  <span class="mega-item-text">Multiplayer Editing</span>
+                </a>
+                <a class="mega-item" href="#single-editor" role="menuitem">
+                  <div class="mega-item-icon" aria-hidden="true">✏️</div>
+                  <span class="mega-item-text">Single Editor</span>
+                </a>
+                <a class="mega-item" href="#live-state" role="menuitem">
+                  <div class="mega-item-icon" aria-hidden="true">🔄</div>
+                  <span class="mega-item-text">Live State Sync</span>
+                </a>
+                <a class="mega-item" href="#live-selection" role="menuitem">
+                  <div class="mega-item-icon" aria-hidden="true">🎯</div>
+                  <span class="mega-item-text">Live Selection</span>
+                </a>
+                <a class="mega-item" href="#huddle" role="menuitem">
+                  <div class="mega-item-icon" aria-hidden="true">🔊</div>
+                  <span class="mega-item-text">Huddle</span>
+                </a>
+                <a class="mega-item" href="#presence" role="menuitem">
+                  <div class="mega-item-icon" aria-hidden="true">🟢</div>
+                  <span class="mega-item-text">Presence</span>
+                </a>
+                <a class="mega-item" href="#cursors" role="menuitem">
+                  <div class="mega-item-icon" aria-hidden="true">🖱️</div>
+                  <span class="mega-item-text">Cursors</span>
+                </a>
+                <a class="mega-item" href="#follow-mode" role="menuitem">
+                  <div class="mega-item-icon" aria-hidden="true">👁️</div>
+                  <span class="mega-item-text">Follow Mode</span>
+                </a>
+              </div>
+
+              <!-- Col 3: PLATFORM -->
+              <div class="mega-col">
+                <div class="mega-col-label">Platform</div>
+                <a class="mega-item" href="#admin" role="menuitem">
+                  <div class="mega-item-icon" aria-hidden="true">🛡️</div>
+                  <span class="mega-item-text">Admin Console</span>
+                </a>
+                <a class="mega-item" href="#devtools" role="menuitem">
+                  <div class="mega-item-icon" aria-hidden="true">🔧</div>
+                  <span class="mega-item-text">Dev Tools</span>
+                </a>
+                <a class="mega-item" href="#mcp" role="menuitem">
+                  <div class="mega-item-icon" aria-hidden="true">🤖</div>
+                  <span class="mega-item-text">MCP</span>
+                </a>
+                <a class="mega-item" href="#webhooks" role="menuitem">
+                  <div class="mega-item-icon" aria-hidden="true">🔗</div>
+                  <span class="mega-item-text">Webhooks &amp; API</span>
+                </a>
+                <a class="mega-item" href="#integrations" role="menuitem">
+                  <div class="mega-item-icon" aria-hidden="true">🔌</div>
+                  <span class="mega-item-text">Integrations</span>
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
+      </header>
 
-        <!-- Mobile Burger -->
-        <button class="navbar-burger" id="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-drawer">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-
-      </div>
-    </nav>
-
-    <!-- ══ MEGA MENU ══════════════════════════════════════════ -->
-    <div class="mega-menu-wrapper" role="region">
-      <div class="mega-menu" id="mega-menu" role="menu" aria-label="Product features">
-        <div class="mega-menu-grid">
-
-          <!-- Col 1: ASYNC -->
-          <div class="mega-col">
-            <div class="mega-col-label">Sync</div>
-            <a class="mega-item" href="#comments" role="menuitem">
-              <div class="mega-item-icon" aria-hidden="true">💬</div>
-              <span class="mega-item-text">Comments</span>
-            </a>
-            <a class="mega-item" href="#notifications" role="menuitem">
-              <div class="mega-item-icon" aria-hidden="true">🔔</div>
-              <span class="mega-item-text">Notifications</span>
-            </a>
-            <a class="mega-item" href="#recording" role="menuitem">
-              <div class="mega-item-icon" aria-hidden="true">📹</div>
-              <span class="mega-item-text">Recording</span>
-            </a>
-            <a class="mega-item" href="#activity-logs" role="menuitem">
-              <div class="mega-item-icon" aria-hidden="true">📋</div>
-              <span class="mega-item-text">Activity Logs</span>
-            </a>
-            <a class="mega-item" href="#video-editor" role="menuitem">
-              <div class="mega-item-icon" aria-hidden="true">🎬</div>
-              <span class="mega-item-text">Video Editor</span>
-            </a>
-            <a class="mega-item" href="#analytics" role="menuitem">
-              <div class="mega-item-icon" aria-hidden="true">📊</div>
-              <span class="mega-item-text">View Analytics</span>
-            </a>
-            <a class="mega-item" href="#reactions" role="menuitem">
-              <div class="mega-item-icon" aria-hidden="true">⚡</div>
-              <span class="mega-item-text">Reactions</span>
-            </a>
-            <a class="mega-view-all" href="#sync-all" role="menuitem">VIEW ALL ↗</a>
-          </div>
-
-          <!-- Col 2: REALTIME -->
-          <div class="mega-col">
-            <div class="mega-col-label">Real Time</div>
-            <a class="mega-item" href="#multiplayer" role="menuitem">
-              <div class="mega-item-icon" aria-hidden="true">🖊️</div>
-              <span class="mega-item-text">Multiplayer Editing</span>
-            </a>
-            <a class="mega-item" href="#single-editor" role="menuitem">
-              <div class="mega-item-icon" aria-hidden="true">✏️</div>
-              <span class="mega-item-text">Single Editor</span>
-            </a>
-            <a class="mega-item" href="#live-state" role="menuitem">
-              <div class="mega-item-icon" aria-hidden="true">🔄</div>
-              <span class="mega-item-text">Live State Sync</span>
-            </a>
-            <a class="mega-item" href="#live-selection" role="menuitem">
-              <div class="mega-item-icon" aria-hidden="true">🎯</div>
-              <span class="mega-item-text">Live Selection</span>
-            </a>
-            <a class="mega-item" href="#huddle" role="menuitem">
-              <div class="mega-item-icon" aria-hidden="true">🔊</div>
-              <span class="mega-item-text">Huddle</span>
-            </a>
-            <a class="mega-item" href="#presence" role="menuitem">
-              <div class="mega-item-icon" aria-hidden="true">🟢</div>
-              <span class="mega-item-text">Presence</span>
-            </a>
-            <a class="mega-item" href="#cursors" role="menuitem">
-              <div class="mega-item-icon" aria-hidden="true">🖱️</div>
-              <span class="mega-item-text">Cursors</span>
-            </a>
-            <a class="mega-item" href="#follow-mode" role="menuitem">
-              <div class="mega-item-icon" aria-hidden="true">👁️</div>
-              <span class="mega-item-text">Follow Mode</span>
-            </a>
-          </div>
-
-          <!-- Col 3: PLATFORM -->
-          <div class="mega-col">
-            <div class="mega-col-label">Platform</div>
-            <a class="mega-item" href="#admin" role="menuitem">
-              <div class="mega-item-icon" aria-hidden="true">🛡️</div>
-              <span class="mega-item-text">Admin Console</span>
-            </a>
-            <a class="mega-item" href="#devtools" role="menuitem">
-              <div class="mega-item-icon" aria-hidden="true">🔧</div>
-              <span class="mega-item-text">Dev Tools</span>
-            </a>
-            <a class="mega-item" href="#mcp" role="menuitem">
-              <div class="mega-item-icon" aria-hidden="true">🤖</div>
-              <span class="mega-item-text">MCP</span>
-            </a>
-            <a class="mega-item" href="#webhooks" role="menuitem">
-              <div class="mega-item-icon" aria-hidden="true">🔗</div>
-              <span class="mega-item-text">Webhooks &amp; API</span>
-            </a>
-            <a class="mega-item" href="#integrations" role="menuitem">
-              <div class="mega-item-icon" aria-hidden="true">🔌</div>
-              <span class="mega-item-text">Integrations</span>
-            </a>
-          </div>
-
-
+      <!-- Mobile Drawer -->
+      <div
+        class="mobile-drawer"
+        id="mobile-drawer"
+        role="dialog"
+        aria-label="Mobile navigation"
+        aria-modal="true"
+      >
+        <div class="mobile-drawer-overlay" id="mobile-drawer-overlay"></div>
+        <div class="mobile-drawer-panel">
+          <div class="drawer-section-label">Product</div>
+          <a href="#comments" class="drawer-link">💬 Comments</a>
+          <a href="#notifications" class="drawer-link">🔔 Notifications</a>
+          <a href="#multiplayer" class="drawer-link">🖊️ Multiplayer Editing</a>
+          <a href="#cursors" class="drawer-link">🖱️ Cursors</a>
+          <a href="#admin" class="drawer-link">🛡️ Admin Console</a>
+          <div class="drawer-divider"></div>
+          <div class="drawer-section-label">Company</div>
+          <a href="#use-cases" class="drawer-link">Use Cases</a>
+          <a href="#enterprise" class="drawer-link">Enterprise</a>
+          <a href="#resources" class="drawer-link">Resources</a>
+          <a href="#pricing" class="drawer-link">Pricing</a>
+          <div class="drawer-divider"></div>
+          <a href="#signin" class="drawer-link">Sign In</a>
+          <a href="#docs" class="drawer-link">Read Docs</a>
+          <a
+            href="../index.html"
+            class="drawer-link"
+            style="color:var(--accent-primary);font-weight:600;"
+            >Back to Collection →</a
+          >
         </div>
       </div>
     </div>
-  </header>
-
-  <!-- Mobile Drawer -->
-  <div class="mobile-drawer" id="mobile-drawer" role="dialog" aria-label="Mobile navigation" aria-modal="true">
-    <div class="mobile-drawer-overlay" id="mobile-drawer-overlay"></div>
-    <div class="mobile-drawer-panel">
-      <div class="drawer-section-label">Product</div>
-      <a href="#comments" class="drawer-link">💬 Comments</a>
-      <a href="#notifications" class="drawer-link">🔔 Notifications</a>
-      <a href="#multiplayer" class="drawer-link">🖊️ Multiplayer Editing</a>
-      <a href="#cursors" class="drawer-link">🖱️ Cursors</a>
-      <a href="#admin" class="drawer-link">🛡️ Admin Console</a>
-      <div class="drawer-divider"></div>
-      <div class="drawer-section-label">Company</div>
-      <a href="#use-cases" class="drawer-link">Use Cases</a>
-      <a href="#enterprise" class="drawer-link">Enterprise</a>
-      <a href="#resources" class="drawer-link">Resources</a>
-      <a href="#pricing" class="drawer-link">Pricing</a>
-      <div class="drawer-divider"></div>
-      <a href="#signin" class="drawer-link">Sign In</a>
-      <a href="#docs" class="drawer-link">Read Docs</a>
-      <a href="../index.html" class="drawer-link" style="color:var(--accent-primary);font-weight:600;">Back to Collection →</a>
-    </div>
-  </div>
-
-
-</div><!-- /.page-wrapper -->
-<script src="script.js"></script>
-</body>
+    <!-- /.page-wrapper -->
+    <script src="script.js"></script>
+  </body>
 </html>
 ```
 
@@ -226,52 +282,52 @@ File ini berisi kode komponen bersih (clean isolated code) yang **HANYA** berkai
    Dark Mode Developer Platform + 4-Column Mega-Menu
    ============================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap");
 
 /* ── Design Tokens ─────────────────────────────────────────── */
 :root {
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: 'Fira Code', 'SF Mono', Menlo, monospace;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "Fira Code", "SF Mono", Menlo, monospace;
 
   /* Dark Palette */
-  --bg-base:       #090a0f;
-  --bg-surface:    #0e0f17;
-  --bg-elevated:   #13141f;
-  --bg-overlay:    #191a27;
-  --bg-hover:      rgba(255,255,255,0.055);
+  --bg-base: #090a0f;
+  --bg-surface: #0e0f17;
+  --bg-elevated: #13141f;
+  --bg-overlay: #191a27;
+  --bg-hover: rgba(255, 255, 255, 0.055);
 
   /* Borders */
-  --border-subtle: rgba(255,255,255,0.07);
-  --border-muted:  rgba(255,255,255,0.12);
-  --border-light:  rgba(255,255,255,0.18);
+  --border-subtle: rgba(255, 255, 255, 0.07);
+  --border-muted: rgba(255, 255, 255, 0.12);
+  --border-light: rgba(255, 255, 255, 0.18);
 
   /* Text */
-  --text-primary:    rgba(255,255,255,0.95);
-  --text-secondary:  rgba(255,255,255,0.60);
-  --text-muted:      rgba(255,255,255,0.35);
-  --text-disabled:   rgba(255,255,255,0.20);
+  --text-primary: rgba(255, 255, 255, 0.95);
+  --text-secondary: rgba(255, 255, 255, 0.6);
+  --text-muted: rgba(255, 255, 255, 0.35);
+  --text-disabled: rgba(255, 255, 255, 0.2);
 
   /* Accent — Electric Violet/Indigo */
-  --accent-primary:   #7C3AED;
-  --accent-hover:     #6D28D9;
-  --accent-light:     rgba(124, 58, 237, 0.18);
-  --accent-glow:      rgba(124, 58, 237, 0.35);
+  --accent-primary: #7c3aed;
+  --accent-hover: #6d28d9;
+  --accent-light: rgba(124, 58, 237, 0.18);
+  --accent-glow: rgba(124, 58, 237, 0.35);
 
   /* Neon accents */
-  --neon-pink:    #F43F5E;
-  --neon-cyan:    #06B6D4;
-  --neon-green:   #10B981;
-  --neon-orange:  #F59E0B;
-  --neon-blue:    #3B82F6;
+  --neon-pink: #f43f5e;
+  --neon-cyan: #06b6d4;
+  --neon-green: #10b981;
+  --neon-orange: #f59e0b;
+  --neon-blue: #3b82f6;
 
   /* Dot grid pattern */
-  --dot-color: rgba(255,255,255,0.06);
+  --dot-color: rgba(255, 255, 255, 0.06);
 
   /* Navbar */
   --navbar-height: 60px;
   --navbar-bg: rgba(9, 10, 15, 0.92);
   --navbar-blur: blur(20px) saturate(160%);
-  --navbar-border: rgba(255,255,255,0.08);
+  --navbar-border: rgba(255, 255, 255, 0.08);
 
   /* Transitions */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
@@ -288,13 +344,22 @@ File ini berisi kode komponen bersih (clean isolated code) yang **HANYA** berkai
   --radius-pill: 9999px;
 
   /* Shadows */
-  --shadow-glow: 0 0 40px rgba(124,58,237,0.15), 0 4px 24px rgba(0,0,0,0.6);
-  --shadow-card: 0 8px 32px rgba(0,0,0,0.5);
+  --shadow-glow:
+    0 0 40px rgba(124, 58, 237, 0.15), 0 4px 24px rgba(0, 0, 0, 0.6);
+  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.5);
 }
 
 /* ── Reset ─────────────────────────────────────────────────── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  scroll-behavior: smooth;
+}
 body {
   font-family: var(--font-sans);
   font-size: 14px;
@@ -309,19 +374,31 @@ body {
 .page-wrapper {
   min-height: 100vh;
   background:
-    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(124,58,237,0.18) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 30% at 80% 20%, rgba(59,130,246,0.12) 0%, transparent 60%),
+    radial-gradient(
+      ellipse 80% 60% at 50% -10%,
+      rgba(124, 58, 237, 0.18) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 40% 30% at 80% 20%,
+      rgba(59, 130, 246, 0.12) 0%,
+      transparent 60%
+    ),
     var(--bg-base);
   position: relative;
 }
 
 /* Dot grid overlay */
 .page-wrapper::before {
-  content: '';
+  content: "";
   position: fixed;
   inset: 0;
-  background-image: radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
-  background-size: 24px 24px;
+  background-color: #101417 !important;
+  background-image:
+    linear-gradient(#ffffff10 1px, transparent 1px),
+    linear-gradient(90deg, #ffffff10 1px, transparent 1px) !important;
+  background-size: 28px 28px !important;
+  background-position: 0 0 !important;
   pointer-events: none;
   z-index: 0;
 }
@@ -368,11 +445,11 @@ body {
   width: 28px;
   height: 28px;
   border-radius: 7px;
-  background: linear-gradient(135deg, #7C3AED, #4F46E5);
+  background: linear-gradient(135deg, #7c3aed, #4f46e5);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 16px rgba(124,58,237,0.5);
+  box-shadow: 0 0 16px rgba(124, 58, 237, 0.5);
 }
 
 .brand-name {
@@ -409,7 +486,9 @@ body {
   border: none;
   background: none;
   font-family: var(--font-sans);
-  transition: color var(--dur-fast) ease, background var(--dur-fast) ease;
+  transition:
+    color var(--dur-fast) ease,
+    background var(--dur-fast) ease;
   white-space: nowrap;
 }
 
@@ -452,7 +531,9 @@ body {
   cursor: pointer;
   border-radius: var(--radius-sm);
   text-decoration: none;
-  transition: color var(--dur-fast) ease, background var(--dur-fast) ease;
+  transition:
+    color var(--dur-fast) ease,
+    background var(--dur-fast) ease;
   white-space: nowrap;
 }
 
@@ -481,14 +562,21 @@ body {
   border-radius: var(--radius-sm);
   cursor: pointer;
   text-decoration: none;
-  transition: background var(--dur-fast) ease, box-shadow var(--dur-fast) ease, transform var(--dur-fast) ease;
+  transition:
+    background var(--dur-fast) ease,
+    box-shadow var(--dur-fast) ease,
+    transform var(--dur-fast) ease;
   white-space: nowrap;
-  box-shadow: 0 0 0 1px rgba(124,58,237,0.5), 0 4px 16px rgba(124,58,237,0.3);
+  box-shadow:
+    0 0 0 1px rgba(124, 58, 237, 0.5),
+    0 4px 16px rgba(124, 58, 237, 0.3);
 }
 
 .nav-btn-primary:hover {
   background: var(--accent-hover);
-  box-shadow: 0 0 0 1px rgba(124,58,237,0.8), 0 6px 24px rgba(124,58,237,0.45);
+  box-shadow:
+    0 0 0 1px rgba(124, 58, 237, 0.8),
+    0 6px 24px rgba(124, 58, 237, 0.45);
   transform: translateY(-1px);
 }
 
@@ -513,9 +601,16 @@ body {
   transition: all var(--dur-med) var(--ease-out);
 }
 
-.navbar-burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-.navbar-burger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-.navbar-burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+.navbar-burger.open span:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+.navbar-burger.open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.navbar-burger.open span:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
 
 /* ═══════════════════════════════════════════════════════════
    MEGA MENU
@@ -544,8 +639,9 @@ body {
   transform: translateY(-8px);
   opacity: 0;
   pointer-events: none;
-  transition: transform var(--dur-med) var(--ease-out),
-              opacity var(--dur-med) ease;
+  transition:
+    transform var(--dur-med) var(--ease-out),
+    opacity var(--dur-med) ease;
 }
 
 .mega-menu.open {
@@ -572,7 +668,9 @@ body {
   padding-left: 20px;
 }
 
-.mega-col:first-child { padding-left: 0; }
+.mega-col:first-child {
+  padding-left: 0;
+}
 
 .mega-col-label {
   font-size: 10.5px;
@@ -597,7 +695,9 @@ body {
   margin-bottom: 2px;
 }
 
-.mega-item:hover { background: var(--bg-hover); }
+.mega-item:hover {
+  background: var(--bg-hover);
+}
 
 .mega-item-icon {
   width: 28px;
@@ -610,7 +710,9 @@ body {
   justify-content: center;
   font-size: 14px;
   flex-shrink: 0;
-  transition: border-color var(--dur-fast) ease, background var(--dur-fast) ease;
+  transition:
+    border-color var(--dur-fast) ease,
+    background var(--dur-fast) ease;
 }
 
 .mega-item:hover .mega-item-icon {
@@ -625,7 +727,9 @@ body {
   transition: color var(--dur-fast) ease;
 }
 
-.mega-item:hover .mega-item-text { color: var(--text-primary); }
+.mega-item:hover .mega-item-text {
+  color: var(--text-primary);
+}
 
 .mega-view-all {
   display: block;
@@ -636,12 +740,14 @@ body {
   text-decoration: none;
   border-radius: var(--radius-sm);
   margin-top: 6px;
-  transition: background var(--dur-fast) ease, color var(--dur-fast) ease;
+  transition:
+    background var(--dur-fast) ease,
+    color var(--dur-fast) ease;
 }
 
 .mega-view-all:hover {
   background: var(--accent-light);
-  color: #9D64FF;
+  color: #9d64ff;
 }
 
 /* ── Showcase Card (4th column) ──────────────────────────── */
@@ -662,10 +768,14 @@ body {
 
 /* Canvas grid for preview */
 .showcase-preview::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle, rgba(124,58,237,0.08) 1px, transparent 1px);
+  background-image: radial-gradient(
+    circle,
+    rgba(124, 58, 237, 0.08) 1px,
+    transparent 1px
+  );
   background-size: 16px 16px;
 }
 
@@ -687,8 +797,16 @@ body {
   white-space: nowrap;
 }
 
-.node-primary { background: rgba(124,58,237,0.2); border-color: rgba(124,58,237,0.5); color: #9D64FF; }
-.node-secondary { background: rgba(59,130,246,0.15); border-color: rgba(59,130,246,0.4); color: #60A5FA; }
+.node-primary {
+  background: rgba(124, 58, 237, 0.2);
+  border-color: rgba(124, 58, 237, 0.5);
+  color: #9d64ff;
+}
+.node-secondary {
+  background: rgba(59, 130, 246, 0.15);
+  border-color: rgba(59, 130, 246, 0.4);
+  color: #60a5fa;
+}
 
 .showcase-connector {
   position: absolute;
@@ -696,7 +814,11 @@ body {
   left: 42%;
   width: 16%;
   height: 1px;
-  background: linear-gradient(to right, rgba(124,58,237,0.5), rgba(59,130,246,0.5));
+  background: linear-gradient(
+    to right,
+    rgba(124, 58, 237, 0.5),
+    rgba(59, 130, 246, 0.5)
+  );
 }
 
 .showcase-badge {
@@ -707,25 +829,30 @@ body {
   align-items: center;
   gap: 4px;
   padding: 3px 8px;
-  background: rgba(16,185,129,0.15);
-  border: 1px solid rgba(16,185,129,0.3);
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.3);
   border-radius: var(--radius-pill);
   font-size: 10px;
   font-weight: 600;
-  color: #34D399;
+  color: #34d399;
 }
 
 .showcase-dot {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: #10B981;
+  background: #10b981;
   animation: pulse-dot 1.5s ease infinite;
 }
 
 @keyframes pulse-dot {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
 }
 
 .showcase-body {
@@ -772,17 +899,20 @@ body {
   color: var(--text-secondary);
 }
 
-.showcase-btn-secondary:hover { background: var(--bg-hover); color: var(--text-primary); }
+.showcase-btn-secondary:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
 
 .showcase-btn-primary {
   background: var(--accent-primary);
   color: white;
-  box-shadow: 0 0 12px rgba(124,58,237,0.3);
+  box-shadow: 0 0 12px rgba(124, 58, 237, 0.3);
 }
 
 .showcase-btn-primary:hover {
   background: var(--accent-hover);
-  box-shadow: 0 0 18px rgba(124,58,237,0.5);
+  box-shadow: 0 0 18px rgba(124, 58, 237, 0.5);
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -816,7 +946,7 @@ body {
 }
 
 .cursor-tag::before {
-  content: '';
+  content: "";
   display: block;
   width: 12px;
   height: 16px;
@@ -825,24 +955,28 @@ body {
 }
 
 .cursor-sean {
-  background: rgba(16,185,129,0.18);
-  border: 1px solid rgba(16,185,129,0.4);
-  color: #34D399;
+  background: rgba(16, 185, 129, 0.18);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #34d399;
   top: 15%;
   left: 15%;
 }
 
-.cursor-sean::before { background: #10B981; }
+.cursor-sean::before {
+  background: #10b981;
+}
 
 .cursor-emma {
-  background: rgba(244,63,94,0.18);
-  border: 1px solid rgba(244,63,94,0.4);
-  color: #FB7185;
+  background: rgba(244, 63, 94, 0.18);
+  border: 1px solid rgba(244, 63, 94, 0.4);
+  color: #fb7185;
   top: 20%;
   right: 18%;
 }
 
-.cursor-emma::before { background: #F43F5E; }
+.cursor-emma::before {
+  background: #f43f5e;
+}
 
 /* Hero Content */
 .hero-badge {
@@ -850,12 +984,12 @@ body {
   align-items: center;
   gap: 8px;
   padding: 5px 12px;
-  background: rgba(124,58,237,0.12);
-  border: 1px solid rgba(124,58,237,0.3);
+  background: rgba(124, 58, 237, 0.12);
+  border: 1px solid rgba(124, 58, 237, 0.3);
   border-radius: var(--radius-pill);
   font-size: 12px;
   font-weight: 600;
-  color: #9D64FF;
+  color: #9d64ff;
   margin-bottom: 24px;
 }
 
@@ -870,7 +1004,7 @@ body {
 .hero-title {
   font-size: clamp(40px, 7vw, 80px);
   font-weight: 800;
-  line-height: 1.0;
+  line-height: 1;
   letter-spacing: -0.04em;
   color: var(--text-primary);
   margin-bottom: 20px;
@@ -878,7 +1012,7 @@ body {
 }
 
 .hero-title-highlight {
-  background: linear-gradient(135deg, #7C3AED, #3B82F6, #06B6D4);
+  background: linear-gradient(135deg, #7c3aed, #3b82f6, #06b6d4);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -938,7 +1072,10 @@ body {
   border-color: var(--border-light);
 }
 
-.cli-copy-btn.copied { color: var(--neon-green); border-color: rgba(16,185,129,0.4); }
+.cli-copy-btn.copied {
+  color: var(--neon-green);
+  border-color: rgba(16, 185, 129, 0.4);
+}
 
 /* ── Use Case Tabs ─────────────────────────────────────────── */
 .use-case-section {
@@ -960,7 +1097,9 @@ body {
   scrollbar-width: none;
 }
 
-.use-case-tabs::-webkit-scrollbar { display: none; }
+.use-case-tabs::-webkit-scrollbar {
+  display: none;
+}
 
 .uc-tab {
   display: flex;
@@ -979,7 +1118,10 @@ body {
   transition: all var(--dur-fast) ease;
 }
 
-.uc-tab:hover { color: var(--text-secondary); background: var(--bg-hover); }
+.uc-tab:hover {
+  color: var(--text-secondary);
+  background: var(--bg-hover);
+}
 
 .uc-tab.active {
   background: var(--bg-overlay);
@@ -995,7 +1137,10 @@ body {
   opacity: 0.6;
 }
 
-.uc-tab.active .uc-tab-dot { opacity: 1; background: var(--neon-cyan); }
+.uc-tab.active .uc-tab-dot {
+  opacity: 1;
+  background: var(--neon-cyan);
+}
 
 /* Use case content preview */
 .uc-preview {
@@ -1018,7 +1163,9 @@ body {
   color: var(--text-muted);
 }
 
-.uc-placeholder-icon { font-size: 40px; }
+.uc-placeholder-icon {
+  font-size: 40px;
+}
 
 .uc-placeholder-label {
   font-size: 13px;
@@ -1039,7 +1186,7 @@ body {
 .mobile-drawer-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.7);
+  background: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(8px);
   opacity: 0;
   transition: opacity var(--dur-med) ease;
@@ -1059,9 +1206,15 @@ body {
   padding: 80px 20px 40px;
 }
 
-.mobile-drawer.open { pointer-events: all; }
-.mobile-drawer.open .mobile-drawer-overlay { opacity: 1; }
-.mobile-drawer.open .mobile-drawer-panel { transform: translateX(0); }
+.mobile-drawer.open {
+  pointer-events: all;
+}
+.mobile-drawer.open .mobile-drawer-overlay {
+  opacity: 1;
+}
+.mobile-drawer.open .mobile-drawer-panel {
+  transform: translateX(0);
+}
 
 .drawer-section-label {
   font-size: 10.5px;
@@ -1083,11 +1236,16 @@ body {
   color: var(--text-secondary);
   text-decoration: none;
   cursor: pointer;
-  transition: background var(--dur-fast) ease, color var(--dur-fast) ease;
+  transition:
+    background var(--dur-fast) ease,
+    color var(--dur-fast) ease;
   margin-bottom: 2px;
 }
 
-.drawer-link:hover { background: var(--bg-hover); color: var(--text-primary); }
+.drawer-link:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
 
 .drawer-divider {
   height: 1px;
@@ -1114,7 +1272,9 @@ body {
   z-index: 2000;
   opacity: 0;
   pointer-events: none;
-  transition: opacity var(--dur-med) ease, transform var(--dur-med) var(--ease-out);
+  transition:
+    opacity var(--dur-med) ease,
+    transform var(--dur-med) var(--ease-out);
   box-shadow: var(--shadow-card);
   backdrop-filter: blur(16px);
 }
@@ -1133,7 +1293,9 @@ body {
     display: none;
   }
 
-  .navbar-burger { display: flex; }
+  .navbar-burger {
+    display: flex;
+  }
 
   .mega-menu-grid {
     grid-template-columns: 1fr 1fr;
@@ -1147,28 +1309,78 @@ body {
 }
 
 @media (max-width: 640px) {
-  .navbar-container { padding: 0 14px; }
-  .navbar-brand-tag { display: none; }
-  .navbar-right .nav-btn-primary { padding: 6px 12px; font-size: 12px; }
-  .hero { padding-top: calc(var(--navbar-height) + 40px); }
-  .hero-title { font-size: clamp(32px, 10vw, 48px); }
-  .cursor-sean, .cursor-emma { display: none; }
-  .use-case-tabs { padding: 3px; overflow-x: auto; max-width: 100%; justify-content: flex-start; }
-  .tab-btn { flex-shrink: 0; font-size: 12px; padding: 6px 12px; }
-  .hero-actions { flex-direction: column; width: 100%; max-width: 320px; }
-  .hero-actions .btn-hero-primary, .hero-actions .btn-hero-ghost { width: 100%; justify-content: center; }
+  .navbar-container {
+    padding: 0 14px;
+  }
+  .navbar-brand-tag {
+    display: none;
+  }
+  .navbar-right .nav-btn-primary {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+  .hero {
+    padding-top: calc(var(--navbar-height) + 40px);
+  }
+  .hero-title {
+    font-size: clamp(32px, 10vw, 48px);
+  }
+  .cursor-sean,
+  .cursor-emma {
+    display: none;
+  }
+  .use-case-tabs {
+    padding: 3px;
+    overflow-x: auto;
+    max-width: 100%;
+    justify-content: flex-start;
+  }
+  .tab-btn {
+    flex-shrink: 0;
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+    max-width: 320px;
+  }
+  .hero-actions .btn-hero-primary,
+  .hero-actions .btn-hero-ghost {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 @media (max-width: 480px) {
-  .navbar-container { padding: 0 12px; }
-  .hero-title { font-size: clamp(28px, 9vw, 40px); }
-  .hero-subtitle { font-size: 14px; }
-  .hero-cli { padding: 10px 14px; font-size: 12px; }
-  .hero-actions { max-width: 100%; }
-  .hero { padding: 100px 16px 60px; }
-  .navbar-brand-name { font-size: 16px; }
-  .mega-menu { padding: 16px; }
-  .mega-menu-grid { grid-template-columns: 1fr; }
+  .navbar-container {
+    padding: 0 12px;
+  }
+  .hero-title {
+    font-size: clamp(28px, 9vw, 40px);
+  }
+  .hero-subtitle {
+    font-size: 14px;
+  }
+  .hero-cli {
+    padding: 10px 14px;
+    font-size: 12px;
+  }
+  .hero-actions {
+    max-width: 100%;
+  }
+  .hero {
+    padding: 100px 16px 60px;
+  }
+  .navbar-brand-name {
+    font-size: 16px;
+  }
+  .mega-menu {
+    padding: 16px;
+  }
+  .mega-menu-grid {
+    grid-template-columns: 1fr;
+  }
 }
 ```
 
@@ -1182,51 +1394,52 @@ body {
    Mega-menu, cursors, CLI copy, tab switcher, mobile drawer
    ============================================================= */
 (function () {
-  'use strict';
+  "use strict";
 
   /* ── DOM refs ──────────────────────────────────────────────── */
-  const megaMenu       = document.getElementById('mega-menu');
-  const megaTrigger    = document.getElementById('mega-trigger');
-  const megaWrap       = document.getElementById('mega-wrap');
-  const mobileDrawer   = document.getElementById('mobile-drawer');
-  const mobileOverlay  = document.getElementById('mobile-drawer-overlay');
-  const navBurger      = document.getElementById('nav-burger');
-  const veltToast      = document.getElementById('velt-toast');
-  const cliCmd         = document.getElementById('cli-cmd-text');
+  const megaMenu = document.getElementById("mega-menu");
+  const megaTrigger = document.getElementById("mega-trigger");
+  const megaWrap = document.getElementById("mega-wrap");
+  const mobileDrawer = document.getElementById("mobile-drawer");
+  const mobileOverlay = document.getElementById("mobile-drawer-overlay");
+  const navBurger = document.getElementById("nav-burger");
+  const veltToast = document.getElementById("velt-toast");
+  const cliCmd = document.getElementById("cli-cmd-text");
   let megaCloseTimer = null;
 
-  function openMega () {
+  function openMega() {
     clearTimeout(megaCloseTimer);
-    megaMenu.classList.add('open');
+    megaMenu.classList.add("open");
     if (megaTrigger) {
-      megaTrigger.classList.add('active');
-      megaTrigger.querySelector('.nav-link-chevron').style.transform = 'rotate(180deg)';
+      megaTrigger.classList.add("active");
+      megaTrigger.querySelector(".nav-link-chevron").style.transform =
+        "rotate(180deg)";
     }
   }
 
-  function closeMega () {
+  function closeMega() {
     megaCloseTimer = setTimeout(() => {
-      megaMenu.classList.remove('open');
+      megaMenu.classList.remove("open");
       if (megaTrigger) {
-        megaTrigger.classList.remove('active');
-        const chevron = megaTrigger.querySelector('.nav-link-chevron');
-        if (chevron) chevron.style.transform = '';
+        megaTrigger.classList.remove("active");
+        const chevron = megaTrigger.querySelector(".nav-link-chevron");
+        if (chevron) chevron.style.transform = "";
       }
     }, 80);
   }
 
   // Hover on trigger
   if (megaTrigger) {
-    megaTrigger.addEventListener('mouseenter', openMega);
-    megaTrigger.addEventListener('mouseleave', closeMega);
-    megaTrigger.addEventListener('click', () => {
-      if (megaMenu.classList.contains('open')) closeMega();
+    megaTrigger.addEventListener("mouseenter", openMega);
+    megaTrigger.addEventListener("mouseleave", closeMega);
+    megaTrigger.addEventListener("click", () => {
+      if (megaMenu.classList.contains("open")) closeMega();
       else openMega();
     });
-    megaTrigger.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
+    megaTrigger.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
-        if (megaMenu.classList.contains('open')) closeMega();
+        if (megaMenu.classList.contains("open")) closeMega();
         else openMega();
       }
     });
@@ -1234,61 +1447,56 @@ body {
 
   // Hover bridge on mega panel itself
   if (megaMenu) {
-    megaMenu.addEventListener('mouseenter', () => clearTimeout(megaCloseTimer));
-    megaMenu.addEventListener('mouseleave', closeMega);
+    megaMenu.addEventListener("mouseenter", () => clearTimeout(megaCloseTimer));
+    megaMenu.addEventListener("mouseleave", closeMega);
   }
 
   // Close on outside click
-  document.addEventListener('click', (e) => {
-    if (
-      !megaTrigger?.contains(e.target) &&
-      !megaMenu?.contains(e.target)
-    ) {
+  document.addEventListener("click", (e) => {
+    if (!megaTrigger?.contains(e.target) && !megaMenu?.contains(e.target)) {
       closeMega();
     }
   });
 
   // Close on Escape
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
       closeMega();
       closeMobileDrawer();
     }
   });
 
   /* ── 2. Mobile Drawer ────────────────────────────────────── */
-  function openMobileDrawer () {
-    mobileDrawer.classList.add('open');
-    navBurger.classList.add('open');
-    navBurger.setAttribute('aria-expanded', 'true');
-    document.body.style.overflow = 'hidden';
+  function openMobileDrawer() {
+    mobileDrawer.classList.add("open");
+    navBurger.classList.add("open");
+    navBurger.setAttribute("aria-expanded", "true");
+    document.body.style.overflow = "hidden";
   }
 
-  function closeMobileDrawer () {
-    mobileDrawer.classList.remove('open');
-    navBurger.classList.remove('open');
-    navBurger.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
+  function closeMobileDrawer() {
+    mobileDrawer.classList.remove("open");
+    navBurger.classList.remove("open");
+    navBurger.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
   }
 
   if (navBurger) {
-    navBurger.addEventListener('click', () => {
-      if (mobileDrawer.classList.contains('open')) closeMobileDrawer();
+    navBurger.addEventListener("click", () => {
+      if (mobileDrawer.classList.contains("open")) closeMobileDrawer();
       else openMobileDrawer();
     });
   }
 
-  if (mobileOverlay) mobileOverlay.addEventListener('click', closeMobileDrawer);
-
-
+  if (mobileOverlay) mobileOverlay.addEventListener("click", closeMobileDrawer);
 
   /* ── 5. Multiplayer Cursor Animation ─────────────────────── */
-  const cursorSean = document.getElementById('cursor-sean');
-  const cursorEmma = document.getElementById('cursor-emma');
+  const cursorSean = document.getElementById("cursor-sean");
+  const cursorEmma = document.getElementById("cursor-emma");
 
   if (cursorSean && cursorEmma) {
     let t = 0;
-    function animateCursors () {
+    function animateCursors() {
       t += 0.008;
       const seanX = 10 + 8 * Math.sin(t * 0.9);
       const seanY = 10 + 5 * Math.cos(t * 0.7);
@@ -1301,17 +1509,15 @@ body {
     animateCursors();
   }
 
-
   /* ── 7. Smooth scroll ────────────────────────────────────── */
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', (e) => {
-      const target = document.querySelector(a.getAttribute('href'));
+  document.querySelectorAll('a[href^="#"]').forEach((a) => {
+    a.addEventListener("click", (e) => {
+      const target = document.querySelector(a.getAttribute("href"));
       if (!target) return;
       e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
       closeMobileDrawer();
     });
   });
-
 })();
 ```

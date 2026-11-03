@@ -1,11 +1,20 @@
 {
   "title": "BordUp™ Operations Rail",
-  "category": "saas",
-  "categoryLabel": "SaaS & Admin — Enterprise HR / Workforce",
+  "category": "sidebar",
+  "categoryLabel": "Sidebar — Enterprise HR / Workforce",
   "descriptionShort": "Sidebar collapsible rail (260px ↔ 76px) dengan tooltip & taksonomi departemen.",
   "descriptionLong": "Sidebar collapsible rail (260px ↔ 76px) dengan transisi mulus, hover tooltip otomatis dalam mode ringkas, switcher workspace perusahaan, dan taksonomi warna departemen.",
   "tech": "HTML · CSS · JS",
-  "keywords": ["enterprise", "hr", "operations", "rail", "collapsible", "sidebar", "department", "taxonomy"],
+  "keywords": [
+    "enterprise",
+    "hr",
+    "operations",
+    "rail",
+    "collapsible",
+    "sidebar",
+    "department",
+    "taxonomy"
+  ],
   "featured": false,
   "order": 4,
   "mobileMenuTrigger": "#mobile-menu-btn"

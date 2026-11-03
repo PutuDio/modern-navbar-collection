@@ -1,6 +1,5 @@
 /* Dynamic Island navigation component */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
 
 /* ── Design Tokens ──────────────────────────────────────────── */
 :root {
@@ -17,7 +16,9 @@
   --space-16: 64px;
 
   /* Typography */
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+  --font-sans:
+    "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI",
+    sans-serif;
   --text-xs: 11px;
   --text-sm: 13px;
   --text-base: 15px;
@@ -30,16 +31,17 @@
 
   /* Apple-inspired Color Palette */
   --island-bg: rgba(10, 10, 12, 0.88);
-  --island-border: rgba(255, 255, 255, 0.10);
-  --island-shadow: 0 24px 60px rgba(0,0,0,0.55), 0 4px 12px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.08);
+  --island-border: rgba(255, 255, 255, 0.1);
+  --island-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.55), 0 4px 12px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
   --island-blur: blur(28px) saturate(180%);
-
 
   /* Glassmorphism surfaces */
   --glass-light: rgba(255, 255, 255, 0.12);
   --glass-border: rgba(255, 255, 255, 0.18);
   --glass-text: rgba(255, 255, 255, 0.92);
-  --glass-text-muted: rgba(255, 255, 255, 0.60);
+  --glass-text-muted: rgba(255, 255, 255, 0.6);
 
   /* Transition */
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -57,13 +59,17 @@
 }
 
 /* ── Reset & Base ────────────────────────────────────────────── */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   font-family: var(--font-sans);
@@ -75,7 +81,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-
 .preview-stage {
   min-height: 100vh;
   background-color: #111;
@@ -85,7 +90,11 @@ body {
     linear-gradient(45deg, transparent 75%, #202020 75%),
     linear-gradient(-45deg, transparent 75%, #202020 75%);
   background-size: 32px 32px;
-  background-position: 0 0, 0 16px, 16px -16px, -16px 0;
+  background-position:
+    0 0,
+    0 16px,
+    16px -16px,
+    -16px 0;
   position: relative;
 }
 
@@ -116,9 +125,10 @@ body {
   backdrop-filter: var(--island-blur);
   -webkit-backdrop-filter: var(--island-blur);
   pointer-events: all;
-  transition: padding var(--duration-med) var(--ease-out),
-              gap var(--duration-med) var(--ease-out),
-              background var(--duration-med) var(--ease-out);
+  transition:
+    padding var(--duration-med) var(--ease-out),
+    gap var(--duration-med) var(--ease-out),
+    background var(--duration-med) var(--ease-out);
   max-width: 680px;
   width: max-content;
 }
@@ -142,7 +152,7 @@ body {
 .island-brand-icon {
   width: 26px;
   height: 26px;
-  background: linear-gradient(135deg, #5E9BEF, #2B6DEA);
+  background: linear-gradient(135deg, #5e9bef, #2b6dea);
   border-radius: 7px;
   display: flex;
   align-items: center;
@@ -183,15 +193,16 @@ body {
   color: var(--glass-text-muted);
   text-decoration: none;
   border-radius: var(--radius-pill);
-  transition: color var(--duration-fast) ease,
-              background var(--duration-fast) ease;
+  transition:
+    color var(--duration-fast) ease,
+    background var(--duration-fast) ease;
   white-space: nowrap;
   letter-spacing: -0.01em;
 }
 
 .island-links li a:hover {
   color: var(--glass-text);
-  background: rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 /* CTA Button */
@@ -208,8 +219,9 @@ body {
   border-radius: var(--radius-pill);
   border: none;
   cursor: pointer;
-  transition: background var(--duration-fast) ease,
-              transform var(--duration-fast) var(--ease-spring);
+  transition:
+    background var(--duration-fast) ease,
+    transform var(--duration-fast) var(--ease-spring);
   white-space: nowrap;
   letter-spacing: -0.01em;
   flex-shrink: 0;
@@ -220,7 +232,9 @@ body {
   transform: scale(1.02);
 }
 
-.island-cta:active { transform: scale(0.98); }
+.island-cta:active {
+  transform: scale(0.98);
+}
 
 .island-cta-icon {
   font-size: 14px;
@@ -251,7 +265,10 @@ body {
   transform: translateY(6px) rotate(45deg);
   background: var(--glass-text);
 }
-.island-burger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.island-burger.open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
 .island-burger.open span:nth-child(3) {
   transform: translateY(-6px) rotate(-45deg);
   background: var(--glass-text);
@@ -271,7 +288,7 @@ body {
 .island-drawer-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(8px);
   opacity: 0;
   transition: opacity var(--duration-med) ease;
@@ -283,7 +300,7 @@ body {
   left: 0;
   right: 0;
   background: rgba(18, 18, 22, 0.97);
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 0 0 var(--radius-xl) var(--radius-xl);
   padding: 80px var(--space-5) var(--space-8);
   transform: translateY(-100%);
@@ -318,12 +335,14 @@ body {
   color: var(--glass-text-muted);
   text-decoration: none;
   border-radius: var(--radius-md);
-  transition: color var(--duration-fast) ease, background var(--duration-fast) ease;
+  transition:
+    color var(--duration-fast) ease,
+    background var(--duration-fast) ease;
 }
 
 .drawer-nav-links a:hover {
   color: var(--glass-text);
-  background: rgba(255,255,255,0.07);
+  background: rgba(255, 255, 255, 0.07);
 }
 
 .drawer-cta {
@@ -341,8 +360,9 @@ body {
   width: 100%;
   transition: background var(--duration-fast) ease;
 }
-.drawer-cta:hover { background: #e8e8e8; }
-
+.drawer-cta:hover {
+  background: #e8e8e8;
+}
 
 @media (max-width: 768px) {
   .island-links,
@@ -361,11 +381,14 @@ body {
     max-width: 100%;
   }
 }
-body, .preview-stage {
-  background-color: #090a0f !important;
+body {
+  background-color: #101417 !important;
   background-image:
-    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(124, 58, 237, 0.18) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 30% at 80% 20%, rgba(59, 130, 246, 0.12) 0%, transparent 60%),
-    radial-gradient(circle, rgba(255, 255, 255, 0.08) 1px, transparent 1px) !important;
-  background-size: auto, auto, 24px 24px !important;
+    linear-gradient(#ffffff10 1px, transparent 1px),
+    linear-gradient(90deg, #ffffff10 1px, transparent 1px) !important;
+  background-size: 28px 28px !important;
+  background-position: 0 0 !important;
+}
+.preview-stage {
+  background: transparent !important;
 }
